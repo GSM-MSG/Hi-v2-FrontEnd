@@ -15,7 +15,7 @@ export const HomeSection1 = styled.div`
 `
 
 export const IntroductoryBox = styled.div`
-  width: 60rem;
+  width: 56rem;
   display: flex;
   justify-content: space-between;
 
