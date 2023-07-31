@@ -20,7 +20,7 @@ const FunctionBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 2rem;
+  padding: 3rem 2rem 2rem;
 
   img {
     margin-left: 1.2rem;
