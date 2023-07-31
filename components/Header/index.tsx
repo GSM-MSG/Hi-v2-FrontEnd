@@ -1,7 +1,7 @@
-import HiLogo from '@/assets/HiLogo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
+import * as SVG from '@/assets/svg'
 
 function Header() {
   const router = useRouter()
@@ -9,7 +9,7 @@ function Header() {
   return (
     <S.HeaderContainer>
       <Link href='/'>
-        <HiLogo />
+        <SVG.HiLogo />
       </Link>
       <S.MenuListBox>
         <li>
