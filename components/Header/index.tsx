@@ -1,8 +1,11 @@
 import HiLogo from '@/assets/HiLogo'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import * as S from './style'
 
 function Header() {
+  const router = useRouter()
+
   return (
     <S.HeaderContainer>
       <Link href='/'>
@@ -10,13 +13,25 @@ function Header() {
       </Link>
       <S.MenuListBox>
         <li>
-          <Link href='/'>홈</Link>
+          <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
+            홈
+          </Link>
         </li>
         <li>
-          <Link href='/notice'>공지</Link>
+          <Link
+            href='/notice'
+            className={router.pathname === '/notice' ? 'choice' : ''}
+          >
+            공지
+          </Link>
         </li>
         <li>
-          <Link href='/reservation'>예약</Link>
+          <Link
+            href='/reservation'
+            className={router.pathname === '/reservation' ? 'choice' : ''}
+          >
+            예약
+          </Link>
         </li>
       </S.MenuListBox>
       <S.LoginBtn>로그인</S.LoginBtn>

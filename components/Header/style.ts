@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const HeaderContainer = styled.header`
   width: 100%;
-  height: 60px;
+  height: 3.8rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -17,10 +17,17 @@ export const MenuListBox = styled.ul`
   justify-content: space-between;
   font-size: 1rem;
   font-weight: 500;
+  padding: 0;
 
   a {
     text-decoration: none;
+    color: #191919;
+    font-weight: 400;
+  }
+
+  .choice {
     color: #000000;
+    font-weight: 600;
   }
 `
 
