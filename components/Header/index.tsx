@@ -1,12 +1,12 @@
-import HiLogo from '@/assets/HiLogo'
 import Link from 'next/link'
 import * as S from './style'
+import * as SVG from '@/assets/svg'
 
 function Header() {
   return (
     <S.HeaderContainer>
       <Link href='/'>
-        <HiLogo />
+        <SVG.HiLogo />
       </Link>
       <S.MenuListBox>
         <li>

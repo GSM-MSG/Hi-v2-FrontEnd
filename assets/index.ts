@@ -1,7 +1,0 @@
-export { default as HiCharacter } from './HiCharacter'
-export { default as HiLogo } from './HiLogo'
-export { default as ScrollMouseIcon } from './ScrollMouseIcon'
-export { default as HiShowIphone2 } from './HiShowIphone2'
-export { default as HiFunctionIcon1 } from './HiFunctionIcon1'
-export { default as HiFunctionIcon2 } from './HiFunctionIcon2'
-export { default as HiFunctionIcon3 } from './HiFunctionIcon3'

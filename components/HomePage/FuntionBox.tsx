@@ -1,5 +1,8 @@
-import * as I from '@/assets'
 import styled from '@emotion/styled'
+import HiFunctionIcon1 from '@/assets/png/HiFunctionIcon1.png'
+import HiFunctionIcon2 from '@/assets/png/HiFunctionIcon2.png'
+import HiFunctionIcon3 from '@/assets/png/HiFunctionIcon3.png'
+import Image from 'next/image'
 
 interface FunctionBoxProps {
   number: number
@@ -18,6 +21,10 @@ const FunctionBoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem 2rem;
+
+  img {
+    margin-left: 1.2rem;
+  }
 
   h3 {
     color: #000000;
@@ -39,9 +46,15 @@ const FunctionBoxContainer = styled.div`
 function FuntionBox({ number, title, description }: FunctionBoxProps) {
   return (
     <FunctionBoxContainer>
-      {number === 1 && <I.HiFunctionIcon1 />}
-      {number === 2 && <I.HiFunctionIcon2 />}
-      {number === 3 && <I.HiFunctionIcon3 />}
+      {number === 1 && (
+        <Image src={HiFunctionIcon1} alt='Hi 기능1' width={130} height={120} />
+      )}
+      {number === 2 && (
+        <Image src={HiFunctionIcon2} alt='Hi 기능2' width={130} height={120} />
+      )}
+      {number === 3 && (
+        <Image src={HiFunctionIcon3} alt='Hi 기능3' width={130} height={120} />
+      )}
       <h3>{title}</h3>
       <p>{description}</p>
     </FunctionBoxContainer>

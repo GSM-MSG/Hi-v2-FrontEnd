@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import * as S from './style'
-import * as I from '@/assets'
+import * as SVG from '@/assets/svg'
 import HiTalkGirl from '@/assets/png/HiTalkGirl.png'
 import HiTalkBoy from '@/assets/png/HiTalkBoy.png'
 import Image from 'next/image'
@@ -18,10 +18,10 @@ function HomePage() {
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
             <Link href='/reservation'>예약하러 가기</Link>
           </S.IntroductoryTextBox>
-          <I.HiCharacter />
+          <SVG.HiCharacter />
         </S.IntroductoryBox>
         <S.ScrollIcon>
-          <I.ScrollMouseIcon />
+          <SVG.ScrollMouseIcon />
         </S.ScrollIcon>
       </S.HomeSection1>
       <S.HomeSection2>
@@ -59,12 +59,12 @@ function HomePage() {
         </S.IntroductoryTextBox2>
         <S.ShowIphoneBox>
           <div className='IphoneBox1'>
-            <I.HiShowIphone2 />
-            <I.HiShowIphone2 />
+            <SVG.HiShowIphone2 />
+            <SVG.HiShowIphone2 />
           </div>
           <div className='IphoneBox2'>
-            <I.HiShowIphone2 />
-            <I.HiShowIphone2 />
+            <SVG.HiShowIphone2 />
+            <SVG.HiShowIphone2 />
           </div>
         </S.ShowIphoneBox>
       </S.HomeSection3>
