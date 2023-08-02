@@ -2,16 +2,30 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
+import { useEffect, useState } from 'react'
 
 function Header() {
   const router = useRouter()
+  const [scroll, setScroll] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
-    <S.HeaderContainer>
+    <S.HeaderContainer scroll={scroll}>
       <Link href='/'>
-        <SVG.HiLogo />
+        {scroll === 0 ? <SVG.HiWhiteLogo /> : <SVG.HiLogo />}
       </Link>
-      <S.MenuListBox>
+      <S.MenuListBox scroll={scroll}>
         <li>
           <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
             홈
@@ -34,7 +48,9 @@ function Header() {
           </Link>
         </li>
       </S.MenuListBox>
-      <S.LoginBtn>로그인</S.LoginBtn>
+      <S.LoginBtn scroll={scroll} onClick={() => console.log(window.scrollY)}>
+        로그인
+      </S.LoginBtn>
     </S.HeaderContainer>
   )
 }

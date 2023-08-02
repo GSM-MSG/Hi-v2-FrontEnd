@@ -7,11 +7,12 @@ export const HomePageContainer = styled.div`
 export const HomeSection1 = styled.div`
   width: 100vw;
   height: 36.5rem;
-  background: linear-gradient(to right, #4200ff, #00d1ff);
+  background: linear-gradient(to right, #0026fa, #00f0ff 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 6rem;
+  color: #00a3ff;
 `
 
 export const IntroductoryBox = styled.div`
