@@ -7,7 +7,7 @@ export const HomePageContainer = styled.div`
 export const HomeSection1 = styled.div`
   width: 100vw;
   height: 36.5rem;
-  background: linear-gradient(to right, #0026fa, #00f0ff 100%);
+  background: linear-gradient(to right, #0026ff, #00f0ff);
   display: flex;
   flex-direction: column;
   align-items: center;

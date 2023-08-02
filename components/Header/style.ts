@@ -15,7 +15,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   transition: all 0.3s ease-in-out;
   z-index: 999;
   background: ${({ scroll }) =>
-    scroll === 0 ? 'linear-gradient(to right, #0026fa, #00F0FF)' : '#ffffff'};
+    scroll === 0 ? 'linear-gradient(to right, #0026ff, #00F0FF)' : '#ffffff'};
 
   svg {
     width: 2rem;
@@ -48,7 +48,7 @@ export const MenuListBox = styled.ul<HeaderProps>`
 export const LoginBtn = styled.button<HeaderProps>`
   border: ${({ scroll }) => (scroll === 0 ? '1px solid #ffffff' : 'none')};
   border-radius: 8px;
-  padding: 0.4rem 0.6rem;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
   background: ${({ scroll }) => (scroll === 0 ? 'none' : '#0066ff')};
   color: #ffffff;
