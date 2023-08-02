@@ -12,13 +12,17 @@ function HomePage() {
       <S.HomeSection1>
         <S.IntroductoryBox>
           <S.IntroductoryTextBox>
-            <h1>
+            <h2>
               더욱 더 간편해진 <br /> 홈베이스 예약
-            </h1>
+            </h2>
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
-            <Link href='/reservation'>예약하러 가기</Link>
+            <Link href='/reservation'>
+              예약하러 가기 <SVG.ArrowIcon />
+            </Link>
           </S.IntroductoryTextBox>
-          <SVG.HiCharacter />
+          <S.HiCharacterBox>
+            <SVG.HiCharacter />
+          </S.HiCharacterBox>
         </S.IntroductoryBox>
         <S.ScrollIcon>
           <SVG.ScrollMouseIcon />

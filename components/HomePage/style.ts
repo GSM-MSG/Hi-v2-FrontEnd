@@ -1,4 +1,27 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
+
+const fadeUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(4rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const floaty = keyframes`
+  0% {
+    margin-top: 0;
+  }
+
+  100% {
+    margin-top: 1.5rem;
+  }
+`
 
 export const HomePageContainer = styled.div`
   width: 100vw;
@@ -19,9 +42,12 @@ export const IntroductoryBox = styled.div`
   width: 56rem;
   display: flex;
   justify-content: space-between;
+`
 
+export const HiCharacterBox = styled.div`
+  animation: ${fadeUp} 1.2s linear 0s;
   svg {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     width: 25rem;
     height: 25rem;
   }
@@ -32,16 +58,20 @@ export const IntroductoryTextBox = styled.div`
   flex-direction: column;
   text-align: left;
   color: #ffffff;
+  animation: ${fadeUp} 1.2s linear 0s;
 
-  h1 {
+  h2 {
     margin: 0;
-    font-size: 2.6rem;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
   }
 
   p {
     font-size: 1rem;
     margin-top: 1.5rem;
     margin-bottom: 2.3rem;
+    letter-spacing: 1px;
   }
 
   a {
@@ -50,29 +80,26 @@ export const IntroductoryTextBox = styled.div`
     font-size: 0.9rem;
     color: #0066ff;
     text-decoration: none;
-    width: 8rem;
+    width: 7rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     font-weight: 600;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      margin-left: 0.3rem;
+    }
   }
 `
 
 export const ScrollIcon = styled.div`
   margin-top: 2rem;
   svg {
-    animation: floatyAnimation 1s linear 0s infinite alternate;
-  }
-
-  @keyframes floatyAnimation {
-    0% {
-      margin-top: 0;
-    }
-
-    100% {
-      margin-top: 18px;
-    }
+    animation: ${floaty} 1s linear 0s infinite alternate;
   }
 `
 
@@ -94,7 +121,7 @@ export const IntroductoryTextBox2 = styled.div`
   h2 {
     font-size: 1.8rem;
     color: #000000;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.5rem;
 
     span {
@@ -113,11 +140,6 @@ export const TalkBox = styled.div`
   display: flex;
   width: 58rem;
   position: relative;
-
-  svg {
-    width: 30rem;
-    height: 20rem;
-  }
 
   .talkGirlIcon {
     position: absolute;

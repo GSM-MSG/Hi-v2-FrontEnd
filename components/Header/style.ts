@@ -48,7 +48,7 @@ export const MenuListBox = styled.ul<HeaderProps>`
 export const LoginBtn = styled.button<HeaderProps>`
   border: ${({ scroll }) => (scroll === 0 ? '1px solid #ffffff' : 'none')};
   border-radius: 8px;
-  padding: 0.3rem 0.5rem;
+  padding: 0.4rem 0.7rem;
   cursor: pointer;
   background: ${({ scroll }) => (scroll === 0 ? 'none' : '#0066ff')};
   color: #ffffff;
