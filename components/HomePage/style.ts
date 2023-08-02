@@ -29,7 +29,7 @@ export const HomePageContainer = styled.div`
 
 export const HomeSection1 = styled.div`
   width: 100vw;
-  height: 36.5rem;
+  height: 79vh;
   background: linear-gradient(to right, #0026ff, #00f0ff);
   display: flex;
   flex-direction: column;
@@ -105,7 +105,7 @@ export const ScrollIcon = styled.div`
 
 export const HomeSection2 = styled.div`
   width: 100vw;
-  height: 42rem;
+  height: 88vh;
   background-color: #f4f8ff;
   display: flex;
   flex-direction: column;
@@ -191,7 +191,7 @@ export const ShowIphoneBox = styled.div`
 
 export const HomeSection4 = styled.div`
   width: 100rem;
-  height: 44rem;
+  height: 88vh;
   display: flex;
   flex-direction: column;
   align-items: center;
