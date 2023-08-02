@@ -1,15 +1,29 @@
 import styled from '@emotion/styled'
 
-export const HeaderContainer = styled.header`
-  width: 100vw;
-  height: 60px;
+interface HeaderProps {
+  scroll: number
+}
+
+export const HeaderContainer = styled.header<HeaderProps>`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 3.8rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+  background: ${({ scroll }) =>
+    scroll === 0 ? 'linear-gradient(to right, #0026ff, #00F0FF)' : '#ffffff'};
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
 `
 
-export const MenuListBox = styled.ul`
+export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
   width: 10rem;
   display: flex;
@@ -17,19 +31,26 @@ export const MenuListBox = styled.ul`
   justify-content: space-between;
   font-size: 1rem;
   font-weight: 500;
+  padding: 0;
 
   a {
     text-decoration: none;
-    color: #000000;
+    color: ${({ scroll }) => (scroll === 0 ? '#ffffff' : '#191919')};
+    font-weight: 400;
+  }
+
+  .choice {
+    color: ${({ scroll }) => (scroll === 0 ? '#ffffff' : '#000000')};
+    font-weight: 600;
   }
 `
 
-export const LoginBtn = styled.button`
-  border: none;
+export const LoginBtn = styled.button<HeaderProps>`
+  border: ${({ scroll }) => (scroll === 0 ? '1px solid #ffffff' : 'none')};
   border-radius: 8px;
-  padding: 7px 10px;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
-  background-color: #0066ff;
+  background: ${({ scroll }) => (scroll === 0 ? 'none' : '#0066ff')};
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 500;
