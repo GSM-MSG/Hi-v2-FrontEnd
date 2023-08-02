@@ -20,6 +20,7 @@ export const IntroductoryBox = styled.div`
   justify-content: space-between;
 
   svg {
+    margin-top: 2rem;
     width: 25rem;
     height: 25rem;
   }
@@ -33,12 +34,13 @@ export const IntroductoryTextBox = styled.div`
 
   h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 2.6rem;
   }
 
   p {
     font-size: 1rem;
-    margin-bottom: 40px;
+    margin-top: 1.5rem;
+    margin-bottom: 2.3rem;
   }
 
   a {
@@ -57,7 +59,7 @@ export const IntroductoryTextBox = styled.div`
 `
 
 export const ScrollIcon = styled.div`
-  margin-top: 60px;
+  margin-top: 2rem;
   svg {
     animation: floatyAnimation 1s linear 0s infinite alternate;
   }
