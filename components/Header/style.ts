@@ -48,10 +48,15 @@ export const MenuListBox = styled.ul<HeaderProps>`
 export const LoginBtn = styled.button<HeaderProps>`
   border: ${({ scroll }) => (scroll === 0 ? '1px solid #ffffff' : 'none')};
   border-radius: 8px;
-  padding: 0.4rem 0.7rem;
+  padding: 0.4rem 0.6rem;
   cursor: pointer;
   background: ${({ scroll }) => (scroll === 0 ? 'none' : '#0066ff')};
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 500;
+
+  &:hover {
+    background: ${({ scroll }) => (scroll === 0 ? '#ffffff' : '#0066ff')};
+    color: ${({ scroll }) => (scroll === 0 ? '#0066ff' : '#ffffff')};
+  }
 `
