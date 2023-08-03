@@ -18,6 +18,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "assets/HiShowIphone2.jsx", "assets/HiShowIphone2.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "assets/HiShowIphone2.jsx",
+    "assets/HiShowIphone2.jsx"
+  ],
   "exclude": ["node_modules"]
 }
