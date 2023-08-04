@@ -2,11 +2,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
+import Login from '../Login'
 import { useEffect, useState } from 'react'
+import { LoginModal } from '@/apis/atoms/atom'
+import { useRecoilState } from 'recoil'
 
 function Header() {
   const router = useRouter()
   const [scroll, setScroll] = useState(0)
+  const [loginModal, setLoginModal] = useRecoilState(LoginModal)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +23,10 @@ function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  function showModal() {
+    setLoginModal((prev) => !prev)
+  }
 
   return (
     <S.HeaderContainer scroll={scroll}>
@@ -48,9 +56,10 @@ function Header() {
           </Link>
         </li>
       </S.MenuListBox>
-      <S.LoginBtn scroll={scroll} onClick={() => console.log(window.scrollY)}>
+      <S.LoginBtn scroll={scroll} onClick={showModal}>
         로그인
       </S.LoginBtn>
+      {loginModal && <Login />}
     </S.HeaderContainer>
   )
 }
