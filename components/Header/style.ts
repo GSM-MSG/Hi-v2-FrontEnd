@@ -17,7 +17,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   background: ${({ scroll }) =>
     scroll === 0 ? 'linear-gradient(to right, #0026ff, #00F0FF)' : '#ffffff'};
 
-  svg {
+  & > svg {
     width: 2rem;
     height: 2rem;
   }
