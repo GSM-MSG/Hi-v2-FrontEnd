@@ -3,12 +3,7 @@ import HiFunctionIcon1 from '@/assets/png/HiFunctionIcon1.png'
 import HiFunctionIcon2 from '@/assets/png/HiFunctionIcon2.png'
 import HiFunctionIcon3 from '@/assets/png/HiFunctionIcon3.png'
 import Image from 'next/image'
-
-interface FunctionBoxProps {
-  number: number
-  title: string
-  description: string
-}
+import { FunctionBoxProps } from '@/types/components/FunctionBox'
 
 const FunctionBoxContainer = styled.div`
   display: flex;
