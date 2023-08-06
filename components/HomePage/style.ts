@@ -29,7 +29,8 @@ export const HomePageContainer = styled.div`
 
 export const HomeSection1 = styled.div`
   width: 100vw;
-  height: 79vh;
+  padding: 0 15vw;
+  height: 100vh;
   background: linear-gradient(to right, #0026ff, #00f0ff);
   display: flex;
   flex-direction: column;
@@ -39,7 +40,7 @@ export const HomeSection1 = styled.div`
 `
 
 export const IntroductoryBox = styled.div`
-  width: 56rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `
@@ -105,7 +106,8 @@ export const ScrollIcon = styled.div`
 
 export const HomeSection2 = styled.div`
   width: 100vw;
-  height: 88vh;
+  padding: 0 15vw;
+  height: 100vh;
   background-color: #f4f8ff;
   display: flex;
   flex-direction: column;
@@ -138,7 +140,7 @@ export const IntroductoryTextBox2 = styled.div`
 
 export const TalkBox = styled.div`
   display: flex;
-  width: 58rem;
+  width: 100%;
   position: relative;
 
   .talkGirlIcon {
@@ -155,6 +157,7 @@ export const TalkBox = styled.div`
 
 export const HomeSection3 = styled.div`
   width: 100vw;
+  padding: 0 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,7 +167,7 @@ export const HomeSection3 = styled.div`
 
 export const ShowIphoneBox = styled.div`
   margin-top: 8rem;
-  width: 60rem;
+  width: 100%;
   height: 90rem;
   display: flex;
 
@@ -190,8 +193,9 @@ export const ShowIphoneBox = styled.div`
 `
 
 export const HomeSection4 = styled.div`
-  width: 100rem;
-  height: 88vh;
+  width: 100vw;
+  padding: 0 15vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
