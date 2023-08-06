@@ -21,11 +21,19 @@ function Header() {
   }, [])
 
   return (
-    <S.HeaderContainer scroll={scroll}>
+    <S.HeaderContainer scroll={scroll} pathname={router.pathname}>
       <Link href='/'>
-        {scroll === 0 ? <SVG.HiWhiteLogo /> : <SVG.HiLogo />}
+        {router.pathname === '/' ? (
+          scroll === 0 ? (
+            <SVG.HiWhiteLogo />
+          ) : (
+            <SVG.HiLogo />
+          )
+        ) : (
+          <SVG.HiLogo />
+        )}
       </Link>
-      <S.MenuListBox scroll={scroll}>
+      <S.MenuListBox scroll={scroll} pathname={router.pathname}>
         <li>
           <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
             홈
@@ -48,7 +56,11 @@ function Header() {
           </Link>
         </li>
       </S.MenuListBox>
-      <S.LoginBtn scroll={scroll} onClick={() => console.log(window.scrollY)}>
+      <S.LoginBtn
+        scroll={scroll}
+        pathname={router.pathname}
+        onClick={() => console.log(window.scrollY)}
+      >
         로그인
       </S.LoginBtn>
     </S.HeaderContainer>
