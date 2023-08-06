@@ -9,8 +9,13 @@ import { useRecoilState } from 'recoil'
 
 function Header() {
   const router = useRouter()
+  const accessToken =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('hi_accessToken')
+      : null
   const [scroll, setScroll] = useState(0)
   const [loginModal, setLoginModal] = useRecoilState(LoginModal)
+  const [loginText, setLoginText] = useState('로그인')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +28,14 @@ function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  useEffect(() => {
+    if (accessToken) {
+      setLoginText('로그아웃')
+    } else {
+      setLoginText('로그인')
+    }
+  }, [accessToken])
 
   function showModal() {
     setLoginModal((prev) => !prev)
@@ -64,13 +77,19 @@ function Header() {
           </Link>
         </li>
       </S.MenuListBox>
-      <S.LoginBtn
-        scroll={scroll}
-        pathname={router.pathname}
-        onClick={() => console.log(window.scrollY)}
-      >
-        로그인
-      </S.LoginBtn>
+      {accessToken ? (
+        <S.LoginBtn scroll={scroll} pathname={router.pathname}>
+          {loginText}
+        </S.LoginBtn>
+      ) : (
+        <S.LoginBtn
+          scroll={scroll}
+          pathname={router.pathname}
+          onClick={() => showModal()}
+        >
+          {loginText}
+        </S.LoginBtn>
+      )}
       {loginModal && <Login />}
     </S.HeaderContainer>
   )

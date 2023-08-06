@@ -15,11 +15,11 @@ const fadeUp = keyframes`
 
 const floaty = keyframes`
   0% {
-    margin-top: 0;
+    transform: translateY(2rem);
   }
-
+  
   100% {
-    margin-top: 1.5rem;
+    transform: translateY(0);
   }
 `
 
@@ -40,18 +40,10 @@ export const HomeSection1 = styled.div`
 `
 
 export const IntroductoryBox = styled.div`
+  margin: auto auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
-`
-
-export const HiCharacterBox = styled.div`
-  animation: ${fadeUp} 1.2s linear 0s;
-  svg {
-    margin-top: 1.5rem;
-    width: 25rem;
-    height: 25rem;
-  }
 `
 
 export const IntroductoryTextBox = styled.div`
@@ -76,12 +68,12 @@ export const IntroductoryTextBox = styled.div`
   }
 
   a {
-    padding: 10px;
+    padding: 12px;
     background-color: #ffffff;
     font-size: 0.9rem;
     color: #0066ff;
     text-decoration: none;
-    width: 7rem;
+    width: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,11 +89,18 @@ export const IntroductoryTextBox = styled.div`
   }
 `
 
-export const ScrollIcon = styled.div`
-  margin-top: 2rem;
+export const HiCharacterBox = styled.div`
+  animation: ${fadeUp} 1.2s linear 0s;
   svg {
-    animation: ${floaty} 1s linear 0s infinite alternate;
+    margin-top: 1.5rem;
+    width: 25rem;
+    height: 25rem;
   }
+`
+
+export const ScrollIcon = styled.div`
+  animation: ${floaty} 1s linear 0s infinite alternate;
+  margin-bottom: 2rem;
 `
 
 export const HomeSection2 = styled.div`
