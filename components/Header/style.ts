@@ -43,8 +43,8 @@ export const MenuListBox = styled.ul<HeaderProps>`
   }
 
   .choice {
-    color: ${({ scroll }) => (scroll === 0 ? '#ffffff' : '#000000')};
-    font-weight: 600;
+    color: ${({ scroll, pathname }) =>
+      pathname === '/' ? (scroll === 0 ? '#ffffff' : '#000000') : '#000000'};
   }
 `
 
