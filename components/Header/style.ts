@@ -1,9 +1,5 @@
+import { HeaderProps } from '@/types/style/Header'
 import styled from '@emotion/styled'
-
-interface HeaderProps {
-  scroll: number
-  pathname: string
-}
 
 export const HeaderContainer = styled.header<HeaderProps>`
   position: fixed;
