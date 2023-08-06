@@ -23,7 +23,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
         : '#ffffff'
       : '#ffffff'};
 
-  svg {
+  & > svg {
     width: 2rem;
     height: 2rem;
   }
@@ -56,15 +56,13 @@ export const LoginBtn = styled.button<HeaderProps>`
   border: ${({ pathname, scroll }) =>
     pathname === '/' ? (scroll === 0 ? '1px solid #ffffff' : 'none') : 'none'};
   border-radius: 8px;
-  padding: 0.4rem 0.7rem;
+  padding: 0.4rem 0.6rem;
   cursor: pointer;
   background: ${({ pathname, scroll }) =>
     pathname === '/' ? (scroll === 0 ? 'none' : '#0066ff') : '#0066ff'};
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 500;
-<<<<<<< Updated upstream
-=======
 
   &:hover {
     background: ${({ pathname, scroll }) =>
@@ -72,5 +70,4 @@ export const LoginBtn = styled.button<HeaderProps>`
     color: ${({ pathname, scroll }) =>
       pathname === '/' ? (scroll === 0 ? '#0066ff' : '#ffffff') : '#ffffff'};
   }
->>>>>>> Stashed changes
 `
