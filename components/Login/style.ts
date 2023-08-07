@@ -1,23 +1,7 @@
 import styled from '@emotion/styled'
 
-export const ModalBackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9;
-`
-
 export const ModalContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  position: relative;
   width: 310px;
   height: 324px;
   background-color: #fff;
