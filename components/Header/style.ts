@@ -6,6 +6,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   top: 0;
   width: 100vw;
   height: 3.8rem;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +44,8 @@ export const MenuListBox = styled.ul<HeaderProps>`
   }
 
   .choice {
-    color: ${({ scroll }) => (scroll === 0 ? '#ffffff' : '#000000')};
+    color: ${({ scroll, pathname }) =>
+      pathname === '/' ? (scroll === 0 ? '#ffffff' : '#000000') : '#000000'};
     font-weight: 600;
   }
 `
