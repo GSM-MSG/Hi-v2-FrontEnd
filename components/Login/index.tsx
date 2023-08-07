@@ -3,9 +3,9 @@ import * as SVG from '@/assets/svg'
 import { GauthLoginButton } from '@msg-team/gauth-react'
 import { useState } from 'react'
 import '@msg-team/gauth-react/dist/index.css'
-import { useSetRecoilState } from 'recoil'
-import { IsModal } from '@/apis/atoms/atom'
+import { IsModal } from '@/atoms/atom'
 import Portal from '../Portal'
+import { useSetRecoilState } from 'recoil'
 
 export default function Login() {
   const setIsModal = useSetRecoilState(IsModal)

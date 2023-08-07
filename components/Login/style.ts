@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const ModalContainer = styled.div`
   position: relative;
   width: 310px;
-  height: 324px;
   background-color: #fff;
   border-radius: 12px;
   padding: 52px 0 40px 0;
@@ -34,5 +33,5 @@ export const LoginTitle = styled.div`
   align-items: center;
   flex-direction: column;
   font-size: 18px;
-  gap: 8px;
+  gap: 32px;
 `
