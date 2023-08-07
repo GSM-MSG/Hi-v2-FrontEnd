@@ -1,12 +1,11 @@
+import { IsModal } from '@/apis/atoms/atom'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 import ReservationModal from './ReservationModal'
 
 function ReservationPage() {
-  return (
-    <>
-      <ReservationModal />
-    </>
-  )
+  const isModal = useRecoilValue(IsModal)
+  return <>{isModal && <ReservationModal />}</>
 }
 
 export default ReservationPage
