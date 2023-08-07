@@ -10,6 +10,11 @@ export const Button = styled.button<ButtonType>`
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
   font-weight: ${(props) => props.fontWeight};
+  &:hover {
+    background: ${(props) => props.hoverBackground};
+    border: ${(props) => props.hoverBorder};
+    color: ${(props) => props.hoverColor};
+  }
   text-decoration: none;
   box-shadow: none;
   outline: none;

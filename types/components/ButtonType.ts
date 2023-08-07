@@ -8,5 +8,8 @@ export type ButtonType = {
   border?: string
   borderRadius?: string
   fontWeight?: string
+  hoverBackground?: string
+  hoverBorder?: string
+  hoverColor?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
