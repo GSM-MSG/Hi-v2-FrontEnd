@@ -4,7 +4,7 @@ import { GauthLoginButton } from '@msg-team/gauth-react'
 import { useState } from 'react'
 import '@msg-team/gauth-react/dist/index.css'
 import { useRecoilState } from 'recoil'
-import { LoginModal } from '@/apis/atoms/atom'
+import { LoginModal } from '@/atoms/atom'
 
 export default function Login() {
   const [loginModal, setLoginModal] = useRecoilState(LoginModal)
