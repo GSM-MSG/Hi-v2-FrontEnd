@@ -5,7 +5,7 @@ import HiTalkGirl from '@/assets/png/HiTalkGirl.png'
 import HiTalkBoy from '@/assets/png/HiTalkBoy.png'
 import Image from 'next/image'
 import FuntionBox from './FuntionBox'
-import Button from '../Button'
+import Button from '../common/Button'
 
 function HomePage() {
   return (
