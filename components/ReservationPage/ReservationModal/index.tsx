@@ -1,7 +1,7 @@
 import Portal from '@/components/Portal'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { IsModal, ModalPage } from '@/apis/atoms/atom'
+import { IsModal, ModalPage } from '@/atoms/atom'
 import Reason from './Page/Reason'
 import MemberSelection from './Page/MemberSelection'
 

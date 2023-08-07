@@ -1,4 +1,4 @@
-import { IsModal } from '@/apis/atoms/atom'
+import { IsModal } from '@/atoms/atom'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import ReservationModal from './ReservationModal'

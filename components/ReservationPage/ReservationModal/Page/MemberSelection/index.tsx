@@ -8,7 +8,7 @@ import {
 } from '@/components/Common/Modal/Title'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { ModalPage } from '@/apis/atoms/atom'
+import { ModalPage } from '@/atoms/atom'
 import * as S from './style'
 import { useSetRecoilState } from 'recoil'
 
