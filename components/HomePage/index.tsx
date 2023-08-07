@@ -5,6 +5,7 @@ import HiTalkGirl from '@/assets/png/HiTalkGirl.png'
 import HiTalkBoy from '@/assets/png/HiTalkBoy.png'
 import Image from 'next/image'
 import FuntionBox from './FuntionBox'
+import Button from '../common/Button'
 
 function HomePage() {
   return (
@@ -17,7 +18,18 @@ function HomePage() {
             </h2>
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
             <Link href='/reservation'>
-              예약하러 가기 <SVG.ArrowIcon />
+              <Button
+                width='8rem'
+                height='2.4rem'
+                color='#0066ff'
+                fontWeight='600'
+                borderRadius='8px'
+                border='none'
+                fontSize='0.9rem'
+              >
+                예약하러 가기
+                <SVG.ArrowIcon />
+              </Button>
             </Link>
           </S.IntroductoryTextBox>
           <S.HiCharacterBox>
