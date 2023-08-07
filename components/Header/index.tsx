@@ -4,7 +4,7 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import Login from '../Login'
 import { useEffect, useState } from 'react'
-import { LoginModal } from '@/apis/atoms/atom'
+import { LoginModal, HasLogin } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 
 function Header() {
@@ -16,6 +16,7 @@ function Header() {
   const [scroll, setScroll] = useState(0)
   const [loginModal, setLoginModal] = useRecoilState(LoginModal)
   const [loginText, setLoginText] = useState('로그인')
+  const [hasLogin, setHasLogin] = useRecoilState(HasLogin)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,8 +78,15 @@ function Header() {
           </Link>
         </li>
       </S.MenuListBox>
-      {accessToken ? (
-        <S.LoginBtn scroll={scroll} pathname={router.pathname}>
+      {hasLogin ? (
+        <S.LoginBtn
+          scroll={scroll}
+          pathname={router.pathname}
+          onClick={() => {
+            setHasLogin(false)
+            localStorage.clear()
+          }}
+        >
           {loginText}
         </S.LoginBtn>
       ) : (
