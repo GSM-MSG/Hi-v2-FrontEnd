@@ -68,17 +68,13 @@ export const IntroductoryTextBox = styled.div`
   }
 
   a {
-    padding: 12px;
-    background-color: #ffffff;
-    font-size: 0.9rem;
-    color: #0066ff;
-    text-decoration: none;
-    width: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    font-weight: 600;
+    text-decoration-line: none;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     svg {
       width: 1rem;
