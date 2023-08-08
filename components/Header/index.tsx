@@ -4,7 +4,7 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import Login from '../Login'
 import { useEffect, useState } from 'react'
-import { LoginModal, HasLogin } from '@/atoms/atom'
+import { HasLogin, IsModal } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 
 function Header() {
@@ -14,7 +14,7 @@ function Header() {
       ? localStorage.getItem('hi_accessToken')
       : null
   const [scroll, setScroll] = useState(0)
-  const [loginModal, setLoginModal] = useRecoilState(LoginModal)
+  const [isModal, setIsModal] = useRecoilState(IsModal)
   const [loginText, setLoginText] = useState('로그인')
   const [hasLogin, setHasLogin] = useRecoilState(HasLogin)
 
@@ -37,10 +37,6 @@ function Header() {
       setLoginText('로그인')
     }
   }, [accessToken])
-
-  function showModal() {
-    setLoginModal((prev) => !prev)
-  }
 
   return (
     <S.HeaderContainer scroll={scroll} pathname={router.pathname}>
@@ -93,12 +89,12 @@ function Header() {
         <S.LoginBtn
           scroll={scroll}
           pathname={router.pathname}
-          onClick={() => showModal()}
+          onClick={() => setIsModal(true)}
         >
           {loginText}
         </S.LoginBtn>
       )}
-      {loginModal && <Login />}
+      {isModal && <Login />}
     </S.HeaderContainer>
   )
 }
