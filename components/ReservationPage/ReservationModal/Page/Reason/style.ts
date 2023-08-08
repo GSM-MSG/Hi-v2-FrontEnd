@@ -5,3 +5,10 @@ export const ReasonContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 `
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

@@ -1,16 +1,17 @@
 import * as SVG from '@/assets/svg'
-import { Button } from '@/components/Common/Modal/Button'
 import {
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
+  TitleDesignToggle,
 } from '@/components/Common/Modal/Title'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModalPage } from '@/atoms/atom'
 import * as S from './style'
 import { useSetRecoilState } from 'recoil'
+import Button from '@/components/Common/Button'
 
 function MemberSelection() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -20,6 +21,7 @@ function MemberSelection() {
     { studentNum: 2405, name: '이운린' },
     { studentNum: 2405, name: '김희망' },
   ])
+
   const form = useForm({ defaultValues: { member: '' } })
 
   const { register, watch, setValue } = form
@@ -28,6 +30,7 @@ function MemberSelection() {
     <S.MemberSelectionContainer>
       <TitleBox>
         <Title>팀원선택</Title>
+        <TitleDesignToggle />
         <PageToggleBox>
           <div className='currentToggle'></div>
           <div></div>
@@ -54,11 +57,37 @@ function MemberSelection() {
                   {item.studentNum} {item.name}
                 </span>
               </S.InfoBox>
-              <S.SelectButton>선택</S.SelectButton>
+              <Button
+                background='none'
+                border='2px solid #0066ff'
+                borderRadius='8px'
+                color='#0066ff'
+                width='3.7rem'
+                height='2rem'
+                fontSize='0.9rem'
+                fontWeight='600'
+                hoverBackground='#0066ff'
+                hoverBorder='none'
+                hoverColor='#ffffff'
+              >
+                선택
+              </Button>
             </S.MemberBox>
           ))}
       </S.MemberListBox>
-      <Button onClick={() => setModalPage(2)}>다음</Button>
+      <Button
+        width='100%'
+        height='3rem'
+        background='#0066ff'
+        color='#ffffff'
+        fontSize='1rem'
+        fontWeight='500'
+        border='none'
+        borderRadius='8px'
+        onClick={() => setModalPage(2)}
+      >
+        다음으로
+      </Button>
     </S.MemberSelectionContainer>
   )
 }

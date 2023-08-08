@@ -78,9 +78,6 @@ export const InfoBox = styled.div`
 `
 
 export const SelectButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: none;
   border: 2px solid #0066ff;
   border-radius: 8px;

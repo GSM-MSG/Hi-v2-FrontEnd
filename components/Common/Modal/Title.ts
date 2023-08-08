@@ -35,6 +35,16 @@ export const Title = styled.h3`
   color: #3c3c43;
 `
 
+export const TitleDesignToggle = styled.div`
+  position: absolute;
+  top: 1.6rem;
+  left: 6.6rem;
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #0066ff;
+`
+
 export const SubTitle = styled.p`
   font-size: 0.9rem;
   font-weight: 300;
