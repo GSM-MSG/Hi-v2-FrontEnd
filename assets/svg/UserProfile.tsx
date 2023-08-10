@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UserPfofile() {
+function UserProfile() {
   return (
     <svg
       width='36'
@@ -18,4 +18,4 @@ function UserPfofile() {
   )
 }
 
-export default UserPfofile
+export default UserProfile
