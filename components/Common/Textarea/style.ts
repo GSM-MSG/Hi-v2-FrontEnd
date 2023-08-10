@@ -4,20 +4,21 @@ import styled from '@emotion/styled'
 export const Textarea = styled.textarea<TextareaPropsType>`
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid ${({ borderColor }) => borderColor};
+  border: 1px solid ${(props) => props.borderColor};
   resize: none;
   width: 100%;
-  height: ${({ height }) => height};
+  height: ${(props) => props.height};
   outline: none;
-  color: #6c6c6c;
-  font-size: 1rem;
+  color: #c0c0c0;
+  font-size: ${(props) => props.fontSize};
   margin-bottom: 2rem;
 
   &:focus {
     border: 1px solid #6c6c6c;
+    color: #6c6c6c;
   }
 
   &::placeholder {
-    color: #b1b1b1;
+    color: #c0c0c0;
   }
 `

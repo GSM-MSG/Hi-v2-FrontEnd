@@ -8,10 +8,7 @@ export default function Input(props: InputPropsType) {
       height={props.height}
       border={props.border}
       borderRadius={props.borderRadius}
-      color={props.color}
       placeholder={props.placeholder}
-      padding={props.padding}
-      placeholderColor={props.placeholderColor}
     />
   )
 }

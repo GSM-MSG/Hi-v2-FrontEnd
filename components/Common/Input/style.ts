@@ -6,11 +6,16 @@ export const Input = styled.input<InputPropsType>`
   height: ${(props) => props.height};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
-  color: ${(props) => props.color};
-  padding: ${(props) => props.padding};
+  padding: 1rem;
+  color: #c0c0c0;
   outline: none;
 
+  &:focus {
+    color: #6c6c6c;
+    border: 1px solid #6c6c6c;
+  }
+
   ::placeholder {
-    color: ${(props) => props.placeholderColor};
+    color: #c0c0c0;
   }
 `
