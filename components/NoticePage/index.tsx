@@ -7,7 +7,7 @@ import PageContainer from '@/components/common/PageContainer'
 
 function NoticePage() {
   return (
-    <PageContainer paddingTop='4vh' paddingBottom='4vh'>
+    <PageContainer paddingTop='4vh' paddingBottom='4vh' background='#f5f5f5'>
       <S.NoticeTitleContainer>
         <h1>공지사항</h1>
         <Link href='notice/write'>

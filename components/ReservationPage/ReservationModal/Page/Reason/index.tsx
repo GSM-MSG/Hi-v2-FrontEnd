@@ -7,7 +7,7 @@ import {
   TitleBox,
   TitleDesignToggle,
 } from '@/components/common/Modal/Title'
-import { Textarea } from '@/components/common/Textarea'
+import Textarea from '@/components/common/Textarea'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
 
@@ -24,7 +24,11 @@ function Reason() {
         </PageToggleBox>
       </TitleBox>
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
-      <Textarea height={288} placeholder='예약 사유를 입력해주세요.' />
+      <Textarea
+        height='288px'
+        placeholder='예약 사유를 입력해주세요.'
+        borderColor='#b1b1b1'
+      />
       <S.ButtonContainer>
         <Button
           width='30%'
