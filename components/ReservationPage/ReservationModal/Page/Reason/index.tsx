@@ -29,6 +29,7 @@ function Reason() {
         placeholder='예약 사유를 입력해주세요.'
         borderColor='#b1b1b1'
         fontSize='0.9rem'
+        margin='0 0 2rem 0'
       />
       <S.ButtonContainer>
         <Button

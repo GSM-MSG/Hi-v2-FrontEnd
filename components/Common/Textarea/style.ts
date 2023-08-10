@@ -11,7 +11,7 @@ export const Textarea = styled.textarea<TextareaPropsType>`
   outline: none;
   color: #c0c0c0;
   font-size: ${(props) => props.fontSize};
-  margin-bottom: 2rem;
+  margin: ${(props) => props.margin};
 
   &:focus {
     border: 1px solid #6c6c6c;

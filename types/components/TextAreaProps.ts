@@ -3,4 +3,5 @@ export type TextareaPropsType = {
   borderColor?: string
   placeholder?: string
   fontSize?: string
+  margin?: string
 }

@@ -8,6 +8,7 @@ export default function Textarea(props: TextareaPropsType) {
       borderColor={props.borderColor}
       placeholder={props.placeholder}
       fontSize={props.fontSize}
+      margin={props.margin}
     />
   )
 }
