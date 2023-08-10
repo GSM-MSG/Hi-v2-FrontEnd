@@ -1,4 +1,4 @@
-export type ButtonType = {
+export type ButtonPropsType = {
   children: React.ReactNode
   width?: string
   height?: string
