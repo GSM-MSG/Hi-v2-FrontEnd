@@ -2,7 +2,7 @@ import { HeaderProps } from '@/types/style/Header'
 import styled from '@emotion/styled'
 
 export const HeaderContainer = styled.header<HeaderProps>`
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100vw;
   height: 3.8rem;
