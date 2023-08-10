@@ -1,7 +1,7 @@
-import { PageContainerType } from '@/types/components/PageContainerType'
+import { PageContainerPropsType } from '@/types/components/PageContainerPropsType'
 import * as S from './style'
 
-export default function PageContainer(props: PageContainerType) {
+export default function PageContainer(props: PageContainerPropsType) {
   return (
     <S.PageContainer
       display={props.display}
@@ -9,6 +9,7 @@ export default function PageContainer(props: PageContainerType) {
       justifyContent={props.justifyContent}
       paddingTop={props.paddingTop}
       paddingBottom={props.paddingBottom}
+      background={props.background}
     >
       {props.children}
     </S.PageContainer>
