@@ -1,15 +1,35 @@
 import styled from '@emotion/styled'
 
-export const NoticePageContainer = styled.div`
-  width: 100vw;
-  min-height: calc(100vh - 4rem);
-  height: 100%;
-  background-color: #f5f5f5;
-  padding: 8vh 15vw 4vh 15vw;
+export const NoticeTitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h1 {
-    margin-top: 4vh;
     font-size: 1.6rem;
     color: #3c3c43;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    @media screen and (max-width: 1350px) {
+      font-size: 0.8rem;
+    }
+
+    @media screen and (max-width: 1270px) {
+      font-size: 0.7rem;
+    }
+
+    @media screen and (max-width: 1200px) {
+      font-size: 0.6rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
   }
 `
