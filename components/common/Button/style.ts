@@ -1,7 +1,7 @@
-import { ButtonType } from '@/types/components/ButtonType'
+import { ButtonPropsType } from '@/types/components/ButtonPropsType'
 import styled from '@emotion/styled'
 
-export const Button = styled.button<ButtonType>`
+export const Button = styled.button<ButtonPropsType>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   font-size: ${(props) => props.fontSize};

@@ -5,13 +5,13 @@ import {
   Title,
   TitleBox,
   TitleDesignToggle,
-} from '@/components/Common/Modal/Title'
+} from '@/components/common/Modal/Title'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModalPage } from '@/atoms/atom'
 import * as S from './style'
 import { useSetRecoilState } from 'recoil'
-import Button from '@/components/Common/Button'
+import Button from '@/components/common/Button'
 
 function MemberSelection() {
   const setModalPage = useSetRecoilState(ModalPage)
