@@ -14,7 +14,6 @@ export const Textarea = styled.textarea<TextareaProps>`
   outline: none;
   color: #6c6c6c;
   font-size: 1rem;
-  margin-bottom: 2rem;
 
   &::placeholder {
     color: #b1b1b1;

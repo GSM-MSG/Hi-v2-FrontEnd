@@ -1,14 +1,14 @@
 import Portal from '@/components/Portal'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { IsModal, ModalPage } from '@/atoms/atom'
+import { IsRModal, ModalPage } from '@/atoms/atom'
 import Reason from './Page/Reason'
 import MemberSelection from './Page/MemberSelection'
 
 function ReservationModal() {
-  const setIsModal = useSetRecoilState(IsModal)
+  const setIsRModal = useSetRecoilState(IsRModal)
   const page = useRecoilValue(ModalPage)
-  const onClose = () => setIsModal(false)
+  const onClose = () => setIsRModal(false)
   return (
     <Portal onClose={onClose}>
       <S.ReservationModalContainer>

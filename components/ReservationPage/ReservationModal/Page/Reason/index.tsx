@@ -5,7 +5,6 @@ import {
   SubTitle,
   Title,
   TitleBox,
-  TitleDesignToggle,
 } from '@/components/Common/Modal/Title'
 import { Textarea } from '@/components/Common/Textarea'
 import { useSetRecoilState } from 'recoil'
@@ -16,8 +15,9 @@ function Reason() {
   return (
     <S.ReasonContainer>
       <TitleBox>
-        <Title>예약사유</Title>
-        <TitleDesignToggle />
+        <Title>
+          예약사유 <span />
+        </Title>
         <PageToggleBox>
           <div></div>
           <div className='currentToggle'></div>
