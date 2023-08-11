@@ -66,12 +66,6 @@ export const MemberBox = styled.div`
   padding: 1.8rem 1rem;
   border-radius: 8px;
 
-  span {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #606060;
-  }
-
   &:hover {
     background: #f7f7f7;
   }
@@ -81,5 +75,12 @@ export const InfoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 8.3vw;
+  width: 8.8vw;
+
+  span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #606060;
+    margin-left: 0.2rem;
+  }
 `

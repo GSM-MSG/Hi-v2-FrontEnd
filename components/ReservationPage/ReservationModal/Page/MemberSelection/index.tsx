@@ -5,7 +5,7 @@ import {
   Title,
   TitleBox,
 } from '@/components/Common/Modal/Title'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModalPage } from '@/atoms/atom'
 import * as S from './style'
@@ -29,8 +29,6 @@ function MemberSelection() {
     url: `/user/search?keyword=${watch('member')}`,
     method: 'get',
   })
-
-  console.log(data)
 
   useEffect(() => {
     if (!watch('member').trim()) return
@@ -65,33 +63,49 @@ function MemberSelection() {
       <S.Input placeholder='팀원을 검색하세요.' {...register('member')} />
       <S.MemberListBox>
         {watch('member')?.trim() &&
-          data?.map((item) => (
-            <S.MemberBox key={item.userId}>
-              <S.InfoBox>
-                <SVG.UserProfile />
-                <span>
-                  {item.grade}
-                  {item.classNum}
-                  {item.number} {item.name}
-                </span>
-              </S.InfoBox>
-              <Button
-                background='none'
-                border='1px solid #0066ff'
-                borderRadius='6px'
-                color='#0066ff'
-                width='3.5rem'
-                height='1.8rem'
-                fontSize='0.9rem'
-                fontWeight='500'
-                hoverBackground='#0066ff'
-                hoverBorder='none'
-                hoverColor='#ffffff'
-              >
-                선택
-              </Button>
-            </S.MemberBox>
-          ))}
+          data
+            ?.sort((a, b) => {
+              const aStudentNum = parseInt(
+                `${a.grade}${a.classNum}${a.number.toString().padStart(2, '0')}`
+              )
+              const bStudentNum = parseInt(
+                `${b.grade}${b.classNum}${b.number.toString().padStart(2, '0')}`
+              )
+
+              return aStudentNum - bStudentNum
+            })
+            .map((item) => (
+              <S.MemberBox key={item.userId}>
+                <S.InfoBox>
+                  <SVG.UserProfile />
+                  <div>
+                    <span>
+                      {parseInt(
+                        `${item.grade}${item.classNum}${item.number
+                          .toString()
+                          .padStart(2, '0')}`
+                      )}
+                    </span>
+                    <span>{item.name}</span>
+                  </div>
+                </S.InfoBox>
+                <Button
+                  background='none'
+                  border='1px solid #0066ff'
+                  borderRadius='6px'
+                  color='#0066ff'
+                  width='3.5rem'
+                  height='1.8rem'
+                  fontSize='0.9rem'
+                  fontWeight='500'
+                  hoverBackground='#0066ff'
+                  hoverBorder='none'
+                  hoverColor='#ffffff'
+                >
+                  선택
+                </Button>
+              </S.MemberBox>
+            ))}
       </S.MemberListBox>
       <Button
         width='100%'
