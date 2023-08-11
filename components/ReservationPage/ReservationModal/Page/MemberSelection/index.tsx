@@ -37,7 +37,7 @@ function MemberSelection() {
 
     const delayFetch = setTimeout(() => {
       fetch()
-    }, 300)
+    }, 200)
 
     return () => clearTimeout(delayFetch)
   }, [fetch, watch])
