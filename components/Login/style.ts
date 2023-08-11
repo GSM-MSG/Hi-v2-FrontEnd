@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const ModalContainer = styled.div`
   position: relative;
   width: 310px;
-  height: 324px;
   background-color: #fff;
   border-radius: 12px;
   padding: 52px 0 40px 0;

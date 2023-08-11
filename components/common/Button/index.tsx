@@ -1,7 +1,7 @@
-import { ButtonType } from '@/types/components/ButtonType'
+import { ButtonPropsType } from '@/types/components/ButtonPropsType'
 import * as S from './style'
 
-export default function Button(props: ButtonType) {
+export default function Button(props: ButtonPropsType) {
   return (
     <S.Button
       width={props.width}
