@@ -12,14 +12,7 @@ import * as S from './style'
 import { useSetRecoilState } from 'recoil'
 import Button from '@/components/Common/Button'
 import useFetch from '@/hooks/useFetch'
-
-interface UserListType {
-  userId: string
-  name: string
-  grade: number
-  classNum: number
-  number: number
-}
+import { UserListType } from '@/types/components/UserListType'
 
 function MemberSelection() {
   const setModalPage = useSetRecoilState(ModalPage)
