@@ -11,6 +11,7 @@ const API = axios.create({
       ? `Bearer ${getStorage('hi_accessToken')}`
       : '',
   },
+  withCredentials: true,
 })
 
 export default API

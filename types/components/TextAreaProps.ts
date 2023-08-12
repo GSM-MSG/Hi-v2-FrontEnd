@@ -1,4 +1,4 @@
-export type TextareaPropsType = {
+export interface TextareaPropsType {
   height: string
   borderColor?: string
   placeholder?: string

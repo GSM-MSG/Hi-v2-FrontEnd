@@ -1,4 +1,4 @@
-export type InputPropsType = {
+export interface InputPropsType {
   width?: string
   height?: string
   border?: string
