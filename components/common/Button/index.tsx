@@ -13,7 +13,7 @@ export default function Button(props: ButtonType) {
       borderRadius={props.borderRadius}
       fontWeight={props.fontWeight}
       hoverBackground={props.hoverBackground}
-      hoverBorder={props.hoverBackground}
+      hoverBorder={props.hoverBorder}
       hoverColor={props.hoverColor}
       onClick={props.onClick}
     >
