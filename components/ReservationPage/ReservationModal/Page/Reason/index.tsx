@@ -24,7 +24,7 @@ function Reason() {
         </PageToggleBox>
       </TitleBox>
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
-      <Textarea height='20rem' placeholder='예약 사유를 입력해주세요.' />
+      <Textarea height='18rem' placeholder='예약 사유를 입력해주세요.' />
       <S.ButtonContainer>
         <Button
           width='30%'
@@ -46,6 +46,7 @@ function Reason() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
+          onClick={() => setModalPage(3)}
         >
           예약하기
         </Button>
