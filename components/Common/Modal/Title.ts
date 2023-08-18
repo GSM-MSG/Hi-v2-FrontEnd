@@ -30,19 +30,19 @@ export const PageToggleBox = styled.div`
 `
 
 export const Title = styled.h3`
+  display: flex;
+  align-items: flex-start;
   font-size: 1.3rem;
   font-weight: bold;
   color: #3c3c43;
-`
+  gap: 5px;
 
-export const TitleDesignToggle = styled.div`
-  position: absolute;
-  top: 1.6rem;
-  left: 6.6rem;
-  border-radius: 50%;
-  width: 0.5rem;
-  height: 0.5rem;
-  background: #0066ff;
+  span {
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #0066ff;
+  }
 `
 
 export const SubTitle = styled.p`

@@ -1,13 +1,12 @@
 import { ModalPage } from '@/atoms/atom'
-import Button from '@/components/common/Button'
+import Button from '@/components/Common/Button'
 import {
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-  TitleDesignToggle,
-} from '@/components/common/Modal/Title'
-import Textarea from '@/components/common/Textarea'
+} from '@/components/Common/Modal/Title'
+import Textarea from '@/components/Common/Textarea'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
 
@@ -16,21 +15,16 @@ function Reason() {
   return (
     <S.ReasonContainer>
       <TitleBox>
-        <Title>예약사유</Title>
-        <TitleDesignToggle />
+        <Title>
+          예약사유 <span />
+        </Title>
         <PageToggleBox>
           <div></div>
           <div className='currentToggle'></div>
         </PageToggleBox>
       </TitleBox>
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
-      <Textarea
-        height='288px'
-        placeholder='예약 사유를 입력해주세요.'
-        borderColor='#b1b1b1'
-        fontSize='0.9rem'
-        margin='0 0 2rem 0'
-      />
+      <Textarea height='20rem' placeholder='예약 사유를 입력해주세요.' />
       <S.ButtonContainer>
         <Button
           width='30%'

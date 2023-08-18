@@ -1,20 +1,21 @@
 import styled from '@emotion/styled'
 
 export const MemberSelectionContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
   .searchIcon {
     position: absolute;
-    top: 6.6rem;
-    left: 3rem;
+    top: 4.6rem;
+    left: 1rem;
   }
 
   .closeIcon {
     position: absolute;
-    top: 6.6rem;
-    right: 3rem;
+    top: 4.6rem;
+    right: 1rem;
     cursor: pointer;
   }
 `
@@ -44,8 +45,14 @@ export const MemberListBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 14rem;
   margin-top: 0.5rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 4rem;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const MemberBox = styled.div`
@@ -59,14 +66,8 @@ export const MemberBox = styled.div`
   padding: 1.8rem 1rem;
   border-radius: 8px;
 
-  span {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #606060;
-  }
-
   &:hover {
-    background: #e9e9e9;
+    background: #f7f7f7;
   }
 `
 
@@ -74,23 +75,12 @@ export const InfoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 9vw;
-`
+  width: 8.8vw;
 
-export const SelectButton = styled.div`
-  background: none;
-  border: 2px solid #0066ff;
-  border-radius: 8px;
-  color: #0066ff;
-  width: 3.7rem;
-  height: 2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s ease-out;
-  cursor: pointer;
-
-  &:hover {
-    color: #ffffff;
-    background: #0066ff;
+  span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #606060;
+    margin-left: 0.2rem;
   }
 `

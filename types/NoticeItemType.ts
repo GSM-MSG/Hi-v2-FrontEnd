@@ -1,4 +1,4 @@
-export type NoticeItemType = {
+export interface NoticeItemType {
   noticeId: number
   title: string
   date: string
