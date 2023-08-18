@@ -11,7 +11,6 @@ import { ModalPage, ShowMembers, TeamMembers } from '@/atoms/atom'
 import * as S from './style'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import Button from '@/components/Common/Button'
-import { useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { UserListType } from '@/types/components/UserListType'
 
