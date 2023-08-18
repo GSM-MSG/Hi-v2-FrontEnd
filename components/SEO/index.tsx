@@ -1,13 +1,10 @@
+import { SeoPropsType } from '@/types/SeoPropsType'
 import Head from 'next/head'
 
-interface SEOProps {
-  title: string
-}
-
-function SEO({ title }: SEOProps) {
+function SEO({ title }: SeoPropsType) {
   return (
     <Head>
-      <title>{title}</title>
+      <title>{`Hi ${title ?? ''}`}</title>
     </Head>
   )
 }
