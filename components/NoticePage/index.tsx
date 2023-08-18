@@ -1,4 +1,4 @@
-import Button from '@/components/common/Button'
+import Button from '../common/Button'
 import NoticeItemList from './NoticeItemList'
 import * as S from './style'
 import * as SVG from '../../assets/svg'
