@@ -6,7 +6,6 @@ import { IsRModal, ModalPage } from '@/atoms/atom'
 
 export default function Completed() {
   const setIsRModal = useSetRecoilState(IsRModal)
-  const setModalPage = useSetRecoilState(ModalPage)
   return (
     <S.CompletedContainer>
       <S.ShowComplted>
@@ -22,7 +21,7 @@ export default function Completed() {
         fontWeight='500'
         border='none'
         borderRadius='8px'
-        onClick={() => setModalPage(2)}
+        onClick={() => setIsRModal(false)}
       >
         확인
       </Button>

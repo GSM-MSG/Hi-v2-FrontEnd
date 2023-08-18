@@ -5,17 +5,19 @@ import {
   Title,
   TitleBox,
 } from '@/components/Common/Modal/Title'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { ModalPage } from '@/atoms/atom'
+import { ModalPage, ShowMembers, TeamMembers } from '@/atoms/atom'
 import * as S from './style'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import Button from '@/components/Common/Button'
 import useFetch from '@/hooks/useFetch'
 import { UserListType } from '@/types/components/UserListType'
 
 function MemberSelection() {
   const setModalPage = useSetRecoilState(ModalPage)
+  const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
+  const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const form = useForm({ defaultValues: { member: '' } })
   const { register, watch, setValue } = form
   const { fetch, data } = useFetch<UserListType[]>({
@@ -32,6 +34,24 @@ function MemberSelection() {
 
     return () => clearTimeout(delayFetch)
   }, [fetch, watch])
+
+  const addMembers = (member: UserListType) => {
+    if (teamMembers.includes(member.userId)) return
+    setShowMembers((prev) => [...prev, member])
+    setTeamMembers((prev) => [...prev, member.userId])
+    setValue('member', '')
+  }
+
+  const deleteMembers = (member: UserListType) => {
+    const filteredShowMembers = showMembers.filter((item) => item !== member)
+    const filteredTeamMembers = teamMembers.filter(
+      (item) => item !== member.userId
+    )
+
+    setShowMembers(filteredShowMembers)
+    setTeamMembers(filteredTeamMembers)
+    setValue('member', '')
+  }
 
   return (
     <S.MemberSelectionContainer>
@@ -53,7 +73,24 @@ function MemberSelection() {
           <SVG.SmallXMark />
         </div>
       )}
-      <S.Input placeholder='팀원을 검색하세요.' {...register('member')} />
+      <S.ShowMemberListBox>
+        {showMembers.map((showMember) => (
+          <S.ShowMemberBox key={showMember.userId}>
+            <span>{showMember.name}</span>
+            <div
+              style={{ cursor: 'pointer' }}
+              onClick={() => deleteMembers(showMember)}
+            >
+              <SVG.CancelXMark />
+            </div>
+          </S.ShowMemberBox>
+        ))}
+      </S.ShowMemberListBox>
+      <S.Input
+        disabled={showMembers.length === 4 ? true : false}
+        placeholder='팀원을 검색하세요.'
+        {...register('member')}
+      />
       <S.MemberListBox>
         {watch('member')?.trim() &&
           data
@@ -94,6 +131,7 @@ function MemberSelection() {
                   hoverBackground='#0066ff'
                   hoverBorder='none'
                   hoverColor='#ffffff'
+                  onClick={() => addMembers(item)}
                 >
                   선택
                 </Button>
