@@ -1,12 +1,12 @@
 import { ModalPage } from '@/atoms/atom'
-import Button from '@/components/Common/Button'
+import Button from '@/components/common/Button'
 import {
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-} from '@/components/Common/Modal/Title'
-import Textarea from '@/components/Common/Textarea'
+} from '@/components/common/Modal/Title'
+import Textarea from '@/components/common/Textarea'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
 
