@@ -4,6 +4,7 @@ import * as S from './style'
 import { IsRModal, ModalPage } from '@/atoms/atom'
 import Reason from './Page/Reason'
 import MemberSelection from './Page/MemberSelection'
+import Completed from './Page/Completed'
 
 function ReservationModal() {
   const setIsRModal = useSetRecoilState(IsRModal)
@@ -14,6 +15,7 @@ function ReservationModal() {
       <S.ReservationModalContainer>
         {page === 1 && <MemberSelection />}
         {page === 2 && <Reason />}
+        {page === 3 && <Completed />}
       </S.ReservationModalContainer>
     </Portal>
   )

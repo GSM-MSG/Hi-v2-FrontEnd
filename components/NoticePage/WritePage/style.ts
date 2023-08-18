@@ -14,7 +14,7 @@ export const WriteContentContainer = styled.div`
   align-items: flex-start;
 
   button {
-    margin-top: 3vh;
+    margin-top: 14vh;
   }
 `
 export const InputContainer = styled.div`
@@ -41,28 +41,4 @@ export const WriteInputTitle = styled.div`
   p:nth-child(3) {
     color: #ff005c;
   }
-`
-
-export const AddImgContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 3vh;
-`
-
-export const AddImg = styled.div`
-  width: 8rem;
-  height: 8rem;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  cursor: pointer;
-`
-
-export const ImgDesc = styled.p`
-  font-size: 0.8rem;
-  color: #b1b1b1;
 `
