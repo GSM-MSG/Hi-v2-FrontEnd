@@ -10,12 +10,13 @@ const FunctionBoxContainer = styled.div`
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 10px;
-  width: 15rem;
-  height: 18rem;
+  width: 18.7rem;
+  height: 23.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 3rem 2rem 2rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 
   img {
     margin-left: 1.2rem;
@@ -23,16 +24,16 @@ const FunctionBoxContainer = styled.div`
 
   h3 {
     color: #000000;
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin: 0;
+    font-weight: 700;
+    font-size: 1.295rem;
+    margin-top: 1rem;
   }
 
   p {
-    margin-top: 1.2rem;
-    font-weight: 500;
+    margin-top: 1.3rem;
+    font-weight: 400;
     color: #606060;
-    font-size: 0.9rem;
+    font-size: 1rem;
     width: 10.8rem;
     text-align: center;
   }

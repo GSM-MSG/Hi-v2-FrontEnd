@@ -6,17 +6,17 @@ export const HeaderContainer = styled.header<HeaderProps>`
   top: 0;
   width: 100vw;
   height: 3.8rem;
+  padding: 0 18vw;
   border: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15vw;
   transition: all 0.3s ease-in-out;
   z-index: 999;
   background: ${({ scroll, pathname }) =>
     pathname === '/'
       ? scroll === 0
-        ? 'linear-gradient(to right, #0026ff, #00F0FF)'
+        ? 'linear-gradient(90deg, #0026ff 50%, #00f0ff)'
         : '#ffffff'
       : '#ffffff'};
 

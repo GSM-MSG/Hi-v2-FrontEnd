@@ -5,7 +5,7 @@ import {
   Title,
   TitleBox,
 } from '@/components/Common/Modal/Title'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModalPage } from '@/atoms/atom'
 import * as S from './style'

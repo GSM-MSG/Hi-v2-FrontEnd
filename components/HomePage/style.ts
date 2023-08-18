@@ -29,9 +29,9 @@ export const HomePageContainer = styled.div`
 
 export const HomeSection1 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   height: 92vh;
-  background: linear-gradient(to right, #0026ff, #00f0ff);
+  background: linear-gradient(105deg, #0026ff 50%, #00f0ff);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,7 +101,7 @@ export const ScrollIcon = styled.div`
 
 export const HomeSection2 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   height: 100vh;
   background-color: #f4f8ff;
   display: flex;
@@ -152,7 +152,7 @@ export const TalkBox = styled.div`
 
 export const HomeSection3 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -189,7 +189,7 @@ export const ShowIphoneBox = styled.div`
 
 export const HomeSection4 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
