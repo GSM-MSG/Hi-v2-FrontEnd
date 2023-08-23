@@ -191,7 +191,7 @@ export const ShowIphoneBox = styled.div`
 export const HomeSection4 = styled.div`
   width: 100vw;
   padding: 0 18vw;
-  height: 100vh;
+  height: 115vh;
   display: flex;
   flex-direction: column;
   align-items: center;
