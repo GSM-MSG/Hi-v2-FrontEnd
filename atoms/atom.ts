@@ -1,3 +1,4 @@
+import { UserListType } from '@/types/components/UserListType'
 import { getStorage } from '@/utils/Storage'
 import { atom } from 'recoil'
 
@@ -8,3 +9,8 @@ export const HasLogin = atom<boolean>({
   key: 'HasLogin',
   default: getStorage('hi_accessToken') ? true : false,
 })
+export const ShowMembers = atom<UserListType[]>({
+  key: 'ShowMembers',
+  default: [],
+})
+export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })

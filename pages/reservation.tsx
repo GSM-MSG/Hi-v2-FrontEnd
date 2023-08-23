@@ -4,7 +4,7 @@ import SEO from '@/components/SEO'
 function Reservation() {
   return (
     <>
-      <SEO title='Hi | 예약' />
+      <SEO title='| 예약페이지' />
       <ReservationPage />
     </>
   )
