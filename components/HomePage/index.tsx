@@ -6,7 +6,6 @@ import HiTalkBoy from '@/assets/png/HiTalkBoy.png'
 import Image from 'next/image'
 import FuntionBox from './FuntionBox'
 import Button from '../common/Button'
-import Header from '../Header'
 
 function HomePage() {
   return (

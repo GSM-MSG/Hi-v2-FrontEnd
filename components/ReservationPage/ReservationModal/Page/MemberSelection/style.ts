@@ -40,6 +40,30 @@ export const Input = styled.input`
   }
 `
 
+export const ShowMemberListBox = styled.div`
+  position: absolute;
+  top: 4.2rem;
+  left: 2.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const ShowMemberBox = styled.div`
+  width: 4.5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background: #f5f5f5;
+  color: #b1b1b1;
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  margin-right: 0.3rem;
+`
+
 export const MemberListBox = styled.div`
   display: flex;
   flex-direction: column;
