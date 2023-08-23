@@ -29,16 +29,16 @@ export const WriteInputTitle = styled.div`
   font-size: 0.9rem;
   display: flex;
 
-  p:nth-child(1) {
+  p:nth-of-type(1) {
     margin-right: 4px;
     color: #6c6c6c;
   }
 
-  p:nth-child(2) {
+  p:nth-of-type(2) {
     color: #b1b1b1;
   }
 
-  p:nth-child(3) {
+  p:nth-of-type(3) {
     color: #ff005c;
   }
 `
