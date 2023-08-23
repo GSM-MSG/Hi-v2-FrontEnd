@@ -1,5 +1,4 @@
 import * as S from './style'
-import * as SVG from '../../../assets/svg'
 import PageContainer from '@/components/common/PageContainer'
 import Input from '@/components/common/Input'
 import Textarea from '@/components/common/Textarea'
@@ -36,25 +35,12 @@ export default function WritePage() {
               <p>*</p>
             </S.WriteInputTitle>
             <Textarea
-              height='20vh'
+              height='35vh'
               borderColor='#c0c0c0'
               placeholder='내용을 작성해주세요.'
               fontSize='0.8rem'
             />
           </S.InputContainer>
-          <S.AddImgContainer>
-            <S.WriteInputTitle>
-              <p>첨부파일</p>
-            </S.WriteInputTitle>
-            <S.AddImg>
-              <SVG.AddImgIcon />
-            </S.AddImg>
-            <S.ImgDesc>
-              이미지 파일(PNG, JPG, GIF)를 기준으로 최대 10MB이하,
-              <br />
-              최대 3개까지 등록 가능합니다.
-            </S.ImgDesc>
-          </S.AddImgContainer>
           <Button
             width='100%'
             height='6vh'
