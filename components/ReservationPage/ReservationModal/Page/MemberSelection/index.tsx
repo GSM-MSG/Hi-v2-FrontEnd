@@ -4,14 +4,13 @@ import {
   SubTitle,
   Title,
   TitleBox,
-} from '@/components/Common/Modal/Title'
+} from '@/components/common/Modal/Title'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModalPage, ShowMembers, TeamMembers } from '@/atoms/atom'
 import * as S from './style'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import Button from '@/components/Common/Button'
-import { useSetRecoilState } from 'recoil'
+import Button from '@/components/common/Button'
 import useFetch from '@/hooks/useFetch'
 import { UserListType } from '@/types/components/UserListType'
 

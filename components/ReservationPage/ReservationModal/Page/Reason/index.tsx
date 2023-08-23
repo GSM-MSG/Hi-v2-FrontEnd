@@ -1,4 +1,4 @@
-import { ModalPage } from '@/atoms/atom'
+import { ModalPage, ReasonText, TeamMembers } from '@/atoms/atom'
 import Button from '@/components/common/Button'
 import {
   PageToggleBox,
@@ -7,11 +7,32 @@ import {
   TitleBox,
 } from '@/components/common/Modal/Title'
 import Textarea from '@/components/common/Textarea'
-import { useSetRecoilState } from 'recoil'
+import useFetch from '@/hooks/useFetch'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
 function Reason() {
   const setModalPage = useSetRecoilState(ModalPage)
+  const teamMembers = useRecoilValue(TeamMembers)
+  const [reasonText, setReasonText] = useRecoilState(ReasonText)
+
+  const { fetch } = useFetch({
+    url: '/homebase',
+    method: 'post',
+    onSuccess: () => {
+      setModalPage(3)
+    },
+    successMessage: '예약이 완료되었습니다.',
+    errorMessage: {
+      401: '잘못된 유저정보입니다.',
+      403: '예약이 불가능한 상태입니다.',
+    },
+  })
+
+  const onReservation = async () => {
+    await fetch({ users: teamMembers, reason: reasonText })
+  }
+
   return (
     <S.ReasonContainer>
       <TitleBox>
@@ -24,7 +45,12 @@ function Reason() {
         </PageToggleBox>
       </TitleBox>
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
-      <Textarea height='18rem' placeholder='예약 사유를 입력해주세요.' />
+      <Textarea
+        value={reasonText}
+        onChange={(e) => setReasonText(e.target.value)}
+        height='18rem'
+        placeholder='예약 사유를 입력해주세요.'
+      />
       <S.ButtonContainer>
         <Button
           width='30%'
@@ -46,7 +72,7 @@ function Reason() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={() => setModalPage(3)}
+          onClick={onReservation}
         >
           예약하기
         </Button>

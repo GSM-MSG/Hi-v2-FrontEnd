@@ -31,7 +31,7 @@ export const HomeSection1 = styled.div`
   width: 100vw;
   padding: 0 15vw;
   height: 92vh;
-  background: linear-gradient(to right, #0026ff, #00f0ff);
+  background: linear-gradient(90deg, #0026ff 0%, #00d1ff 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
