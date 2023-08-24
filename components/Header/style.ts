@@ -16,7 +16,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   background: ${({ scroll, pathname }) =>
     pathname === '/'
       ? scroll === 0
-        ? 'linear-gradient(90deg, #0026ff 50%, #00f0ff)'
+        ? 'linear-gradient(90deg, #0026ff 0%, #00d1ff 100%)'
         : '#ffffff'
       : '#ffffff'};
 
