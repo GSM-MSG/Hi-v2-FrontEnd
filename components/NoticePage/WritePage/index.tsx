@@ -11,9 +11,9 @@ export default function WritePage() {
   const [notice, setNotice] = useState({ title: '', content: '' })
   const { title, content } = notice
 
-  function onChange(
+  const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  ) => {
     const { name, value } = e.target
     setNotice((prevNotice) => ({
       ...prevNotice,
@@ -21,7 +21,7 @@ export default function WritePage() {
     }))
   }
 
-  function onClick() {
+  const onClick = () => {
     fetch(notice)
   }
 
