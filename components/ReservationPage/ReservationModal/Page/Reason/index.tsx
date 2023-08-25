@@ -17,7 +17,7 @@ function Reason() {
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
 
   const { fetch } = useFetch({
-    url: '/homebase',
+    url: '/homebase?floor=2&period=8',
     method: 'post',
     onSuccess: () => {
       setModalPage(3)
@@ -26,10 +26,11 @@ function Reason() {
     errorMessage: {
       401: '잘못된 유저정보입니다.',
       403: '예약이 불가능한 상태입니다.',
+      404: '홈베이스를 찾을 수 없습니다.',
     },
   })
 
-  const onReservation = async () => {
+  const onReserve = async () => {
     await fetch({ users: teamMembers, reason: reasonText })
   }
 
@@ -72,7 +73,7 @@ function Reason() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={onReservation}
+          onClick={onReserve}
         >
           예약하기
         </Button>
