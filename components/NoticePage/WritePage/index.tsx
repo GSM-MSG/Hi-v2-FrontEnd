@@ -7,7 +7,14 @@ import useFetch from '@/hooks/useFetch'
 import { useState } from 'react'
 
 export default function WritePage() {
-  const { fetch } = useFetch({ url: '/notice', method: 'post' })
+  const { fetch } = useFetch({
+    url: '/notice',
+    method: 'post',
+    successMessage: '공지가 등록되었습니다.',
+    errorMessage: {
+      403: '권한이 없습니다.',
+    },
+  })
   const [notice, setNotice] = useState({ title: '', content: '' })
   const { title, content } = notice
 
@@ -21,8 +28,8 @@ export default function WritePage() {
     }))
   }
 
-  const onClick = () => {
-    fetch(notice)
+  const onClick = async () => {
+    await fetch(notice)
   }
 
   return (
