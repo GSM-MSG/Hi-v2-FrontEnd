@@ -3,8 +3,28 @@ import PageContainer from '@/components/common/PageContainer'
 import Input from '@/components/common/Input'
 import Textarea from '@/components/common/Textarea'
 import Button from '@/components/common/Button'
+import useFetch from '@/hooks/useFetch'
+import { useState } from 'react'
 
 export default function WritePage() {
+  const { fetch } = useFetch({ url: '/notice', method: 'post' })
+  const [notice, setNotice] = useState({ title: '', content: '' })
+  const { title, content } = notice
+
+  function onChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = e.target
+    setNotice((prevNotice) => ({
+      ...prevNotice,
+      [name]: value,
+    }))
+  }
+
+  function onClick() {
+    fetch(notice)
+  }
+
   return (
     <PageContainer
       display='flex'
@@ -26,6 +46,9 @@ export default function WritePage() {
               placeholder='제목을 입력해주세요.'
               border='1px solid #C0C0C0'
               borderRadius='8px'
+              onChange={(e) => onChange(e)}
+              value={title}
+              name='title'
             />
           </S.InputContainer>
           <S.InputContainer>
@@ -39,6 +62,9 @@ export default function WritePage() {
               borderColor='#c0c0c0'
               placeholder='내용을 작성해주세요.'
               fontSize='0.8rem'
+              onChange={(e) => onChange(e)}
+              value={content}
+              name='content'
             />
           </S.InputContainer>
           <Button
@@ -49,6 +75,7 @@ export default function WritePage() {
             border='none'
             borderRadius='8px'
             fontWeight='600'
+            onClick={onClick}
           >
             작성완료
           </Button>
