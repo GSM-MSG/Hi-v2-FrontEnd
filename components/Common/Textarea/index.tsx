@@ -11,7 +11,6 @@ export default function Textarea(props: TextareaPropsType) {
       fontSize={props.fontSize}
       margin={props.margin}
       onChange={props.onChange}
-      value={props.value}
       name={props.name}
     />
   )
