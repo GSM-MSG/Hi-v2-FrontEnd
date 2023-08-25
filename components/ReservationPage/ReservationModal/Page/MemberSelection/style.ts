@@ -4,49 +4,47 @@ export const MemberSelectionContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+`
 
-  .searchIcon {
-    position: absolute;
-    top: 4.6rem;
-    left: 1rem;
+export const InputBlock = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #b1b1b1;
+  border-radius: 8px;
+
+  .searchIcon,
+  .cancelIcon {
+    cursor: pointer;
+    margin-top: 0.3rem;
   }
 
-  .closeIcon {
-    position: absolute;
-    top: 4.6rem;
-    right: 1rem;
-    cursor: pointer;
+  &:focus {
+    border: 1px solid red;
   }
 `
 
 export const Input = styled.input`
-  border: 1px solid #b1b1b1;
   width: 100%;
   height: 2rem;
-  padding: 1.3rem 3rem 1.3rem 3rem;
   color: #b1b1b1;
   font-size: 1rem;
-  border-radius: 8px;
+  border: none;
   outline: none;
 
   &::placeholder {
     color: #b1b1b1;
-    font-size: 0.9rem;
-  }
-
-  &:focus {
-    border: 1px solid #6c6c6c;
+    font-size: 0.8rem;
   }
 `
 
 export const ShowMemberListBox = styled.div`
-  position: absolute;
-  top: 4.2rem;
-  left: 2.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 0.5rem;
+  margin-left: 0.8rem;
 `
 
 export const ShowMemberBox = styled.div`
@@ -61,7 +59,7 @@ export const ShowMemberBox = styled.div`
   color: #b1b1b1;
   padding: 0.1rem 0.5rem;
   border-radius: 6px;
-  margin-right: 0.3rem;
+  margin-right: 0.5rem;
 `
 
 export const MemberListBox = styled.div`
