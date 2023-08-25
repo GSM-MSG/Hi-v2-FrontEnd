@@ -9,6 +9,9 @@ export default function Input(props: InputPropsType) {
       border={props.border}
       borderRadius={props.borderRadius}
       placeholder={props.placeholder}
+      onChange={props.onChange}
+      value={props.value}
+      name={props.name}
     />
   )
 }

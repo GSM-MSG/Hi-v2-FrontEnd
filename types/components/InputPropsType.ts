@@ -4,4 +4,7 @@ export interface InputPropsType {
   border?: string
   borderRadius?: string
   placeholder?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value?: string
+  name?: string
 }
