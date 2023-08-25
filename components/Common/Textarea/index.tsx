@@ -10,6 +10,9 @@ export default function Textarea(props: TextareaPropsType) {
       placeholder={props.placeholder}
       fontSize={props.fontSize}
       margin={props.margin}
+      onChange={props.onChange}
+      value={props.value}
+      name={props.name}
     />
   )
 }

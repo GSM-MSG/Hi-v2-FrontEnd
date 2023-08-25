@@ -1,8 +1,8 @@
 function HiLogo() {
   return (
     <svg
-      width='40'
-      height='40'
+      width='34'
+      height='34'
       viewBox='0 0 30 38'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

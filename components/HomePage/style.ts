@@ -29,7 +29,7 @@ export const HomePageContainer = styled.div`
 
 export const HomeSection1 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   height: 92vh;
   background: linear-gradient(90deg, #0026ff 0%, #00d1ff 100%);
   display: flex;
@@ -101,8 +101,8 @@ export const ScrollIcon = styled.div`
 
 export const HomeSection2 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
-  height: 100vh;
+  padding: 0 18vw;
+  height: 110vh;
   background-color: #f4f8ff;
   display: flex;
   flex-direction: column;
@@ -114,12 +114,13 @@ export const IntroductoryTextBox2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 3rem 0;
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #000000;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.9rem;
 
     span {
       color: #0066ff;
@@ -128,7 +129,7 @@ export const IntroductoryTextBox2 = styled.div`
 
   p {
     color: #6c6c6c;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
   }
 `
@@ -152,7 +153,7 @@ export const TalkBox = styled.div`
 
 export const HomeSection3 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
+  padding: 0 18vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -189,8 +190,8 @@ export const ShowIphoneBox = styled.div`
 
 export const HomeSection4 = styled.div`
   width: 100vw;
-  padding: 0 15vw;
-  height: 100vh;
+  padding: 0 18vw;
+  height: 115vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,8 +200,8 @@ export const HomeSection4 = styled.div`
 `
 
 export const FunctionIntroductoryBox = styled.div`
-  margin-top: 4rem;
-  width: 60rem;
+  margin-top: 2.5rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `
