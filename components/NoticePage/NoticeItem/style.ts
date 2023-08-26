@@ -31,7 +31,7 @@ export const NoticeIdContainer = styled.div`
 `
 
 export const NoticeTitle = styled.div`
-  width: 69%;
+  width: 60%;
   padding-right: 20px;
   overflow: hidden;
   white-space: nowrap;
@@ -42,9 +42,16 @@ export const NoticeTitle = styled.div`
 export const NoticeDate = styled.div`
   width: 12%;
   color: #b1b1b1;
+  text-align: center;
 `
 
 export const NoticeUser = styled.div`
   width: 12%;
   color: #b1b1b1;
+  text-align: center;
+`
+
+export const SVG = styled.div`
+  width: 9%;
+  text-align: center;
 `
