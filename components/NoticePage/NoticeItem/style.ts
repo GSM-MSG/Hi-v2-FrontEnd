@@ -8,6 +8,7 @@ export const NoticeItemContainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background-color: #f5f9ff;
@@ -31,7 +32,7 @@ export const NoticeIdContainer = styled.div`
 `
 
 export const NoticeTitle = styled.div`
-  width: 69%;
+  width: 60%;
   padding-right: 20px;
   overflow: hidden;
   white-space: nowrap;
@@ -42,9 +43,18 @@ export const NoticeTitle = styled.div`
 export const NoticeDate = styled.div`
   width: 12%;
   color: #b1b1b1;
+  text-align: center;
 `
 
 export const NoticeUser = styled.div`
   width: 12%;
   color: #b1b1b1;
+  text-align: center;
+`
+
+export const SVG = styled.div`
+  position: absolute;
+  text-align: center;
+  right: 24px;
+  padding: 8px;
 `
