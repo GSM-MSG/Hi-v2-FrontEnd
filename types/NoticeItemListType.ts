@@ -1,4 +1,4 @@
-export interface NoticeItemType {
+export interface NoticeItemListType {
   noticeNum?: number
   noticeId: string
   title: string
@@ -10,5 +10,4 @@ export interface NoticeItemType {
     classNum: number
     number: number
   }
-  noticeList: (body?: any) => Promise<void>
 }

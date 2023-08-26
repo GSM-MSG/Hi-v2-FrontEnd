@@ -2,10 +2,10 @@ import * as S from './style'
 import NoticeItem from '../NoticeItem'
 import useFetch from '@/hooks/useFetch'
 import { useEffect } from 'react'
-import { NoticeItemType } from '@/types/NoticeItemType'
+import { NoticeItemListType } from '@/types/NoticeItemListType'
 
 export default function NoticeItemList() {
-  const { fetch, data } = useFetch<NoticeItemType[]>({
+  const { fetch, data } = useFetch<NoticeItemListType[]>({
     url: '/notice',
     method: 'get',
   })
@@ -25,6 +25,7 @@ export default function NoticeItemList() {
           title={title}
           createdAt={createdAt}
           user={user}
+          noticeList={fetch}
         />
       ))}
     </S.NoticeItemListContainer>

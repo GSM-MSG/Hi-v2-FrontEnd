@@ -8,6 +8,7 @@ export const NoticeItemContainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background-color: #f5f9ff;
@@ -52,6 +53,8 @@ export const NoticeUser = styled.div`
 `
 
 export const SVG = styled.div`
-  width: 9%;
+  position: absolute;
   text-align: center;
+  right: 24px;
+  padding: 8px;
 `
