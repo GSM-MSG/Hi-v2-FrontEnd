@@ -14,3 +14,4 @@ export const ShowMembers = atom<UserListType[]>({
   default: [],
 })
 export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
+export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })

@@ -36,7 +36,7 @@ function useFetch<T>({
           data: body,
         })
         setData(data)
-
+        
         if (successMessage) toast.success(successMessage, toastOptions)
         if (onSuccess) await onSuccess(data)
       } catch (e) {

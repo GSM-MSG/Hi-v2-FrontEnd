@@ -1,6 +1,6 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
-import Button from '@/components/Common/Button'
+import Button from '@/components/common/Button'
 import { useSetRecoilState } from 'recoil'
 import { IsRModal, ModalPage } from '@/atoms/atom'
 
