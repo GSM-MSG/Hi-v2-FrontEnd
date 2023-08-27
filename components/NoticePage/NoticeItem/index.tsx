@@ -14,10 +14,10 @@ export default function NoticeItem({
 }: NoticeItemType) {
   const { fetch } = useFetch({ url: `/notice/${noticeId}`, method: 'delete' })
 
-  const onDelete = (e: React.MouseEvent) => {
+  const onDelete = async (e: React.MouseEvent) => {
     e.preventDefault()
-    fetch()
-    noticeList()
+    await fetch()
+    await noticeList()
   }
   return (
     <Link href='/notice/detail'>
