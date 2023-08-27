@@ -10,7 +10,7 @@ export const InputBlock = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0.4rem 0.9rem;
+  padding: 0.3rem 0.9rem;
   border: 1px solid #b1b1b1;
   border-radius: 8px;
 
@@ -48,12 +48,12 @@ export const ShowMemberListBox = styled.div`
 `
 
 export const ShowMemberBox = styled.div`
-  width: 4.5rem;
+  width: 4rem;
   height: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 400;
   background: #f5f5f5;
   color: #b1b1b1;

@@ -45,14 +45,17 @@ function Header() {
       </Link>
       <S.MenuListBox scroll={scroll} pathname={router.pathname}>
         <li>
-          <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
+          <Link
+            href='/'
+            className={router.pathname.includes('/home') ? 'choice' : ''}
+          >
             홈
           </Link>
         </li>
         <li>
           <Link
             href='/notice'
-            className={router.pathname === '/notice' ? 'choice' : ''}
+            className={router.pathname.includes('/notice') ? 'choice' : ''}
           >
             공지
           </Link>
@@ -60,7 +63,7 @@ function Header() {
         <li>
           <Link
             href='/reservation'
-            className={router.pathname === '/reservation' ? 'choice' : ''}
+            className={router.pathname.includes('/reservation') ? 'choice' : ''}
           >
             예약
           </Link>
