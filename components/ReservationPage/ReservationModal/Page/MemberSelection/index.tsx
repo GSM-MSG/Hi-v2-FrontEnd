@@ -14,6 +14,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { UserListType } from '@/types/components/UserListType'
 import { toast } from 'react-toastify'
+import toastOptions from '@/lib/ToastOptions'
 
 function MemberSelection() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -38,7 +39,7 @@ function MemberSelection() {
 
   const addMembers = (member: UserListType) => {
     if (teamMembers.includes(member.userId))
-      return toast.error('중복된 팀원입니다.')
+      return toast.warning('중복된 팀원입니다.', toastOptions)
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
     setValue('member', '')
@@ -56,7 +57,8 @@ function MemberSelection() {
   }
 
   const onNext = () => {
-    if (showMembers.length === 0) return toast.error('팀원을 골라주세요.')
+    if (showMembers.length <= 1)
+      return toast.warning('신청 윈원은 최소 2명입니다..', toastOptions)
     setModalPage(2)
   }
 
@@ -84,7 +86,9 @@ function MemberSelection() {
                 style={{ cursor: 'pointer' }}
                 onClick={() => deleteMembers(showMember)}
               >
-                <SVG.CancelXMark />
+                <div style={{ marginTop: '0.125rem' }}>
+                  <SVG.CancelXMark />
+                </div>
               </div>
             </S.ShowMemberBox>
           ))}
