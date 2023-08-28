@@ -14,7 +14,5 @@ export default function ReservationDetailPage() {
     fetch()
   }, [fetch])
 
-  console.log(data)
-
   return <PageContainer>힝;</PageContainer>
 }
