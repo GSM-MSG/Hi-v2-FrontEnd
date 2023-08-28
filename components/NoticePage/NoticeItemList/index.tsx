@@ -16,10 +16,13 @@ export default function NoticeItemList() {
 
   if (!data) return <div />
 
+  console.log(data)
+
   return (
     <S.NoticeItemListContainer>
-      {data.map(({ noticeId, title, createdAt, user }, index) => (
+      {data.map(({ index, noticeId, title, createdAt, user }, idx) => (
         <NoticeItem
+          index={index}
           key={index}
           noticeId={noticeId}
           title={title}

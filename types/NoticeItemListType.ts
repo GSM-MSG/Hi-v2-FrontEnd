@@ -1,4 +1,5 @@
 export interface NoticeItemListType {
+  index: number
   noticeNum?: number
   noticeId: string
   title: string
