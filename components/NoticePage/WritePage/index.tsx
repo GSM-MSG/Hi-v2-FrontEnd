@@ -4,11 +4,17 @@ import Input from '@/components/common/Input'
 import Textarea from '@/components/common/Textarea'
 import Button from '@/components/common/Button'
 import useFetch from '@/hooks/useFetch'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { NoticeModifyType } from '@/types/NoticeModifyType'
 
 export default function WritePage() {
-  const { fetch } = useFetch({
+  const router = useRouter()
+  const id = router.query.id
+  const [notice, setNotice] = useState({ title: '', content: '' })
+  const { title, content } = notice
+
+  const { fetch: noticeCreate } = useFetch({
     url: '/notice',
     method: 'post',
     successMessage: '공지가 등록되었습니다.',
@@ -16,9 +22,28 @@ export default function WritePage() {
       403: '권한이 없습니다.',
     },
   })
-  const [notice, setNotice] = useState({ title: '', content: '' })
-  const { title, content } = notice
-  const router = useRouter()
+
+  const { fetch: noticeModify } = useFetch<NoticeModifyType>({
+    url: `notice/${id}`,
+    method: 'patch',
+    successMessage: '공지가 수정되었습니다.',
+    errorMessage: {
+      403: '권한이 없습니다.',
+      404: '존재하지 않는 글입니다.',
+    },
+  })
+
+  useEffect(() => {
+    const id = router.query.id
+    const initialTitle = router.query.title as string
+    const initialContent = router.query.content as string
+    if (id) {
+      setNotice({
+        title: initialTitle || '',
+        content: initialContent || '',
+      })
+    }
+  }, [router.query.id, router.query.title, router.query.content])
 
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,7 +56,11 @@ export default function WritePage() {
   }
 
   const onClick = async () => {
-    await fetch(notice)
+    if (id) {
+      await noticeModify(notice)
+    } else {
+      await noticeCreate(notice)
+    }
     router.push('/notice', undefined, { shallow: true })
   }
 

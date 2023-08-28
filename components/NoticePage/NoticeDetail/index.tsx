@@ -6,6 +6,7 @@ import useFetch from '@/hooks/useFetch'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
+import { NoticeModifyType } from '@/types/NoticeModifyType'
 import { dateToString } from '@/utils/formatter'
 import Button from '@/components/common/Button'
 
@@ -17,6 +18,15 @@ export default function NoticeDetailPage() {
     url: `/notice/${id}`,
     method: 'get',
   })
+
+  const onModify = () => {
+    if (data) {
+      router.push({
+        pathname: '/notice/write',
+        query: { id, title: data.title, content: data.content },
+      })
+    }
+  }
 
   useEffect(() => {
     fetch()
@@ -45,6 +55,7 @@ export default function NoticeDetailPage() {
               borderRadius='16px'
               color='#9E9E9E'
               background='#F5F5F5'
+              onClick={onModify}
             >
               수정
             </Button>
