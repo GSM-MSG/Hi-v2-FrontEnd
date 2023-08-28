@@ -23,6 +23,12 @@ export const DetailWrapper = styled.div`
   gap: 12px;
 `
 
+export const DetailTitleContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`
+
 export const DetailTitle = styled.h1`
   font-size: 1.6rem;
   font-weight: 600;

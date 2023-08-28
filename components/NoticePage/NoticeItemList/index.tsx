@@ -16,8 +16,6 @@ export default function NoticeItemList() {
 
   if (!data) return <div />
 
-  console.log(data)
-
   return (
     <S.NoticeItemListContainer>
       {data.map(({ index, noticeId, title, createdAt, user }, idx) => (

@@ -7,11 +7,11 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
 import { dateToString } from '@/utils/formatter'
+import Button from '@/components/common/Button'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
   const id = router.query.id
-  console.log(id)
 
   const { fetch, data } = useFetch<NoticeDetailType>({
     url: `/notice/${id}`,
@@ -36,7 +36,19 @@ export default function NoticeDetailPage() {
           <SVG.BackArrowIcon />
         </Link>
         <S.DetailWrapper>
-          <S.DetailTitle>{data.title}</S.DetailTitle>
+          <S.DetailTitleContainer>
+            <S.DetailTitle>{data.title}</S.DetailTitle>
+            <Button
+              width='48px'
+              height='26px'
+              border='none'
+              borderRadius='16px'
+              color='#9E9E9E'
+              background='#F5F5F5'
+            >
+              수정
+            </Button>
+          </S.DetailTitleContainer>
           <S.DetailInfo>
             <div>작성일 : {dateToString(data.createdAt)}</div>
             <div>작성자 : {data.user.name}</div>
