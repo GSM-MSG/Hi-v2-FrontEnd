@@ -15,7 +15,7 @@ export const NoticeItemContainer = styled.div`
   }
 `
 
-export const NoticeID = styled.div`
+export const NoticeIDX = styled.div`
   width: 36px;
   height: 36px;
   text-align: center;
@@ -24,7 +24,7 @@ export const NoticeID = styled.div`
   background-color: #ebf3ff;
 `
 
-export const NoticeIdContainer = styled.div`
+export const NoticeIDXContainer = styled.div`
   width: 7%;
   display: flex;
   justify-content: center;

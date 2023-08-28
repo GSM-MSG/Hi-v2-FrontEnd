@@ -6,23 +6,30 @@ import * as SVG from '@/assets/svg'
 import useFetch from '@/hooks/useFetch'
 
 export default function NoticeItem({
+  index,
   noticeId,
   title,
   createdAt,
   user,
   noticeList,
 }: NoticeItemType) {
-  const { fetch } = useFetch({ url: `/notice/${noticeId}`, method: 'delete' })
+  const { fetch } = useFetch({
+    url: `/notice/${noticeId}`,
+    method: 'delete',
+  })
 
   const onDelete = async (e: React.MouseEvent) => {
     e.preventDefault()
     await fetch()
     await noticeList()
   }
+
   return (
     <Link href='/notice/detail'>
       <S.NoticeItemContainer>
-        <S.NoticeIdContainer></S.NoticeIdContainer>
+        <S.NoticeIDXContainer>
+          <S.NoticeIDX>{index}</S.NoticeIDX>
+        </S.NoticeIDXContainer>
         <S.NoticeTitle>{title}</S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
