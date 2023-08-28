@@ -32,6 +32,8 @@ export const DetailTitle = styled.h1`
 export const DetailInfo = styled.p`
   font-size: 0.8rem;
   color: #9e9e9e;
+  display: flex;
+  gap: 8px;
 `
 
 export const DetailContent = styled.p`

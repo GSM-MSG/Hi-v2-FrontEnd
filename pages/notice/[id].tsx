@@ -1,5 +1,5 @@
 import SEO from '@/components/SEO'
-import NoticeDetailPage from '@/components/NoticePage/NoticeDetailPage'
+import NoticeDetailPage from '@/components/NoticePage/NoticeDetail'
 
 export default function detail() {
   return (
