@@ -5,6 +5,7 @@ import Textarea from '@/components/common/Textarea'
 import Button from '@/components/common/Button'
 import useFetch from '@/hooks/useFetch'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function WritePage() {
   const { fetch } = useFetch({
@@ -17,6 +18,7 @@ export default function WritePage() {
   })
   const [notice, setNotice] = useState({ title: '', content: '' })
   const { title, content } = notice
+  const router = useRouter()
 
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,6 +32,7 @@ export default function WritePage() {
 
   const onClick = async () => {
     await fetch(notice)
+    router.push('/notice', undefined, { shallow: true })
   }
 
   return (
