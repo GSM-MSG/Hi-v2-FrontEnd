@@ -43,7 +43,7 @@ export default function WritePage() {
         content: initialContent || '',
       })
     }
-  }, [router.query.id, router.query.title, router.query.content])
+  }, [router])
 
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
