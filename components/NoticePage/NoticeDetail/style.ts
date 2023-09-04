@@ -25,11 +25,10 @@ export const DetailWrapper = styled.div`
 
 export const DetailTitleContainer = styled.div`
   display: flex;
-  gap: 12px;
-  align-items: center;
 `
 
 export const DetailTitle = styled.h1`
+  width: 100%;
   font-size: 1.6rem;
   font-weight: 600;
   color: #3c3c43;
