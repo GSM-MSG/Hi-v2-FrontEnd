@@ -94,9 +94,10 @@ function MemberSelection() {
           ))}
         </S.ShowMemberListBox>
         <S.Input
-          disabled={showMembers.length === 4 ? true : false}
+          disabled={showMembers.length === 6 ? true : false}
           placeholder='팀원을 검색하세요.'
           {...register('member')}
+          autoComplete='off'
         />
         {watch('member').length > 0 && (
           <div className='cancelIcon' onClick={() => setValue('member', '')}>
@@ -106,7 +107,13 @@ function MemberSelection() {
       </S.InputBlock>
 
       {isLoading ? (
-        <span>팀원을 찾고 있습니다.</span>
+        <S.LoadingMemberListBox>
+          <span>학생정보를 찾는 중입니다.</span>
+        </S.LoadingMemberListBox>
+      ) : data?.length === 0 ? (
+        <S.LoadingMemberListBox>
+          <span>학생정보를 찾을 수 없습니다.</span>
+        </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
           {watch('member')?.trim() &&
