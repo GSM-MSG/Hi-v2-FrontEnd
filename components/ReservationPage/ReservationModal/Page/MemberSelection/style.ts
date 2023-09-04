@@ -77,6 +77,13 @@ export const MemberListBox = styled.div`
   }
 `
 
+export const LoadingMemberListBox = styled(MemberListBox)`
+  justify-content: center;
+  span {
+    color: #9e9e9e;
+  }
+`
+
 export const MemberBox = styled.div`
   width: 100%;
   background: none;
