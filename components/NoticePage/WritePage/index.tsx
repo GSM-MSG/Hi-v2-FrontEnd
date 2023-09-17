@@ -19,6 +19,7 @@ export default function WritePage() {
     method: 'post',
     successMessage: '공지가 등록되었습니다.',
     errorMessage: {
+      401: '권한이 없습니다.',
       403: '권한이 없습니다.',
     },
   })

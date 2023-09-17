@@ -15,46 +15,62 @@ export const NoticeItemContainer = styled.div`
   }
 `
 
+export const NoticeItemWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`
+
 export const NoticeIDX = styled.div`
   width: 36px;
   height: 36px;
   text-align: center;
   line-height: 36px;
   border-radius: 8px;
+  margin-left: 16px;
   background-color: #ebf3ff;
 `
 
 export const NoticeIDXContainer = styled.div`
-  width: 7%;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #b1b1b1;
 `
 
 export const NoticeTitle = styled.div`
-  width: 60%;
+  width: 44vw;
   padding-right: 20px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #606060;
+  margin-left: 27px;
+  padding-right: 6vw;
 `
 
 export const NoticeDate = styled.div`
-  width: 12%;
+  text-align: center;
   color: #b1b1b1;
   text-align: center;
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
 `
 
 export const NoticeUser = styled.div`
-  width: 12%;
+  width: 120px;
+  text-align: center;
   color: #b1b1b1;
   text-align: center;
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
 `
 
 export const SVG = styled.div`
-  position: absolute;
   text-align: center;
-  right: 24px;
   padding: 8px;
 `

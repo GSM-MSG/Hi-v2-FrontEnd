@@ -12,10 +12,10 @@ function NoticePage() {
         <h1>공지사항</h1>
         <Link href='notice/write'>
           <Button
-            width='5vw'
+            width='80px'
             height='4vh'
             border='1px solid #0066FF'
-            fontSize='0.9rem'
+            fontSize='14px'
             color='#0066FF'
             borderRadius='8px'
           >

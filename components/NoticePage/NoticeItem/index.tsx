@@ -31,15 +31,17 @@ export default function NoticeItem({
 
   return (
     <S.NoticeItemContainer onClick={() => router.push(`/notice/${noticeId}`)}>
-      <S.NoticeIDXContainer>
-        <S.NoticeIDX>{index}</S.NoticeIDX>
-      </S.NoticeIDXContainer>
-      <S.NoticeTitle>{title}</S.NoticeTitle>
-      <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
-      <S.NoticeUser>{user.name}</S.NoticeUser>
-      <S.SVG onClick={onDelete}>
-        <SVG.XMark />
-      </S.SVG>
+      <S.NoticeItemWrapper>
+        <S.NoticeIDXContainer>
+          <S.NoticeIDX>{index}</S.NoticeIDX>
+        </S.NoticeIDXContainer>
+        <S.NoticeTitle>{title}</S.NoticeTitle>
+        <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
+        <S.NoticeUser>{user.name}</S.NoticeUser>
+        <S.SVG onClick={onDelete}>
+          <SVG.XMark />
+        </S.SVG>
+      </S.NoticeItemWrapper>
     </S.NoticeItemContainer>
   )
 }

@@ -6,7 +6,6 @@ import useFetch from '@/hooks/useFetch'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
-import { NoticeModifyType } from '@/types/NoticeModifyType'
 import { dateToString } from '@/utils/formatter'
 import Button from '@/components/common/Button'
 
