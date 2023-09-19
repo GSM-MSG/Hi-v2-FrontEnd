@@ -19,7 +19,8 @@ export default function WritePage() {
     method: 'post',
     successMessage: '공지가 등록되었습니다.',
     errorMessage: {
-      403: '권한이 없습니다.',
+      401: '토큰 값이 이상하거나 변질되었습니다.',
+      403: '제어 권한이 없습니다.',
     },
   })
 
@@ -28,7 +29,7 @@ export default function WritePage() {
     method: 'patch',
     successMessage: '공지가 수정되었습니다.',
     errorMessage: {
-      403: '권한이 없습니다.',
+      403: '제어 권한이 없습니다.',
       404: '존재하지 않는 글입니다.',
     },
   })

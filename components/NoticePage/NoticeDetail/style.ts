@@ -4,10 +4,9 @@ export const DetailContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  position: relative;
 
   svg:nth-of-type(1) {
-    margin-right: 32px;
-    margin-top: 24px;
     cursor: pointer;
   }
 `

@@ -16,20 +16,8 @@ export const NoticeTitleContainer = styled.div`
     align-items: center;
     gap: 8px;
 
-    @media screen and (max-width: 1350px) {
-      font-size: 0.8rem;
+    a {
+      text-decoration: none;
     }
-
-    @media screen and (max-width: 1270px) {
-      font-size: 0.7rem;
-    }
-
-    @media screen and (max-width: 1200px) {
-      font-size: 0.6rem;
-    }
-  }
-
-  a {
-    text-decoration: none;
   }
 `
