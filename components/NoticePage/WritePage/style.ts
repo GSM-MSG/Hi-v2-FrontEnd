@@ -1,11 +1,15 @@
 import styled from '@emotion/styled'
 
 export const WriteContainer = styled.div`
-  width: 34vw;
+  width: 580px;
   height: 80vh;
   background-color: #fff;
   border-radius: 8px;
-  padding: 6vh 2.5vw;
+  padding: 6vh 50px;
+
+  @media screen and (max-width: 600px) {
+    padding: 6vh 30px;
+  }
 `
 
 export const WriteContentContainer = styled.div`
