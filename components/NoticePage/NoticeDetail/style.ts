@@ -47,4 +47,6 @@ export const DetailContent = styled.p`
   color: #3c3c43;
   line-height: 28px;
   margin-top: 4px;
+  white-space: pre-wrap;
+  overflow: auto;
 `
