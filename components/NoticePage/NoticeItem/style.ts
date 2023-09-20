@@ -29,6 +29,11 @@ export const NoticeIDX = styled.div`
   border-radius: 8px;
   margin-left: 16px;
   background-color: #ebf3ff;
+
+  @media screen and (max-width: 600px) {
+    background-color: #fff;
+    margin-left: 4px;
+  }
 `
 
 export const NoticeIDXContainer = styled.div`
@@ -47,6 +52,14 @@ export const NoticeTitle = styled.div`
   color: #606060;
   margin-left: 27px;
   padding-right: 6vw;
+
+  @media screen and (max-width: 750px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
 `
 
 export const NoticeDate = styled.div`
@@ -56,6 +69,10 @@ export const NoticeDate = styled.div`
 
   @media screen and (max-width: 600px) {
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
   }
 `
 
@@ -67,6 +84,10 @@ export const NoticeUser = styled.div`
 
   @media screen and (max-width: 600px) {
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 9px;
   }
 `
 
