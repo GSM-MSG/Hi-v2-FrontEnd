@@ -6,8 +6,14 @@ import Login from '../Login'
 import { useEffect, useState } from 'react'
 import { HasLogin, IsModal } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
+import useFetch from '@/hooks/useFetch'
+import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 
 function Header() {
+  const { fetch, data } = useFetch<GetRoleTypes>({
+    url: 'user/my-role',
+    method: 'get',
+  })
   const router = useRouter()
   const [scroll, setScroll] = useState(0)
   const [isModal, setIsModal] = useRecoilState(IsModal)
@@ -15,6 +21,8 @@ function Header() {
   const [hasLogin, setHasLogin] = useRecoilState(HasLogin)
 
   useEffect(() => {
+    setLoginText(hasLogin ? '로그아웃' : '로그인')
+
     const handleScroll = () => {
       setScroll(window.scrollY)
     }
@@ -24,11 +32,11 @@ function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [hasLogin])
 
   useEffect(() => {
-    setLoginText(hasLogin ? '로그아웃' : '로그인')
-  }, [hasLogin])
+    fetch()
+  }, [])
 
   return (
     <S.HeaderContainer scroll={scroll} pathname={router.pathname}>
@@ -43,7 +51,11 @@ function Header() {
           <SVG.HiLogo />
         )}
       </Link>
-      <S.MenuListBox scroll={scroll} pathname={router.pathname}>
+      <S.MenuListBox
+        scroll={scroll}
+        pathname={router.pathname}
+        role={data?.role}
+      >
         <li>
           <Link
             href='/'
@@ -68,6 +80,16 @@ function Header() {
             예약
           </Link>
         </li>
+        {data?.role === 'ROLE_ADMIN' && (
+          <li>
+            <Link
+              href='/user'
+              className={router.pathname.includes('/user') ? 'choice' : ''}
+            >
+              학생정보
+            </Link>
+          </li>
+        )}
       </S.MenuListBox>
       {hasLogin ? (
         <S.LoginBtn
