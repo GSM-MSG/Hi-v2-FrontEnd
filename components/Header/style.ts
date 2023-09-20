@@ -28,7 +28,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
 
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
-  width: 10rem;
+  width: ${({ role }) => (role === 'ROLE_STUDENT' ? '10rem' : '15rem')};
   display: flex;
   align-items: center;
   justify-content: space-between;

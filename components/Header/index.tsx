@@ -51,7 +51,11 @@ function Header() {
           <SVG.HiLogo />
         )}
       </Link>
-      <S.MenuListBox scroll={scroll} pathname={router.pathname}>
+      <S.MenuListBox
+        scroll={scroll}
+        pathname={router.pathname}
+        role={data?.role}
+      >
         <li>
           <Link
             href='/'
@@ -76,6 +80,16 @@ function Header() {
             예약
           </Link>
         </li>
+        {data?.role === 'ROLE_ADMIN' && (
+          <li>
+            <Link
+              href='/user'
+              className={router.pathname.includes('/user') ? 'choice' : ''}
+            >
+              학생정보
+            </Link>
+          </li>
+        )}
       </S.MenuListBox>
       {hasLogin ? (
         <S.LoginBtn
