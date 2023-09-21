@@ -36,7 +36,6 @@ function Header() {
 
   useEffect(() => {
     fetch()
-    console.log(data)
   }, [])
 
   return (
