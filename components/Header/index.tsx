@@ -22,6 +22,10 @@ function Header() {
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
+    const fetchRole = async () => {
+      await fetch()
+    }
+    fetchRole()
 
     const handleScroll = () => {
       setScroll(window.scrollY)
@@ -33,10 +37,6 @@ function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [hasLogin])
-
-  useEffect(() => {
-    fetch()
-  }, [])
 
   return (
     <S.HeaderContainer scroll={scroll} pathname={router.pathname}>
