@@ -25,10 +25,9 @@ export const HeaderContainer = styled.header<HeaderProps>`
     height: 2rem;
   }
 `
-
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
-  width: ${({ role }) => (role === 'ROLE_STUDENT' ? '10rem' : '15rem')};
+  width: ${({ is_role }) => (is_role ? '15rem' : '10rem')};
   display: flex;
   align-items: center;
   justify-content: space-between;
