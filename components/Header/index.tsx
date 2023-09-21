@@ -36,6 +36,7 @@ function Header() {
 
   useEffect(() => {
     fetch()
+    console.log(data)
   }, [])
 
   return (
@@ -54,7 +55,7 @@ function Header() {
       <S.MenuListBox
         scroll={scroll}
         pathname={router.pathname}
-        role={data?.role}
+        is_role={data?.role.includes('ROLE_ADMIN')}
       >
         <li>
           <Link
@@ -80,7 +81,7 @@ function Header() {
             예약
           </Link>
         </li>
-        {data?.role === 'ROLE_ADMIN' && (
+        {data?.role?.includes('ROLE_ADMIN') && (
           <li>
             <Link
               href='/user'

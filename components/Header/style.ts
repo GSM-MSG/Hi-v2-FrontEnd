@@ -25,10 +25,10 @@ export const HeaderContainer = styled.header<HeaderProps>`
     height: 2rem;
   }
 `
-
+// ul 태그는 기본적으로 role이라는 props를 갖고 있어서 다른 변수로 바꿔야 할 것 같아
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
-  width: ${({ role }) => (role === 'ROLE_STUDENT' ? '10rem' : '15rem')};
+  width: ${({ is_role }) => (is_role ? '15rem' : '10rem')};
   display: flex;
   align-items: center;
   justify-content: space-between;

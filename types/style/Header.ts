@@ -1,5 +1,5 @@
 export interface HeaderProps {
   scroll: number
   pathname: string
-  role?: string
+  is_role?: boolean
 }

@@ -1,4 +1,4 @@
 export interface GetRoleTypes {
-  role: string
+  role: string[]
   userId: string
 }
