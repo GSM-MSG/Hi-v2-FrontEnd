@@ -14,8 +14,6 @@ export default function UserItemList() {
     fetch()
   }, [])
 
-  console.log(data)
-
   if (!data) return <div />
 
   return (
