@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
 
-export const MemberSelectionContainer = styled.div`
+export const MemberSelectContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `
 
 export const InputBlock = styled.div`
@@ -112,4 +113,10 @@ export const InfoBox = styled.div`
     color: #606060;
     margin-left: 0.2rem;
   }
+`
+
+export const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `

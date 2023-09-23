@@ -135,9 +135,9 @@ export const IntroductoryTextBox2 = styled.div`
 `
 
 export const TalkBox = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
-  position: relative;
 
   .talkGirlIcon {
     position: absolute;

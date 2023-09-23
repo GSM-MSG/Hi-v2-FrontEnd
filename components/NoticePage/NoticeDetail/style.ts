@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
 export const DetailContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  position: relative;
 
   svg:nth-of-type(1) {
     cursor: pointer;

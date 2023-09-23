@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const CompletedContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,4 +21,10 @@ export const ShowComplted = styled.div`
     font-size: 1.3rem;
     font-weight: 600;
   }
+`
+
+export const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `

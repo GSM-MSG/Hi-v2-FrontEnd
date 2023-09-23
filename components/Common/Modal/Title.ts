@@ -9,7 +9,7 @@ export const TitleBox = styled.div`
 `
 
 export const PageToggleBox = styled.div`
-  width: 1.5rem;
+  width: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
