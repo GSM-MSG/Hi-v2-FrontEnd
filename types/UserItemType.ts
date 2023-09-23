@@ -6,4 +6,5 @@ export interface UserItemType {
   classNum: number
   number: number
   useStatus: string
+  profileImageUrl: string
 }

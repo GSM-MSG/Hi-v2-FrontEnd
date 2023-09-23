@@ -2,6 +2,7 @@ import Button from '@/components/common/Button'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
+import Image from 'next/image'
 
 export default function UserItem({
   id,
@@ -11,13 +12,23 @@ export default function UserItem({
   classNum,
   number,
   useStatus,
+  profileImageUrl,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   return (
     <S.UserItemContainer>
       <S.UserItemWrraper>
-        <SVG.UserProfile />
+        {profileImageUrl ? (
+          <Image
+            src={profileImageUrl}
+            alt='profileImage'
+            width='48'
+            height='48'
+          />
+        ) : (
+          <SVG.UserProfile />
+        )}
         <S.UserInfo>
           <S.UserName>
             {grade}
