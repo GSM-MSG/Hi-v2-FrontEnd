@@ -23,6 +23,17 @@ export const UserItemContainer = styled.div`
 `
 
 export const UserItemWrraper = styled.div`
+  img {
+    border-radius: 50%;
+    margin-right: 16px;
+    margin-left: 8px;
+  }
+
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+
   height: 66px;
   display: flex;
   align-items: center;
