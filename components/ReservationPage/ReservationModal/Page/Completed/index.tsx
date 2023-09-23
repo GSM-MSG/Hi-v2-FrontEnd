@@ -12,19 +12,21 @@ export default function Completed() {
         <SVG.CompletedImg />
         <h2>예약이 완료되었습니다.</h2>
       </S.ShowComplted>
-      <Button
-        width='100%'
-        height='3rem'
-        background='#0066ff'
-        color='#ffffff'
-        fontSize='1rem'
-        fontWeight='500'
-        border='none'
-        borderRadius='8px'
-        onClick={() => setIsRModal(false)}
-      >
-        확인
-      </Button>
+      <S.ButtonContainer>
+        <Button
+          width='100%'
+          height='3rem'
+          background='#0066ff'
+          color='#ffffff'
+          fontSize='1rem'
+          fontWeight='500'
+          border='none'
+          borderRadius='8px'
+          onClick={() => setIsRModal(false)}
+        >
+          확인
+        </Button>
+      </S.ButtonContainer>
     </S.CompletedContainer>
   )
 }

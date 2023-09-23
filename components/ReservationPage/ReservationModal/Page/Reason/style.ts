@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
 export const ReasonContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: relative;
   height: 100%;
 `
 

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const NoticeItemContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 7vh;
   display: flex;
@@ -8,7 +9,6 @@ export const NoticeItemContainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
   cursor: pointer;
-  position: relative;
 
   &:hover {
     background-color: #f5f9ff;

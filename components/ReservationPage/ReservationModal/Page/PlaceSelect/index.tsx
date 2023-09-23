@@ -6,7 +6,10 @@ import {
   Title,
   TitleBox,
 } from '@/components/common/Modal/Title'
+import useFetch from '@/hooks/useFetch'
+import toastOptions from '@/lib/ToastOptions'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
@@ -25,6 +28,19 @@ function PlaceSelect() {
 
   const { floors, periods } = showPlace
 
+  const { fetch } = useFetch({
+    url: `/homebase?floor=${place.floor}&period=${place.period}`,
+    method: 'post',
+    onSuccess: () => {
+      setModalPage(4)
+    },
+    successMessage: '예약이 완료되었습니다.',
+    errorMessage: {
+      401: '잘못된 유저정보입니다.',
+      403: '예약이 불가능한 상태입니다.',
+    },
+  })
+
   const onFloor = (floor: number) => {
     setFloorClicked((prev) => (prev === floor ? 0 : floor))
     setPlace((prev) => ({
@@ -39,6 +55,18 @@ function PlaceSelect() {
       ...prev,
       period: period.toString(),
     }))
+  }
+
+  const onReserve = async () => {
+    if (place.floor === '' || place.floor === '') {
+      return toast.warning('층과 교시를 선택해주세요.', toastOptions)
+    }
+
+    await fetch({
+      users: teamMembers,
+      reason: reasonText,
+      reservationNumber: 5, // 수정할 예정입니다.
+    })
   }
 
   return (
@@ -112,9 +140,9 @@ function PlaceSelect() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={() => console.log(teamMembers, reasonText, place)}
+          onClick={onReserve}
         >
-          다음으로
+          예약하기
         </Button>
       </S.ButtonContainer>
     </S.PlaceSelectContainer>
