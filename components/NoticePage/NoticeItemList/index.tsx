@@ -21,7 +21,7 @@ export default function NoticeItemList() {
       {data.map(({ index, noticeId, title, createdAt, user }, idx) => (
         <NoticeItem
           index={index}
-          key={index}
+          key={idx}
           noticeId={noticeId}
           title={title}
           createdAt={createdAt}

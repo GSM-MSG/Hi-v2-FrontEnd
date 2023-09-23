@@ -29,11 +29,11 @@ export default function UserItemList() {
             useStatus,
             profileImageUrl,
           },
-          index
+          idx
         ) => (
           <UserItem
             profileImageUrl={profileImageUrl}
-            key={index}
+            key={idx}
             id={id}
             email={email}
             name={name}
