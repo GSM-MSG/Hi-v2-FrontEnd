@@ -4,7 +4,7 @@ import { cloneElement, useState, MouseEvent, useEffect } from 'react'
 import * as S from './style'
 
 function Portal({ children, onClose }: PortalProps) {
-  const [isCSR, setIsCSR] = useState(false)
+  const [isCSR, setIsCSR] = useState<boolean>(false)
 
   useEffect(() => {
     setIsCSR(true)
@@ -12,7 +12,7 @@ function Portal({ children, onClose }: PortalProps) {
 
   if (typeof window === 'undefined') return <></>
   if (!isCSR) return <></>
-  
+
   const el = document.getElementById('modal')
   if (!el) throw new Error('Not Found Modal')
 

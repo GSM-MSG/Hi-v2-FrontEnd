@@ -11,7 +11,10 @@ import { NoticeModifyType } from '@/types/NoticeModifyType'
 export default function WritePage() {
   const router = useRouter()
   const id = router.query.id
-  const [notice, setNotice] = useState({ title: '', content: '' })
+  const [notice, setNotice] = useState<{ title: string; content: string }>({
+    title: '',
+    content: '',
+  })
   const { title, content } = notice
 
   const { fetch: noticeCreate } = useFetch({

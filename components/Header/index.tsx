@@ -15,10 +15,10 @@ function Header() {
     method: 'get',
   })
   const router = useRouter()
-  const [scroll, setScroll] = useState(0)
-  const [isModal, setIsModal] = useRecoilState(IsModal)
-  const [loginText, setLoginText] = useState('')
-  const [hasLogin, setHasLogin] = useRecoilState(HasLogin)
+  const [scroll, setScroll] = useState<number>(0)
+  const [isModal, setIsModal] = useRecoilState<boolean>(IsModal)
+  const [loginText, setLoginText] = useState<string>('')
+  const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')

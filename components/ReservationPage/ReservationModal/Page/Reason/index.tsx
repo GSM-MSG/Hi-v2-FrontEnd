@@ -7,7 +7,6 @@ import {
   TitleBox,
 } from '@/components/common/Modal/Title'
 import Textarea from '@/components/common/Textarea'
-import useFetch from '@/hooks/useFetch'
 import toastOptions from '@/lib/ToastOptions'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -15,28 +14,12 @@ import * as S from './style'
 
 function Reason() {
   const setModalPage = useSetRecoilState(ModalPage)
-  const teamMembers = useRecoilValue(TeamMembers)
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
 
-  const { fetch } = useFetch({
-    url: '/homebase?floor=2&period=9',
-    method: 'post',
-    onSuccess: () => {
-      setModalPage(3)
-    },
-    successMessage: '예약이 완료되었습니다.',
-    errorMessage: {
-      400: '신청 사유를 적어주세요.',
-      401: '잘못된 유저정보입니다.',
-      403: '예약이 불가능한 상태입니다.',
-      404: '홈베이스를 찾을 수 없습니다.',
-    },
-  })
-
-  const onReserve = async () => {
+  const onNext = async () => {
     if (reasonText.length === 0)
       return toast.warning('신청 사유를 적어주세요.', toastOptions)
-    await fetch({ users: teamMembers, reason: reasonText })
+    setModalPage(3)
   }
 
   return (
@@ -78,9 +61,9 @@ function Reason() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={onReserve}
+          onClick={onNext}
         >
-          예약하기
+          다음으로
         </Button>
       </S.ButtonContainer>
     </S.ReasonContainer>

@@ -8,7 +8,7 @@ import Portal from '../Portal'
 import { useSetRecoilState } from 'recoil'
 
 export default function Login() {
-  const setIsModal = useSetRecoilState(IsModal)
+  const setIsModal = useSetRecoilState<boolean>(IsModal)
 
   const onClose = () => {
     setIsModal(false)

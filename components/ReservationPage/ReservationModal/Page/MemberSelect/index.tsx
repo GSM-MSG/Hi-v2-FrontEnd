@@ -16,7 +16,7 @@ import { UserListType } from '@/types/components/UserListType'
 import { toast } from 'react-toastify'
 import toastOptions from '@/lib/ToastOptions'
 
-function MemberSelection() {
+function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
@@ -46,9 +46,9 @@ function MemberSelection() {
   }
 
   const deleteMembers = (member: UserListType) => {
-    const filteredShowMembers = showMembers.filter((item) => item !== member)
+    const filteredShowMembers = showMembers.filter((prev) => prev !== member)
     const filteredTeamMembers = teamMembers.filter(
-      (item) => item !== member.userId
+      (prev) => prev !== member.userId
     )
 
     setShowMembers(filteredShowMembers)
@@ -58,19 +58,20 @@ function MemberSelection() {
 
   const onNext = () => {
     if (showMembers.length <= 1)
-      return toast.warning('신청 윈원은 최소 2명입니다..', toastOptions)
+      return toast.warning('신청 인원은 최소 2명입니다..', toastOptions)
     setModalPage(2)
   }
 
   return (
-    <S.MemberSelectionContainer>
+    <S.MemberSelectContainer>
       <TitleBox>
         <Title>
           팀원선택 <span />
         </Title>
         <PageToggleBox>
-          <div className='currentToggle'></div>
-          <div></div>
+          <div className='currentToggle' />
+          <div />
+          <div />
         </PageToggleBox>
       </TitleBox>
       <SubTitle>같이할 팀원을 선택해주세요.</SubTitle>
@@ -167,22 +168,23 @@ function MemberSelection() {
               ))}
         </S.MemberListBox>
       )}
-
-      <Button
-        width='100%'
-        height='3rem'
-        background='#0066ff'
-        color='#ffffff'
-        fontSize='1rem'
-        fontWeight='500'
-        border='none'
-        borderRadius='8px'
-        onClick={onNext}
-      >
-        다음으로
-      </Button>
-    </S.MemberSelectionContainer>
+      <S.ButtonContainer>
+        <Button
+          width='100%'
+          height='3rem'
+          background='#0066ff'
+          color='#ffffff'
+          fontSize='1rem'
+          fontWeight='500'
+          border='none'
+          borderRadius='8px'
+          onClick={onNext}
+        >
+          다음으로
+        </Button>
+      </S.ButtonContainer>
+    </S.MemberSelectContainer>
   )
 }
 
-export default MemberSelection
+export default MemberSelect
