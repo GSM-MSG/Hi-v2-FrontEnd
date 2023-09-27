@@ -4,24 +4,15 @@ import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
 
-export default function UserItem({
-  id,
-  email,
-  name,
-  grade,
-  classNum,
-  number,
-  useStatus,
-  profileImageUrl,
-}: UserItemType) {
+export default function UserItem({ user, useStatus }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   return (
     <S.UserItemContainer>
       <S.UserItemWrraper>
-        {profileImageUrl ? (
+        {user.profileImageUrl ? (
           <Image
-            src={profileImageUrl}
+            src={user.profileImageUrl}
             alt='profileImage'
             width='48'
             height='48'
@@ -31,11 +22,14 @@ export default function UserItem({
         )}
         <S.UserInfo>
           <S.UserName>
-            {grade}
-            {classNum}
-            {number.toString().length === 2 ? number : '0' + number} {name}
+            {user.grade}
+            {user.classNum}
+            {user.number.toString().length === 2
+              ? user.number
+              : '0' + user.number}{' '}
+            {user.name}
           </S.UserName>
-          <S.UserEmail>{email}</S.UserEmail>
+          <S.UserEmail>{user.email}</S.UserEmail>
         </S.UserInfo>
       </S.UserItemWrraper>
       <Button
