@@ -9,4 +9,5 @@ export interface UserItemType {
     number: number
     profileImageUrl: string
   }
+  userlistRefetch: (body?: any) => Promise<void>
 }

@@ -18,8 +18,13 @@ export default function UserItemList() {
 
   return (
     <S.UserItemListContainer>
-      {data.student.map(({ useStatus, user }, idx) => (
-        <UserItem key={idx} user={user} useStatus={useStatus} />
+      {data.student.map(({ useStatus, user, userlistRefetch }, idx) => (
+        <UserItem
+          key={idx}
+          user={user}
+          useStatus={useStatus}
+          userlistRefetch={fetch}
+        />
       ))}
     </S.UserItemListContainer>
   )
