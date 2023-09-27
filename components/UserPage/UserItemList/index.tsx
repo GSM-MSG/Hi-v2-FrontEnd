@@ -15,35 +15,12 @@ export default function UserItemList() {
   }, [])
 
   if (!data) return <div />
+
   return (
     <S.UserItemListContainer>
-      {data.student.map(
-        (
-          {
-            id,
-            email,
-            name,
-            grade,
-            classNum,
-            number,
-            useStatus,
-            profileImageUrl,
-          },
-          idx
-        ) => (
-          <UserItem
-            profileImageUrl={profileImageUrl}
-            key={idx}
-            id={id}
-            email={email}
-            name={name}
-            grade={grade}
-            classNum={classNum}
-            number={number}
-            useStatus={useStatus}
-          />
-        )
-      )}
+      {data.student.map(({ useStatus, user }, idx) => (
+        <UserItem key={idx} user={user} useStatus={useStatus} />
+      ))}
     </S.UserItemListContainer>
   )
 }
