@@ -3,7 +3,9 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
-import useFetch from '@/hooks/useFetch'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { IsStuStateModal, SelectUser, SelectUserState } from '@/atoms/atom'
+import StuState from '../StuState'
 
 export default function UserItem({
   user,
@@ -11,18 +13,10 @@ export default function UserItem({
   userlistRefetch,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
-
-  const { fetch } = useFetch({
-    url: `/user/${user.userId}`,
-    method: 'patch',
-  })
-
-  const chageStudentState = async () => {
-    await fetch({
-      status: useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
-    })
-    await userlistRefetch()
-  }
+  const [isStuStateModal, setIsStuStateModal] =
+    useRecoilState<boolean>(IsStuStateModal)
+  const setSelectUser = useSetRecoilState(SelectUser)
+  const setSelectUserState = useSetRecoilState(SelectUserState)
 
   return (
     <S.UserItemContainer>
@@ -57,10 +51,15 @@ export default function UserItem({
         background='none'
         fontWeight='600'
         color={buttonColor}
-        onClick={chageStudentState}
+        onClick={() => {
+          setIsStuStateModal(true)
+          setSelectUser(user)
+          setSelectUserState(useStatus)
+        }}
       >
         {useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
       </Button>
+      {isStuStateModal && <StuState userlistRefetch={userlistRefetch} />}
     </S.UserItemContainer>
   )
 }
