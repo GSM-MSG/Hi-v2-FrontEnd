@@ -1,3 +1,4 @@
+import { UserItemType } from '@/types/UserItemType'
 import { UserListType } from '@/types/components/UserListType'
 import { getStorage } from '@/utils/Storage'
 import { atom } from 'recoil'
@@ -18,4 +19,36 @@ export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })
 export const Place = atom<{ floor: string; period: string }>({
   key: 'Place',
   default: { floor: '', period: '' },
+})
+export const IsStuStateModal = atom<boolean>({
+  key: 'IsStuStateModal',
+  default: false,
+})
+export const UserList = atom<UserItemType[]>({
+  key: 'UserList',
+  default: [],
+})
+export const SelectUser = atom<{
+  classNum: number
+  email: string
+  grade: number
+  number: number
+  name: string
+  profileImageUrl: string
+  userId: string
+}>({
+  key: 'SelectUser',
+  default: {
+    classNum: 1,
+    email: '',
+    grade: 1,
+    name: '',
+    number: 1,
+    profileImageUrl: '',
+    userId: '',
+  },
+})
+export const SelectUserState = atom<string>({
+  key: 'SelectuserState',
+  default: '',
 })
