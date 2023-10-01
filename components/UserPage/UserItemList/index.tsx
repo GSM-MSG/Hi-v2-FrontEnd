@@ -3,11 +3,17 @@ import * as S from './style'
 import UserItem from '../UserItem'
 import useFetch from '@/hooks/useFetch'
 import { UserItemListType } from '@/types/UserItemListType'
+import { useRecoilState } from 'recoil'
+import { UserList } from '@/atoms/atom'
 
 export default function UserItemList() {
+  const [userList, setUserList] = useRecoilState(UserList)
   const { fetch, data } = useFetch<UserItemListType>({
     url: '/user/students',
     method: 'get',
+    onSuccess: (data) => {
+      setUserList(data.student)
+    },
   })
 
   useEffect(() => {
@@ -18,14 +24,36 @@ export default function UserItemList() {
 
   return (
     <S.UserItemListContainer>
-      {data.student.map(({ useStatus, user, userlistRefetch }, idx) => (
-        <UserItem
-          key={idx}
-          user={user}
-          useStatus={useStatus}
-          userlistRefetch={fetch}
-        />
-      ))}
+      {userList.map(
+        (
+          {
+            userId,
+            email,
+            name,
+            grade,
+            classNum,
+            number,
+            profileImageUrl,
+            roles,
+            useStatus,
+          },
+          idx
+        ) => (
+          <UserItem
+            key={idx}
+            userlistRefetch={fetch}
+            userId={userId}
+            email={email}
+            name={name}
+            grade={grade}
+            classNum={classNum}
+            number={number}
+            profileImageUrl={profileImageUrl}
+            roles={roles}
+            useStatus={useStatus}
+          />
+        )
+      )}
     </S.UserItemListContainer>
   )
 }

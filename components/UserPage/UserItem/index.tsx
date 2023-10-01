@@ -3,33 +3,33 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
-import useFetch from '@/hooks/useFetch'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { IsStuStateModal, SelectedUser } from '@/atoms/atom'
+import StuState from '../StuState'
 
 export default function UserItem({
-  user,
+  userId,
+  email,
+  name,
+  grade,
+  classNum,
+  number,
+  profileImageUrl,
+  roles,
   useStatus,
   userlistRefetch,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
-
-  const { fetch } = useFetch({
-    url: `/user/${user.userId}`,
-    method: 'patch',
-  })
-
-  const chageStudentState = async () => {
-    await fetch({
-      status: useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
-    })
-    await userlistRefetch()
-  }
+  const [isStuStateModal, setIsStuStateModal] =
+    useRecoilState<boolean>(IsStuStateModal)
+  const setSelectedUser = useSetRecoilState(SelectedUser)
 
   return (
     <S.UserItemContainer>
       <S.UserItemWrraper>
-        {user.profileImageUrl ? (
+        {profileImageUrl ? (
           <Image
-            src={user.profileImageUrl}
+            src={profileImageUrl}
             alt='profileImage'
             width='48'
             height='48'
@@ -39,14 +39,11 @@ export default function UserItem({
         )}
         <S.UserInfo>
           <S.UserName>
-            {user.grade}
-            {user.classNum}
-            {user.number.toString().length === 2
-              ? user.number
-              : '0' + user.number}{' '}
-            {user.name}
+            {grade}
+            {classNum}
+            {number.toString().length === 2 ? number : '0' + number} {name}
           </S.UserName>
-          <S.UserEmail>{user.email}</S.UserEmail>
+          <S.UserEmail>{email}</S.UserEmail>
         </S.UserInfo>
       </S.UserItemWrraper>
       <Button
@@ -57,10 +54,24 @@ export default function UserItem({
         background='none'
         fontWeight='600'
         color={buttonColor}
-        onClick={chageStudentState}
+        onClick={() => {
+          setIsStuStateModal(true)
+          setSelectedUser({
+            userId,
+            email,
+            name,
+            grade,
+            classNum,
+            number,
+            profileImageUrl,
+            useStatus,
+            roles,
+          })
+        }}
       >
         {useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
       </Button>
+      {isStuStateModal && <StuState userlistRefetch={userlistRefetch} />}
     </S.UserItemContainer>
   )
 }
