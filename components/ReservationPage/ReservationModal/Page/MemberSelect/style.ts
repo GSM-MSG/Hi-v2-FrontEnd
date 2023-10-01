@@ -107,6 +107,10 @@ export const InfoBox = styled.div`
   justify-content: space-between;
   width: 8.8vw;
 
+  img {
+    border-radius: 50%;
+  }
+
   span {
     font-size: 1rem;
     font-weight: 500;

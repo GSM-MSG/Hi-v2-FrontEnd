@@ -43,18 +43,20 @@ function PlaceSelect() {
 
   const onFloor = (floor: number) => {
     setFloorClicked((prev) => (prev === floor ? 0 : floor))
-    setPlace((prev) => ({
-      ...prev,
-      floor: floor.toString(),
-    }))
+    setPlace((prev) =>
+      prev.floor === floor.toString()
+        ? { ...prev, floor: '' }
+        : { ...prev, floor: floor.toString() }
+    )
   }
 
   const onPeriod = (period: number) => {
     setPeriodClicked((prev) => (prev === period ? 0 : period))
-    setPlace((prev) => ({
-      ...prev,
-      period: period.toString(),
-    }))
+    setPlace((prev) =>
+      prev.period === period.toString()
+        ? { ...prev, period: '' }
+        : { ...prev, period: period.toString() }
+    )
   }
 
   const onReserve = async () => {

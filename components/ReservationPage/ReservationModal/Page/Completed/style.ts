@@ -5,6 +5,7 @@ export const CompletedContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 `
 
 export const ShowComplted = styled.div`
@@ -12,7 +13,6 @@ export const ShowComplted = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
-  margin-bottom: 11.892rem;
   height: 9.2rem;
   justify-content: space-between;
 

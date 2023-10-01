@@ -29,8 +29,9 @@ function Reason() {
           예약사유 <span />
         </Title>
         <PageToggleBox>
-          <div></div>
-          <div className='currentToggle'></div>
+          <div />
+          <div className='currentToggle' />
+          <div />
         </PageToggleBox>
       </TitleBox>
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>

@@ -15,6 +15,7 @@ import useFetch from '@/hooks/useFetch'
 import { toast } from 'react-toastify'
 import toastOptions from '@/lib/ToastOptions'
 import { UserItemType } from '@/types/UserItemType'
+import Image from 'next/image'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -23,7 +24,7 @@ function MemberSelect() {
   const form = useForm({ defaultValues: { member: '' } })
   const { register, watch, setValue } = form
   const { isLoading, fetch, data } = useFetch<UserItemType[]>({
-    url: `/user/search?keyword=${watch('member')}`,
+    url: `/user/search-student?keyword=${watch('member')}`,
     method: 'get',
   })
 
@@ -136,7 +137,16 @@ function MemberSelect() {
               .map((item) => (
                 <S.MemberBox key={item.userId}>
                   <S.InfoBox>
-                    <SVG.UserProfile />
+                    {item.profileImageUrl !== '' ? (
+                      <Image
+                        src={item.profileImageUrl}
+                        alt='profileImage'
+                        width='40'
+                        height='40'
+                      />
+                    ) : (
+                      <SVG.UserProfile />
+                    )}
                     <div>
                       <span>
                         {parseInt(
