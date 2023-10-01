@@ -12,9 +12,9 @@ import * as S from './style'
 import Button from '@/components/common/Button'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
-import { UserListType } from '@/types/components/UserListType'
 import { toast } from 'react-toastify'
 import toastOptions from '@/lib/ToastOptions'
+import { UserItemType } from '@/types/UserItemType'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -22,7 +22,7 @@ function MemberSelect() {
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const form = useForm({ defaultValues: { member: '' } })
   const { register, watch, setValue } = form
-  const { isLoading, fetch, data } = useFetch<UserListType[]>({
+  const { isLoading, fetch, data } = useFetch<UserItemType[]>({
     url: `/user/search?keyword=${watch('member')}`,
     method: 'get',
   })
@@ -37,7 +37,7 @@ function MemberSelect() {
     return () => clearTimeout(delayFetch)
   }, [fetch, watch])
 
-  const addMembers = (member: UserListType) => {
+  const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId))
       return toast.warning('중복된 팀원입니다.', toastOptions)
     setShowMembers((prev) => [...prev, member])
@@ -45,7 +45,7 @@ function MemberSelect() {
     setValue('member', '')
   }
 
-  const deleteMembers = (member: UserListType) => {
+  const deleteMembers = (member: UserItemType) => {
     const filteredShowMembers = showMembers.filter((prev) => prev !== member)
     const filteredTeamMembers = teamMembers.filter(
       (prev) => prev !== member.userId
