@@ -1,25 +1,19 @@
 import Portal from '@/components/Portal'
 import * as S from './style'
-import {
-  IsStuStateModal,
-  SelectUser,
-  SelectUserState,
-  UserList,
-} from '@/atoms/atom'
+import { IsStuStateModal, SelectedUser } from '@/atoms/atom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Button from '@/components/common/Button'
 import useFetch from '@/hooks/useFetch'
 
 export default function StuState({ userlistRefetch }: any) {
   const setIsStuStateModal = useSetRecoilState<boolean>(IsStuStateModal)
-  const selectUser = useRecoilValue(SelectUser)
-  const selectUserState = useRecoilValue(SelectUserState)
+  const selectedUser = useRecoilValue(SelectedUser)
   const onClose = () => {
     setIsStuStateModal(false)
   }
 
   const { fetch } = useFetch({
-    url: `/user/${selectUser.userId}`,
+    url: `/user/${selectedUser.userId}`,
     method: 'patch',
     onSuccess: () => onClose(),
     successMessage: '예약 상태가 변경되었습니다.',
@@ -30,7 +24,8 @@ export default function StuState({ userlistRefetch }: any) {
 
   const chageStudentState = async () => {
     await fetch({
-      status: selectUserState === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
+      status:
+        selectedUser.useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
     })
     await userlistRefetch()
   }
@@ -38,15 +33,17 @@ export default function StuState({ userlistRefetch }: any) {
     <Portal onClose={onClose}>
       <S.ModalConatiner>
         <p>
-          {selectUser.grade}
-          {selectUser.classNum}
-          {selectUser.number.toString().length === 2
-            ? selectUser.number
-            : '0' + selectUser.number}{' '}
-          {selectUser.name}
-          님을 {selectUserState === 'AVAILABLE' ? '예약불가' : '예약가능'}
-          <br />
-          시키시겠습니까?
+          {selectedUser.grade}
+          {selectedUser.classNum}
+          {selectedUser.number.toString().length === 2
+            ? selectedUser.number
+            : '0' + selectedUser.number}{' '}
+          {selectedUser.name}
+          님을{' '}
+          {selectedUser.useStatus === 'AVAILABLE'
+            ? '예약불가 상태'
+            : '예약가능 상태'}
+          <br />로 변경하시겠습니까?
         </p>
         <S.ButtonWrapper>
           <Button
