@@ -28,14 +28,16 @@ export const UserList = atom<UserItemType[]>({
   key: 'UserList',
   default: [],
 })
-export const SelectUser = atom<{
-  classNum: number
-  email: string
-  grade: number
-  number: number
-  name: string
-  profileImageUrl: string
+export const SelectedUser = atom<{
   userId: string
+  email: string
+  name: string
+  grade: number
+  classNum: number
+  number: number
+  profileImageUrl: string
+  roles: string[]
+  useStatus: 'AVAILABLE' | 'UNAVAILABLE'
 }>({
   key: 'SelectUser',
   default: {
@@ -46,9 +48,7 @@ export const SelectUser = atom<{
     number: 1,
     profileImageUrl: '',
     userId: '',
+    useStatus: 'AVAILABLE',
+    roles: [],
   },
-})
-export const SelectUserState = atom<string>({
-  key: 'SelectuserState',
-  default: '',
 })
