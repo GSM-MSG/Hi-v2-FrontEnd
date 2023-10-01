@@ -43,7 +43,8 @@ export default function StuState({ userlistRefetch }: any) {
           {selectedUser.useStatus === 'AVAILABLE'
             ? '예약불가 상태'
             : '예약가능 상태'}
-          <br />로 변경하시겠습니까?
+          로<br />
+          변경하시겠습니까?
         </p>
         <S.ButtonWrapper>
           <Button
