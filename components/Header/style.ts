@@ -27,7 +27,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
 `
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
-  width: ${({ is_role }) => (is_role ? '15rem' : '10rem')};
+  width: ${({ is_admin }) => (is_admin ? '20rem' : '15rem')};
   display: flex;
   align-items: center;
   justify-content: space-between;

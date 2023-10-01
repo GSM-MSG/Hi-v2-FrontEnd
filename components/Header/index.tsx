@@ -22,6 +22,7 @@ function Header() {
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
+
     const fetchRole = async () => {
       await fetch()
     }
@@ -54,13 +55,10 @@ function Header() {
       <S.MenuListBox
         scroll={scroll}
         pathname={router.pathname}
-        is_role={data?.role.includes('ROLE_ADMIN')}
+        is_admin={data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER')}
       >
         <li>
-          <Link
-            href='/'
-            className={router.pathname.includes('/home') ? 'choice' : ''}
-          >
+          <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
             홈
           </Link>
         </li>
@@ -80,7 +78,15 @@ function Header() {
             예약
           </Link>
         </li>
-        {data?.role?.includes('ROLE_ADMIN') && (
+        <li>
+          <Link
+            href='/my-page'
+            className={router.pathname.includes('/my-page') ? 'choice' : ''}
+          >
+            마이페이지
+          </Link>
+        </li>
+        {data?.role?.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
           <li>
             <Link
               href='/user'
