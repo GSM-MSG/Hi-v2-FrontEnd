@@ -97,3 +97,43 @@ body::-webkit-scrollbar {
 a {
   text-decoration: none;
 }
+
+.HiTalkGirl {
+  position: absolute;
+  left: 0;
+  background-image: url('../assets/png/HiTalkGirl.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 520px;
+  height: 280px;
+}
+
+.HiTalkBoy {
+  position: absolute;
+  right: 0;
+  top: 12rem;
+  background-image: url('../assets/png/HiTalkBoy.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 520px;
+  height: 280px;
+}
+
+@media screen and (max-width: 600px) {
+  .HiTalkGirl {
+    position: static;
+    background-image: url('../assets/png/HiResponsiveTalkGirl.png');
+    width: 380px;
+    height: 380px;
+  }
+
+  .HiTalkBoy {
+    position: static;
+    background-image: url('../assets/png/HiResponsiveTalkBoy.png');
+    width: 380px;
+    height: 380px;
+    margin-top: 7rem;
+  }
+}

@@ -9,7 +9,7 @@ export const HasLogin = atom<boolean>({
   key: 'HasLogin',
   default: getStorage('hi_accessToken') ? true : false,
 })
-export const ShowMembers = atom<>({
+export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
   default: [],
 })
