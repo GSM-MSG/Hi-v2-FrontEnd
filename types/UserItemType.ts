@@ -8,5 +8,5 @@ export interface UserItemType {
   profileImageUrl: string
   roles: []
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
-  userlistRefetch: (body?: any) => Promise<void>
+  userlistRefetch?: (body?: any) => Promise<void>
 }

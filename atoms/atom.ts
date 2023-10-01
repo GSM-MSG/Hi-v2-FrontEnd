@@ -1,5 +1,4 @@
 import { UserItemType } from '@/types/UserItemType'
-import { UserListType } from '@/types/components/UserListType'
 import { getStorage } from '@/utils/Storage'
 import { atom } from 'recoil'
 
@@ -10,7 +9,7 @@ export const HasLogin = atom<boolean>({
   key: 'HasLogin',
   default: getStorage('hi_accessToken') ? true : false,
 })
-export const ShowMembers = atom<UserListType[]>({
+export const ShowMembers = atom<>({
   key: 'ShowMembers',
   default: [],
 })
@@ -28,17 +27,7 @@ export const UserList = atom<UserItemType[]>({
   key: 'UserList',
   default: [],
 })
-export const SelectedUser = atom<{
-  userId: string
-  email: string
-  name: string
-  grade: number
-  classNum: number
-  number: number
-  profileImageUrl: string
-  roles: string[]
-  useStatus: 'AVAILABLE' | 'UNAVAILABLE'
-}>({
+export const SelectedUser = atom<UserItemType>({
   key: 'SelectUser',
   default: {
     classNum: 1,
