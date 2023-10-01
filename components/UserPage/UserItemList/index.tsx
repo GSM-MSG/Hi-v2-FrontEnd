@@ -24,14 +24,36 @@ export default function UserItemList() {
 
   return (
     <S.UserItemListContainer>
-      {userList.map(({ useStatus, user }, idx) => (
-        <UserItem
-          key={idx}
-          user={user}
-          useStatus={useStatus}
-          userlistRefetch={fetch}
-        />
-      ))}
+      {userList.map(
+        (
+          {
+            userId,
+            email,
+            name,
+            grade,
+            classNum,
+            number,
+            profileImageUrl,
+            roles,
+            useStatus,
+          },
+          idx
+        ) => (
+          <UserItem
+            key={idx}
+            userlistRefetch={fetch}
+            userId={userId}
+            email={email}
+            name={name}
+            grade={grade}
+            classNum={classNum}
+            number={number}
+            profileImageUrl={profileImageUrl}
+            roles={roles}
+            useStatus={useStatus}
+          />
+        )
+      )}
     </S.UserItemListContainer>
   )
 }
