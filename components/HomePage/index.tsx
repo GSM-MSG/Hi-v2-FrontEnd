@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import * as S from './style'
-import * as SVG from '@/assets/svg'
-import HiTalkGirl from '@/assets/png/HiTalkGirl.png'
-import HiTalkBoy from '@/assets/png/HiTalkBoy.png'
 import Image from 'next/image'
+import HiCharacter from '@/assets/png/HiCharacter.png'
+import HiShowIphone1 from '@/assets/png/HiShowIphone1.png'
+import HiShowIphone2 from '@/assets/png/HiShowIphone2.png'
+import * as SVG from '@/assets/svg'
 import FuntionBox from './FuntionBox'
 import Button from '../common/Button'
 
@@ -25,7 +26,7 @@ function HomePage() {
                 fontWeight='600'
                 borderRadius='8px'
                 border='none'
-                fontSize='0.9rem'
+                fontSize='0.95rem'
               >
                 예약하러 가기
                 <SVG.ArrowIcon />
@@ -33,7 +34,7 @@ function HomePage() {
             </Link>
           </S.IntroductoryTextBox>
           <S.HiCharacterBox>
-            <SVG.HiCharacter />
+            <Image src={HiCharacter} alt='HiCharacter' />
           </S.HiCharacterBox>
         </S.IntroductoryBox>
         <S.ScrollIcon>
@@ -48,22 +49,8 @@ function HomePage() {
           <p>학생들이 불편을 겪고 있어요</p>
         </S.IntroductoryTextBox2>
         <S.TalkBox>
-          <div className='talkGirlIcon'>
-            <Image
-              src={HiTalkGirl}
-              alt='학생들의 불편1'
-              width={520}
-              height={280}
-            />
-          </div>
-          <div className='talkBoyIcon'>
-            <Image
-              src={HiTalkBoy}
-              alt='학생들의 불편2'
-              width={520}
-              height={280}
-            />
-          </div>
+          <div className='HiTalkGirl' />
+          <div className='HiTalkBoy' />
         </S.TalkBox>
       </S.HomeSection2>
       <S.HomeSection3>
@@ -74,14 +61,8 @@ function HomePage() {
           <p>교무실까지 가지 않아도 돼요!</p>
         </S.IntroductoryTextBox2>
         <S.ShowIphoneBox>
-          <div className='IphoneBox1'>
-            <SVG.HiShowIphone2 />
-            <SVG.HiShowIphone2 />
-          </div>
-          <div className='IphoneBox2'>
-            <SVG.HiShowIphone2 />
-            <SVG.HiShowIphone2 />
-          </div>
+          <Image src={HiShowIphone1} alt='Hi Mobile1' />
+          <Image src={HiShowIphone2} alt='Hi Mobile2' />
         </S.ShowIphoneBox>
       </S.HomeSection3>
       <S.HomeSection4>
