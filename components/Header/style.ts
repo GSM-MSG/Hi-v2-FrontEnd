@@ -24,6 +24,18 @@ export const HeaderContainer = styled.header<HeaderProps>`
     width: 2rem;
     height: 2rem;
   }
+
+  @media screen and (max-width: 850px) {
+    padding: 0 14vw;
+  }
+
+  @media screen and (max-width: 670px) {
+    padding: 0 10vw;
+  }
+
+  @media screen and (max-width: 450px) {
+    padding: 0 8vw;
+  }
 `
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
@@ -47,6 +59,11 @@ export const MenuListBox = styled.ul<HeaderProps>`
       pathname === '/' ? (scroll === 0 ? '#ffffff' : '#000000') : '#000000'};
     font-weight: 600;
   }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.8rem;
+    width: 14rem;
+  }
 `
 
 export const LoginBtn = styled.button<HeaderProps>`
@@ -58,7 +75,7 @@ export const LoginBtn = styled.button<HeaderProps>`
   background: ${({ pathname, scroll }) =>
     pathname === '/' ? (scroll === 0 ? 'none' : '#0066ff') : '#0066ff'};
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
 
   &:hover {
@@ -66,5 +83,9 @@ export const LoginBtn = styled.button<HeaderProps>`
       pathname === '/' ? (scroll === 0 ? '#ffffff' : '#0066ff') : '#0066ff'};
     color: ${({ pathname, scroll }) =>
       pathname === '/' ? (scroll === 0 ? '#0066ff' : '#ffffff') : '#ffffff'};
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.1rem;
   }
 `

@@ -86,7 +86,7 @@ function Header() {
             마이페이지
           </Link>
         </li>
-        {data?.role?.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+        {!data?.role?.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
           <li>
             <Link
               href='/user'
