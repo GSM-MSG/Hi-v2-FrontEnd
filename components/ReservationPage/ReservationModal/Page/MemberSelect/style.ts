@@ -26,20 +26,6 @@ export const InputBlock = styled.div`
   }
 `
 
-export const Input = styled.input`
-  width: 100%;
-  height: 2rem;
-  color: #b1b1b1;
-  font-size: 1rem;
-  border: none;
-  outline: none;
-
-  &::placeholder {
-    color: #b1b1b1;
-    font-size: 0.8rem;
-  }
-`
-
 export const ShowMemberListBox = styled.div`
   display: flex;
   justify-content: space-between;

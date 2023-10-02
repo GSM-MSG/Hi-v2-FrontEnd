@@ -16,6 +16,7 @@ export default function Button(props: ButtonPropsType) {
       hoverBorder={props.hoverBorder}
       hoverColor={props.hoverColor}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.children}
     </S.Button>
