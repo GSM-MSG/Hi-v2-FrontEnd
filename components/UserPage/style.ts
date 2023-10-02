@@ -23,7 +23,7 @@ export const InputWrapper = styled.form`
   }
 
   input {
-    padding-right: 34px;
+    padding-right: 36px;
   }
 `
 
