@@ -10,5 +10,5 @@ export const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
-  padding-top: 4.8rem;
+  align-items: center;
 `
