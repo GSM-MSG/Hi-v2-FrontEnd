@@ -13,11 +13,10 @@ export const UserTitleContainer = styled.div`
   }
 `
 
-export const InputWrapper = styled.div`
-  position: relative;
+export const InputWrapper = styled.form`
   display: flex;
+  position: relative;
   align-items: center;
-  gap: 8px;
 
   @media screen and (max-width: 640px) {
     display: none;
@@ -26,10 +25,12 @@ export const InputWrapper = styled.div`
   input {
     padding-right: 34px;
   }
+`
 
-  svg {
-    position: absolute;
-    right: 12px;
-    cursor: pointer;
-  }
+export const SearchIconWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 18px;
+  cursor: pointer;
 `

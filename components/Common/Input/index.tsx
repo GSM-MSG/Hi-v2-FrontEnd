@@ -1,9 +1,11 @@
 import { InputPropsType } from '@/types/components/InputPropsType'
 import * as S from './style'
+import React, { forwardRef } from 'react'
 
-export default function Input(props: InputPropsType) {
+const Input = (props: InputPropsType, ref: any) => {
   return (
     <S.Input
+      ref={ref}
       width={props.width}
       height={props.height}
       border={props.border}
@@ -15,3 +17,5 @@ export default function Input(props: InputPropsType) {
     />
   )
 }
+
+export default forwardRef(Input)

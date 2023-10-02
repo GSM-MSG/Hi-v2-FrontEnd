@@ -5,7 +5,6 @@ import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { IsStuStateModal, SelectedUser } from '@/atoms/atom'
-import StuState from '../StuState'
 
 export default function UserItem({
   userId,
@@ -17,7 +16,6 @@ export default function UserItem({
   profileImageUrl,
   roles,
   useStatus,
-  userlistRefetch,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const [isStuStateModal, setIsStuStateModal] =
@@ -71,7 +69,6 @@ export default function UserItem({
       >
         {useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
       </Button>
-      {isStuStateModal && <StuState userlistRefetch={userlistRefetch} />}
     </S.UserItemContainer>
   )
 }
