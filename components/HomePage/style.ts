@@ -108,7 +108,7 @@ export const IntroductoryTextBox = styled.div`
     }
 
     p {
-      font-size: 0.98rem;
+      font-size: 0.9rem;
       width: 210px;
       letter-spacing: 0.7px;
     }
@@ -239,11 +239,16 @@ export const ShowIphoneBox = styled.div`
 
   @media screen and (max-width: 600px) {
     margin-top: 4rem;
+    justify-content: center;
     img {
       width: 340px;
 
-      :nth-of-type(1) {
+      &:nth-of-type(1) {
         display: none;
+      }
+
+      &:nth-of-type(2) {
+        position: static;
       }
     }
   }
