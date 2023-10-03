@@ -35,8 +35,10 @@ export default function UserPage() {
             width='320px'
             height='28px'
             border='1px solid #B1B1B1'
+            padding='1rem'
             borderRadius='20px'
             placeholder='이름을 입력해 주세요.'
+            focus={true}
             {...register('user')}
           />
           <S.SearchIconWrapper onClick={handleSubmit(onSubmit)}>

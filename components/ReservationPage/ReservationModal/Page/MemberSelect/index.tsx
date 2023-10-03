@@ -16,6 +16,7 @@ import { toast } from 'react-toastify'
 import toastOptions from '@/lib/ToastOptions'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
+import Input from '@/components/common/Input'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -95,11 +96,15 @@ function MemberSelect() {
             </S.ShowMemberBox>
           ))}
         </S.ShowMemberListBox>
-        <S.Input
+        <Input
           disabled={showMembers.length === 6 ? true : false}
           placeholder='팀원을 검색하세요.'
-          {...register('member')}
+          width='100%'
+          height='2rem'
+          font-size='1rem'
+          border='none'
           autoComplete='off'
+          {...register('member')}
         />
         {watch('member').length > 0 && (
           <div className='cancelIcon' onClick={() => setValue('member', '')}>
@@ -161,7 +166,7 @@ function MemberSelect() {
                   <Button
                     background='none'
                     border='1px solid #0066ff'
-                    borderRadius='6px'
+                    borderRadius='4px'
                     color='#0066ff'
                     width='3.5rem'
                     height='1.8rem'
@@ -170,7 +175,10 @@ function MemberSelect() {
                     hoverBackground='#0066ff'
                     hoverBorder='none'
                     hoverColor='#ffffff'
-                    onClick={() => addMembers(item)}
+                    onClick={() => {
+                      addMembers(item)
+                    }}
+                    disabled={item.useStatus === 'AVAILABLE' ? false : true}
                   >
                     선택
                   </Button>

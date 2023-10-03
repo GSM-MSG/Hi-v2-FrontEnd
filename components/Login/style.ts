@@ -6,7 +6,6 @@ export const ModalContainer = styled.div`
   background-color: #fff;
   border-radius: 12px;
   padding: 52px 0 40px 0;
-  z-index: 10;
 `
 
 export const SVGConatiner = styled.div`

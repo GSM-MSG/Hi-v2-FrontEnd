@@ -9,11 +9,15 @@ const Input = (props: InputPropsType, ref: any) => {
       width={props.width}
       height={props.height}
       border={props.border}
+      padding={props.padding}
       borderRadius={props.borderRadius}
       placeholder={props.placeholder}
       onChange={props.onChange}
       value={props.value}
       name={props.name}
+      focus={props.focus}
+      autoComplete={props.autoComplete}
+      disabled={props.disabled}
     />
   )
 }

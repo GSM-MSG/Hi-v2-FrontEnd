@@ -17,6 +17,7 @@ function ReservationModal() {
     setTeamMembers([])
     setReason('')
   }
+
   return (
     <Portal onClose={onClose}>
       <S.ReservationModalContainer>

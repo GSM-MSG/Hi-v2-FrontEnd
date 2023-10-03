@@ -7,4 +7,5 @@ export const ReservationModalContainer = styled.div`
   background: #ffffff;
   border-radius: 8px;
   padding: 2rem;
+  margin-bottom: 3rem;
 `
