@@ -11,7 +11,6 @@ export const HeaderContainer = styled.header<HeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.3s ease-in-out;
   z-index: 999;
   background: ${({ scroll, pathname }) =>
     pathname === '/'
@@ -37,6 +36,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
     padding: 0 8vw;
   }
 `
+
 export const MenuListBox = styled.ul<HeaderProps>`
   list-style: none;
   width: ${({ is_admin }) => (is_admin ? '20rem' : '15rem')};
@@ -62,7 +62,7 @@ export const MenuListBox = styled.ul<HeaderProps>`
 
   @media screen and (max-width: 600px) {
     font-size: 0.8rem;
-    width: 14rem;
+    width: 12rem;
   }
 `
 

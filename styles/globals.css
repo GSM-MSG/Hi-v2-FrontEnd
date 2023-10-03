@@ -137,3 +137,16 @@ a {
     margin-top: 7rem;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .HiTalkGirl {
+    width: 360px;
+    height: 380px;
+  }
+
+  .HiTalkBoy {
+    width: 360px;
+    height: 380px;
+    margin-top: 7rem;
+  }
+}
