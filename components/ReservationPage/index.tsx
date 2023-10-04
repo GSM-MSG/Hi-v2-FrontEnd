@@ -1,12 +1,11 @@
-import { IsRModal } from '@/atoms/atom'
 import * as S from './style'
-import { useRecoilValue } from 'recoil'
-import ReservationModal from './ReservationModal'
+import ReservationModal from '../../modals/ReservationModal'
 import PageContainer from '../common/PageContainer'
 import Link from 'next/link'
+import useModal from '@/hooks/useModal'
 
 function ReservationPage() {
-  const isRModal = useRecoilValue(IsRModal)
+  const { openModal } = useModal()
 
   return (
     <PageContainer paddingTop='5vh' paddingBottom='5vh' background='#ffffff'>
@@ -18,7 +17,7 @@ function ReservationPage() {
           </S.ShowCheckedBox>
           <h2>1번 테이블</h2>
           <p>예약 가능 합니다.</p>
-          <span>예약하기</span>
+          <span onClick={() => openModal(<ReservationModal />)}>예약하기</span>
         </S.TableBox>
         <S.DisabledTableBox>
           <S.ShowCheckedBox disabled>
@@ -61,7 +60,6 @@ function ReservationPage() {
           <Link href={`/reservation/detail/1234`}>예약조회</Link>
         </S.DisabledTableBox>
       </S.ReservationTableContainer>
-      {isRModal && <ReservationModal />}
     </PageContainer>
   )
 }

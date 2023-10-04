@@ -1,23 +1,17 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { GauthLoginButton } from '@msg-team/gauth-react'
-import { useState } from 'react'
 import '@msg-team/gauth-react/dist/index.css'
-import { IsModal } from '@/atoms/atom'
-import Portal from '../Portal'
-import { useSetRecoilState } from 'recoil'
+import Portal from '../../components/Portal'
+import useModal from '@/hooks/useModal'
 
-export default function Login() {
-  const setIsModal = useSetRecoilState<boolean>(IsModal)
-
-  const onClose = () => {
-    setIsModal(false)
-  }
+export default function LoginModal() {
+  const { closeModal } = useModal()
 
   return (
-    <Portal onClose={onClose}>
+    <Portal onClose={closeModal}>
       <S.ModalContainer>
-        <S.SVGConatiner onClick={() => setIsModal(false)}>
+        <S.SVGConatiner onClick={closeModal}>
           <SVG.XMark />
         </S.SVGConatiner>
         <S.ModalContent>
