@@ -4,13 +4,14 @@ import Header from '@/components/Header'
 import { GAUTH_CLIENT_ID } from '@/utils/env'
 import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
-import { useSetRecoilState } from 'recoil'
-import { HasLogin } from '@/atoms/atom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { HasLogin, IsModal } from '@/atoms/atom'
 import { LayoutType } from '@/types/LayoutType'
 
 export default function Layout({ children }: LayoutType) {
   const router = useRouter()
   const setHasLogin = useSetRecoilState(HasLogin)
+  const isModal = useRecoilValue(IsModal)
   return (
     <GauthProvider
       redirectUri='http://localhost:3000/callback'
@@ -31,6 +32,7 @@ export default function Layout({ children }: LayoutType) {
       <Header />
       {children}
       <Footer />
+      {isModal && <>{isModal}</>}
     </GauthProvider>
   )
 }

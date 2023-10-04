@@ -4,13 +4,10 @@ import UserItem from '../UserItem'
 import useFetch from '@/hooks/useFetch'
 import { UserItemListType } from '@/types/UserItemListType'
 import { useRecoilState } from 'recoil'
-import { IsStuStateModal, UserList } from '@/atoms/atom'
-import StuStateModal from '../StuStateModal'
+import { UserList } from '@/atoms/atom'
 
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)
-  const [isStuStateModal, setIsStuStateModal] =
-    useRecoilState<boolean>(IsStuStateModal)
   const { fetch, data } = useFetch<UserItemListType>({
     url: '/user/students',
     method: 'get',
@@ -23,11 +20,10 @@ export default function UserItemList() {
     fetch()
   }, [])
 
-  if (!data) return <div />
+  if (!data) return <></>
 
   return (
     <S.UserItemListContainer>
-      {isStuStateModal && <StuStateModal userlistRefetch={fetch} />}
       {userList.map(
         (
           {

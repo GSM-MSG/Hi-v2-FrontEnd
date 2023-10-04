@@ -3,8 +3,10 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { IsStuStateModal, SelectedUser } from '@/atoms/atom'
+import { useSetRecoilState } from 'recoil'
+import { SelectedUser } from '@/atoms/atom'
+import useModal from '@/hooks/useModal'
+import StudentStateModal from '@/modals/StuStateModal'
 
 export default function UserItem({
   userId,
@@ -18,9 +20,8 @@ export default function UserItem({
   useStatus,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
-  const [isStuStateModal, setIsStuStateModal] =
-    useRecoilState<boolean>(IsStuStateModal)
   const setSelectedUser = useSetRecoilState(SelectedUser)
+  const { openModal } = useModal()
 
   return (
     <S.UserItemContainer>
@@ -53,7 +54,7 @@ export default function UserItem({
         fontWeight='600'
         color={buttonColor}
         onClick={() => {
-          setIsStuStateModal(true)
+          openModal(<StudentStateModal />)
           setSelectedUser({
             userId,
             email,

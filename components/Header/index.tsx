@@ -2,12 +2,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
-import Login from '../Login'
 import { useEffect, useState } from 'react'
 import { HasLogin, IsModal } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import useModal from '@/hooks/useModal'
+import LoginModal from '../../modals/LoginModal'
 
 function Header() {
   const { fetch, data } = useFetch<GetRoleTypes>({
@@ -16,9 +17,9 @@ function Header() {
   })
   const router = useRouter()
   const [scroll, setScroll] = useState<number>(0)
-  const [isModal, setIsModal] = useRecoilState<boolean>(IsModal)
   const [loginText, setLoginText] = useState<string>('')
   const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
+  const { openModal } = useModal()
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
@@ -112,14 +113,11 @@ function Header() {
         <S.LoginBtn
           scroll={scroll}
           pathname={router.pathname}
-          onClick={() => {
-            setIsModal(true)
-          }}
+          onClick={() => openModal(<LoginModal />)}
         >
           {loginText}
         </S.LoginBtn>
       )}
-      {isModal && <Login />}
     </S.HeaderContainer>
   )
 }

@@ -1,21 +1,29 @@
 import Portal from '@/components/Portal'
 import * as S from './style'
-import { IsStuStateModal, SelectedUser } from '@/atoms/atom'
+import { SelectedUser, UserList } from '@/atoms/atom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Button from '@/components/common/Button'
 import useFetch from '@/hooks/useFetch'
+import useModal from '@/hooks/useModal'
+import { UserItemListType } from '@/types/UserItemListType'
 
-export default function StuState({ userlistRefetch }: any) {
-  const setIsStuStateModal = useSetRecoilState<boolean>(IsStuStateModal)
+export default function StudentStateModal() {
+  const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
-  const onClose = () => {
-    setIsStuStateModal(false)
-  }
+  const { closeModal } = useModal()
+
+  const { fetch: userlistRefetch } = useFetch<UserItemListType>({
+    url: '/user/students',
+    method: 'get',
+    onSuccess: (data) => {
+      setUserList(data.student)
+    },
+  })
 
   const { fetch } = useFetch({
     url: `/user/${selectedUser.userId}`,
     method: 'patch',
-    onSuccess: () => onClose(),
+    onSuccess: closeModal,
     successMessage: '예약 상태가 변경되었습니다.',
     errorMessage: {
       401: '토큰 값이 이상하거나 변질되었습니다.',
@@ -29,8 +37,9 @@ export default function StuState({ userlistRefetch }: any) {
     })
     await userlistRefetch()
   }
+
   return (
-    <Portal onClose={onClose}>
+    <Portal onClose={closeModal}>
       <S.ModalConatiner>
         <p>
           {selectedUser.grade}
@@ -54,7 +63,7 @@ export default function StuState({ userlistRefetch }: any) {
             border='1px solid #0066FF'
             borderRadius='8px'
             color='#0066FF'
-            onClick={onClose}
+            onClick={closeModal}
           >
             취소
           </Button>
