@@ -4,24 +4,41 @@ import * as S from './style'
 import * as SVG from '../../assets/svg'
 import Link from 'next/link'
 import PageContainer from '@/components/common/PageContainer'
+import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import useFetch from '@/hooks/useFetch'
+import { useEffect } from 'react'
 
 function NoticePage() {
+  const { fetch, data } = useFetch<GetRoleTypes>({
+    url: 'user/my-role',
+    method: 'get',
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetch()
+    }
+    fetchData()
+  }, [])
+
   return (
     <PageContainer paddingTop='4vh' paddingBottom='4vh' background='#f5f5f5'>
       <S.NoticeTitleContainer>
         <h1>공지사항</h1>
         <Link href='notice/write'>
-          <Button
-            width='80px'
-            height='4vh'
-            border='1px solid #0066FF'
-            fontSize='14px'
-            color='#0066FF'
-            borderRadius='8px'
-          >
-            <SVG.NoticeWrite />
-            글작성
-          </Button>
+          {data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+            <Button
+              width='80px'
+              height='4vh'
+              border='1px solid #0066FF'
+              fontSize='14px'
+              color='#0066FF'
+              borderRadius='8px'
+            >
+              <SVG.NoticeWrite />
+              글작성
+            </Button>
+          )}
         </Link>
       </S.NoticeTitleContainer>
       <NoticeItemList />
