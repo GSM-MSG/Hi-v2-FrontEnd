@@ -29,7 +29,10 @@ export default function NoticeItem({
   })
 
   useEffect(() => {
-    getRoleTypes()
+    const fetchData = async () => {
+      await getRoleTypes()
+    }
+    fetchData()
   }, [])
 
   const onDelete = async (e: React.MouseEvent) => {

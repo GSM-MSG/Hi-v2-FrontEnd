@@ -25,8 +25,10 @@ export default function NoticeDetailPage() {
   })
 
   useEffect(() => {
-    getRoleTypes()
-    fetch()
+    const fetchData = async () => {
+      await getRoleTypes()
+    }
+    fetchData()
   }, [])
 
   const onModify = () => {

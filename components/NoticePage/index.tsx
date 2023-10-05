@@ -15,7 +15,10 @@ function NoticePage() {
   })
 
   useEffect(() => {
-    fetch()
+    const fetchData = async () => {
+      await fetch()
+    }
+    fetchData()
   }, [])
 
   return (
