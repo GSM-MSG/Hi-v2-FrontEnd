@@ -36,7 +36,7 @@ export default function UserItem({
     },
   }
 
-  const getRoleLabel = (roles: string) => {
+  const getRoleLabel = (roles: string[]) => {
     if (roles.includes('ROLE_ADMIN')) {
       return roleInfo.LABELS.ROLE_ADMIN
     } else if (roles.includes('ROLE_TEACHER')) {
@@ -46,7 +46,7 @@ export default function UserItem({
     }
   }
 
-  const getRoleColor = (roles: string) => {
+  const getRoleColor = (roles: string[]) => {
     if (roles.includes('ROLE_ADMIN')) {
       return roleInfo.COLORS.ROLE_ADMIN
     } else if (roles.includes('ROLE_TEACHER')) {

@@ -6,6 +6,6 @@ export interface UserItemType {
   classNum: number
   number: number
   profileImageUrl: string
-  roles: string
+  roles: string[]
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
 }
