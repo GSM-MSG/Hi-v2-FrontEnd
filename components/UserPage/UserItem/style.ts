@@ -42,6 +42,7 @@ export const UserItemWrraper = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
 `
 
 export const UserName = styled.p`
@@ -50,4 +51,10 @@ export const UserName = styled.p`
 
 export const UserEmail = styled.p`
   color: #9e9e9e;
+  font-size: 15px;
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 8px;
 `
