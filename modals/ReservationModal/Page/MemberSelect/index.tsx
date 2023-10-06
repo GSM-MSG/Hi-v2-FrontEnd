@@ -103,7 +103,7 @@ function MemberSelect() {
           height='2rem'
           font-size='1rem'
           border='none'
-          autoComplete='off'
+          autoComplete='no'
           {...register('member')}
         />
         {watch('member').length > 0 && (
