@@ -1,4 +1,7 @@
-export interface ButtonPropsType {
+import { ButtonHTMLAttributes } from 'react'
+
+export interface ButtonPropsType
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   width?: string
   height?: string
@@ -11,6 +14,4 @@ export interface ButtonPropsType {
   hoverBackground?: string
   hoverBorder?: string
   hoverColor?: string
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  disabled?: boolean
 }
