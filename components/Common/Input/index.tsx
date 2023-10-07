@@ -1,8 +1,8 @@
 import { InputPropsType } from '@/types/components/InputPropsType'
 import * as S from './style'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, memo } from 'react'
 
-const Input = (
+function Input(
   {
     width,
     height,
@@ -13,7 +13,7 @@ const Input = (
     ...rest
   }: InputPropsType,
   ref: any
-) => {
+) {
   return (
     <S.Input
       ref={ref}
@@ -28,4 +28,4 @@ const Input = (
   )
 }
 
-export default forwardRef(Input)
+export default memo(forwardRef(Input))

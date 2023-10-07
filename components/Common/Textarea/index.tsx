@@ -1,7 +1,8 @@
 import * as S from './style'
 import { TextareaPropsType } from '@/types/components/TextAreaProps'
+import { memo } from 'react'
 
-export default function Textarea({
+function Textarea({
   height,
   borderColor,
   fontSize,
@@ -18,3 +19,5 @@ export default function Textarea({
     />
   )
 }
+
+export default memo(Textarea)

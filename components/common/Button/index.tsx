@@ -1,7 +1,8 @@
 import { ButtonPropsType } from '@/types/components/ButtonPropsType'
+import { memo } from 'react'
 import * as S from './style'
 
-export default function Button({
+function Button({
   children,
   width,
   height,
@@ -35,3 +36,5 @@ export default function Button({
     </S.Button>
   )
 }
+
+export default memo(Button)
