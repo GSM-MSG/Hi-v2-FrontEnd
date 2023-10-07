@@ -2,9 +2,11 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import Button from '@/components/common/Button'
 import useModal from '@/hooks/useModal'
+import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
 
 export default function Completed() {
   const { closeModal } = useModal()
+  const { delReserveStatus } = useDeleteReservationStatus()
 
   return (
     <S.CompletedContainer>
@@ -22,7 +24,10 @@ export default function Completed() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={closeModal}
+          onClick={() => {
+            closeModal()
+            delReserveStatus()
+          }}
         >
           확인
         </Button>
