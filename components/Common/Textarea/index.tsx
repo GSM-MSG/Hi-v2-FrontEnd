@@ -1,17 +1,23 @@
 import * as S from './style'
 import { TextareaPropsType } from '@/types/components/TextAreaProps'
+import { memo } from 'react'
 
-export default function Textarea(props: TextareaPropsType) {
+function Textarea({
+  height,
+  borderColor,
+  fontSize,
+  margin,
+  ...rest
+}: TextareaPropsType) {
   return (
     <S.Textarea
-      value={props.value}
-      height={props.height}
-      borderColor={props.borderColor}
-      placeholder={props.placeholder}
-      fontSize={props.fontSize}
-      margin={props.margin}
-      onChange={props.onChange}
-      name={props.name}
+      height={height}
+      borderColor={borderColor}
+      fontSize={fontSize}
+      margin={margin}
+      {...rest}
     />
   )
 }
+
+export default memo(Textarea)
