@@ -19,8 +19,17 @@ export const ProfileWrapper = styled.div`
 export const ProfileImg = styled.div`
   width: 100px;
   height: 100px;
+
   border-radius: 50%;
-  background: pink;
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
+
+  img {
+    border-radius: 50%;
+  }
 `
 
 export const NameContainer = styled.div`
@@ -36,15 +45,15 @@ export const NameContainer = styled.div`
   }
 `
 
-export const ReservationState = styled.span`
+export const ReservationState = styled.span<{ buttonColor: string }>`
   width: auto;
   white-space: nowrap;
   position: absolute;
   left: 64px;
-  border: 1.2px solid #04b600;
+  border: ${(props) => `1.2px solid ${props.buttonColor}`};
   border-radius: 40px;
   padding: 4px 6px;
-  color: #04b600;
+  color: ${(props) => props.buttonColor};
   font-size: 14px;
 `
 
