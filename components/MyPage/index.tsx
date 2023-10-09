@@ -25,9 +25,7 @@ export default function MyPage() {
 
   console.log(data)
 
-  if (!data) {
-    return <div />
-  }
+  if (!data) return <div />
 
   return (
     <S.PageContainer>
