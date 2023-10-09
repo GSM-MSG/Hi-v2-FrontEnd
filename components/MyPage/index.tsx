@@ -23,8 +23,6 @@ export default function MyPage() {
     fetch()
   }, [])
 
-  console.log(data)
-
   if (!data) return <div />
 
   return (
