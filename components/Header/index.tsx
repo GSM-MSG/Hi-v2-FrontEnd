@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
-import Login from '../Login'
 import { useEffect, useState } from 'react'
 import { HasLogin } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import useModal from '@/hooks/useModal'
+import LoginModal from '../../modals/LoginModal'
 
 function Header() {
   const { fetch, data } = useFetch<GetRoleTypes>({
@@ -91,9 +91,7 @@ function Header() {
       ) : (
         <S.LoginBtn
           pathname={router.pathname}
-          onClick={() => {
-            openModal(<Login />)
-          }}
+          onClick={() => openModal(<LoginModal />)}
         >
           {loginText}
         </S.LoginBtn>

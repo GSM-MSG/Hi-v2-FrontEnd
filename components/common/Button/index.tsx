@@ -1,24 +1,40 @@
 import { ButtonPropsType } from '@/types/components/ButtonPropsType'
+import { memo } from 'react'
 import * as S from './style'
 
-export default function Button(props: ButtonPropsType) {
+function Button({
+  children,
+  width,
+  height,
+  fontSize,
+  color,
+  background,
+  border,
+  borderRadius,
+  fontWeight,
+  hoverBackground,
+  hoverBorder,
+  hoverColor,
+  ...rest
+}: ButtonPropsType) {
   return (
     <S.Button
-      width={props.width}
-      height={props.height}
-      fontSize={props.fontSize}
-      color={props.color}
-      background={props.background}
-      border={props.border}
-      borderRadius={props.borderRadius}
-      fontWeight={props.fontWeight}
-      hoverBackground={props.hoverBackground}
-      hoverBorder={props.hoverBorder}
-      hoverColor={props.hoverColor}
-      onClick={props.onClick}
-      disabled={props.disabled}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+      color={color}
+      background={background}
+      border={border}
+      borderRadius={borderRadius}
+      fontWeight={fontWeight}
+      hoverBackground={hoverBackground}
+      hoverBorder={hoverBorder}
+      hoverColor={hoverColor}
+      {...rest}
     >
-      {props.children}
+      {children}
     </S.Button>
   )
 }
+
+export default memo(Button)

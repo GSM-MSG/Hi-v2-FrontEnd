@@ -1,11 +1,13 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import Button from '@/components/common/Button'
-import { useSetRecoilState } from 'recoil'
-import { IsRModal, ModalPage } from '@/atoms/atom'
+import useModal from '@/hooks/useModal'
+import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
 
 export default function Completed() {
-  const setIsRModal = useSetRecoilState(IsRModal)
+  const { closeModal } = useModal()
+  const { delReserveStatus } = useDeleteReservationStatus()
+
   return (
     <S.CompletedContainer>
       <S.ShowComplted>
@@ -22,7 +24,10 @@ export default function Completed() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={() => setIsRModal(false)}
+          onClick={() => {
+            closeModal()
+            delReserveStatus()
+          }}
         >
           확인
         </Button>
