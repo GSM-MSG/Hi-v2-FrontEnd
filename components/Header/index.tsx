@@ -4,56 +4,37 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import Login from '../Login'
 import { useEffect, useState } from 'react'
-import { HasLogin, IsModal } from '@/atoms/atom'
+import { HasLogin } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import useModal from '@/hooks/useModal'
 
 function Header() {
   const { fetch, data } = useFetch<GetRoleTypes>({
     url: 'user/my-role',
     method: 'get',
   })
+
   const router = useRouter()
-  const [scroll, setScroll] = useState<number>(0)
-  const [isModal, setIsModal] = useRecoilState<boolean>(IsModal)
   const [loginText, setLoginText] = useState<string>('')
   const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
+  const { openModal } = useModal()
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
-
-    const fetchRole = async () => {
-      await fetch()
-    }
-    fetchRole()
-
-    const handleScroll = () => {
-      setScroll(window.scrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
   }, [hasLogin])
 
+  useEffect(() => {
+    ;(async () => await fetch())()
+  }, [])
+
   return (
-    <S.HeaderContainer scroll={scroll} pathname={router.pathname}>
+    <S.HeaderContainer pathname={router.pathname}>
       <Link href='/'>
-        {router.pathname === '/' ? (
-          scroll === 0 ? (
-            <SVG.HiWhiteLogo />
-          ) : (
-            <SVG.HiLogo />
-          )
-        ) : (
-          <SVG.HiLogo />
-        )}
+        <SVG.HiLogo />
       </Link>
       <S.MenuListBox
-        scroll={scroll}
         pathname={router.pathname}
         is_admin={data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER')}
       >
@@ -86,7 +67,7 @@ function Header() {
             마이페이지
           </Link>
         </li>
-        {data?.role?.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+        {data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
           <li>
             <Link
               href='/user'
@@ -99,7 +80,6 @@ function Header() {
       </S.MenuListBox>
       {hasLogin ? (
         <S.LoginBtn
-          scroll={scroll}
           pathname={router.pathname}
           onClick={() => {
             setHasLogin(false)
@@ -110,16 +90,14 @@ function Header() {
         </S.LoginBtn>
       ) : (
         <S.LoginBtn
-          scroll={scroll}
           pathname={router.pathname}
           onClick={() => {
-            setIsModal(true)
+            openModal(<Login />)
           }}
         >
           {loginText}
         </S.LoginBtn>
       )}
-      {isModal && <Login />}
     </S.HeaderContainer>
   )
 }
