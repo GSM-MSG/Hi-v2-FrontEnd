@@ -12,12 +12,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   align-items: center;
   justify-content: space-between;
   z-index: 999;
-  background: ${({ scroll, pathname }) =>
-    pathname === '/'
-      ? scroll === 0
-        ? 'linear-gradient(90deg, #0026ff 0%, #00d1ff 100%)'
-        : '#ffffff'
-      : '#ffffff'};
+  background: #ffffff;
 
   & > svg {
     width: 2rem;
@@ -49,14 +44,12 @@ export const MenuListBox = styled.ul<HeaderProps>`
 
   a {
     text-decoration: none;
-    color: ${({ scroll, pathname }) =>
-      pathname === '/' ? (scroll === 0 ? '#ffffff' : '#191919') : '#191919'};
+    color: #191919;
     font-weight: 400;
   }
 
   .choice {
-    color: ${({ scroll, pathname }) =>
-      pathname === '/' ? (scroll === 0 ? '#ffffff' : '#000000') : '#000000'};
+    color: #000000;
     font-weight: 600;
   }
 
@@ -67,23 +60,14 @@ export const MenuListBox = styled.ul<HeaderProps>`
 `
 
 export const LoginBtn = styled.button<HeaderProps>`
-  border: ${({ pathname, scroll }) =>
-    pathname === '/' ? (scroll === 0 ? '1px solid #ffffff' : 'none') : 'none'};
+  border: none;
   border-radius: 8px;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
-  background: ${({ pathname, scroll }) =>
-    pathname === '/' ? (scroll === 0 ? 'none' : '#0066ff') : '#0066ff'};
+  background: #0066ff;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 500;
-
-  &:hover {
-    background: ${({ pathname, scroll }) =>
-      pathname === '/' ? (scroll === 0 ? '#ffffff' : '#0066ff') : '#0066ff'};
-    color: ${({ pathname, scroll }) =>
-      pathname === '/' ? (scroll === 0 ? '#0066ff' : '#ffffff') : '#ffffff'};
-  }
 
   @media screen and (max-width: 600px) {
     font-size: 0.1rem;
