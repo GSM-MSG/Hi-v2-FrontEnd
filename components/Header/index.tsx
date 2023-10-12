@@ -30,12 +30,11 @@ function Header() {
   }, [])
 
   return (
-    <S.HeaderContainer pathname={router.pathname}>
+    <S.HeaderContainer>
       <Link href='/'>
         <SVG.HiLogo />
       </Link>
       <S.MenuListBox
-        pathname={router.pathname}
         is_admin={data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER')}
       >
         <li>
@@ -80,7 +79,6 @@ function Header() {
       </S.MenuListBox>
       {hasLogin ? (
         <S.LoginBtn
-          pathname={router.pathname}
           onClick={() => {
             setHasLogin(false)
             localStorage.clear()
@@ -89,10 +87,7 @@ function Header() {
           {loginText}
         </S.LoginBtn>
       ) : (
-        <S.LoginBtn
-          pathname={router.pathname}
-          onClick={() => openModal(<LoginModal />)}
-        >
+        <S.LoginBtn onClick={() => openModal(<LoginModal />)}>
           {loginText}
         </S.LoginBtn>
       )}
