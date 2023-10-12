@@ -1,5 +1,4 @@
 import API from '@/apis/api'
-import toastOptions from '@/lib/ToastOptions'
 import { ErrorsMessageType } from '@/types/hooks/useFetch'
 import { isAxiosError, Method } from 'axios'
 import { useCallback, useState } from 'react'
@@ -37,7 +36,7 @@ function useFetch<T>({
         })
         setData(data)
 
-        if (successMessage) toast.success(successMessage, toastOptions)
+        if (successMessage) toast.success(successMessage)
         if (onSuccess) await onSuccess(data)
       } catch (e) {
         if (!isAxiosError(e)) {
