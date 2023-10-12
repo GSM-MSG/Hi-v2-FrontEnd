@@ -4,25 +4,33 @@ import { ReactNode } from 'react'
 import { atom } from 'recoil'
 
 export const IsModal = atom<ReactNode>({ key: 'IsModal', default: null })
+
+export const ReservationPlace = atom<{ floor: number; period: number }>({
+  key: 'Place',
+  default: { floor: 3, period: 8 },
+})
+
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
+
 export const HasLogin = atom<boolean>({
   key: 'HasLogin',
   default: getStorage('hi_accessToken') ? true : false,
 })
+
 export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
   default: [],
 })
+
 export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
+
 export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })
-export const Place = atom<{ floor: string; period: string }>({
-  key: 'Place',
-  default: { floor: '', period: '' },
-})
+
 export const UserList = atom<UserItemType[]>({
   key: 'UserList',
   default: [],
 })
+
 export const SelectedUser = atom<UserItemType>({
   key: 'SelectedUser',
   default: {

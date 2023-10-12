@@ -13,7 +13,6 @@ import Button from '@/components/common/Button'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { toast } from 'react-toastify'
-import toastOptions from '@/lib/ToastOptions'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
 import Input from '@/components/common/Input'
@@ -41,7 +40,7 @@ function MemberSelect() {
 
   const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId))
-      return toast.warning('중복된 팀원입니다.', toastOptions)
+      return toast.warning('중복된 팀원입니다.')
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
     setValue('member', '')
@@ -60,7 +59,7 @@ function MemberSelect() {
 
   const onNext = () => {
     if (showMembers.length <= 1)
-      return toast.warning('신청 인원은 최소 2명입니다..', toastOptions)
+      return toast.warning('신청 인원은 최소 2명입니다.')
     setModalPage(2)
   }
 
@@ -72,7 +71,6 @@ function MemberSelect() {
         </Title>
         <PageToggleBox>
           <div className='currentToggle' />
-          <div />
           <div />
         </PageToggleBox>
       </TitleBox>
