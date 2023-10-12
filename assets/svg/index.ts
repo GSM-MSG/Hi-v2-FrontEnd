@@ -1,5 +1,4 @@
 export { default as HiLogo } from './HiLogo'
-export { default as HiWhiteLogo } from './HiWhiteLogo'
 export { default as ScrollMouseIcon } from './ScrollMouseIcon'
 export { default as ArrowIcon } from './ArrowIcon'
 export { default as HiLoginLogo } from './HiLoginLogo'

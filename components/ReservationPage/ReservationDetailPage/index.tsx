@@ -5,8 +5,9 @@ import { useEffect } from 'react'
 
 export default function ReservationDetailPage() {
   const router = useRouter()
+  console.log(router)
   const { fetch, data } = useFetch({
-    url: `/reservation/${router.query.homebaseID}`,
+    url: `/reservation/${router.query.reservationId}`,
     method: 'get',
   })
 
@@ -14,5 +15,5 @@ export default function ReservationDetailPage() {
     fetch()
   }, [fetch])
 
-  return <PageContainer>힝;</PageContainer>
+  return <PageContainer>test</PageContainer>
 }

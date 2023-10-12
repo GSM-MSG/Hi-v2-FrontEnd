@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <ToastContainer />
+      <ToastContainer position='top-right' theme='colored' autoClose={2000} />
     </RecoilRoot>
   )
 }

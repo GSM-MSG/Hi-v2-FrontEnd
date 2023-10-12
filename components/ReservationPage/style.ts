@@ -4,7 +4,7 @@ interface ShowCheckedBoxProps {
   disabled?: boolean
 }
 
-export const ReservationTitleContainer = styled.h2`
+export const ReservationTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   color: #3c3c43;
