@@ -20,8 +20,8 @@ export default function MyPage() {
   const buttonColor = data?.useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   useEffect(() => {
-    fetch()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   if (!data) return <div />
 

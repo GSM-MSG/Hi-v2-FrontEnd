@@ -11,8 +11,8 @@ export default function NoticeItemList() {
   })
 
   useEffect(() => {
-    fetch()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   if (!data) return <div />
 

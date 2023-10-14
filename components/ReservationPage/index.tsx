@@ -15,11 +15,8 @@ function ReservationPage() {
   })
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch()
-    }
-    fetchData()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
