@@ -25,11 +25,12 @@ export default function NoticeDetailPage() {
   })
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getRoleTypes()
-    }
-    fetchData()
-  }, [])
+    ;(async () => await getRoleTypes())()
+  }, [getRoleTypes])
+
+  useEffect(() => {
+    ;(async () => await fetch())()
+  }, [router, fetch])
 
   const onModify = () => {
     if (data) {
@@ -42,10 +43,6 @@ export default function NoticeDetailPage() {
       )
     }
   }
-
-  useEffect(() => {
-    fetch()
-  }, [router])
 
   if (!data) return <div />
 

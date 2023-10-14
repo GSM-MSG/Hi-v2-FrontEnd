@@ -43,6 +43,10 @@ export default function ReservationTableItem({
         onClick={
           item.users
             ? () =>
+                openModal(
+                  <ReservationModal reservationNumber={reservationNumber} />
+                )
+            : () =>
                 router.push(
                   {
                     pathname: '/reservation/detail',
@@ -51,10 +55,6 @@ export default function ReservationTableItem({
                     },
                   },
                   '/reservation/detail'
-                )
-            : () =>
-                openModal(
-                  <ReservationModal reservationNumber={reservationNumber} />
                 )
         }
       >

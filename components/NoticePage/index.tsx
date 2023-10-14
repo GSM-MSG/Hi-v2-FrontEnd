@@ -15,11 +15,8 @@ function NoticePage() {
   })
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch()
-    }
-    fetchData()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   return (
     <PageContainer paddingTop='4vh' paddingBottom='4vh' background='#f5f5f5'>

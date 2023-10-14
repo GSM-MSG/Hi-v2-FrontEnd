@@ -12,7 +12,7 @@ export default function ReservationDetailPage() {
   })
 
   useEffect(() => {
-    fetch()
+    ;(async () => await fetch())()
   }, [fetch])
 
   return <PageContainer>test</PageContainer>

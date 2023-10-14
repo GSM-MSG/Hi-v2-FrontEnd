@@ -29,11 +29,8 @@ export default function NoticeItem({
   })
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getRoleTypes()
-    }
-    fetchData()
-  }, [])
+    ;(async () => await getRoleTypes())()
+  }, [getRoleTypes])
 
   const onDelete = async (e: React.MouseEvent) => {
     e.stopPropagation()
