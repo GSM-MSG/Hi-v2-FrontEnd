@@ -33,10 +33,13 @@ export default function NoticeDetailPage() {
 
   const onModify = () => {
     if (data) {
-      router.push({
-        pathname: '/notice/write',
-        query: { id, title: data.title, content: data.content },
-      })
+      router.push(
+        {
+          pathname: '/notice/write',
+          query: { id, title: data.title, content: data.content },
+        },
+        'write'
+      )
     }
   }
 
