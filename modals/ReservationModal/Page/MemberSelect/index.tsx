@@ -88,7 +88,7 @@ function MemberSelect() {
                 onClick={() => deleteMembers(showMember)}
               >
                 <div style={{ marginTop: '0.125rem' }}>
-                  <SVG.CancelXMark />
+                  <SVG.XMark width='11' height='11' />
                 </div>
               </div>
             </S.ShowMemberBox>
@@ -106,7 +106,7 @@ function MemberSelect() {
         />
         {watch('member').length > 0 && (
           <div className='cancelIcon' onClick={() => setValue('member', '')}>
-            <SVG.SmallXMark />
+            <SVG.XMark />
           </div>
         )}
       </S.InputBlock>
