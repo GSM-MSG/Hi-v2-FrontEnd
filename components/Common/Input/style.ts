@@ -6,7 +6,7 @@ export const Input = styled.input<InputPropsType>`
   height: ${(props) => props.height};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
-  padding: ${(props) => props.padding};
+  padding: 16px;
   color: #c0c0c0;
   outline: none;
 
