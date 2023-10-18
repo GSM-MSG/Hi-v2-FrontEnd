@@ -18,7 +18,7 @@ export default function UserItemList() {
 
   useEffect(() => {
     ;(async () => await fetch())()
-  }, [fetch])
+  }, [])
 
   if (!data) return <></>
 
