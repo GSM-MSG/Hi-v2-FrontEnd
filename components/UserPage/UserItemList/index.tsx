@@ -9,10 +9,10 @@ import { UserList } from '@/atoms/atom'
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)
   const { fetch, data } = useFetch<UserItemListType>({
-    url: '/user/students',
+    url: '/user/all',
     method: 'get',
     onSuccess: (data) => {
-      setUserList(data.student)
+      setUserList(data.users)
     },
   })
 

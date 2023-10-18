@@ -13,10 +13,10 @@ export default function StudentStateModal() {
   const { closeModal } = useModal()
 
   const { fetch: userlistRefetch } = useFetch<UserItemListType>({
-    url: '/user/students',
+    url: '/user/all',
     method: 'get',
     onSuccess: (data) => {
-      setUserList(data.student)
+      setUserList(data.users)
     },
   })
 
