@@ -6,9 +6,8 @@ import { UserItemListType } from '@/types/UserItemListType'
 import useFetch from '@/hooks/useFetch'
 import Portal from '@/components/Portal'
 import * as SVG from '@/assets/svg'
-import { ReactNode, useEffect, useState } from 'react'
+import { useState } from 'react'
 import Button from '@/components/common/Button'
-import { useRouter } from 'next/router'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)
@@ -23,10 +22,10 @@ export default function UserRoleChangeModal() {
   ]
 
   const { fetch: userlistRefetch } = useFetch<UserItemListType>({
-    url: '/user/students',
+    url: '/user/all',
     method: 'get',
     onSuccess: (data) => {
-      setUserList(data.student)
+      setUserList(data.users)
       closeModal()
     },
   })
