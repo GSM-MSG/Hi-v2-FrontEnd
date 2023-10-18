@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil'
 import { SelectedUser } from '@/atoms/atom'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
+import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
 
 export default function UserItem({
   userId,
@@ -87,6 +88,20 @@ export default function UserItem({
           background='none'
           fontWeight='600'
           color={getRoleColor(roles)}
+          onClick={() => {
+            openModal(<UserRoleChangeModal />)
+            setSelectedUser({
+              userId,
+              email,
+              name,
+              grade,
+              classNum,
+              number,
+              profileImageUrl,
+              useStatus,
+              roles,
+            })
+          }}
         >
           {getRoleLabel(roles)}
         </Button>
