@@ -13,7 +13,7 @@ export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
-  const [selectRole, setSelectRole] = useState('')
+  const [selectedRole, setSelectedRole] = useState('')
 
   const Array = [
     { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
@@ -50,8 +50,12 @@ export default function UserRoleChangeModal() {
             <S.RoleButtonItem
               key={idx}
               color={color}
-              onClick={() => setSelectRole(`${label}`)}
+              onClick={() => {
+                setSelectedRole(`${label}`)
+              }}
+              isClicked={selectedRole === label}
             >
+              <SVG.SelectedCheck stroke={color} />
               {role}
             </S.RoleButtonItem>
           ))}
@@ -63,11 +67,11 @@ export default function UserRoleChangeModal() {
           borderRadius='8px'
           border='none'
           color='#fff'
-          onClick={() =>
+          onClick={() => {
             userRoleChange({
-              role: `${selectRole}`,
+              role: `${selectedRole}`,
             })
-          }
+          }}
         >
           확인
         </Button>
