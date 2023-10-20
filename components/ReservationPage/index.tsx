@@ -36,8 +36,6 @@ function ReservationPage() {
     openModal(<PlaceSelect />)
   }, [])
 
-  console.log(arr)
-
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
       <S.ReservationTitle>예약현황</S.ReservationTitle>
