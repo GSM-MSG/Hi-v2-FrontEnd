@@ -24,9 +24,10 @@ export default function Completed() {
           fontWeight='500'
           border='none'
           borderRadius='8px'
-          onClick={() => {
+          onClick={async () => {
             closeModal()
             delReserveStatus()
+            window.location.reload()
           }}
         >
           확인

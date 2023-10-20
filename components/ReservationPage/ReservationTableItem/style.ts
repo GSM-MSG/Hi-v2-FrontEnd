@@ -10,7 +10,6 @@ export const TableBox = styled.div<{ reserved: boolean }>`
   border: 1px solid ${({ reserved }) => (reserved ? '#b1b1b1' : '#0066ff')};
   border-radius: 12px;
   padding: 1.5rem;
-  margin-top: 1.5rem;
 
   span {
     margin-top: 7rem;
