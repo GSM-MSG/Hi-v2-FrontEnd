@@ -2,14 +2,14 @@ import styled from '@emotion/styled'
 
 export const TitleBox = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 10px;
 `
 
 export const PageToggleBox = styled.div`
-  width: 2rem;
+  width: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,7 +32,7 @@ export const PageToggleBox = styled.div`
 export const Title = styled.h3`
   display: flex;
   align-items: flex-start;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #3c3c43;
   gap: 5px;

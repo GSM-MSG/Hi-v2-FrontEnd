@@ -24,7 +24,7 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const teamMembers = useRecoilValue(TeamMembers)
   const { fetch } = useFetch({
-    url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}&reservationNumber=${reservationNumber}`,
+    url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}`,
     method: 'post',
     onSuccess: () => {
       setModalPage(3)
@@ -38,7 +38,7 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
 
   const onReserve = async () => {
     if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
-    await fetch({ users: teamMembers, reason: reasonText })
+    await fetch({ users: teamMembers, reason: reasonText, reservationNumber })
   }
 
   return (

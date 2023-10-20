@@ -7,7 +7,7 @@ export const IsModal = atom<ReactNode>({ key: 'IsModal', default: null })
 
 export const ReservationPlace = atom<{ floor: number; period: number }>({
   key: 'Place',
-  default: { floor: 3, period: 8 },
+  default: { floor: 2, period: 8 },
 })
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })

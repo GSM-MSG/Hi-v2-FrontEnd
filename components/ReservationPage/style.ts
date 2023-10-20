@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { TableBox } from './ReservationTableItem/style'
 
 interface ShowCheckedBoxProps {
   disabled?: boolean
@@ -11,48 +12,12 @@ export const ReservationTitle = styled.h2`
 `
 
 export const ReservationTableContainer = styled.div`
-  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`
-
-export const TableBox = styled.div`
-  position: relative;
-  border: 1px solid #0066ff;
-  background: rgba(0, 102, 255, 0.04);
-  border-radius: 1.2rem;
-  height: 10.7rem;
-  width: 31.5vw;
-  padding: 1.5rem;
-  margin-bottom: 1.2rem;
-
-  h2 {
-    color: #606060;
-    font-weight: 600;
-    font-size: 1.4rem;
-    margin: 0.6rem 0;
-  }
-
-  p {
-    color: #9e9e9e;
-    font-size: 0.935rem;
-    font-weight: 400;
-  }
-
-  span {
-    float: right;
-    margin-top: 1rem;
-    color: #0066ff;
-    font-weight: 400;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  margin-top: 1.3rem;
 `
 
 export const DisabledTableBox = styled(TableBox)`
