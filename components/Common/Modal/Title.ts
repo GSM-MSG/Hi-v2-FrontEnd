@@ -36,6 +36,7 @@ export const Title = styled.h3`
   font-weight: bold;
   color: #3c3c43;
   gap: 5px;
+  justify-content: space-between;
 
   span {
     border-radius: 50%;

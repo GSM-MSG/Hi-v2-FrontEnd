@@ -7,7 +7,7 @@ import { ReservationDataType } from '@/types/modals/ReservationData'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 import useModal from '@/hooks/useModal'
-import PlaceSelect from '@/modals/ReservationModal/PlaceSelect'
+import PlaceSelect from '@/modals/PlaceSelect'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
@@ -25,6 +25,7 @@ function ReservationPage() {
   }, [fetch])
 
   useEffect(() => {
+    setArr([1, 2, 3, 4, 5])
     setArr((prev: any) =>
       prev.map(
         (e: any) => data?.find((obj) => obj.reservationNumber === e) || e
