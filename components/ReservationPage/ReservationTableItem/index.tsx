@@ -3,8 +3,8 @@ import * as SVG from '@/assets/svg'
 import useModal from '@/hooks/useModal'
 import ReservationModal from '@/modals/ReservationModal'
 import { ReservationDataType } from '@/types/modals/ReservationData'
-import { useEffect, useState } from 'react'
-import ViewReservationModal from '@/modals/ReservationModal/ViewReservationModal'
+import { useState } from 'react'
+import ViewReservationModal from '@/modals/ViewReservationModal'
 
 export default function ReservationTableItem({
   item,
@@ -32,9 +32,11 @@ export default function ReservationTableItem({
           {typeof item !== 'number' ? (
             <>
               <span>
-                {item.users[0].name} 외 {item.users.length - 1} 명
+                {item.users.length === 1
+                  ? item.users[0].name
+                  : `${item.users[0].name} 외 ${item.users.length - 1} 명`}
               </span>
-              <SVG.BackArrowIcon />
+              {item.users.length !== 1 && <SVG.BackArrowIcon />}
             </>
           ) : (
             '예약 가능 합니다.'

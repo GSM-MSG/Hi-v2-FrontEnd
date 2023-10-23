@@ -16,6 +16,7 @@ import { toast } from 'react-toastify'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
 import Input from '@/components/common/Input'
+import { MyPageType } from '@/types/MyPageType'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -40,7 +41,7 @@ function MemberSelect() {
 
   const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId))
-      return toast.warning('중복된 팀원입니다.')
+      return toast.warning('중복된 팀원입니다')
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
     setValue('member', '')
@@ -59,7 +60,7 @@ function MemberSelect() {
 
   const onNext = () => {
     if (showMembers.length <= 1)
-      return toast.warning('신청 인원은 최소 2명입니다.')
+      return toast.warning('신청 인원은 최소 2명입니다')
     setModalPage(2)
   }
 

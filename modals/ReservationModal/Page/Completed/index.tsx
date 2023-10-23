@@ -3,10 +3,12 @@ import * as SVG from '@/assets/svg'
 import Button from '@/components/common/Button'
 import useModal from '@/hooks/useModal'
 import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
+import { useRouter } from 'next/navigation'
 
 export default function Completed() {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
+  const router = useRouter()
 
   return (
     <S.CompletedContainer>
@@ -27,7 +29,7 @@ export default function Completed() {
           onClick={async () => {
             closeModal()
             delReserveStatus()
-            window.location.reload()
+            router.refresh()
           }}
         >
           확인
