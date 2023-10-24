@@ -30,7 +30,7 @@ export default function ViewReservationModal({
     method: 'patch',
   })
 
-  const { fetch: myFetch, data: roleData } = useFetch<GetRoleTypes>({
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
     url: '/user/my-role',
     method: 'get',
   })
@@ -56,8 +56,8 @@ export default function ViewReservationModal({
   }, [fetch])
 
   useEffect(() => {
-    ;(async () => await myFetch())()
-  }, [myFetch])
+    ;(async () => await fetchRole())()
+  }, [fetchRole])
 
   return (
     <Portal onClose={closeModal}>

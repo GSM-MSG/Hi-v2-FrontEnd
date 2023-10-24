@@ -21,9 +21,11 @@ export default function RepresentativeMandateModal({
   const { fetch } = useFetch({
     url: `/reservation/${reservationId}/${userId}`,
     method: 'patch',
+    successMessage: `${username}님을 대표자로 위임했습니다`,
+    onSuccess: () => {
+      openModal(<ViewReservationModal reservationId={reservationId} />)
+    },
   })
-
-  console.log(userId, reservationId)
 
   return (
     <Portal onClose={closeModal}>
