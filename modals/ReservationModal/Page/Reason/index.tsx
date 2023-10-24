@@ -13,6 +13,8 @@ import {
 } from '@/components/common/Modal/Title'
 import Textarea from '@/components/common/Textarea'
 import useFetch from '@/hooks/useFetch'
+import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
@@ -22,7 +24,7 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
   const reservationPlace = useRecoilValue(ReservationPlace)
 
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
-  const teamMembers = useRecoilValue(TeamMembers)
+  const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const { fetch } = useFetch({
     url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}`,
     method: 'post',
@@ -36,9 +38,26 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
     },
   })
 
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
+    url: '/user/my-page',
+    method: 'get',
+  })
+
+  useEffect(() => {
+    ;(async () => await fetchRole())()
+    setTeamMembers((prev) => [...prev, roleData?.userId || ''])
+  }, [fetchRole, roleData?.userId, setTeamMembers])
+
   const onReserve = async () => {
     if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
-    await fetch({ users: teamMembers, reason: reasonText, reservationNumber })
+    const filteredTeam = teamMembers.filter(
+      (member, idx) => teamMembers.indexOf(member) === idx && member.length
+    )
+    await fetch({
+      users: filteredTeam,
+      reason: reasonText,
+      reservationNumber,
+    })
   }
 
   return (

@@ -1,10 +1,10 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import useModal from '@/hooks/useModal'
-import ReservationModal from '@/modals/ReservationModal'
 import { ReservationDataType } from '@/types/modals/ReservationData'
 import { useState } from 'react'
 import ViewReservationModal from '@/modals/ViewReservationModal'
+import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 
 export default function ReservationTableItem({
   item,
@@ -57,7 +57,7 @@ export default function ReservationTableItem({
             typeof item !== 'number' ? (
               <ViewReservationModal reservationId={item.reservationId} />
             ) : (
-              <ReservationModal reservationNumber={reservationNumber} />
+              <ConfirmReservationModal reservationNumber={reservationNumber} />
             )
           )
         }}

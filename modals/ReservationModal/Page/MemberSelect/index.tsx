@@ -16,7 +16,7 @@ import { toast } from 'react-toastify'
 import { UserItemType } from '@/types/UserItemType'
 import Image from 'next/image'
 import Input from '@/components/common/Input'
-import { MyPageType } from '@/types/MyPageType'
+import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -29,6 +29,15 @@ function MemberSelect() {
     method: 'get',
   })
 
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
+    url: '/user/my-role',
+    method: 'get',
+  })
+
+  useEffect(() => {
+    ;(async () => await fetchRole())()
+  }, [fetchRole])
+
   useEffect(() => {
     if (!watch('member').trim()) return
 
@@ -40,8 +49,11 @@ function MemberSelect() {
   }, [fetch, watch])
 
   const addMembers = (member: UserItemType) => {
-    if (teamMembers.includes(member.userId))
-      return toast.warning('중복된 팀원입니다')
+    if (teamMembers.includes(member.userId)) {
+      return toast.warning('이미 포함된 멤버입니다')
+    } else if (member.userId === roleData?.userId) {
+      return toast.warning('자신을 제외한 멤버를 선택해주세요')
+    }
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
     setValue('member', '')
@@ -59,8 +71,8 @@ function MemberSelect() {
   }
 
   const onNext = () => {
-    if (showMembers.length <= 1)
-      return toast.warning('신청 인원은 최소 2명입니다')
+    if (showMembers.length < 1)
+      return toast.warning('최소 1명이상의 팀원을 등록해주세요')
     setModalPage(2)
   }
 
@@ -96,7 +108,7 @@ function MemberSelect() {
           ))}
         </S.ShowMemberListBox>
         <Input
-          disabled={showMembers.length === 6 ? true : false}
+          disabled={showMembers.length === 5 ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
           height='2rem'
