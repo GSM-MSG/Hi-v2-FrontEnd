@@ -8,7 +8,6 @@ import Portal from '@/components/Portal'
 import * as SVG from '@/assets/svg'
 import { useState } from 'react'
 import Button from '@/components/common/Button'
-import useGetRole from '@/hooks/useGetRole'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)
