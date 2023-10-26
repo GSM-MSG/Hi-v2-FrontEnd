@@ -5,8 +5,7 @@ import { dateToString } from '@/utils/formatter'
 import * as SVG from '@/assets/svg'
 import useFetch from '@/hooks/useFetch'
 import { useRouter } from 'next/router'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
-import { useEffect } from 'react'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeItem({
   index,
@@ -23,14 +22,7 @@ export default function NoticeItem({
     errorMessage: { 403: '권한이 없습니다.', 404: '존재하지 않는 글입니다.' },
   })
 
-  const { fetch: getRoleTypes, data } = useFetch<GetRoleTypes>({
-    url: 'user/my-role',
-    method: 'get',
-  })
-
-  useEffect(() => {
-    ;(async () => await getRoleTypes())()
-  }, [getRoleTypes])
+  const { isAdmin, isTeacher } = useGetRole()
 
   const onDelete = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -49,7 +41,7 @@ export default function NoticeItem({
         <S.NoticeTitle>{title}</S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
-        {data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+        {(isAdmin || isTeacher) && (
           <S.SVG onClick={onDelete}>
             <SVG.XMark />
           </S.SVG>

@@ -21,7 +21,7 @@ export default function MyPage() {
 
   useEffect(() => {
     ;(async () => await fetch())()
-  }, [fetch])
+  }, [])
 
   if (!data) return <div />
 
