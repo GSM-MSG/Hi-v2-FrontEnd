@@ -27,7 +27,7 @@ function Header() {
 
   useEffect(() => {
     ;(async () => await fetch())()
-  }, [])
+  }, [fetch])
 
   return (
     <S.HeaderContainer>
