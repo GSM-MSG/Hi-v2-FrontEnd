@@ -8,6 +8,7 @@ import { SelectedUser } from '@/atoms/atom'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
 import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function UserItem({
   userId,
@@ -36,6 +37,8 @@ export default function UserItem({
       ROLE_STUDENT: '#2E80CC',
     },
   }
+
+  const { isAdmin } = useGetRole()
 
   const getRoleLabel = (roles: string[]) => {
     if (roles.includes('ROLE_ADMIN')) {
@@ -80,31 +83,33 @@ export default function UserItem({
         </S.UserInfo>
       </S.UserItemWrraper>
       <S.ButtonWrapper>
-        <Button
-          width='78px'
-          height='36px'
-          border={`solid 1px ${getRoleColor(roles)}`}
-          borderRadius='8px'
-          background='none'
-          fontWeight='600'
-          color={getRoleColor(roles)}
-          onClick={() => {
-            openModal(<UserRoleChangeModal />)
-            setSelectedUser({
-              userId,
-              email,
-              name,
-              grade,
-              classNum,
-              number,
-              profileImageUrl,
-              useStatus,
-              roles,
-            })
-          }}
-        >
-          {getRoleLabel(roles)}
-        </Button>
+        {isAdmin && (
+          <Button
+            width='78px'
+            height='36px'
+            border={`solid 1px ${getRoleColor(roles)}`}
+            borderRadius='8px'
+            background='none'
+            fontWeight='600'
+            color={getRoleColor(roles)}
+            onClick={() => {
+              openModal(<UserRoleChangeModal />)
+              setSelectedUser({
+                userId,
+                email,
+                name,
+                grade,
+                classNum,
+                number,
+                profileImageUrl,
+                useStatus,
+                roles,
+              })
+            }}
+          >
+            {getRoleLabel(roles)}
+          </Button>
+        )}
         <Button
           width='84px'
           height='36px'

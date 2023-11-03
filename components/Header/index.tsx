@@ -5,17 +5,11 @@ import * as SVG from '@/assets/svg'
 import { useEffect, useState } from 'react'
 import { HasLogin } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
-import useFetch from '@/hooks/useFetch'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import useModal from '@/hooks/useModal'
 import LoginModal from '../../modals/LoginModal'
+import useGetRole from '@/hooks/useGetRole'
 
 function Header() {
-  const { fetch, data } = useFetch<GetRoleTypes>({
-    url: 'user/my-role',
-    method: 'get',
-  })
-
   const router = useRouter()
   const [loginText, setLoginText] = useState<string>('')
   const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
@@ -25,18 +19,14 @@ function Header() {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
   }, [hasLogin])
 
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [fetch])
+  const { isTeacher, isAdmin } = useGetRole()
 
   return (
     <S.HeaderContainer>
       <Link href='/'>
         <SVG.HiLogo />
       </Link>
-      <S.MenuListBox
-        is_admin={data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER')}
-      >
+      <S.MenuListBox is_admin={isTeacher || isAdmin}>
         <li>
           <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
             홈
@@ -66,7 +56,7 @@ function Header() {
             마이페이지
           </Link>
         </li>
-        {data?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+        {(isTeacher || isAdmin) && (
           <li>
             <Link
               href='/user'

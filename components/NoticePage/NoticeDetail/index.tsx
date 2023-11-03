@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
 import { dateToString } from '@/utils/formatter'
 import Button from '@/components/common/Button'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
@@ -19,14 +19,7 @@ export default function NoticeDetailPage() {
     method: 'get',
   })
 
-  const { fetch: getRoleTypes, data: roleData } = useFetch<GetRoleTypes>({
-    url: 'user/my-role',
-    method: 'get',
-  })
-
-  useEffect(() => {
-    ;(async () => await getRoleTypes())()
-  }, [getRoleTypes])
+  const { isAdmin, isTeacher } = useGetRole()
 
   useEffect(() => {
     ;(async () => await fetch())()
@@ -60,7 +53,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{data.title}</S.DetailTitle>
-            {roleData?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+            {(isAdmin || isTeacher) && (
               <Button
                 width='48px'
                 height='26px'
