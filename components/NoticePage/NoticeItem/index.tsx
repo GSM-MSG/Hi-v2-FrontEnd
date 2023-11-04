@@ -14,6 +14,7 @@ export default function NoticeItem({
   createdAt,
   user,
   noticeList,
+  role,
 }: NoticeItemType) {
   const { fetch } = useFetch({
     url: `/notice/${noticeId}`,
@@ -21,8 +22,6 @@ export default function NoticeItem({
     successMessage: '공지가 삭제되었습니다.',
     errorMessage: { 403: '권한이 없습니다.', 404: '존재하지 않는 글입니다.' },
   })
-
-  const { isAdmin, isTeacher } = useGetRole()
 
   const onDelete = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -41,7 +40,7 @@ export default function NoticeItem({
         <S.NoticeTitle>{title}</S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
-        {(isAdmin || isTeacher) && (
+        {(role.isAdmin || role.isTeacher) && (
           <S.SVG onClick={onDelete}>
             <SVG.XMark />
           </S.SVG>

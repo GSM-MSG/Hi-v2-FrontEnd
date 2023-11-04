@@ -8,7 +8,6 @@ import { SelectedUser } from '@/atoms/atom'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
 import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
-import useGetRole from '@/hooks/useGetRole'
 
 export default function UserItem({
   userId,
@@ -20,6 +19,7 @@ export default function UserItem({
   profileImageUrl,
   roles,
   useStatus,
+  role,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
@@ -37,8 +37,6 @@ export default function UserItem({
       ROLE_STUDENT: '#2E80CC',
     },
   }
-
-  const { isAdmin } = useGetRole()
 
   const getRoleLabel = (roles: string[]) => {
     if (roles.includes('ROLE_ADMIN')) {
@@ -83,7 +81,7 @@ export default function UserItem({
         </S.UserInfo>
       </S.UserItemWrraper>
       <S.ButtonWrapper>
-        {isAdmin && (
+        {role.isAdmin && (
           <Button
             width='78px'
             height='36px'
@@ -104,6 +102,7 @@ export default function UserItem({
                 profileImageUrl,
                 useStatus,
                 roles,
+                role,
               })
             }}
           >
@@ -130,6 +129,7 @@ export default function UserItem({
               profileImageUrl,
               useStatus,
               roles,
+              role,
             })
           }}
         >
