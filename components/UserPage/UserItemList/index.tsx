@@ -5,6 +5,7 @@ import useFetch from '@/hooks/useFetch'
 import { UserItemListType } from '@/types/UserItemListType'
 import { useRecoilState } from 'recoil'
 import { UserList } from '@/atoms/atom'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)
@@ -15,6 +16,8 @@ export default function UserItemList() {
       setUserList(data.users)
     },
   })
+
+  const role = useGetRole()
 
   useEffect(() => {
     ;(async () => await fetch())()
@@ -50,6 +53,7 @@ export default function UserItemList() {
             profileImageUrl={profileImageUrl}
             roles={roles}
             useStatus={useStatus}
+            role={role}
           />
         )
       )}
