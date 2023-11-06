@@ -28,19 +28,17 @@ export const InputBlock = styled.div`
 
 export const ShowMemberListBox = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-left: 0.5rem;
-  margin-left: 0.8rem;
+  margin-top: 1rem;
 `
 
 export const ShowMemberBox = styled.div`
-  width: 4rem;
-  height: 2rem;
+  width: 4.1rem;
+  height: 1.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 400;
   background: #f5f5f5;
   color: #b1b1b1;
