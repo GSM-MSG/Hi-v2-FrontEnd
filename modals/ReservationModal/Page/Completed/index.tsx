@@ -5,16 +5,17 @@ import useModal from '@/hooks/useModal'
 import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
 import { useRouter } from 'next/navigation'
 
-export default function Completed() {
+export default function Completed({ isModify }: { isModify: boolean }) {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
+
   const router = useRouter()
 
   return (
     <S.CompletedContainer>
       <S.ShowComplted>
         <SVG.CompletedImg />
-        <h2>예약이 완료되었습니다.</h2>
+        <h2>{isModify ? '수정이' : '예약이'} 완료되었습니다.</h2>
       </S.ShowComplted>
       <S.ButtonContainer>
         <Button

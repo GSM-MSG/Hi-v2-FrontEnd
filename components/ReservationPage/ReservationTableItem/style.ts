@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const TableBox = styled.div<{ reserved: boolean }>`
   display: flex;
   justify-content: space-between;
-  width: 30.5rem;
+  width: 31.5vw;
   height: 11rem;
   background-color: ${({ reserved }) =>
     reserved ? 'none' : 'rgba(0, 102, 255, 0.04)'};
@@ -12,13 +12,19 @@ export const TableBox = styled.div<{ reserved: boolean }>`
   padding: 1.5rem;
 
   span {
-    margin-top: 7rem;
     cursor: pointer;
     color: ${({ reserved }) => (reserved ? '#9e9e9e' : '#0066ff')};
-
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  @media screen and (max-width: 680px) {
+    width: 28rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 20rem;
   }
 `
 
