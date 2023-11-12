@@ -54,7 +54,7 @@ export const MenuListBox = styled.ul<HeaderProps>`
   }
 
   @media screen and (max-width: 600px) {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     width: 12rem;
   }
 `
@@ -70,6 +70,6 @@ export const LoginBtn = styled.button<HeaderProps>`
   font-weight: 500;
 
   @media screen and (max-width: 600px) {
-    font-size: 0.1rem;
+    font-size: 0.8rem;
   }
 `
