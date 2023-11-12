@@ -92,29 +92,14 @@ function MemberSelect() {
         <div className='searchIcon'>
           <SVG.SearchIcon />
         </div>
-        <S.ShowMemberListBox>
-          {showMembers.map((showMember) => (
-            <S.ShowMemberBox key={showMember.userId}>
-              <span>{showMember.name}</span>
-              <div
-                style={{ cursor: 'pointer' }}
-                onClick={() => deleteMembers(showMember)}
-              >
-                <div style={{ marginTop: '0.125rem' }}>
-                  <SVG.XMark width='11' height='11' />
-                </div>
-              </div>
-            </S.ShowMemberBox>
-          ))}
-        </S.ShowMemberListBox>
         <Input
           disabled={showMembers.length === 5 ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
           height='2rem'
-          font-size='1rem'
+          fontSize='1rem'
           border='none'
-          autoComplete='no'
+          autoComplete='new-password'
           {...register('member')}
         />
         {watch('member').length > 0 && (
@@ -123,7 +108,21 @@ function MemberSelect() {
           </div>
         )}
       </S.InputBlock>
-
+      <S.ShowMemberListBox>
+        {showMembers.map((showMember) => (
+          <S.ShowMemberBox key={showMember.userId}>
+            <span>{showMember.name}</span>
+            <div
+              style={{ cursor: 'pointer' }}
+              onClick={() => deleteMembers(showMember)}
+            >
+              <div style={{ marginTop: '0.125rem' }}>
+                <SVG.XMark width='11' height='11' />
+              </div>
+            </div>
+          </S.ShowMemberBox>
+        ))}
+      </S.ShowMemberListBox>
       {isLoading ? (
         <S.LoadingMemberListBox>
           <span>학생정보를 찾는 중입니다.</span>
@@ -163,7 +162,7 @@ function MemberSelect() {
                     ) : (
                       <SVG.UserProfile />
                     )}
-                    <div>
+                    <div style={{ whiteSpace: 'nowrap' }}>
                       <span>
                         {parseInt(
                           `${item.grade}${item.classNum}${item.number
