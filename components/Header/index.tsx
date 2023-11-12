@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react'
 import { HasLogin } from '@/atoms/atom'
 import { useRecoilState } from 'recoil'
 import useModal from '@/hooks/useModal'
-import LoginModal from '../../modals/LoginModal'
+import LoginModal from '@/modals/LoginModal'
 import useGetRole from '@/hooks/useGetRole'
+import { headerMenuList } from '@/constants/headerObject'
 
 function Header() {
   const router = useRouter()
@@ -27,45 +28,27 @@ function Header() {
         <SVG.HiLogo />
       </Link>
       <S.MenuListBox is_admin={isTeacher || isAdmin}>
-        <li>
-          <Link href='/' className={router.pathname === '/' ? 'choice' : ''}>
-            홈
-          </Link>
-        </li>
-        <li>
-          <Link
-            href='/notice'
-            className={router.pathname.includes('/notice') ? 'choice' : ''}
-          >
-            공지
-          </Link>
-        </li>
-        <li>
-          <Link
-            href='/reservation'
-            className={router.pathname.includes('/reservation') ? 'choice' : ''}
-          >
-            예약
-          </Link>
-        </li>
-        <li>
-          <Link
-            href='/my-page'
-            className={router.pathname.includes('/my-page') ? 'choice' : ''}
-          >
-            마이페이지
-          </Link>
-        </li>
-        {(isTeacher || isAdmin) && (
-          <li>
-            <Link
-              href='/user'
-              className={router.pathname.includes('/user') ? 'choice' : ''}
-            >
-              학생정보
-            </Link>
-          </li>
-        )}
+        {isTeacher || isAdmin
+          ? headerMenuList.map((menu) => (
+              <li key={menu.id}>
+                <Link
+                  href={menu.link}
+                  className={router.pathname === menu.link ? 'choice' : ''}
+                >
+                  {menu.text}
+                </Link>
+              </li>
+            ))
+          : headerMenuList.slice(0, 4).map((menu) => (
+              <li key={menu.id}>
+                <Link
+                  href={menu.link}
+                  className={router.pathname === menu.link ? 'choice' : ''}
+                >
+                  {menu.text}
+                </Link>
+              </li>
+            ))}
       </S.MenuListBox>
       {hasLogin ? (
         <S.LoginBtn
