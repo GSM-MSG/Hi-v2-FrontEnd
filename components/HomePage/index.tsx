@@ -15,7 +15,8 @@ function HomePage() {
         <S.IntroductoryBox>
           <S.IntroductoryTextBox>
             <h2>
-              더욱 더 간편해진 <br /> 홈베이스 예약
+              더욱 더 간편해진 <br />
+              홈베이스 예약
             </h2>
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
             <Link href='/reservation'>

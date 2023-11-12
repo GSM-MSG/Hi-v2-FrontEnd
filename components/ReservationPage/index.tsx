@@ -10,8 +10,10 @@ import useModal from '@/hooks/useModal'
 import PlaceSelect from '@/modals/PlaceSelect'
 import Button from '../common/Button'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import { useRouter } from 'next/navigation'
 
 function ReservationPage() {
+  const router = useRouter()
   const reservationPlace = useRecoilValue(ReservationPlace)
   const { fetch, data } = useFetch<ReservationDataType[]>({
     url: `/homebase?period=${reservationPlace.period}&floor=${reservationPlace.floor}`,
@@ -23,6 +25,9 @@ function ReservationPage() {
   const { fetch: deleteTable } = useFetch({
     url: '/reservation/kill-all',
     method: 'delete',
+    onSuccess: () => {
+      router.refresh()
+    },
     successMessage: '예약 테이블을 모두 삭제했습니다.',
   })
 
@@ -31,9 +36,9 @@ function ReservationPage() {
     method: 'get',
   })
 
-  const [arr, setArr] = useState([1, 2, 3, 4, 5])
-
   const { openModal } = useModal()
+
+  const [reservationTables, setReservationTables] = useState([1, 2, 3, 4, 5])
 
   useEffect(() => {
     ;(async () => await fetch())()
@@ -44,13 +49,13 @@ function ReservationPage() {
   }, [fetchRole])
 
   useEffect(() => {
-    setArr([1, 2, 3, 4, 5])
-    setArr((prev: any) =>
+    setReservationTables([1, 2, 3, 4, 5])
+    setReservationTables((prev: any) =>
       prev.map(
         (e: any) => data?.find((obj) => obj.reservationNumber === e) || e
       )
     )
-  }, [data])
+  }, [data, setReservationTables])
 
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
@@ -68,9 +73,9 @@ function ReservationPage() {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button
             width='3.8rem'
-            height='1.8rem'
+            height='1.7rem'
             border='1px solid #0066ff'
-            borderRadius='8px'
+            borderRadius='4px'
             color='#0066ff'
             fontSize='0.81rem'
             fontWeight='500'
@@ -84,9 +89,9 @@ function ReservationPage() {
           {roleDate?.role.includes('ROLE_ADMIN') && (
             <Button
               width='3.8rem'
-              height='1.8rem'
+              height='1.7rem'
               border='1px solid #FF002E'
-              borderRadius='8px'
+              borderRadius='4px'
               color='#FF002E'
               fontSize='0.81rem'
               fontWeight='500'
@@ -102,13 +107,15 @@ function ReservationPage() {
         </div>
       </S.ReservationTitleBox>
       <S.ReservationTableContainer>
-        {arr.slice(0, reservationPlace.floor === 3 ? 5 : 4).map((item, idx) => (
-          <ReservationTableItem
-            key={idx}
-            item={item}
-            reservationNumber={idx + 1}
-          />
-        ))}
+        {reservationTables
+          .slice(0, reservationPlace.floor === 3 ? 5 : 4)
+          .map((item, idx) => (
+            <ReservationTableItem
+              key={idx}
+              item={item}
+              reservationNumber={idx + 1}
+            />
+          ))}
       </S.ReservationTableContainer>
     </PageContainer>
   )

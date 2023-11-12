@@ -19,12 +19,21 @@ import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function Reason({ reservationNumber }: { reservationNumber: number }) {
+function Reason({
+  reservationNumber,
+  isModify,
+  reservationId,
+}: {
+  reservationNumber: number
+  isModify: boolean
+  reservationId: string | undefined
+}) {
   const setModalPage = useSetRecoilState(ModalPage)
   const reservationPlace = useRecoilValue(ReservationPlace)
 
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
+
   const { fetch } = useFetch({
     url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}`,
     method: 'post',
@@ -38,6 +47,15 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
     },
   })
 
+  const { fetch: updateTable } = useFetch({
+    url: `/reservation/${reservationId}`,
+    method: 'patch',
+    onSuccess: () => {
+      setModalPage(3)
+    },
+    successMessage: '예약 테이블을 수정했습니다',
+  })
+
   const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
     url: '/user/my-page',
     method: 'get',
@@ -49,15 +67,23 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
   }, [fetchRole, roleData?.userId, setTeamMembers])
 
   const onReserve = async () => {
-    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
     const filteredTeam = teamMembers.filter(
       (member, idx) => teamMembers.indexOf(member) === idx && member.length
     )
-    await fetch({
-      users: filteredTeam,
-      reason: reasonText,
-      reservationNumber,
-    })
+    
+    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
+    else if (isModify) {
+      await updateTable({
+        users: filteredTeam,
+        reason: reasonText,
+      })
+    } else {
+      await fetch({
+        users: filteredTeam,
+        reason: reasonText,
+        reservationNumber,
+      })
+    }
   }
 
   return (
@@ -84,6 +110,7 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
           height='3rem'
           background='#d9d9d9'
           color='#ffffff'
+          fontSize='1rem'
           borderRadius='8px'
           border='none'
           onClick={() => setModalPage(1)}
@@ -101,7 +128,7 @@ function Reason({ reservationNumber }: { reservationNumber: number }) {
           borderRadius='8px'
           onClick={onReserve}
         >
-          예약하기
+          {isModify ? '수정하기' : '예약하기'}
         </Button>
       </S.ButtonContainer>
     </S.ReasonContainer>

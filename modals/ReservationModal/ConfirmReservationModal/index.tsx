@@ -45,7 +45,10 @@ export default function ConfirmReservationModal({
             borderRadius='8px'
             onClick={() =>
               openModal(
-                <ReservationModal reservationNumber={reservationNumber} />
+                <ReservationModal
+                  reservationNumber={reservationNumber}
+                  isModify={false}
+                />
               )
             }
           >
