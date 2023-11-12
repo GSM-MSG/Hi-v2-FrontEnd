@@ -48,7 +48,7 @@ const FunctionBoxBlock = styled.div`
   }
 `
 
-function FunctionBox({ number, title, description }: FunctionBoxProps) {
+function FuntionBox({ number, title, description }: FunctionBoxProps) {
   return (
     <FunctionBoxBlock>
       {number === 1 && <Image src={HiFunctionIcon1} alt='Hi 기능1' />}
@@ -60,4 +60,4 @@ function FunctionBox({ number, title, description }: FunctionBoxProps) {
   )
 }
 
-export default FunctionBox
+export default FuntionBox
