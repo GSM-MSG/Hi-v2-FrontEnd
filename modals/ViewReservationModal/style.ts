@@ -49,10 +49,6 @@ export const Member = styled.div<{ isRepresentative: boolean }>`
   align-items: center;
   margin-top: ${({ isRepresentative }) => isRepresentative && '-1.33rem'};
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 export const ViewReservationButtonContainer = styled(ButtonContainer)`
