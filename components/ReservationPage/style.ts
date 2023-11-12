@@ -30,6 +30,18 @@ export const ReservationTitle = styled.div`
     margin-right: 0.4rem;
     border-radius: 8px;
   }
+
+  @media screen and (max-width: 680px) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    h2 {
+      font-size: 1rem;
+    }
+  }
 `
 
 export const ReservationTableContainer = styled.div`

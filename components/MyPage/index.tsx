@@ -59,15 +59,6 @@ export default function MyPage() {
               <span className='tableNum'>
                 {data.reservation.reservationNumber}번 테이블
               </span>
-              <Button
-                width='60px'
-                height='28px'
-                background='#F5F5F5'
-                border='none'
-                color='#B1B1B1'
-              >
-                예약수정
-              </Button>
             </div>
             <div>
               <S.NameWrapper

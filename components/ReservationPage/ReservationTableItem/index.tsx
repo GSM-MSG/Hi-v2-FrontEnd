@@ -4,12 +4,13 @@ import useModal from '@/hooks/useModal'
 import { ReservationDataType } from '@/types/modals/ReservationData'
 import { useEffect, useState } from 'react'
 import ViewReservationModal from '@/modals/ViewReservationModal'
-import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 import useFetch from '@/hooks/useFetch'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import ReservationModal from '@/modals/ReservationModal'
+import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 import { useSetRecoilState } from 'recoil'
 import { ShowMembers, TeamMembers } from '@/atoms/atom'
+import { MyPageType } from '@/types/MyPageType'
+import { toast } from 'react-toastify'
 
 export default function ReservationTableItem({
   item,
@@ -22,14 +23,46 @@ export default function ReservationTableItem({
   const setTeamMembers = useSetRecoilState(TeamMembers)
   const [showDetailName, setShowDetailName] = useState<boolean>(false)
   const { openModal } = useModal()
-  const { fetch, data } = useFetch<GetRoleTypes>({
-    url: '/user/my-role',
+  const { fetch, data } = useFetch<MyPageType>({
+    url: '/user/my-page',
     method: 'get',
   })
 
   useEffect(() => {
     ;(async () => await fetch())()
   }, [fetch])
+
+  const onModify = (item: ReservationDataType) => {
+    setShowMembers(
+      item.users
+        .map((user) => user)
+        .filter((user) => user.userId !== item.representativeId)
+    )
+    setTeamMembers(
+      item.users
+        .map((user) => user.userId)
+        .filter((userId) => userId !== item.representativeId)
+    )
+    openModal(
+      <ReservationModal
+        isModify={true}
+        reservationNumber={reservationNumber}
+        reservationId={item.reservationId}
+      />
+    )
+  }
+
+  const onReservationCase = (item: ReservationDataType | number) => {
+    openModal(
+      typeof item !== 'number' ? (
+        <ViewReservationModal reservationId={item.reservationId} />
+      ) : data?.useStatus === 'AVAILABLE' ? (
+        <ConfirmReservationModal reservationNumber={reservationNumber} />
+      ) : (
+        toast.info('예약이 불가능한 상태입니다')
+      )
+    )
+  }
 
   return (
     <S.TableBox reserved={typeof item !== 'number' ? true : false}>
@@ -70,44 +103,11 @@ export default function ReservationTableItem({
         style={{ marginTop: '7rem', overflow: 'hiddlen', whiteSpace: 'nowrap' }}
       >
         {typeof item !== 'number' && item.representativeId === data?.userId && (
-          <span
-            style={{ marginRight: '1rem' }}
-            onClick={() => {
-              setShowMembers(
-                item.users
-                  .map((user) => user)
-                  .filter((user) => user.userId !== item.representativeId)
-              )
-              setTeamMembers(
-                item.users
-                  .map((user) => user.userId)
-                  .filter((userId) => userId !== item.representativeId)
-              )
-              openModal(
-                <ReservationModal
-                  isModify={true}
-                  reservationNumber={reservationNumber}
-                  reservationId={item.reservationId}
-                />
-              )
-            }}
-          >
+          <span style={{ marginRight: '1rem' }} onClick={() => onModify(item)}>
             예약수정
           </span>
         )}
-        <span
-          onClick={() => {
-            openModal(
-              typeof item !== 'number' ? (
-                <ViewReservationModal reservationId={item.reservationId} />
-              ) : (
-                <ConfirmReservationModal
-                  reservationNumber={reservationNumber}
-                />
-              )
-            )
-          }}
-        >
+        <span onClick={() => onReservationCase(item)}>
           {typeof item !== 'number' ? '예약조회' : '예약하기'}
         </span>
       </div>
