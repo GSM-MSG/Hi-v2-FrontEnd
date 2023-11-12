@@ -81,7 +81,7 @@ export default function UserItem({
         </S.UserInfo>
       </S.UserItemWrraper>
       <S.ButtonWrapper>
-        {role.isAdmin && (
+        {role?.isAdmin && (
           <Button
             width='78px'
             height='36px'

@@ -10,5 +10,5 @@ export interface UserItemType {
   profileImageUrl: string
   roles: string[]
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
-  role: useGetRoleReturnType
+  role?: useGetRoleReturnType
 }
