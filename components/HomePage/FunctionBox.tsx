@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import Image from 'next/image'
 import HiFunctionIcon1 from '@/assets/png/HiFunctionIcon1.png'
 import HiFunctionIcon2 from '@/assets/png/HiFunctionIcon2.png'
 import HiFunctionIcon3 from '@/assets/png/HiFunctionIcon3.png'
-import Image from 'next/image'
 import { FunctionBoxProps } from '@/types/components/FunctionBox'
 
 const FunctionBoxBlock = styled.div`
@@ -48,7 +48,7 @@ const FunctionBoxBlock = styled.div`
   }
 `
 
-function FuntionBox({ number, title, description }: FunctionBoxProps) {
+function FunctionBox({ number, title, description }: FunctionBoxProps) {
   return (
     <FunctionBoxBlock>
       {number === 1 && <Image src={HiFunctionIcon1} alt='Hi 기능1' />}
@@ -60,4 +60,4 @@ function FuntionBox({ number, title, description }: FunctionBoxProps) {
   )
 }
 
-export default FuntionBox
+export default FunctionBox
