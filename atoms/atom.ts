@@ -43,5 +43,6 @@ export const SelectedUser = atom<UserItemType>({
     profileImageUrl: '',
     roles: [],
     useStatus: 'AVAILABLE',
+    role: {},
   },
 })

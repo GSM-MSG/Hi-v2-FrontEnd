@@ -5,7 +5,8 @@ import HiCharacter from '@/assets/png/HiCharacter.png'
 import HiShowIphone1 from '@/assets/png/HiShowIphone1.png'
 import HiShowIphone2 from '@/assets/png/HiShowIphone2.png'
 import * as SVG from '@/assets/svg'
-import FuntionBox from './FuntionBox'
+import FunctionBox from './FunctionBox'
+import { FunctionBoxList } from '@/constants/homeObject'
 import Button from '../common/Button'
 
 function HomePage() {
@@ -74,21 +75,14 @@ function HomePage() {
           <p>HI의 대표기능 세가지를 소개해 드릴게요!</p>
         </S.IntroductoryTextBox2>
         <S.FunctionIntroductoryBox>
-          <FuntionBox
-            number={1}
-            title='홈베이스 예약'
-            description='특정 교시,층,시간을 선택해서 홈베이스를 예약 할 수 있어요!'
-          />
-          <FuntionBox
-            number={2}
-            title='홈베이스 관리'
-            description='홈베이스를 예약한 인원을 확인하고 관리할 수 있어요!'
-          />
-          <FuntionBox
-            number={3}
-            title='자동화'
-            description='예약 후에 시간이 지나면 자동으로 예약이 해제돼요!'
-          />
+          {FunctionBoxList.map((box) => (
+            <FunctionBox
+              key={box.id}
+              number={box.id}
+              title={box.title}
+              description={box.description}
+            />
+          ))}
         </S.FunctionIntroductoryBox>
       </S.HomeSection4>
     </S.HomePageContainer>
