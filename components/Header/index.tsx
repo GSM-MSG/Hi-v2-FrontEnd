@@ -9,6 +9,7 @@ import useModal from '@/hooks/useModal'
 import LoginModal from '@/modals/LoginModal'
 import useGetRole from '@/hooks/useGetRole'
 import { headerMenuList } from '@/constants/headerObject'
+import useLogout from '@/hooks/useLogout'
 
 function Header() {
   const router = useRouter()
@@ -19,6 +20,8 @@ function Header() {
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
   }, [hasLogin])
+
+  const logout = useLogout()
 
   const { isTeacher, isAdmin } = useGetRole()
 
@@ -51,14 +54,7 @@ function Header() {
             ))}
       </S.MenuListBox>
       {hasLogin ? (
-        <S.LoginBtn
-          onClick={() => {
-            setHasLogin(false)
-            localStorage.clear()
-          }}
-        >
-          {loginText}
-        </S.LoginBtn>
+        <S.LoginBtn onClick={logout}>{loginText}</S.LoginBtn>
       ) : (
         <S.LoginBtn onClick={() => openModal(<LoginModal />)}>
           {loginText}
