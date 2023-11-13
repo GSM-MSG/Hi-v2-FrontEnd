@@ -54,13 +54,7 @@ function Header() {
             ))}
       </S.MenuListBox>
       {hasLogin ? (
-        <S.LoginBtn
-          onClick={() => {
-            logout()
-          }}
-        >
-          {loginText}
-        </S.LoginBtn>
+        <S.LoginBtn onClick={logout}>{loginText}</S.LoginBtn>
       ) : (
         <S.LoginBtn onClick={() => openModal(<LoginModal />)}>
           {loginText}
