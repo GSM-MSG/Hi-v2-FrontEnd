@@ -23,10 +23,6 @@ function Header() {
 
   const logout = useLogout()
 
-  const handleLogout = () => {
-    logout()
-  }
-
   const { isTeacher, isAdmin } = useGetRole()
 
   return (
@@ -60,7 +56,7 @@ function Header() {
       {hasLogin ? (
         <S.LoginBtn
           onClick={() => {
-            handleLogout()
+            logout()
           }}
         >
           {loginText}
