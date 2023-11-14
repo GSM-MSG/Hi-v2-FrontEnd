@@ -61,16 +61,18 @@ export default function UserItem({
   return (
     <S.UserItemContainer>
       <S.UserItemWrraper>
-        {profileImageUrl ? (
-          <Image
-            src={profileImageUrl}
-            alt='profileImage'
-            width='48'
-            height='48'
-          />
-        ) : (
-          <SVG.UserProfile />
-        )}
+        <S.UserProfileContainer>
+          {profileImageUrl ? (
+            <Image
+              src={profileImageUrl}
+              alt='profileImage'
+              layout='fill'
+              objectFit='cover'
+            />
+          ) : (
+            <SVG.UserProfile />
+          )}
+        </S.UserProfileContainer>
         <S.UserInfo>
           <S.UserName>
             {grade}

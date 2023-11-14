@@ -33,8 +33,8 @@ export default function MyPage() {
             <Image
               src={data.profileImageUrl}
               alt='profileImage'
-              width={100}
-              height={100}
+              layout='fill'
+              objectFit='cover'
             />
           ) : (
             <SVG.UserProfile />

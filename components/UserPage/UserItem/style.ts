@@ -13,30 +13,26 @@ export const UserItemContainer = styled.div`
     background: #f9f9f9;
   }
 
-  svg {
-    margin: 0 16px 0 8px;
-  }
-
   button {
     margin-right: 8px;
   }
 `
 
 export const UserItemWrraper = styled.div`
-  img {
-    border-radius: 50%;
-    margin-right: 16px;
-    margin-left: 8px;
-  }
-
-  svg {
-    width: 48px;
-    height: 48px;
-  }
-
   height: 66px;
   display: flex;
   align-items: center;
+  gap: 16px;
+`
+
+export const UserProfileContainer = styled.div`
+  position: relative;
+  width: 48px;
+  height: 48px;
+
+  img {
+    border-radius: 50%;
+  }
 `
 
 export const UserInfo = styled.div`
