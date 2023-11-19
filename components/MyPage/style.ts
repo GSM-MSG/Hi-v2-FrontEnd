@@ -17,6 +17,7 @@ export const ProfileWrapper = styled.div`
   margin-top: 6vh;
 `
 export const ProfileImg = styled.div`
+  position: relative;
   width: 100px;
   height: 100px;
 

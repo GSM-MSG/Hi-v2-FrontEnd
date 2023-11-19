@@ -21,7 +21,7 @@ export default function MyPage() {
 
   useEffect(() => {
     ;(async () => await fetch())()
-  }, [])
+  }, [fetch])
 
   if (!data) return <div />
 
@@ -33,6 +33,8 @@ export default function MyPage() {
             <Image
               src={data.profileImageUrl}
               alt='profileImage'
+              layout='fill'
+              objectFit='cover'
               width={100}
               height={100}
             />
