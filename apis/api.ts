@@ -1,6 +1,7 @@
-import { getStorage } from '@/utils/Storage'
 import { BASE_URL } from '@/utils/env'
-import axios, { InternalAxiosRequestConfig } from 'axios'
+import axios from 'axios'
+import TokenManager from './TokenManager'
+import { getStorage } from '@/utils/Storage'
 
 const API = axios.create({
   baseURL: BASE_URL,
@@ -10,11 +11,36 @@ const API = axios.create({
   },
   withCredentials: true,
 })
+API.interceptors.request.use(async (config) => {
+  const tokenManager = new TokenManager()
 
-API.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const accessToken = getStorage('hi_accessToken')
-  if (!accessToken) return config
-  config.headers.Authorization = `Bearer ${accessToken}`
+  if (
+    !tokenManager.validateToken(
+      tokenManager.accessExpiredAt,
+      tokenManager.accessToken
+    ) &&
+    tokenManager.validateToken(
+      tokenManager.refreshExpiredAt,
+      tokenManager.refreshToken
+    )
+  ) {
+    tokenManager.reissueToken()
+  } else if (
+    !tokenManager.validateToken(
+      tokenManager.accessExpiredAt,
+      tokenManager.accessToken
+    ) &&
+    !tokenManager.validateToken(
+      tokenManager.refreshExpiredAt,
+      tokenManager.refreshToken
+    )
+  )
+    tokenManager.removeTokens()
+
+  config.headers['Authorization'] = tokenManager.accessToken
+    ? `Bearer ${tokenManager.accessToken}`
+    : undefined
+
   return config
 })
 
