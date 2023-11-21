@@ -4,14 +4,14 @@ import {
   ReservationPlace,
   TeamMembers,
 } from '@/atoms/atom'
-import Button from '@/components/common/Button'
 import {
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-} from '@/components/common/Modal/Title'
-import Textarea from '@/components/common/Textarea'
+  Button,
+  Textarea,
+} from '@/components/commons'
 import useFetch from '@/hooks/useFetch'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import { useEffect } from 'react'
@@ -70,7 +70,7 @@ function Reason({
     const filteredTeam = teamMembers.filter(
       (member, idx) => teamMembers.indexOf(member) === idx && member.length
     )
-    
+
     if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
     else if (isModify) {
       await updateTable({
