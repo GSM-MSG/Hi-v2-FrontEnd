@@ -1,12 +1,9 @@
 import * as S from './style'
-import PageContainer from '@/components/common/PageContainer'
-import Input from '@/components/common/Input'
-import Textarea from '@/components/common/Textarea'
-import Button from '@/components/common/Button'
+import { Button, Input, PageContainer, Textarea } from '@/components/commons'
 import useFetch from '@/hooks/useFetch'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import { NoticeModifyType } from '@/types/NoticeModifyType'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 export default function WritePage() {
   const router = useRouter()

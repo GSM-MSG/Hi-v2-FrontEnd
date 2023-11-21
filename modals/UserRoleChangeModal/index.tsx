@@ -1,13 +1,13 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import * as S from './style'
-import { IsModal, SelectedUser, UserList } from '@/atoms/atom'
+import * as SVG from '@/assets/svg'
+import { SelectedUser, UserList } from '@/atoms/atom'
+import { Button } from '@/components/commons'
+import Portal from '@/components/Portal'
+import useFetch from '@/hooks/useFetch'
 import useModal from '@/hooks/useModal'
 import { UserItemListType } from '@/types/UserItemListType'
-import useFetch from '@/hooks/useFetch'
-import Portal from '@/components/Portal'
-import * as SVG from '@/assets/svg'
 import { useState } from 'react'
-import Button from '@/components/common/Button'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import * as S from './style'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)

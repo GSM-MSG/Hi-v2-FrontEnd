@@ -1,6 +1,5 @@
 import { ReservationPlace } from '@/atoms/atom'
-import Button from '@/components/common/Button'
-import { Title, TitleBox } from '@/components/common/Modal/Title'
+import { Title, TitleBox, Button } from '@/components/commons'
 import * as SVG from '@/assets/svg'
 import Portal from '@/components/Portal'
 import useModal from '@/hooks/useModal'

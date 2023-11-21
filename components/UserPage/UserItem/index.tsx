@@ -1,4 +1,4 @@
-import Button from '@/components/commons/Button'
+import { Button } from '@/components/commons'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
