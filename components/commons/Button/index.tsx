@@ -1,6 +1,6 @@
 import { ButtonPropsType } from '@/types/components/ButtonPropsType'
-import { memo } from 'react'
 import * as S from './style'
+import { memo } from 'react'
 
 function Button({
   children,

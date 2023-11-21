@@ -1,7 +1,7 @@
 import { PageContainerPropsType } from '@/types/components/PageContainerPropsType'
 import * as S from './style'
 
-export default function PageContainer(props: PageContainerPropsType) {
+function PageContainer(props: PageContainerPropsType) {
   return (
     <S.PageContainer
       display={props.display}
@@ -15,3 +15,5 @@ export default function PageContainer(props: PageContainerPropsType) {
     </S.PageContainer>
   )
 }
+
+export default PageContainer
