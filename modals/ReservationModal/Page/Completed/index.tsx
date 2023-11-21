@@ -1,6 +1,6 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
-import Button from '@/components/commons/Button'
+import { Button } from '@/components/commons'
 import useModal from '@/hooks/useModal'
 import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
 import { useRouter } from 'next/navigation'

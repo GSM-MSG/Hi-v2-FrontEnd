@@ -1,6 +1,6 @@
 import * as S from './style'
-import Button from '../commons/Button'
 import * as SVG from '@/assets/svg'
+import { Button } from '../commons'
 import { useEffect, useState } from 'react'
 import useFetch from '@/hooks/useFetch'
 import { MyPageType } from '@/types/MyPageType'

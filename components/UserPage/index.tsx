@@ -1,6 +1,5 @@
 import * as SVG from '@/assets/svg'
-import Input from '../commons/Input'
-import PageContainer from '../commons/PageContainer'
+import { Input, PageContainer } from '../commons'
 import * as S from './style'
 import UserItemList from './UserItemList'
 import { useForm } from 'react-hook-form'

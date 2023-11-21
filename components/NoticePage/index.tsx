@@ -1,9 +1,8 @@
-import Button from '../commons/Button'
 import NoticeItemList from './NoticeItemList'
 import * as S from './style'
+import { Button, PageContainer } from '../commons'
 import * as SVG from '../../assets/svg'
 import Link from 'next/link'
-import PageContainer from '@/components/commons/PageContainer'
 import useGetRole from '@/hooks/useGetRole'
 
 function NoticePage() {

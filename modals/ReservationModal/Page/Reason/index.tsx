@@ -4,14 +4,14 @@ import {
   ReservationPlace,
   TeamMembers,
 } from '@/atoms/atom'
-import Button from '@/components/commons/Button'
 import {
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-} from '@/components/commons/Modal/Title'
-import Textarea from '@/components/commons/Textarea'
+  Button,
+  Textarea,
+} from '@/components/commons'
 import useFetch from '@/hooks/useFetch'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import { useEffect } from 'react'

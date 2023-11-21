@@ -6,8 +6,8 @@ import HiShowIphone1 from '@/assets/png/HiShowIphone1.png'
 import HiShowIphone2 from '@/assets/png/HiShowIphone2.png'
 import * as SVG from '@/assets/svg'
 import FunctionBox from './FunctionBox'
+import { Button } from '../commons'
 import { FunctionBoxList } from '@/constants/homeObject'
-import Button from '../commons/Button'
 
 function HomePage() {
   return (

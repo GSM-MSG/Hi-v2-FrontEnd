@@ -2,10 +2,10 @@ import Portal from '@/components/Portal'
 import * as S from './style'
 import { SelectedUser, UserList } from '@/atoms/atom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import Button from '@/components/commons/Button'
 import useFetch from '@/hooks/useFetch'
 import useModal from '@/hooks/useModal'
 import { UserItemListType } from '@/types/UserItemListType'
+import { Button } from '@/components/commons'
 
 export default function StudentStateModal() {
   const setUserList = useSetRecoilState(UserList)

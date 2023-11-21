@@ -1,4 +1,4 @@
-import PageContainer from '../commons/PageContainer'
+import { PageContainer, Button } from '../commons'
 import { useRecoilValue } from 'recoil'
 import { ReservationPlace } from '@/atoms/atom'
 import useFetch from '@/hooks/useFetch'
@@ -8,7 +8,6 @@ import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 import useModal from '@/hooks/useModal'
 import PlaceSelect from '@/modals/PlaceSelect'
-import Button from '../commons/Button'
 import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 import { useRouter } from 'next/navigation'
 

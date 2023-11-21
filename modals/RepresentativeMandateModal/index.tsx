@@ -1,10 +1,9 @@
-import { Title } from '@/components/commons/Modal/Title'
+import { Title, Button } from '@/components/commons'
 import Portal from '@/components/Portal'
 import useModal from '@/hooks/useModal'
 import * as SVG from '@/assets/svg'
 import * as S from './style'
 import { ButtonContainer } from '../DeleteTableCheckModal/style'
-import Button from '@/components/commons/Button'
 import useFetch from '@/hooks/useFetch'
 import ViewReservationModal from '../ViewReservationModal'
 
