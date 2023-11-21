@@ -1,6 +1,6 @@
 import * as S from './style'
-import Button from '../common/Button'
 import * as SVG from '@/assets/svg'
+import { Button } from '../commons'
 import { useEffect, useState } from 'react'
 import useFetch from '@/hooks/useFetch'
 import { MyPageType } from '@/types/MyPageType'
@@ -20,8 +20,8 @@ export default function MyPage() {
   const buttonColor = data?.useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   useEffect(() => {
-    fetch()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   if (!data) return <div />
 

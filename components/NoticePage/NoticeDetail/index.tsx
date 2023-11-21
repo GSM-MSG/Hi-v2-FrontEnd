@@ -1,5 +1,5 @@
-import PageContainer from '@/components/common/PageContainer'
 import * as S from './style'
+import { PageContainer, Button } from '@/components/commons'
 import * as SVG from '../../../assets/svg'
 import Link from 'next/link'
 import useFetch from '@/hooks/useFetch'
@@ -7,8 +7,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
 import { dateToString } from '@/utils/formatter'
-import Button from '@/components/common/Button'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
@@ -19,30 +18,23 @@ export default function NoticeDetailPage() {
     method: 'get',
   })
 
-  const { fetch: getRoleTypes, data: roleData } = useFetch<GetRoleTypes>({
-    url: 'user/my-role',
-    method: 'get',
-  })
+  const { isAdmin, isTeacher } = useGetRole()
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getRoleTypes()
-    }
-    fetchData()
-  }, [])
+    ;(async () => await fetch())()
+  }, [router, fetch])
 
   const onModify = () => {
     if (data) {
-      router.push({
-        pathname: '/notice/write',
-        query: { id, title: data.title, content: data.content },
-      })
+      router.push(
+        {
+          pathname: '/notice/write',
+          query: { id, title: data.title, content: data.content },
+        },
+        'write'
+      )
     }
   }
-
-  useEffect(() => {
-    fetch()
-  }, [router])
 
   if (!data) return <div />
 
@@ -60,7 +52,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{data.title}</S.DetailTitle>
-            {roleData?.role.includes('ROLE_ADMIN' || 'ROLE_TEACHER') && (
+            {(isAdmin || isTeacher) && (
               <Button
                 width='48px'
                 height='26px'

@@ -4,8 +4,8 @@ export interface InputPropsType extends InputHTMLAttributes<HTMLInputElement> {
   width?: string
   height?: string
   border?: string
-  padding?: string
   color?: string
   borderRadius?: string
   focus?: boolean
+  fontSize?: string
 }

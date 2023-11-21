@@ -3,6 +3,7 @@ import NoticeItem from '../NoticeItem'
 import useFetch from '@/hooks/useFetch'
 import { useEffect } from 'react'
 import { NoticeItemListType } from '@/types/NoticeItemListType'
+import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeItemList() {
   const { fetch, data } = useFetch<NoticeItemListType[]>({
@@ -10,9 +11,11 @@ export default function NoticeItemList() {
     method: 'get',
   })
 
+  const role = useGetRole()
+
   useEffect(() => {
-    fetch()
-  }, [])
+    ;(async () => await fetch())()
+  }, [fetch])
 
   if (!data) return <div />
 
@@ -27,6 +30,7 @@ export default function NoticeItemList() {
           createdAt={createdAt}
           user={user}
           noticeList={fetch}
+          role={role}
         />
       ))}
     </S.NoticeItemListContainer>

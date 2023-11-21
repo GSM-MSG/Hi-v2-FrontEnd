@@ -1,6 +1,5 @@
 import * as SVG from '@/assets/svg'
-import Input from '../common/Input'
-import PageContainer from '../common/PageContainer'
+import { Input, PageContainer } from '../commons'
 import * as S from './style'
 import UserItemList from './UserItemList'
 import { useForm } from 'react-hook-form'
@@ -35,7 +34,6 @@ export default function UserPage() {
             width='320px'
             height='28px'
             border='1px solid #B1B1B1'
-            padding='1rem'
             borderRadius='20px'
             placeholder='이름을 입력해 주세요.'
             focus={true}

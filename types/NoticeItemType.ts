@@ -1,3 +1,5 @@
+import { useGetRoleReturnType } from './hooks/useGetRole'
+
 export interface NoticeItemType {
   index: number
   noticeNum?: number
@@ -12,4 +14,5 @@ export interface NoticeItemType {
     number: number
   }
   noticeList: (body?: any) => Promise<void>
+  role: useGetRoleReturnType
 }

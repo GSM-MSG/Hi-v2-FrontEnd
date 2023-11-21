@@ -1,15 +1,22 @@
-import Portal from '@/components/Portal'
-import { useRecoilValue } from 'recoil'
-import * as S from './style'
 import { ModalPage } from '@/atoms/atom'
-import Reason from './Page/Reason'
-import MemberSelect from './Page/MemberSelect'
-import Completed from './Page/Completed'
-import PlaceSelect from './Page/PlaceSelect'
-import useModal from '@/hooks/useModal'
+import Portal from '@/components/Portal'
 import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
+import useModal from '@/hooks/useModal'
+import { useRecoilValue } from 'recoil'
+import Completed from './Page/Completed'
+import MemberSelect from './Page/MemberSelect'
+import Reason from './Page/Reason'
+import * as S from './style'
 
-function ReservationModal() {
+function ReservationModal({
+  reservationNumber,
+  isModify,
+  reservationId,
+}: {
+  reservationNumber: number
+  isModify: boolean
+  reservationId?: string
+}) {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
 
@@ -24,9 +31,14 @@ function ReservationModal() {
     <Portal onClose={onClose}>
       <S.ReservationModalContainer>
         {page === 1 && <MemberSelect />}
-        {page === 2 && <Reason />}
-        {page === 3 && <PlaceSelect />}
-        {page === 4 && <Completed />}
+        {page === 2 && (
+          <Reason
+            reservationNumber={reservationNumber}
+            isModify={isModify}
+            reservationId={reservationId}
+          />
+        )}
+        {page === 3 && <Completed isModify={isModify} />}
       </S.ReservationModalContainer>
     </Portal>
   )

@@ -1,3 +1,5 @@
+import { useGetRoleReturnType } from './hooks/useGetRole'
+
 export interface UserItemType {
   userId: string
   email: string
@@ -8,4 +10,5 @@ export interface UserItemType {
   profileImageUrl: string
   roles: string[]
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
+  role: useGetRoleReturnType
 }

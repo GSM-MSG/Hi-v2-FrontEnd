@@ -1,4 +1,4 @@
-import Button from '@/components/common/Button'
+import { Button } from '@/components/commons'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { UserItemType } from '@/types/UserItemType'
@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil'
 import { SelectedUser } from '@/atoms/atom'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
+import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
 
 export default function UserItem({
   userId,
@@ -18,6 +19,7 @@ export default function UserItem({
   profileImageUrl,
   roles,
   useStatus,
+  role,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
@@ -59,16 +61,18 @@ export default function UserItem({
   return (
     <S.UserItemContainer>
       <S.UserItemWrraper>
-        {profileImageUrl ? (
-          <Image
-            src={profileImageUrl}
-            alt='profileImage'
-            width='48'
-            height='48'
-          />
-        ) : (
-          <SVG.UserProfile />
-        )}
+        <S.UserProfileContainer>
+          {profileImageUrl ? (
+            <Image
+              src={profileImageUrl}
+              alt='profileImage'
+              layout='fill'
+              objectFit='cover'
+            />
+          ) : (
+            <SVG.UserProfile />
+          )}
+        </S.UserProfileContainer>
         <S.UserInfo>
           <S.UserName>
             {grade}
@@ -79,17 +83,34 @@ export default function UserItem({
         </S.UserInfo>
       </S.UserItemWrraper>
       <S.ButtonWrapper>
-        <Button
-          width='78px'
-          height='36px'
-          border={`solid 1px ${getRoleColor(roles)}`}
-          borderRadius='8px'
-          background='none'
-          fontWeight='600'
-          color={getRoleColor(roles)}
-        >
-          {getRoleLabel(roles)}
-        </Button>
+        {role.isAdmin && (
+          <Button
+            width='78px'
+            height='36px'
+            border={`solid 1px ${getRoleColor(roles)}`}
+            borderRadius='8px'
+            background='none'
+            fontWeight='600'
+            color={getRoleColor(roles)}
+            onClick={() => {
+              openModal(<UserRoleChangeModal />)
+              setSelectedUser({
+                userId,
+                email,
+                name,
+                grade,
+                classNum,
+                number,
+                profileImageUrl,
+                useStatus,
+                roles,
+                role,
+              })
+            }}
+          >
+            {getRoleLabel(roles)}
+          </Button>
+        )}
         <Button
           width='84px'
           height='36px'
@@ -110,6 +131,7 @@ export default function UserItem({
               profileImageUrl,
               useStatus,
               roles,
+              role,
             })
           }}
         >
