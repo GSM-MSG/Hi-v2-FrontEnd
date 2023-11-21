@@ -1,4 +1,4 @@
-import Button from '@/components/commons/Button'
+import Button from '@/components/common/Button'
 import Portal from '@/components/Portal'
 import useModal from '@/hooks/useModal'
 import { ButtonContainer } from '@/modals/DeleteTableCheckModal/style'

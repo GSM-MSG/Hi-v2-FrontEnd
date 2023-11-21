@@ -7,7 +7,7 @@ import useFetch from '@/hooks/useFetch'
 import Portal from '@/components/Portal'
 import * as SVG from '@/assets/svg'
 import { useState } from 'react'
-import Button from '@/components/commons/Button'
+import Button from '@/components/common/Button'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)

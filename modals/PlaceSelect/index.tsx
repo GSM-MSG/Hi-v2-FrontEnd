@@ -1,15 +1,16 @@
 import { ReservationPlace } from '@/atoms/atom'
-import Button from '@/components/commons/Button'
-import { Title, TitleBox } from '@/components/commons/Modal/Title'
+import Button from '@/components/common/Button'
+import { Title, TitleBox } from '@/components/common/Modal/Title'
 import * as SVG from '@/assets/svg'
 import Portal from '@/components/Portal'
 import useModal from '@/hooks/useModal'
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import * as S from './style'
 
 function PlaceSelect() {
-  const setReservationPlace = useSetRecoilState(ReservationPlace)
+  const [reservationPlace, setReservationPlace] =
+    useRecoilState(ReservationPlace)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
