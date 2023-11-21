@@ -1,5 +1,5 @@
 import * as S from './style'
-import Button from '../common/Button'
+import Button from '../commons/Button'
 import * as SVG from '@/assets/svg'
 import { useEffect, useState } from 'react'
 import useFetch from '@/hooks/useFetch'
