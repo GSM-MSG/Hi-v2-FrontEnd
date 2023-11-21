@@ -1,4 +1,4 @@
-import PageContainer from '@/components/common/PageContainer'
+import PageContainer from '@/components/commons/PageContainer'
 import * as S from './style'
 import * as SVG from '../../../assets/svg'
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NoticeDetailType } from '@/types/NoticeDetailType'
 import { dateToString } from '@/utils/formatter'
-import Button from '@/components/common/Button'
+import Button from '@/components/commons/Button'
 import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeDetailPage() {
