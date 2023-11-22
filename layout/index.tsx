@@ -6,10 +6,15 @@ import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { HasLogin, IsModal } from '@/atoms/atom'
-import { LayoutType } from '@/types/LayoutType'
 import { setStorage } from '@/utils/Storage'
+import {
+  accessTokenStorage,
+  refreshTokenStorage,
+  accessExpiredAtStorage,
+  refreshExpiredAtStorage,
+} from '@/types/apis'
 
-export default function Layout({ children }: LayoutType) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const setHasLogin = useSetRecoilState(HasLogin)
   const isModal = useRecoilValue(IsModal)
@@ -28,10 +33,10 @@ export default function Layout({ children }: LayoutType) {
           code,
         })
 
-        setStorage('hi_accessToken', accessToken)
-        setStorage('hi_refreshToken', refreshToken)
-        setStorage('hi_accessExpiredAt', accessExpiredAt)
-        setStorage('hi_refreshExpiredAt', refreshExpiredAt)
+        setStorage(accessTokenStorage, accessToken)
+        setStorage(refreshTokenStorage, refreshToken)
+        setStorage(accessExpiredAtStorage, accessExpiredAt)
+        setStorage(refreshExpiredAtStorage, refreshExpiredAt)
 
         router.push('/', undefined, { shallow: true })
         setHasLogin(true)

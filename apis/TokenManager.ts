@@ -1,8 +1,14 @@
-import { TokensType } from '@/types/TokensType'
+import { TokensType } from '@/types/apis'
 import { getStorage, removeStorage, setStorage } from '@/utils/Storage'
 import { BASE_URL } from '@/utils/env'
 import axios from 'axios'
 import Router from 'next/router'
+import {
+  accessTokenStorage,
+  refreshTokenStorage,
+  accessExpiredAtStorage,
+  refreshExpiredAtStorage,
+} from '@/types/apis'
 
 class TokenManager {
   private _accessToken: string | null = null
@@ -29,10 +35,10 @@ class TokenManager {
 
   initToken() {
     if (typeof window === 'undefined') return
-    this._accessToken = getStorage('hi_accessToken')
-    this._refreshToken = getStorage('hi_refreshToken')
-    this._accessExpiredAt = getStorage('hi_accessExpiredAt')
-    this._refreshExpiredAt = getStorage('hi_refreshExpiredAt')
+    this._accessToken = getStorage(accessTokenStorage)
+    this._refreshToken = getStorage(refreshTokenStorage)
+    this._accessExpiredAt = getStorage(accessExpiredAtStorage)
+    this._refreshExpiredAt = getStorage(refreshExpiredAtStorage)
   }
 
   setTokens(tokens: TokensType) {
@@ -41,10 +47,10 @@ class TokenManager {
     this._accessExpiredAt = tokens.accessExpiredAt
     this._refreshExpiredAt = tokens.refreshExpiredAt
 
-    setStorage('hi_accessToken', tokens.accessToken)
-    setStorage('hi_refreshToken', tokens.refreshToken)
-    setStorage('hi_accessExpiredAt', tokens.accessExpiredAt)
-    setStorage('hi_refreshExpiredAt', tokens.refreshExpiredAt)
+    setStorage(accessTokenStorage, tokens.accessToken)
+    setStorage(refreshTokenStorage, tokens.refreshToken)
+    setStorage(accessExpiredAtStorage, tokens.accessExpiredAt)
+    setStorage(refreshExpiredAtStorage, tokens.refreshExpiredAt)
   }
 
   removeTokens() {
@@ -54,10 +60,10 @@ class TokenManager {
     this._accessExpiredAt = null
     this._refreshExpiredAt = null
 
-    removeStorage('hi_accessToken')
-    removeStorage('hi_refreshToken')
-    removeStorage('hi_accessExpiredAt')
-    removeStorage('hi_refreshExpiredAt')
+    removeStorage(accessTokenStorage)
+    removeStorage(refreshTokenStorage)
+    removeStorage(accessExpiredAtStorage)
+    removeStorage(refreshExpiredAtStorage)
   }
 
   get accessToken() {
@@ -77,7 +83,7 @@ class TokenManager {
   }
 
   async reissueToken() {
-    const refreshToken = getStorage('hi_refreshToken')
+    const refreshToken = getStorage(accessTokenStorage)
 
     try {
       const { data } = await axios.patch(
