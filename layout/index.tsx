@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { HasLogin, IsModal } from '@/atoms/atom'
 import { LayoutType } from '@/types/LayoutType'
+import { setStorage } from '@/utils/Storage'
 
 export default function Layout({ children }: LayoutType) {
   const router = useRouter()
@@ -17,13 +18,21 @@ export default function Layout({ children }: LayoutType) {
       redirectUri='http://localhost:3000/callback'
       onSuccess={async (code: string) => {
         const {
-          data: { accessToken, refreshToken },
+          data: {
+            accessToken,
+            refreshToken,
+            accessExpiredAt,
+            refreshExpiredAt,
+          },
         } = await API.post('/auth', {
           code,
         })
 
-        localStorage.setItem('hi_accessToken', accessToken)
-        localStorage.setItem('hi_refreshToken', refreshToken)
+        setStorage('hi_accessToken', accessToken)
+        setStorage('hi_refreshToken', refreshToken)
+        setStorage('hi_accessExpiredAt', accessExpiredAt)
+        setStorage('hi_refreshExpiredAt', refreshExpiredAt)
+
         router.push('/', undefined, { shallow: true })
         setHasLogin(true)
       }}
