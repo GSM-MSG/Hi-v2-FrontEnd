@@ -1,4 +1,4 @@
-import { PageContainerPropsType } from '@/types/components/PageContainerPropsType'
+import { PageContainerPropsType } from '@/types/components'
 import styled from '@emotion/styled'
 
 export const PageContainer = styled.div<PageContainerPropsType>`

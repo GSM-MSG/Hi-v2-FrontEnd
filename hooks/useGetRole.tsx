@@ -1,7 +1,7 @@
 import useFetch from './useFetch'
 import { useEffect } from 'react'
 import { useGetRoleReturnType } from '@/types/hooks'
-import { GetRoleType } from '@/types/components/GetRoleType'
+import { GetRoleType } from '@/types/components'
 
 export default function useGetRole(): useGetRoleReturnType {
   const { fetch, data } = useFetch<GetRoleType>({

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import * as S from './style'
 import UserItem from '../UserItem'
-import useFetch from '@/hooks/useFetch'
-import { UserItemListType } from '@/types/UserItemListType'
+import { useFetch, useGetRole } from '@/hooks'
+import { UserItemListType } from '@/types/components'
 import { useRecoilState } from 'recoil'
 import { UserList } from '@/atoms/atom'
-import useGetRole from '@/hooks/useGetRole'
 
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)

@@ -1,7 +1,7 @@
 import * as S from './style'
 import { Button, Input, PageContainer, Textarea } from '@/components/commons'
 import useFetch from '@/hooks/useFetch'
-import { NoticeModifyType } from '@/types/NoticeModifyType'
+import { NoticeModifyType } from '@/types/components'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 

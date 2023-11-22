@@ -2,12 +2,11 @@ import * as S from './style'
 import { PageContainer, Button } from '@/components/commons'
 import * as SVG from '../../../assets/svg'
 import Link from 'next/link'
-import useFetch from '@/hooks/useFetch'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { NoticeDetailType } from '@/types/NoticeDetailType'
+import { NoticeDetailType } from '@/types/components'
 import { dateToString } from '@/utils/formatter'
-import useGetRole from '@/hooks/useGetRole'
+import { useFetch, useGetRole } from '@/hooks'
 
 export default function NoticeDetailPage() {
   const router = useRouter()

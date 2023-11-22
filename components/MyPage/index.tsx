@@ -3,7 +3,7 @@ import * as SVG from '@/assets/svg'
 import { Button } from '../commons'
 import { useEffect, useState } from 'react'
 import useFetch from '@/hooks/useFetch'
-import { MyPageType } from '@/types/MyPageType'
+import { MyPageType } from '@/types/components'
 import Image from 'next/image'
 
 export default function MyPage() {

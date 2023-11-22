@@ -31,7 +31,7 @@ export const HeaderContainer = styled.div`
   }
 `
 
-export const MenuListBox = styled.ul<{ is_admin: boolean }>`
+export const MenuListBox = styled.ul<{ is_admin: boolean | undefined }>`
   list-style: none;
   width: ${({ is_admin }) => (is_admin ? '20rem' : '15rem')};
   display: flex;
@@ -58,7 +58,7 @@ export const MenuListBox = styled.ul<{ is_admin: boolean }>`
   }
 `
 
-export const LoginBtn = styled.button<{ is_admin: boolean }>`
+export const LoginBtn = styled.button`
   border: none;
   border-radius: 8px;
   padding: 0.4rem 0.6rem;
