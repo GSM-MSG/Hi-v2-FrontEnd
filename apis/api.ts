@@ -1,16 +1,12 @@
 import { BASE_URL } from '@/utils/env'
-import axios from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import TokenManager from './TokenManager'
-import { getStorage } from '@/utils/Storage'
 
 const API = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
   withCredentials: true,
 })
+
 API.interceptors.request.use(async (config) => {
   const tokenManager = new TokenManager()
 
@@ -24,7 +20,8 @@ API.interceptors.request.use(async (config) => {
       tokenManager.refreshToken
     )
   ) {
-    tokenManager.reissueToken()
+    tokenManager.reissueToken({ refreshToken: tokenManager.refreshToken })
+    tokenManager.initToken()
   } else if (
     !tokenManager.validateToken(
       tokenManager.accessExpiredAt,
@@ -43,5 +40,21 @@ API.interceptors.request.use(async (config) => {
 
   return config
 })
+
+API.interceptors.response.use(
+  (res: AxiosResponse) => {
+    return res
+  },
+  async (err: AxiosError) => {
+    const tokenManager = new TokenManager()
+
+    if (err.response && err.response.status === 401) {
+      return tokenManager.reissueToken({
+        refreshToken: tokenManager.refreshToken,
+      })
+    }
+    return Promise.reject(err)
+  }
+)
 
 export default API

@@ -66,6 +66,28 @@ class TokenManager {
     removeStorage(refreshExpiredAtStorage)
   }
 
+  async reissueToken({ refreshToken }: { refreshToken: string | null }) {
+    try {
+      const { data } = await axios.patch(
+        `${BASE_URL}/auth`,
+        {},
+        {
+          headers: {
+            RefreshToken: `Bearer ${refreshToken}`,
+          },
+        }
+      )
+
+      this.setTokens(data)
+
+      return true
+    } catch (error) {
+      this.removeTokens()
+      Router.push('/')
+      return false
+    }
+  }
+
   get accessToken() {
     return this._accessToken
   }
@@ -80,31 +102,6 @@ class TokenManager {
 
   get refreshExpiredAt() {
     return this._refreshExpiredAt
-  }
-
-  async reissueToken() {
-    const refreshToken = getStorage(accessTokenStorage)
-
-    try {
-      const { data } = await axios.patch(
-        `${BASE_URL}auth`,
-        {},
-        {
-          headers: {
-            RefreshToken: `Bearer ${refreshToken}`,
-          },
-        }
-      )
-
-      this.setTokens(data)
-
-      return true
-    } catch (error) {
-      this.removeTokens()
-      await Router.push('/')
-
-      return false
-    }
   }
 }
 

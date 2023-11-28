@@ -30,7 +30,7 @@ export default function StudentStateModal() {
     },
   })
 
-  const chageStudentState = async () => {
+  const changeStudentState = async () => {
     await fetch({
       status:
         selectedUser.useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
@@ -40,7 +40,7 @@ export default function StudentStateModal() {
 
   return (
     <Portal onClose={closeModal}>
-      <S.ModalConatiner>
+      <S.ModalContainer>
         <p>
           {selectedUser.grade}
           {selectedUser.classNum}
@@ -74,12 +74,12 @@ export default function StudentStateModal() {
             border='1px solid #0066FF'
             borderRadius='8px'
             color='#fff'
-            onClick={chageStudentState}
+            onClick={changeStudentState}
           >
             확인
           </Button>
         </S.ButtonWrapper>
-      </S.ModalConatiner>
+      </S.ModalContainer>
     </Portal>
   )
 }
