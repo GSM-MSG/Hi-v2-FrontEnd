@@ -1,7 +1,7 @@
 import API from '@/apis/api'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { GAUTH_CLIENT_ID } from '@/utils/env'
+import { GAUTH_CLIENT_ID, REDIRECT_URI } from '@/utils/env'
 import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutType) {
   const isModal = useRecoilValue(IsModal)
   return (
     <GauthProvider
-      redirectUri='http://localhost:3000/callback'
+      redirectUri={REDIRECT_URI}
       onSuccess={async (code: string) => {
         const {
           data: { accessToken, refreshToken },
@@ -29,10 +29,12 @@ export default function Layout({ children }: LayoutType) {
       }}
       clientId={GAUTH_CLIENT_ID}
     >
-      <Header />
-      {children}
-      <Footer />
-      {isModal && <>{isModal}</>}
+      <>
+        <Header />
+        {children}
+        <Footer />
+        {isModal && <>{isModal}</>}
+      </>
     </GauthProvider>
   )
 }
