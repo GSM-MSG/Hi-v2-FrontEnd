@@ -3,12 +3,12 @@ import { useRecoilValue } from 'recoil'
 import { ReservationPlace } from '@/atoms/atom'
 import useFetch from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
-import { ReservationDataType } from '@/types/modals/ReservationData'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 import useModal from '@/hooks/useModal'
 import PlaceSelect from '@/modals/PlaceSelect'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import { GetRoleType } from '@/types/components'
+import { ReservationDataType } from '@/types/modals'
 import { useRouter } from 'next/navigation'
 
 function ReservationPage() {
@@ -30,7 +30,7 @@ function ReservationPage() {
     successMessage: '예약 테이블을 모두 삭제했습니다.',
   })
 
-  const { fetch: fetchRole, data: roleDate } = useFetch<GetRoleTypes>({
+  const { fetch: fetchRole, data: roleDate } = useFetch<GetRoleType>({
     url: '/user/my-role',
     method: 'get',
   })

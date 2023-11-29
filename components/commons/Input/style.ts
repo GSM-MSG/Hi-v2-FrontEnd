@@ -1,4 +1,4 @@
-import { InputPropsType } from '@/types/components/InputPropsType'
+import { InputPropsType } from '@/types/components'
 import styled from '@emotion/styled'
 
 export const Input = styled.input<InputPropsType>`

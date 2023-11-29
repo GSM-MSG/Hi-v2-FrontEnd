@@ -3,7 +3,7 @@ import Image from 'next/image'
 import HiFunctionIcon1 from '@/assets/png/HiFunctionIcon1.png'
 import HiFunctionIcon2 from '@/assets/png/HiFunctionIcon2.png'
 import HiFunctionIcon3 from '@/assets/png/HiFunctionIcon3.png'
-import { FunctionBoxProps } from '@/types/components/FunctionBox'
+import { FunctionBoxPropsType } from '@/types/components'
 
 const FunctionBoxBlock = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const FunctionBoxBlock = styled.div`
   }
 `
 
-function FunctionBox({ number, title, description }: FunctionBoxProps) {
+function FunctionBox({ number, title, description }: FunctionBoxPropsType) {
   return (
     <FunctionBoxBlock>
       {number === 1 && <Image src={HiFunctionIcon1} alt='Hi 기능1' />}

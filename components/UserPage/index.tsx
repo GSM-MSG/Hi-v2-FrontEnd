@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import useFetch from '@/hooks/useFetch'
 import { useSetRecoilState } from 'recoil'
 import { UserList } from '@/atoms/atom'
-import { UserItemType } from '@/types/UserItemType'
+import { UserItemType } from '@/types/components'
 
 export default function UserPage() {
   const form = useForm({ defaultValues: { user: '' } })

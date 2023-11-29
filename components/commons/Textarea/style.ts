@@ -1,4 +1,4 @@
-import { TextareaPropsType } from '@/types/components/TextAreaProps'
+import { TextareaPropsType } from '@/types/components'
 import styled from '@emotion/styled'
 
 export const Textarea = styled.textarea<TextareaPropsType>`
