@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { TextareaPropsType } from '@/types/components/TextAreaProps'
+import { TextareaPropsType } from '@/types/components'
 import * as S from './style'
 
 function Textarea({

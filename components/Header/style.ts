@@ -1,7 +1,6 @@
-import { HeaderProps } from '@/types/style/Header'
 import styled from '@emotion/styled'
 
-export const HeaderContainer = styled.header<HeaderProps>`
+export const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
   width: 100vw;
@@ -32,7 +31,7 @@ export const HeaderContainer = styled.header<HeaderProps>`
   }
 `
 
-export const MenuListBox = styled.ul<HeaderProps>`
+export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
   list-style: none;
   width: ${({ is_admin }) => (is_admin ? '20rem' : '15rem')};
   display: flex;
@@ -59,7 +58,7 @@ export const MenuListBox = styled.ul<HeaderProps>`
   }
 `
 
-export const LoginBtn = styled.button<HeaderProps>`
+export const LoginBtn = styled.button`
   border: none;
   border-radius: 8px;
   padding: 0.4rem 0.6rem;

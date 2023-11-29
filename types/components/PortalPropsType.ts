@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-export interface PortalProps {
+export interface PortalPropsType {
   children: ReactElement
   onClose?: () => void
 }

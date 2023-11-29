@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const ModalConatiner = styled.div`
+export const ModalContainer = styled.div`
   width: 300px;
   height: 200px;
   background: #fff;

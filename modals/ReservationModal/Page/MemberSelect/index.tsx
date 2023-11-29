@@ -14,9 +14,8 @@ import * as S from './style'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import { toast } from 'react-toastify'
-import { UserItemType } from '@/types/UserItemType'
+import { UserItemType, GetRoleType } from '@/types/components'
 import Image from 'next/image'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -29,7 +28,7 @@ function MemberSelect() {
     method: 'get',
   })
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
     url: '/user/my-role',
     method: 'get',
   })
