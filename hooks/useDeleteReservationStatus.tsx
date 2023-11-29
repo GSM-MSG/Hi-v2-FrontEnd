@@ -1,5 +1,5 @@
 import { ModalPage, ReasonText, ShowMembers, TeamMembers } from '@/atoms/atom'
-import { UserItemType } from '@/types/UserItemType'
+import { UserItemType } from '@/types/components'
 import { useSetRecoilState } from 'recoil'
 
 export default function useDeleteReservationStatus() {

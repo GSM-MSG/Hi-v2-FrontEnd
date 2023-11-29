@@ -1,4 +1,4 @@
-import { ButtonPropsType } from '@/types/components/ButtonPropsType'
+import { ButtonPropsType } from '@/types/components'
 import styled from '@emotion/styled'
 
 export const Button = styled.button<ButtonPropsType>`

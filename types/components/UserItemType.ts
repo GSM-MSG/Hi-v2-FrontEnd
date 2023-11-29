@@ -1,4 +1,4 @@
-import { useGetRoleReturnType } from './hooks/useGetRole'
+import { useGetRoleReturnType } from '../hooks'
 
 export interface UserItemType {
   userId: string

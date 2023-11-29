@@ -1,7 +1,7 @@
 import { Button } from '@/components/commons'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
-import { UserItemType } from '@/types/UserItemType'
+import { UserItemType } from '@/types/components'
 import Image from 'next/image'
 import { useSetRecoilState } from 'recoil'
 import { SelectedUser } from '@/atoms/atom'

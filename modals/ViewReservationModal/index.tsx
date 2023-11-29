@@ -2,12 +2,11 @@ import * as SVG from '@/assets/svg'
 import { ReservationPlace } from '@/atoms/atom'
 import { Title, TitleBox, Button } from '@/components/commons'
 import Portal from '@/components/Portal'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
+import { useFetch, useModal } from '@/hooks'
 import DeleteTableCheckModal from '../DeleteTableCheckModal'
 import RepresentativeMandateModal from '../RepresentativeMandateModal'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
-import { ViewReservationData } from '@/types/modals/ViewReservationData'
+import { GetRoleType } from '@/types/components'
+import { ViewReservationData } from '@/types/modals'
 import { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import LeaveReservationTableModal from '../LeaveReservationTableModal'
@@ -24,12 +23,12 @@ export default function ViewReservationModal({
     method: 'get',
   })
 
-  const { fetch: updateCheck } = useFetch<GetRoleTypes>({
+  const { fetch: updateCheck } = useFetch<GetRoleType>({
     url: `/reservation/${reservationId}/check-status`,
     method: 'patch',
   })
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
     url: '/user/my-role',
     method: 'get',
   })
