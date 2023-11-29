@@ -9,29 +9,19 @@ const API = axios.create({
 
 API.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   const tokenManager = new TokenManager()
+  const accessTokenIsValid = tokenManager.validateToken(
+    tokenManager.accessExpiredAt,
+    tokenManager.accessToken
+  )
+  const refreshTokenIsValid = tokenManager.validateToken(
+    tokenManager.refreshExpiredAt,
+    tokenManager.refreshToken
+  )
 
-  if (
-    !tokenManager.validateToken(
-      tokenManager.accessExpiredAt,
-      tokenManager.accessToken
-    ) &&
-    tokenManager.validateToken(
-      tokenManager.refreshExpiredAt,
-      tokenManager.refreshToken
-    )
-  ) {
+  if (!accessTokenIsValid && refreshTokenIsValid) {
     await tokenManager.reissueToken({ refreshToken: tokenManager.refreshToken })
     tokenManager.initToken()
-  } else if (
-    !tokenManager.validateToken(
-      tokenManager.accessExpiredAt,
-      tokenManager.accessToken
-    ) &&
-    !tokenManager.validateToken(
-      tokenManager.refreshExpiredAt,
-      tokenManager.refreshToken
-    )
-  )
+  } else if (!accessTokenIsValid && !refreshTokenIsValid)
     tokenManager.removeTokens()
 
   config.headers['Authorization'] = tokenManager.accessToken
