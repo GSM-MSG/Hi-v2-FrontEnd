@@ -31,7 +31,7 @@ export const HeaderContainer = styled.div`
   }
 `
 
-export const MenuListBox = styled.ul<{ is_admin: boolean | undefined }>`
+export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
   list-style: none;
   width: ${({ is_admin }) => (is_admin ? '20rem' : '15rem')};
   display: flex;

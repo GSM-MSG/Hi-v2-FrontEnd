@@ -69,11 +69,13 @@ class TokenManager {
   async reissueToken({ refreshToken }: { refreshToken: string | null }) {
     try {
       const { data } = await axios.patch(
-        `${BASE_URL}/auth`,
+        '/auth',
         {},
         {
+          baseURL: BASE_URL,
+          withCredentials: true,
           headers: {
-            RefreshToken: `Bearer ${refreshToken}`,
+            RefreshToken: this.refreshToken && `Bearer ${refreshToken}`,
           },
         }
       )

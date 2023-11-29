@@ -1,4 +1,4 @@
-import API from '@/apis/api'
+import API from '@/apis'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { GAUTH_CLIENT_ID } from '@/utils/env'

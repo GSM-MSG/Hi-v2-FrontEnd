@@ -35,7 +35,7 @@ export default function NoticeDetailPage() {
     }
   }
 
-  if (!data) return <div />
+  if (!data) return <></>
 
   return (
     <PageContainer
