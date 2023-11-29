@@ -1,4 +1,4 @@
-import { ButtonPropsType } from '@/types/components/ButtonPropsType'
+import { ButtonPropsType } from '@/types/components'
 import * as S from './style'
 import { memo } from 'react'
 

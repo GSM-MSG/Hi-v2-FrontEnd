@@ -1,4 +1,4 @@
-import { UserItemType } from '../UserItemType'
+import { UserItemType } from '../components'
 
 export interface ReservationDataType {
   floor: number

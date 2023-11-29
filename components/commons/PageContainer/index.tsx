@@ -1,4 +1,4 @@
-import { PageContainerPropsType } from '@/types/components/PageContainerPropsType'
+import { PageContainerPropsType } from '@/types/components'
 import * as S from './style'
 
 function PageContainer(props: PageContainerPropsType) {

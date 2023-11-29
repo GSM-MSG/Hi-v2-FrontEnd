@@ -1,15 +1,15 @@
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import useModal from '@/hooks/useModal'
-import { ReservationDataType } from '@/types/modals/ReservationData'
+import { ReservationDataType } from '@/types/modals'
 import { useEffect, useState } from 'react'
 import ViewReservationModal from '@/modals/ViewReservationModal'
-import useFetch from '@/hooks/useFetch'
+import { useFetch } from '@/hooks'
 import ReservationModal from '@/modals/ReservationModal'
 import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 import { useSetRecoilState } from 'recoil'
 import { ShowMembers, TeamMembers } from '@/atoms/atom'
-import { MyPageType } from '@/types/MyPageType'
+import { MyPageType } from '@/types/components'
 import { toast } from 'react-toastify'
 
 export default function ReservationTableItem({

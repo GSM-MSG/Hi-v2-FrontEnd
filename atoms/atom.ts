@@ -1,4 +1,4 @@
-import { UserItemType } from '@/types/UserItemType'
+import { UserItemType } from '@/types/components'
 import { getStorage } from '@/utils/Storage'
 import { ReactNode } from 'react'
 import { atom } from 'recoil'
