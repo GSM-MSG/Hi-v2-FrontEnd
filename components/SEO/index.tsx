@@ -1,4 +1,4 @@
-import { SeoPropsType } from '@/types/SeoPropsType'
+import { SeoPropsType } from '@/types/components'
 import Head from 'next/head'
 
 function SEO({ title }: SeoPropsType) {

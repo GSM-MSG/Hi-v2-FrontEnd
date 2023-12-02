@@ -13,7 +13,7 @@ import {
   Textarea,
 } from '@/components/commons'
 import useFetch from '@/hooks/useFetch'
-import { GetRoleTypes } from '@/types/components/GetRoleTypes'
+import { GetRoleType } from '@/types/components'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -56,7 +56,7 @@ function Reason({
     successMessage: '예약 테이블을 수정했습니다',
   })
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleTypes>({
+  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
     url: '/user/my-page',
     method: 'get',
   })

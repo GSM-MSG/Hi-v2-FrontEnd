@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import * as S from './style'
-import { NoticeItemType } from '@/types/NoticeItemType'
+import { NoticeItemType } from '@/types/components'
 import { dateToString } from '@/utils/formatter'
 import * as SVG from '@/assets/svg'
-import useFetch from '@/hooks/useFetch'
+import { useFetch } from '@/hooks'
 import { useRouter } from 'next/router'
-import useGetRole from '@/hooks/useGetRole'
 
 export default function NoticeItem({
   index,

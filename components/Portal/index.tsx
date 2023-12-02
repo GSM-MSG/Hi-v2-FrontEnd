@@ -1,17 +1,16 @@
 import ReactDOM from 'react-dom'
-import { PortalProps } from '@/types/components/Portal'
+import { PortalPropsType } from '@/types/components'
 import { cloneElement, useState, MouseEvent, useEffect } from 'react'
 import * as S from './style'
 
-function Portal({ children, onClose }: PortalProps) {
-  const [isCSR, setIsCSR] = useState<boolean>(false)
+function Portal({ children, onClose }: PortalPropsType) {
+  const [isMounted, setIsMounted] = useState<boolean>(false)
 
   useEffect(() => {
-    setIsCSR(true)
+    setIsMounted(true)
   }, [])
 
-  if (typeof window === 'undefined') return <></>
-  if (!isCSR) return <></>
+  if (typeof window === 'undefined' || !isMounted) return <></>
 
   const el = document.getElementById('modal')
   if (!el) throw new Error('Not Found Modal')
