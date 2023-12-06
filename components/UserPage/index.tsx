@@ -21,14 +21,14 @@ export default function UserPage() {
       setUserList(data)
     },
   })
-  const { isTeacher, isAdmin } = useGetRole()
+  const { isStudent } = useGetRole()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isTeacher || !isAdmin) {
+    if (isStudent) {
       router.push('/')
     }
-  }, [isTeacher, isAdmin, router])
+  }, [isStudent, router])
 
   const onSubmit = async (data: any) => await fetch(data)
 
