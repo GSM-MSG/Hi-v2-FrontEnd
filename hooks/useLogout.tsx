@@ -1,5 +1,5 @@
 import API from '@/apis'
-import { HasLogin } from '@/atoms/atom'
+import { HasLogin } from '@/atoms'
 import { getStorage } from '@/utils/Storage'
 import { useRecoilState } from 'recoil'
 

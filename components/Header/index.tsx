@@ -3,13 +3,12 @@ import { useRouter } from 'next/router'
 import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { useEffect, useState } from 'react'
-import { HasLogin } from '@/atoms/atom'
+import { HasLogin } from '@/atoms'
 import { useRecoilState } from 'recoil'
 import useModal from '@/hooks/useModal'
 import LoginModal from '@/modals/LoginModal'
-import useGetRole from '@/hooks/useGetRole'
+import { useGetRole, useLogout } from '@/hooks'
 import { headerMenuList } from '@/constants/headerObject'
-import useLogout from '@/hooks/useLogout'
 
 function Header() {
   const router = useRouter()
