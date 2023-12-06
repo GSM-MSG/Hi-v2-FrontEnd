@@ -8,8 +8,11 @@ import * as SVG from '@/assets/svg'
 import FunctionBox from './FunctionBox'
 import { Button } from '../commons'
 import { FunctionBoxList } from '@/constants/homeObject'
+import { useRecoilValue } from 'recoil'
+import { HasLogin } from '@/atoms'
 
 function HomePage() {
+  const hasLogin = useRecoilValue(HasLogin)
   return (
     <S.HomePageContainer>
       <S.HomeSection1>
@@ -20,7 +23,7 @@ function HomePage() {
               홈베이스 예약
             </h2>
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
-            <Link href='/reservation'>
+            <Link href={hasLogin ? '/reservation' : '/'}>
               <Button
                 width='8rem'
                 height='2.4rem'
