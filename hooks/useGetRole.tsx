@@ -3,14 +3,13 @@ import { useEffect } from 'react'
 import { useGetRoleReturnType } from '@/types/hooks'
 import { GetRoleType } from '@/types/components'
 import { useRecoilValue } from 'recoil'
-import { HasLogin } from '@/atoms/atom'
+import { HasLogin } from '@/atoms'
 
 export default function useGetRole(): useGetRoleReturnType {
   const { fetch, data } = useFetch<GetRoleType>({
     url: 'user/my-role',
     method: 'get',
   })
-
   const hasLogin = useRecoilValue(HasLogin)
 
   const hasRole = (role: string) => {
