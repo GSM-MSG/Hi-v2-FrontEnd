@@ -9,7 +9,7 @@ import {
 } from '@/components/commons'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { ModalPage, ShowMembers, TeamMembers } from '@/atoms/atom'
+import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
 import * as S from './style'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'

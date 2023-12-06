@@ -1,6 +1,6 @@
 import Portal from '@/components/Portal'
 import * as S from './style'
-import { SelectedUser, UserList } from '@/atoms/atom'
+import { SelectedUser, UserList } from '@/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import useFetch from '@/hooks/useFetch'
 import useModal from '@/hooks/useModal'

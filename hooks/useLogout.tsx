@@ -1,22 +1,21 @@
 import API from '@/apis'
-import { HasLogin } from '@/atoms/atom'
-import { getStorage } from '@/utils/Storage'
-import { useRecoilState } from 'recoil'
+import TokenManager from '@/apis/TokenManager'
+import { useSetRecoilState } from 'recoil'
+import { HasLogin } from '@/atoms'
 
 export default function useLogout() {
-  const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
-  const accessToken = getStorage('hi_accessToken')
-  const refreshToken = getStorage('hi_refreshToken')
+  const setHasLogin = useSetRecoilState<boolean>(HasLogin)
+  const tokenManager = new TokenManager()
 
-  function logout() {
-    API.delete('/auth', {
+  const logout = async () => {
+    await API.delete('/auth', {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        RefreshToken: refreshToken,
+        Authorization: `Bearer ${tokenManager.accessToken}`,
+        RefreshToken: tokenManager.refreshToken,
       },
     })
     setHasLogin(false)
-    localStorage.clear()
+    tokenManager.removeTokens()
   }
 
   return logout

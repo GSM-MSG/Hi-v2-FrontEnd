@@ -3,16 +3,17 @@ import { Input, PageContainer } from '../commons'
 import * as S from './style'
 import UserItemList from './UserItemList'
 import { useForm } from 'react-hook-form'
-import useFetch from '@/hooks/useFetch'
 import { useSetRecoilState } from 'recoil'
-import { UserList } from '@/atoms/atom'
+import { UserList } from '@/atoms'
 import { UserItemType } from '@/types/components'
+import { useGetRole, useFetch } from '@/hooks'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 export default function UserPage() {
   const form = useForm({ defaultValues: { user: '' } })
   const { register, watch, handleSubmit } = form
   const setUserList = useSetRecoilState(UserList)
-
   const { fetch } = useFetch<UserItemType[]>({
     url: `/user/search?keyword=${watch('user')}`,
     method: 'get',
@@ -20,10 +21,16 @@ export default function UserPage() {
       setUserList(data)
     },
   })
+  const { isStudent } = useGetRole()
+  const router = useRouter()
 
-  const onSubmit = async (data: any) => {
-    await fetch(data)
-  }
+  useEffect(() => {
+    if (isStudent) {
+      router.push('/')
+    }
+  }, [isStudent, router])
+
+  const onSubmit = async (data: any) => await fetch(data)
 
   return (
     <PageContainer paddingTop='6vh' paddingBottom='4vh'>

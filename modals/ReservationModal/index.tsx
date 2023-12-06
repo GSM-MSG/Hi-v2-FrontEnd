@@ -1,4 +1,4 @@
-import { ModalPage } from '@/atoms/atom'
+import { ModalPage } from '@/atoms'
 import Portal from '@/components/Portal'
 import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
 import useModal from '@/hooks/useModal'

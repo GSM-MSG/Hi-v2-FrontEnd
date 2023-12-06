@@ -1,9 +1,4 @@
-import {
-  ModalPage,
-  ReasonText,
-  ReservationPlace,
-  TeamMembers,
-} from '@/atoms/atom'
+import { ModalPage, ReasonText, ReservationPlace, TeamMembers } from '@/atoms'
 import {
   PageToggleBox,
   SubTitle,
