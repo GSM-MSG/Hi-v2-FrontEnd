@@ -1,5 +1,5 @@
 import * as SVG from '@/assets/svg'
-import { ReservationPlace } from '@/atoms/atom'
+import { ReservationPlace } from '@/atoms'
 import { Title, TitleBox, Button } from '@/components/commons'
 import Portal from '@/components/Portal'
 import { useFetch, useModal } from '@/hooks'

@@ -5,7 +5,7 @@ import { GAUTH_CLIENT_ID, REDIRECT_URI } from '@/utils/env'
 import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { HasLogin, IsModal } from '@/atoms/atom'
+import { HasLogin, IsModal } from '@/atoms'
 import { setStorage } from '@/utils/Storage'
 import {
   accessTokenStorage,

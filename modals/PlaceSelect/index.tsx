@@ -1,4 +1,4 @@
-import { ReservationPlace } from '@/atoms/atom'
+import { ReservationPlace } from '@/atoms'
 import { Title, TitleBox, Button } from '@/components/commons'
 import * as SVG from '@/assets/svg'
 import Portal from '@/components/Portal'

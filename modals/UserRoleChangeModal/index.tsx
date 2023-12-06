@@ -1,5 +1,5 @@
 import * as SVG from '@/assets/svg'
-import { SelectedUser, UserList } from '@/atoms/atom'
+import { SelectedUser, UserList } from '@/atoms'
 import { Button } from '@/components/commons'
 import Portal from '@/components/Portal'
 import useFetch from '@/hooks/useFetch'
