@@ -4,52 +4,57 @@ import * as S from './style'
 import * as SVG from '@/assets/svg'
 import { useEffect, useState } from 'react'
 import { HasLogin } from '@/atoms/atom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import useModal from '@/hooks/useModal'
 import LoginModal from '@/modals/LoginModal'
 import useGetRole from '@/hooks/useGetRole'
 import { headerMenuList } from '@/constants/headerObject'
 import useLogout from '@/hooks/useLogout'
+import { toast } from 'react-toastify'
 
 function Header() {
   const router = useRouter()
-  const [loginText, setLoginText] = useState<string>('')
-  const [hasLogin, setHasLogin] = useRecoilState<boolean>(HasLogin)
+  const hasLogin = useRecoilValue<boolean>(HasLogin)
+  const [loginText, setLoginText] = useState<'로그아웃' | '로그인'>('로그인')
   const { openModal } = useModal()
+  const logout = useLogout()
+  const { isStudent } = useGetRole()
 
   useEffect(() => {
     setLoginText(hasLogin ? '로그아웃' : '로그인')
   }, [hasLogin])
-
-  const logout = useLogout()
-
-  const { isTeacher, isAdmin } = useGetRole()
 
   return (
     <S.HeaderContainer>
       <Link href='/'>
         <SVG.HiLogo />
       </Link>
-      <S.MenuListBox is_admin={isTeacher || isAdmin}>
-        {isTeacher || isAdmin
+      <S.MenuListBox is_admin={!isStudent}>
+        {!isStudent
           ? headerMenuList.map((menu) => (
-              <li key={menu.id}>
-                <Link
-                  href={menu.link}
-                  className={router.pathname === menu.link ? 'choice' : ''}
-                >
-                  {menu.text}
-                </Link>
+              <li
+                key={menu.id}
+                className={router.pathname === menu.link ? 'choice' : ''}
+                onClick={() =>
+                  hasLogin
+                    ? router.push(`${menu.link}`)
+                    : toast.info('로그인 후에 이용해주세요')
+                }
+              >
+                {menu.text}
               </li>
             ))
           : headerMenuList.slice(0, 4).map((menu) => (
-              <li key={menu.id}>
-                <Link
-                  href={menu.link}
-                  className={router.pathname === menu.link ? 'choice' : ''}
-                >
-                  {menu.text}
-                </Link>
+              <li
+                key={menu.id}
+                className={router.pathname === menu.link ? 'choice' : ''}
+                onClick={() =>
+                  hasLogin
+                    ? router.push(`${menu.link}`)
+                    : toast.info('로그인 후에 이용해주세요')
+                }
+              >
+                {menu.text}
               </li>
             ))}
       </S.MenuListBox>

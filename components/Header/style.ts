@@ -41,13 +41,14 @@ export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
   font-weight: 500;
   padding: 0;
 
-  a {
-    text-decoration: none;
+  li {
     color: #191919;
     font-weight: 400;
+    cursor: pointer;
   }
 
   .choice {
+    cursor: pointer;
     color: #000000;
     font-weight: 600;
   }
