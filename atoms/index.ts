@@ -14,7 +14,7 @@ export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
 
 export const HasLogin = atom<boolean>({
   key: 'HasLogin',
-  default: getStorage('hi_accessToken') ? true : false,
+  default: false,
 })
 
 export const ShowMembers = atom<UserItemType[]>({
