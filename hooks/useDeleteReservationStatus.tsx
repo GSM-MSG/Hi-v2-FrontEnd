@@ -1,4 +1,4 @@
-import { ModalPage, ReasonText, ShowMembers, TeamMembers } from '@/atoms/atom'
+import { ModalPage, ReasonText, ShowMembers, TeamMembers } from '@/atoms'
 import { UserItemType } from '@/types/components'
 import { useSetRecoilState } from 'recoil'
 

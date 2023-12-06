@@ -8,7 +8,7 @@ import { useFetch } from '@/hooks'
 import ReservationModal from '@/modals/ReservationModal'
 import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 import { useSetRecoilState } from 'recoil'
-import { ShowMembers, TeamMembers } from '@/atoms/atom'
+import { ShowMembers, TeamMembers } from '@/atoms'
 import { MyPageType } from '@/types/components'
 import { toast } from 'react-toastify'
 

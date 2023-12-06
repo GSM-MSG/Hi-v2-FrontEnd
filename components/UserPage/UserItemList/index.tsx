@@ -4,7 +4,7 @@ import UserItem from '../UserItem'
 import { useFetch, useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types/components'
 import { useRecoilState } from 'recoil'
-import { UserList } from '@/atoms/atom'
+import { UserList } from '@/atoms'
 
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)

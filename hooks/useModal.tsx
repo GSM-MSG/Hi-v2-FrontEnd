@@ -1,4 +1,4 @@
-import { IsModal } from '@/atoms/atom'
+import { IsModal } from '@/atoms'
 import { ReactNode } from 'react'
 import { useSetRecoilState } from 'recoil'
 

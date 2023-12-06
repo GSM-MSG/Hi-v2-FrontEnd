@@ -1,7 +1,7 @@
 import API from '@/apis'
 import TokenManager from '@/apis/TokenManager'
-import { HasLogin } from '@/atoms/atom'
 import { useSetRecoilState } from 'recoil'
+import { HasLogin } from '@/atoms'
 
 export default function useLogout() {
   const setHasLogin = useSetRecoilState<boolean>(HasLogin)

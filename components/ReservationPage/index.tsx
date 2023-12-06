@@ -1,6 +1,6 @@
 import { PageContainer, Button } from '../commons'
 import { useRecoilValue } from 'recoil'
-import { ReservationPlace } from '@/atoms/atom'
+import { ReservationPlace } from '@/atoms'
 import useFetch from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
 import ReservationTableItem from './ReservationTableItem'
