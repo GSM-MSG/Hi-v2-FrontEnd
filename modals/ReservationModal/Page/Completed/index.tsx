@@ -1,9 +1,8 @@
-import * as S from './style'
-import * as SVG from '@/assets/svg'
-import { Button } from '@/components/commons'
-import useModal from '@/hooks/useModal'
-import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
+import { Button } from '@/components'
+import { useDeleteReservationStatus, useModal } from '@/hooks'
 import { useRouter } from 'next/navigation'
+import * as S from './style'
+import { CompletedImg } from '@/assets'
 
 export default function Completed({ isModify }: { isModify: boolean }) {
   const { closeModal } = useModal()
@@ -13,10 +12,10 @@ export default function Completed({ isModify }: { isModify: boolean }) {
 
   return (
     <S.CompletedContainer>
-      <S.ShowComplted>
-        <SVG.CompletedImg />
+      <S.ShowCompleted>
+        <CompletedImg />
         <h2>{isModify ? '수정이' : '예약이'} 완료되었습니다.</h2>
-      </S.ShowComplted>
+      </S.ShowCompleted>
       <S.ButtonContainer>
         <Button
           width='100%'

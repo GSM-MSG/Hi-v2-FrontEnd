@@ -1,13 +1,11 @@
-import * as SVG from '@/assets/svg'
 import { SelectedUser, UserList } from '@/atoms'
-import { Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
-import { UserItemListType } from '@/types/components'
+import { Button, Portal } from '@/components'
+import { useFetch, useModal } from '@/hooks'
+import { UserItemListType } from '@/types'
 import { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
+import { SelectedCheck, XMark } from '@/assets'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)
@@ -42,7 +40,7 @@ export default function UserRoleChangeModal() {
         <S.ModalTitleWrapper>
           <span>권한 변경</span>
           <div onClick={closeModal}>
-            <SVG.XMark />
+            <XMark />
           </div>
         </S.ModalTitleWrapper>
         <S.RoleButtonWrapper>
@@ -55,7 +53,7 @@ export default function UserRoleChangeModal() {
               }}
               isClicked={selectedRole === label}
             >
-              <SVG.SelectedCheck stroke={color} />
+              <SelectedCheck stroke={color} />
               {role}
             </S.RoleButtonItem>
           ))}

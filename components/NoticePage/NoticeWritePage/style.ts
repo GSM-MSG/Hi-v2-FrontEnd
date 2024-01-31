@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const WriteContainer = styled.div`
+export const NoticeWriteContainer = styled.div`
   width: 580px;
   height: 80vh;
   background-color: #fff;
@@ -12,7 +12,7 @@ export const WriteContainer = styled.div`
   }
 `
 
-export const WriteContentContainer = styled.div`
+export const NoticeWriteContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

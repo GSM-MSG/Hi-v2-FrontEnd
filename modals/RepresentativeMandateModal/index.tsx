@@ -1,10 +1,12 @@
-import { Title, Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useModal from '@/hooks/useModal'
-import * as SVG from '@/assets/svg'
-import * as S from './style'
-import { ButtonContainer } from '../DeleteTableCheckModal/style'
-import useFetch from '@/hooks/useFetch'
+import { XMark } from '@/assets'
+import {
+  Button,
+  ButtonContainer,
+  CheckModalContainer,
+  Portal,
+  Title,
+} from '@/components'
+import { useFetch, useModal } from '@/hooks'
 import ViewReservationModal from '../ViewReservationModal'
 
 export default function RepresentativeMandateModal({
@@ -28,7 +30,7 @@ export default function RepresentativeMandateModal({
 
   return (
     <Portal onClose={closeModal}>
-      <S.RepresentativeMandateModalContainer>
+      <CheckModalContainer style={{ height: '170px' }}>
         <Title>
           <h2>대표자 위임</h2>
           <div
@@ -37,7 +39,7 @@ export default function RepresentativeMandateModal({
             }
             style={{ cursor: 'pointer' }}
           >
-            <SVG.XMark />
+            <XMark />
           </div>
         </Title>
         <p>{username}님을 대표자로 위임하시겠습니까?</p>
@@ -56,7 +58,7 @@ export default function RepresentativeMandateModal({
             대표자 위임
           </Button>
         </ButtonContainer>
-      </S.RepresentativeMandateModalContainer>
+      </CheckModalContainer>
     </Portal>
   )
 }

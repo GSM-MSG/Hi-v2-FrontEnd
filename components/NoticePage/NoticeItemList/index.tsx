@@ -1,8 +1,8 @@
-import * as S from './style'
-import NoticeItem from '../NoticeItem'
 import { useFetch, useGetRole } from '@/hooks'
+import { NoticeItemListType } from '@/types'
 import { useEffect } from 'react'
-import { NoticeItemListType } from '@/types/components'
+import NoticeItem from '../NoticeItem'
+import * as S from './style'
 
 export default function NoticeItemList() {
   const { fetch, data } = useFetch<NoticeItemListType[]>({

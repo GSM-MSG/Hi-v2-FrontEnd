@@ -1,10 +1,11 @@
-import { Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
-import { ButtonContainer } from '../DeleteTableCheckModal/style'
+import {
+  Button,
+  ButtonContainer,
+  CheckModalContainer,
+  Portal,
+} from '@/components'
+import { useFetch, useModal } from '@/hooks'
 import ViewReservationModal from '../ViewReservationModal'
-import * as S from './style'
 
 export default function LeaveReservationTableModal({
   reservationId,
@@ -25,7 +26,7 @@ export default function LeaveReservationTableModal({
 
   return (
     <Portal onClose={closeModal}>
-      <S.LeaveReservationTableContainer>
+      <CheckModalContainer style={{ height: '180px' }}>
         <h2>테이블 나가기</h2>
         <p>정말로 {reservationNumber}번 테이블을 나가시겠습니까?</p>
         <ButtonContainer style={{ marginTop: '2rem' }}>
@@ -61,7 +62,7 @@ export default function LeaveReservationTableModal({
             확인
           </Button>
         </ButtonContainer>
-      </S.LeaveReservationTableContainer>
+      </CheckModalContainer>
     </Portal>
   )
 }

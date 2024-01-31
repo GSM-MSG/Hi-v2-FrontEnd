@@ -1,5 +1,5 @@
 import React, { forwardRef, memo } from 'react'
-import { InputPropsType } from '@/types/components'
+import { InputPropsType } from '@/types'
 import * as S from './style'
 
 function Input(
