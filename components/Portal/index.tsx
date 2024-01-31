@@ -1,6 +1,6 @@
+import { PortalPropsType } from '@/types'
+import { MouseEvent, cloneElement, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { PortalPropsType } from '@/types/components'
-import { cloneElement, useState, MouseEvent, useEffect } from 'react'
 import * as S from './style'
 
 function Portal({ children, onClose }: PortalPropsType) {
@@ -15,7 +15,6 @@ function Portal({ children, onClose }: PortalPropsType) {
   const el = document.getElementById('modal')
   if (!el) throw new Error('Not Found Modal')
 
-  // 이벤트 버블링 방지
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
   }

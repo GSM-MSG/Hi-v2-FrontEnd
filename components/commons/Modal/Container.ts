@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const DeleteTableCheckModalContainer = styled.div`
+export const CheckModalContainer = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   width: 310px;

@@ -8,7 +8,7 @@ export const CompletedContainer = styled.div`
   height: 100%;
 `
 
-export const ShowComplted = styled.div`
+export const ShowCompleted = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

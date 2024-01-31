@@ -1,12 +1,12 @@
-import * as S from './style'
-import { PageContainer, Button } from '@/components/commons'
-import * as SVG from '../../../assets/svg'
-import Link from 'next/link'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { NoticeDetailType } from '@/types/components'
-import { dateToString } from '@/utils/formatter'
+import { Button, PageContainer } from '@/components'
 import { useFetch, useGetRole } from '@/hooks'
+import { NoticeDetailType } from '@/types'
+import { dateToString } from '@/utils'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import * as S from './style'
+import { BackArrowIcon } from '@/assets'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
@@ -46,7 +46,7 @@ export default function NoticeDetailPage() {
     >
       <S.DetailContainer>
         <Link href='/notice'>
-          <SVG.BackArrowIcon />
+          <BackArrowIcon />
         </Link>
         <S.DetailWrapper>
           <S.DetailTitleContainer>

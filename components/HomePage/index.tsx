@@ -1,18 +1,15 @@
-import Link from 'next/link'
-import * as S from './style'
+import { ArrowIcon, HiCharacter, HiShowIphone1, HiShowIphone2, ScrollMouseIcon } from '@/assets'
+import { FunctionBoxList } from '@/constants'
 import Image from 'next/image'
-import HiCharacter from '@/assets/png/HiCharacter.png'
-import HiShowIphone1 from '@/assets/png/HiShowIphone1.png'
-import HiShowIphone2 from '@/assets/png/HiShowIphone2.png'
-import * as SVG from '@/assets/svg'
-import FunctionBox from './FunctionBox'
+import Link from 'next/link'
 import { Button } from '../commons'
-import { FunctionBoxList } from '@/constants/homeObject'
-import { useRecoilValue } from 'recoil'
-import { HasLogin } from '@/atoms'
+import FunctionBox from './FunctionBox'
+import * as S from './style'
+import TokenManager from '@/apis/TokenManager'
 
 function HomePage() {
-  const hasLogin = useRecoilValue(HasLogin)
+  const tokenManager = new TokenManager()
+
   return (
     <S.HomePageContainer>
       <S.HomeSection1>
@@ -23,7 +20,7 @@ function HomePage() {
               홈베이스 예약
             </h2>
             <p>매번 불편했던 홈베이스 예약, HI로 쉽고 간편하게 예약해보세요!</p>
-            <Link href={hasLogin ? '/reservation' : '/'}>
+            <Link href={tokenManager.accessToken ? '/reservation' : '/'}>
               <Button
                 width='8rem'
                 height='2.4rem'
@@ -34,7 +31,7 @@ function HomePage() {
                 fontSize='0.95rem'
               >
                 예약하러 가기
-                <SVG.ArrowIcon />
+                <ArrowIcon />
               </Button>
             </Link>
           </S.IntroductoryTextBox>
@@ -43,7 +40,7 @@ function HomePage() {
           </S.HiCharacterBox>
         </S.IntroductoryBox>
         <S.ScrollIcon>
-          <SVG.ScrollMouseIcon />
+          <ScrollMouseIcon />
         </S.ScrollIcon>
       </S.HomeSection1>
       <S.HomeSection2>

@@ -1,5 +1,5 @@
 import API from '@/apis'
-import { ErrorsMessageType } from '@/types/hooks/useFetch'
+import { ErrorsMessageType } from '@/types'
 import { isAxiosError, Method } from 'axios'
 import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'

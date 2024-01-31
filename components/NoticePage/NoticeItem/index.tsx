@@ -1,10 +1,9 @@
-import Link from 'next/link'
 import * as S from './style'
-import { NoticeItemType } from '@/types/components'
-import { dateToString } from '@/utils/formatter'
-import * as SVG from '@/assets/svg'
+import { NoticeItemType } from '@/types'
+import { dateToString } from '@/utils'
 import { useFetch } from '@/hooks'
 import { useRouter } from 'next/router'
+import { XMark } from '@/assets'
 
 export default function NoticeItem({
   index,
@@ -41,7 +40,7 @@ export default function NoticeItem({
         <S.NoticeUser>{user.name}</S.NoticeUser>
         {(role.isAdmin || role.isTeacher) && (
           <S.SVG onClick={onDelete}>
-            <SVG.XMark />
+            <XMark />
           </S.SVG>
         )}
       </S.NoticeItemWrapper>

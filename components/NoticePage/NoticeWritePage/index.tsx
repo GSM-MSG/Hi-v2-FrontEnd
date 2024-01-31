@@ -1,11 +1,11 @@
-import * as S from './style'
-import { Button, Input, PageContainer, Textarea } from '@/components/commons'
-import useFetch from '@/hooks/useFetch'
-import { NoticeModifyType } from '@/types/components'
+import { Button, Input, PageContainer, Textarea } from '@/components'
+import { useFetch } from '@/hooks'
+import { NoticeModifyType } from '@/types'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import * as S from './style'
 
-export default function WritePage() {
+export default function NoticeWritePage() {
   const router = useRouter()
   const id = router.query.id
   const [notice, setNotice] = useState<{ title: string; content: string }>({
@@ -72,8 +72,8 @@ export default function WritePage() {
       justifyContent='center'
       background='#f5f5f5'
     >
-      <S.WriteContainer>
-        <S.WriteContentContainer>
+      <S.NoticeWriteContainer>
+        <S.NoticeWriteContentContainer>
           <S.InputContainer>
             <S.WriteInputTitle>
               <p>제목</p>
@@ -119,8 +119,8 @@ export default function WritePage() {
           >
             작성완료
           </Button>
-        </S.WriteContentContainer>
-      </S.WriteContainer>
+        </S.NoticeWriteContentContainer>
+      </S.NoticeWriteContainer>
     </PageContainer>
   )
 }

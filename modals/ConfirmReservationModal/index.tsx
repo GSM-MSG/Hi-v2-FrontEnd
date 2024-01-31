@@ -1,9 +1,11 @@
-import { Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useModal from '@/hooks/useModal'
-import { ButtonContainer } from '@/modals/DeleteTableCheckModal/style'
-import ReservationModal from '..'
-import * as S from './style'
+import {
+  Button,
+  ButtonContainer,
+  CheckModalContainer,
+  Portal,
+} from '@/components'
+import { useModal } from '@/hooks'
+import ReservationModal from '../ReservationModal'
 
 export default function ConfirmReservationModal({
   reservationNumber,
@@ -14,7 +16,7 @@ export default function ConfirmReservationModal({
 
   return (
     <Portal onClose={closeModal}>
-      <S.ConfirmReservationModalContainer>
+      <CheckModalContainer style={{ height: '180px' }}>
         <h2>예약확인</h2>
         <p>{reservationNumber}번 테이블을 예약하시겠습니까?</p>
         <ButtonContainer style={{ marginTop: '2rem' }}>
@@ -55,7 +57,7 @@ export default function ConfirmReservationModal({
             확인
           </Button>
         </ButtonContainer>
-      </S.ConfirmReservationModalContainer>
+      </CheckModalContainer>
     </Portal>
   )
 }

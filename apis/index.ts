@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/utils/env'
+import { BASE_URL } from '@/utils'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import TokenManager from './TokenManager'
 

@@ -1,5 +1,4 @@
 import { UserItemType } from '@/types/components'
-import { getStorage } from '@/utils/Storage'
 import { ReactNode } from 'react'
 import { atom } from 'recoil'
 
@@ -11,11 +10,6 @@ export const ReservationPlace = atom<{ floor: number; period: number }>({
 })
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
-
-export const HasLogin = atom<boolean>({
-  key: 'HasLogin',
-  default: false,
-})
 
 export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
