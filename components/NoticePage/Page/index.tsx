@@ -1,9 +1,9 @@
-import NoticeItemList from './NoticeItemList'
-import * as S from './style'
-import { Button, PageContainer } from '../commons'
-import * as SVG from '../../assets/svg'
+import { NoticeWrite } from '@/assets'
+import { Button, PageContainer } from '@/components'
+import { useGetRole } from '@/hooks'
 import Link from 'next/link'
-import useGetRole from '@/hooks/useGetRole'
+import NoticeItemList from '../NoticeItemList'
+import * as S from './style'
 
 function NoticePage() {
   const { isAdmin, isTeacher } = useGetRole()
@@ -22,7 +22,7 @@ function NoticePage() {
               color='#0066FF'
               borderRadius='8px'
             >
-              <SVG.NoticeWrite />
+              <NoticeWrite />
               글작성
             </Button>
           )}

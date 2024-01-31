@@ -1,18 +1,18 @@
 import { ModalPage, ReasonText, ReservationPlace, TeamMembers } from '@/atoms'
 import {
+  Button,
   PageToggleBox,
   SubTitle,
+  Textarea,
   Title,
   TitleBox,
-  Button,
-  Textarea,
-} from '@/components/commons'
-import useFetch from '@/hooks/useFetch'
-import { GetRoleType } from '@/types/components'
+} from '@/components'
+import { GetRoleType } from '@/types'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
+import { useFetch } from '@/hooks'
 
 function Reason({
   reservationNumber,

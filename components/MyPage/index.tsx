@@ -1,10 +1,9 @@
-import * as S from './style'
-import * as SVG from '@/assets/svg'
-import { Button } from '../commons'
-import { useEffect, useState } from 'react'
-import useFetch from '@/hooks/useFetch'
-import { MyPageType } from '@/types/components'
+import { useFetch } from '@/hooks'
+import { MyPageType } from '@/types'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import * as S from './style'
+import { BackArrowIcon, UserProfile } from '@/assets'
 
 export default function MyPage() {
   const [showDetailName, setShowDetailName] = useState(false)
@@ -38,7 +37,7 @@ export default function MyPage() {
               height={100}
             />
           ) : (
-            <SVG.UserProfile />
+            <UserProfile />
           )}
         </S.ProfileImg>
         <S.NameContainer>
@@ -69,7 +68,7 @@ export default function MyPage() {
                 <S.Name>
                   {data.reservation.users[0].name} 외{' '}
                   {data.reservation.users.length - 1}명
-                  <SVG.BackArrowIcon />
+                  <BackArrowIcon />
                 </S.Name>
                 {showDetailName && (
                   <S.DetailName>

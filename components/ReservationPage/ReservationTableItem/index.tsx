@@ -1,16 +1,13 @@
 import * as S from './style'
-import * as SVG from '@/assets/svg'
-import useModal from '@/hooks/useModal'
-import { ReservationDataType } from '@/types/modals'
+import {useModal} from '@/hooks'
+import { ReservationDataType, MyPageType } from '@/types'
 import { useEffect, useState } from 'react'
-import ViewReservationModal from '@/modals/ViewReservationModal'
+import {ViewReservationModal, ReservationModal, ConfirmReservationModal} from '@/modals'
 import { useFetch } from '@/hooks'
-import ReservationModal from '@/modals/ReservationModal'
-import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
 import { useSetRecoilState } from 'recoil'
 import { ShowMembers, TeamMembers } from '@/atoms'
-import { MyPageType } from '@/types/components'
 import { toast } from 'react-toastify'
+import { BackArrowIcon } from '@/assets'
 
 export default function ReservationTableItem({
   item,
@@ -84,7 +81,7 @@ export default function ReservationTableItem({
                   ? item.users[0].name
                   : `${item.users[0].name} 외 ${item.users.length - 1} 명`}
               </span>
-              {item.users.length !== 1 && <SVG.BackArrowIcon />}
+              {item.users.length !== 1 && <BackArrowIcon />}
             </>
           ) : (
             '예약 가능 합니다.'

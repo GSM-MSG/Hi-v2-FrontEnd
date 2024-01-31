@@ -1,16 +1,16 @@
-import * as SVG from '@/assets/svg'
 import { ReservationPlace } from '@/atoms'
-import { Title, TitleBox, Button } from '@/components/commons'
-import Portal from '@/components/Portal'
+import { Title, TitleBox, Button, Portal } from '@/components'
 import { useFetch, useModal } from '@/hooks'
-import DeleteTableCheckModal from '../DeleteTableCheckModal'
-import RepresentativeMandateModal from '../RepresentativeMandateModal'
-import { GetRoleType } from '@/types/components'
-import { ViewReservationData } from '@/types/modals'
+import {
+  DeleteTableCheckModal,
+  RepresentativeMandateModal,
+  LeaveReservationTableModal,
+} from '@/modals'
+import { GetRoleType, ViewReservationData } from '@/types'
 import { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
-import LeaveReservationTableModal from '../LeaveReservationTableModal'
 import * as S from './style'
+import { RepresentativeIcon, TableCheckIcon, XMark } from '@/assets'
 
 export default function ViewReservationModal({
   reservationId,
@@ -71,13 +71,13 @@ export default function ViewReservationModal({
                   marginRight: '0.3rem',
                 }}
               >
-                <SVG.TableCheckIcon checkStatus={data?.checkStatus} />
+                <TableCheckIcon checkStatus={data?.checkStatus} />
               </div>
             )}
             예약조회
           </Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-            <SVG.XMark width='24' height='24' />
+            <XMark width='24' height='24' />
           </div>
         </TitleBox>
         <S.ViewReservationDataContainer>
@@ -107,7 +107,7 @@ export default function ViewReservationModal({
                       }
                     >
                       {data.representativeId === item.userId && (
-                        <SVG.RepresentativeIcon />
+                        <RepresentativeIcon />
                       )}
                       {item.name}
                     </S.Member>

@@ -1,23 +1,21 @@
 import API from '@/apis'
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import { GAUTH_CLIENT_ID, REDIRECT_URI } from '@/utils/env'
+import { Footer, Header } from '@/components'
+import { GAUTH_CLIENT_ID, REDIRECT_URI, setStorage } from '@/utils'
 import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { HasLogin, IsModal } from '@/atoms'
-import { setStorage } from '@/utils/Storage'
+import { IsModal } from '@/atoms'
 import {
   accessTokenStorage,
   refreshTokenStorage,
   accessExpiredAtStorage,
   refreshExpiredAtStorage,
-} from '@/types/apis'
+} from '@/types'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const setHasLogin = useSetRecoilState(HasLogin)
   const isModal = useRecoilValue(IsModal)
+
   return (
     <GauthProvider
       redirectUri={REDIRECT_URI}
@@ -39,16 +37,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         setStorage(refreshExpiredAtStorage, refreshExpiredAt)
 
         router.push('/', undefined, { shallow: true })
-        setHasLogin(true)
       }}
       clientId={GAUTH_CLIENT_ID}
     >
-      <>
-        <Header />
-        {children}
-        <Footer />
-        {isModal && <>{isModal}</>}
-      </>
+      <Header />
+      {children}
+      <Footer />
+      {isModal && <>{isModal}</>}
     </GauthProvider>
   )
 }

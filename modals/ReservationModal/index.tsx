@@ -1,11 +1,8 @@
 import { ModalPage } from '@/atoms'
-import Portal from '@/components/Portal'
-import useDeleteReservationStatus from '@/hooks/useDeleteReservationStatus'
-import useModal from '@/hooks/useModal'
+import { Portal } from '@/components'
+import { useModal, useDeleteReservationStatus } from '@/hooks'
 import { useRecoilValue } from 'recoil'
-import Completed from './Page/Completed'
-import MemberSelect from './Page/MemberSelect'
-import Reason from './Page/Reason'
+import { Completed, MemberSelect, Reason } from './Page'
 import * as S from './style'
 
 function ReservationModal({

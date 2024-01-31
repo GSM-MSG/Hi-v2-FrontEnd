@@ -1,15 +1,14 @@
 import { ReservationPlace } from '@/atoms'
-import { Title, TitleBox, Button } from '@/components/commons'
-import * as SVG from '@/assets/svg'
-import Portal from '@/components/Portal'
-import useModal from '@/hooks/useModal'
+import { Button, Portal, Title, TitleBox } from '@/components'
+import { useModal } from '@/hooks'
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import * as S from './style'
+import { XMark } from '@/assets'
 
 function PlaceSelect() {
-  const [reservationPlace, setReservationPlace] =
-    useRecoilState(ReservationPlace)
+  const setReservationPlace =
+    useSetRecoilState(ReservationPlace)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
@@ -35,7 +34,7 @@ function PlaceSelect() {
         <TitleBox>
           <Title>상세정보 선택</Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-            <SVG.XMark width='24' height='24' />
+            <XMark width='24' height='24' />
           </div>
         </TitleBox>
         <S.PlaceSelectBox>

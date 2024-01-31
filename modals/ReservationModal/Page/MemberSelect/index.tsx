@@ -1,21 +1,21 @@
-import * as SVG from '@/assets/svg'
+import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
 import {
+  Button,
+  Input,
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-  Button,
-  Input,
-} from '@/components/commons'
+} from '@/components'
+import { useFetch } from '@/hooks'
+import { GetRoleType, UserItemType } from '@/types'
+import Image from 'next/image'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
-import * as S from './style'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import useFetch from '@/hooks/useFetch'
 import { toast } from 'react-toastify'
-import { UserItemType, GetRoleType } from '@/types/components'
-import Image from 'next/image'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import * as S from './style'
+import { SearchIcon, UserProfile, XMark } from '@/assets'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -89,7 +89,7 @@ function MemberSelect() {
       <SubTitle>같이할 팀원을 선택해주세요.</SubTitle>
       <S.InputBlock>
         <div className='searchIcon'>
-          <SVG.SearchIcon />
+          <SearchIcon />
         </div>
         <Input
           disabled={showMembers.length === 5 ? true : false}
@@ -103,7 +103,7 @@ function MemberSelect() {
         />
         {watch('member').length > 0 && (
           <div className='cancelIcon' onClick={() => setValue('member', '')}>
-            <SVG.XMark />
+            <XMark />
           </div>
         )}
       </S.InputBlock>
@@ -116,7 +116,7 @@ function MemberSelect() {
               onClick={() => deleteMembers(showMember)}
             >
               <div style={{ marginTop: '0.125rem' }}>
-                <SVG.XMark width='11' height='11' />
+                <XMark width='11' height='11' />
               </div>
             </div>
           </S.ShowMemberBox>
@@ -159,7 +159,7 @@ function MemberSelect() {
                         height='40'
                       />
                     ) : (
-                      <SVG.UserProfile />
+                      <UserProfile />
                     )}
                     <div style={{ whiteSpace: 'nowrap' }}>
                       <span>

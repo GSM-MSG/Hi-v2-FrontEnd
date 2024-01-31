@@ -1,18 +1,16 @@
-import Portal from '@/components/Portal'
+import {Portal, Button} from '@/components'
 import * as S from './style'
 import { SelectedUser, UserList } from '@/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
-import { UserItemListType } from '@/types/components'
-import { Button } from '@/components/commons'
+import {useFetch, useModal} from '@/hooks'
+import { UserItemListType } from '@/types'
 
 export default function StudentStateModal() {
   const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
 
-  const { fetch: userlistRefetch } = useFetch<UserItemListType>({
+  const { fetch: userListRefetch } = useFetch<UserItemListType>({
     url: '/user/all',
     method: 'get',
     onSuccess: (data) => {
@@ -35,7 +33,7 @@ export default function StudentStateModal() {
       status:
         selectedUser.useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
     })
-    await userlistRefetch()
+    await userListRefetch()
   }
 
   return (
