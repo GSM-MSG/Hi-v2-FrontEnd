@@ -1,15 +1,13 @@
-import { PageContainer, Button } from '../commons'
-import { useRecoilValue } from 'recoil'
 import { ReservationPlace } from '@/atoms'
-import useFetch from '@/hooks/useFetch'
+import { useFetch, useModal } from '@/hooks'
+import { PlaceSelect } from '@/modals'
+import { GetRoleType, ReservationDataType } from '@/types'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
-import useModal from '@/hooks/useModal'
-import PlaceSelect from '@/modals/PlaceSelect'
-import { GetRoleType } from '@/types/components'
-import { ReservationDataType } from '@/types/modals'
-import { useRouter } from 'next/navigation'
 
 function ReservationPage() {
   const router = useRouter()
