@@ -42,10 +42,12 @@ export const FloorButton = styled.button<{
   height: 2.8rem;
   background: ${({ clicked, current_value }) =>
     clicked === current_value ? '#0066ff' : 'none'};
-  border: 1px solid #0066ff;
+  border: 1px solid
+    ${({ clicked, current_value }) =>
+      clicked === current_value ? '#0066ff' : '#9E9E9E'};
   border-radius: 8px;
   color: ${({ clicked, current_value }) =>
-    clicked === current_value ? '#ffffff' : '#0066ff'};
+    clicked === current_value ? '#ffffff' : '#9E9E9E'};
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
