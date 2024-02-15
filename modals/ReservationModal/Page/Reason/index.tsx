@@ -103,11 +103,12 @@ function Reason({
         <Button
           width='30%'
           height='3rem'
-          background='#d9d9d9'
-          color='#ffffff'
+          background='none'
+          color='#0066ff'
           fontSize='1rem'
+          fontWeight='700'
           borderRadius='8px'
-          border='none'
+          border='1px solid #0066ff'
           onClick={() => setModalPage(1)}
         >
           돌아가기
@@ -118,7 +119,7 @@ function Reason({
           background='#0066ff'
           color='#ffffff'
           fontSize='1rem'
-          fontWeight='500'
+          fontWeight='700'
           border='none'
           borderRadius='8px'
           onClick={onReserve}
