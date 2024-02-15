@@ -1,16 +1,20 @@
+import { TableCheckIcon, XMark } from '@/assets'
 import { ReservationPlace } from '@/atoms'
-import { Title, TitleBox, Button, Portal } from '@/components'
+import { Button, Portal, Title, TitleBox } from '@/components'
 import { useFetch, useModal } from '@/hooks'
 import {
   DeleteTableCheckModal,
-  RepresentativeMandateModal,
   LeaveReservationTableModal,
+  RepresentativeMandateModal,
 } from '@/modals'
-import { GetRoleType, ViewReservationData } from '@/types'
+import {
+  GetRoleType,
+  ViewReservationData,
+  ViewReservationDataTypes,
+} from '@/types'
 import { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
-import { RepresentativeIcon, TableCheckIcon, XMark } from '@/assets'
 
 export default function ViewReservationModal({
   reservationId,
@@ -33,18 +37,11 @@ export default function ViewReservationModal({
     method: 'get',
   })
 
-  const ViewReservationDatas = [
-    { id: 1, name: '층', content: `${reservationPlace.floor}F` },
-    { id: 2, name: '테이블', content: `${data?.reservationNumber}번` },
-    {
-      id: 3,
-      name: '확인상태',
-      content: !data?.checkStatus ? '미확인' : '확인',
-    },
-    {
-      id: 4,
-      name: '멤버',
-    },
+  const ViewReservationDataColumns: ViewReservationDataTypes[] = [
+    { name: '예약층', content: `${reservationPlace.floor}F` },
+    { name: '예약 테이블', content: `${data?.reservationNumber}번` },
+    { name: '예약 멤버' },
+    { name: '예약 사유', content: `${data?.reason}` },
   ]
 
   const { openModal, closeModal } = useModal()
@@ -74,51 +71,51 @@ export default function ViewReservationModal({
                 <TableCheckIcon checkStatus={data?.checkStatus} />
               </div>
             )}
-            예약조회
+            {data?.reservationNumber}
           </Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
             <XMark width='24' height='24' />
           </div>
         </TitleBox>
-        <S.ViewReservationDataContainer>
-          {ViewReservationDatas.map((viewData) => (
-            <S.ViewReservationDataColumn
-              key={viewData.id}
-              name={viewData.name === '멤버' ? '멤버' : ''}
-            >
-              <span>{viewData.name}</span>
-
-              <S.ViewDataBox name={viewData.name === '멤버' ? '멤버' : ''}>
-                {viewData.name === '멤버' ? (
-                  data?.users.map((item) => (
-                    <S.Member
-                      key={item.userId}
-                      isRepresentative={data.representativeId === item.userId}
-                      onClick={() =>
-                        data.representativeId === roleData?.userId &&
-                        data.representativeId !== item.userId &&
-                        openModal(
-                          <RepresentativeMandateModal
-                            username={item.name}
-                            userId={item.userId}
-                            reservationId={reservationId}
-                          />
-                        )
-                      }
-                    >
-                      {data.representativeId === item.userId && (
-                        <RepresentativeIcon />
-                      )}
-                      {item.name}
-                    </S.Member>
-                  ))
-                ) : (
-                  <span>{viewData.content}</span>
-                )}
-              </S.ViewDataBox>
-            </S.ViewReservationDataColumn>
-          ))}
-        </S.ViewReservationDataContainer>
+        <S.ViewReservationDataBox>
+          <S.ViewReservationText>예약정보 확인</S.ViewReservationText>
+          <S.ViewReservationDataContainer>
+            {ViewReservationDataColumns.map((view, idx) =>
+              view.name === '예약 멤버' ? (
+                <S.ViewReservationDataColumn key={idx} column={idx}>
+                  <span>{view.name}</span>
+                  <p>
+                    {data?.users.map((user) =>
+                      user.userId === data?.representativeId ? (
+                        <b key={user.userId}>{user.name} </b>
+                      ) : (
+                        <span
+                          key={user.userId}
+                          onClick={() =>
+                            openModal(
+                              <RepresentativeMandateModal
+                                username={user.name}
+                                userId={user.userId}
+                                reservationId={reservationId}
+                              />
+                            )
+                          }
+                        >
+                          {user.name}{' '}
+                        </span>
+                      )
+                    )}
+                  </p>
+                </S.ViewReservationDataColumn>
+              ) : (
+                <S.ViewReservationDataColumn key={idx} column={idx}>
+                  <span>{view.name}</span>
+                  <p>{view.content}</p>
+                </S.ViewReservationDataColumn>
+              )
+            )}
+          </S.ViewReservationDataContainer>
+        </S.ViewReservationDataBox>
         <S.ViewReservationButtonContainer>
           {data?.representativeId === roleData?.userId && (
             <Button
