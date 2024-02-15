@@ -141,11 +141,11 @@ export default function ViewReservationModal({
               <Button
                 width='30%'
                 height='3.2rem'
-                background='#c0c0c0'
-                color='#ffffff'
+                background='none'
+                color='#0066ff'
                 fontSize='1.2rem'
-                fontWeight='500'
-                border='none'
+                fontWeight='700'
+                border='1px solid #0066ff'
                 borderRadius='8px'
                 onClick={() =>
                   openModal(
