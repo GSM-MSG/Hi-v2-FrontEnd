@@ -55,7 +55,7 @@ export default function RepresentativeMandateModal({
             borderRadius='8px'
             onClick={async () => await fetch()}
           >
-            대표자 위임
+            위임하기
           </Button>
         </ButtonContainer>
       </CheckModalContainer>
