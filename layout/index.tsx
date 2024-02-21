@@ -1,4 +1,4 @@
-import API from '@/apis'
+import API from '@/apis/instance'
 import { Footer, Header } from '@/components'
 import { GAUTH_CLIENT_ID, REDIRECT_URI, setStorage } from '@/utils'
 import { GauthProvider } from '@msg-team/gauth-react'

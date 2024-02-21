@@ -1,4 +1,4 @@
-import API from '@/apis'
+import API from '@/apis/instance'
 import { ErrorsMessageType } from '@/types'
 import { isAxiosError, Method } from 'axios'
 import { useCallback, useState } from 'react'
