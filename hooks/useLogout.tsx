@@ -1,4 +1,4 @@
-import API from '@/apis'
+import API from '@/apis/instance'
 import TokenManager from '@/apis/TokenManager'
 import { useRouter } from 'next/router'
 
