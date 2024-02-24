@@ -1,3 +1,4 @@
+import { patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { XMark } from '@/assets'
 import {
   Button,
@@ -6,7 +7,9 @@ import {
   Portal,
   Title,
 } from '@/components'
-import { useFetch, useModal } from '@/hooks'
+import { useModal } from '@/hooks'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
 export default function RepresentativeMandateModal({
@@ -19,11 +22,11 @@ export default function RepresentativeMandateModal({
   reservationId: string | undefined
 }) {
   const { openModal, closeModal } = useModal()
-  const { fetch } = useFetch({
-    url: `/reservation/${reservationId}/${userId}`,
-    method: 'patch',
-    successMessage: `${username}님을 대표자로 위임했습니다`,
+  const { mutate } = useMutation<void, Error>({
+    mutationKey: reservationQueryKeys.delegate(reservationId, userId),
+    mutationFn: () => patch(reservationUrl.delegate({ reservationId, userId })),
     onSuccess: () => {
+      toast.success(`${username}님을 대표자로 위임했습니다`)
       openModal(<ViewReservationModal reservationId={reservationId} />)
     },
   })
@@ -53,7 +56,7 @@ export default function RepresentativeMandateModal({
             fontWeight='500'
             border='1px solid #0066ff'
             borderRadius='8px'
-            onClick={async () => await fetch()}
+            onClick={() => mutate()}
           >
             위임하기
           </Button>

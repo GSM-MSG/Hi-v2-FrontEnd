@@ -1,10 +1,13 @@
+import { del, reservationQueryKeys, reservationUrl } from '@/apis'
 import {
   Button,
   ButtonContainer,
   CheckModalContainer,
   Portal,
 } from '@/components'
-import { useFetch, useModal } from '@/hooks'
+import { useModal } from '@/hooks'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
 export default function LeaveReservationTableModal({
@@ -15,11 +18,11 @@ export default function LeaveReservationTableModal({
   reservationNumber: number | undefined
 }) {
   const { openModal, closeModal } = useModal()
-  const { fetch } = useFetch({
-    url: `/reservation/${reservationId}/exit`,
-    method: 'delete',
-    successMessage: '예약 테이블을 나갔습니다',
+  const { mutate } = useMutation<void, Error>({
+    mutationKey: reservationQueryKeys.exit(reservationId),
+    mutationFn: () => del(reservationUrl.exit(reservationId)),
     onSuccess: () => {
+      toast.success('예약테이블을 나갔습니다')
       closeModal()
     },
   })
@@ -57,7 +60,7 @@ export default function LeaveReservationTableModal({
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={async () => await fetch()}
+            onClick={() => mutate()}
           >
             확인
           </Button>

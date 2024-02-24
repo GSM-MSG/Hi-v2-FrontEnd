@@ -16,15 +16,16 @@ export const userUrl = {
 } as const
 
 export const homebaseUrl = {
-  hombase: () => `/homebase`,
+  hombase: (queryString: { period: number; floor: number }) =>
+    `/homebase?period=${queryString.period}&floor=${queryString.floor}`,
 } as const
 
 export const reservationUrl = {
-  requestId: (reservationId: string) => `/reservation/${reservationId}`,
+  requestId: (reservationId: string | undefined) => `/reservation/${reservationId}`,
   delegate: (ids: reservationIdsType) =>
     `/reservation/${ids.reservationId}/${ids.userId}`,
-  exit: (reservationId: string) => `/reservation/${reservationId}/exit`,
-  check: (reservationId: string) =>
+  exit: (reservationId: string | undefined) => `/reservation/${reservationId}/exit`,
+  check: (reservationId: string | undefined) =>
     `/reservation/${reservationId}/check-status`,
   deleteAll: () => `/reservation/kill-all`,
 } as const

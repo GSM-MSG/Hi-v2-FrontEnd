@@ -1,4 +1,4 @@
 export interface reservationIdsType {
-  reservationId: string
+  reservationId: string | undefined
   userId: string
 }

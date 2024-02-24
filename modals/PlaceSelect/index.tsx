@@ -14,16 +14,13 @@ function PlaceSelect() {
     floors: [2, 3, 4],
     periods: [8, 9, 10, 11],
   })
-
   const [floorClicked, setFloorClicked] = useState<number>(2)
   const [periodClicked, setPeriodClicked] = useState<number>(8)
-
   const { floors, periods } = showPlace
 
   const onFloor = (floor: number) => {
     setFloorClicked(floor)
   }
-
   const onPeriod = (period: number) => {
     setPeriodClicked(period)
   }

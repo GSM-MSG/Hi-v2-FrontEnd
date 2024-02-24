@@ -1,3 +1,11 @@
+import {
+  homebaseQueryKeys,
+  homebaseUrl,
+  patch,
+  post,
+  reservationQueryKeys,
+  reservationUrl,
+} from '@/apis'
 import { ModalPage, ReasonText, ReservationPlace, TeamMembers } from '@/atoms'
 import {
   Button,
@@ -7,12 +15,13 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { GetRoleType } from '@/types'
-import { useEffect } from 'react'
+import { useGetRole } from '@/hooks'
+import { ReserveModifyMutationValues, ReserveMutationValues } from '@/types'
+import { useMutation } from '@tanstack/react-query'
+import { ChangeEvent, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { useFetch } from '@/hooks'
 
 function Reason({
   reservationNumber,
@@ -25,60 +34,60 @@ function Reason({
 }) {
   const setModalPage = useSetRecoilState(ModalPage)
   const reservationPlace = useRecoilValue(ReservationPlace)
-
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
 
-  const { fetch } = useFetch({
-    url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}`,
-    method: 'post',
+  const { mutate } = useMutation<void, Error, ReserveMutationValues>({
+    mutationKey: homebaseQueryKeys.reserve(),
+    mutationFn: (reserveValues) =>
+      post(
+        homebaseUrl.hombase({
+          period: reservationPlace.period,
+          floor: reservationPlace.floor,
+        }),
+        reserveValues
+      ),
     onSuccess: () => {
+      toast.success('예약이 완료되었습니다')
       setModalPage(3)
-    },
-    successMessage: '예약이 완료되었습니다.',
-    errorMessage: {
-      401: '잘못된 유저정보입니다.',
-      403: '예약이 불가능한 상태입니다.',
     },
   })
 
-  const { fetch: updateTable } = useFetch({
-    url: `/reservation/${reservationId}`,
-    method: 'patch',
+  const { mutate: updateTable } = useMutation<
+    void,
+    Error,
+    ReserveModifyMutationValues
+  >({
+    mutationKey: reservationQueryKeys.modify(reservationId),
+    mutationFn: (modifyValues) =>
+      patch(reservationUrl.requestId(reservationId), modifyValues),
     onSuccess: () => {
+      toast.success('예약테이블을 수정했습니다')
       setModalPage(3)
     },
-    successMessage: '예약 테이블을 수정했습니다',
   })
-
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-page',
-    method: 'get',
-  })
+  const { userId } = useGetRole()
 
   useEffect(() => {
-    ;(async () => await fetchRole())()
-    setTeamMembers((prev) => [...prev, roleData?.userId || ''])
-  }, [fetchRole, roleData?.userId, setTeamMembers])
+    setTeamMembers((prev) => [...prev, userId || ''])
+  }, [setTeamMembers, userId])
 
-  const onReserve = async () => {
+  const onReserve = () => {
     const filteredTeam = teamMembers.filter(
       (member, idx) => teamMembers.indexOf(member) === idx && member.length
     )
-
-    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
-    else if (isModify) {
-      await updateTable({
+    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요')
+    else if (isModify)
+      updateTable({
         users: filteredTeam,
         reason: reasonText,
       })
-    } else {
-      await fetch({
+    else
+      mutate({
         users: filteredTeam,
         reason: reasonText,
         reservationNumber,
       })
-    }
   }
 
   return (
@@ -95,7 +104,9 @@ function Reason({
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
       <Textarea
         value={reasonText}
-        onChange={(e) => setReasonText(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          setReasonText(e.target.value)
+        }
         height='18rem'
         placeholder='예약 사유를 입력해주세요.'
       />

@@ -19,16 +19,32 @@ export const homebaseQueryKeys = {
 } as const
 
 export const reservationQueryKeys = {
-  detail: (reservationId: string) => ['reservation', 'detail', reservationId],
-  delete: (reservationId: string) => ['reservation', 'delete', reservationId],
-  modify: (reservationId: string) => ['reservation', 'modify', reservationId],
-  delegate: (reservationId: string) => [
+  detail: (reservationId: string | undefined) => [
+    'reservation',
+    'detail',
+    reservationId,
+  ],
+  delete: (reservationId: string | undefined) => [
+    'reservation',
+    'delete',
+    reservationId,
+  ],
+  modify: (reservationId: string | undefined) => [
+    'reservation',
+    'modify',
+    reservationId,
+  ],
+  delegate: (reservationId: string | undefined, userId: string) => [
     'reservation',
     'delegate',
     reservationId,
   ],
-  exit: (reservationId: string) => ['reservation', 'exit', reservationId],
-  check: (reservationId: string) => ['reservation', 'check', reservationId],
+  exit: (reservationId: string | undefined) => [
+    'reservation',
+    'exit',
+    reservationId,
+  ],
+  check: (reservationId: string | undefined) => ['reservation', 'check', reservationId],
   deleteAll: () => ['reservation', 'deleteAll'],
 } as const
 

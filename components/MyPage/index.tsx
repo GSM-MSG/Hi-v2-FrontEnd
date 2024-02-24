@@ -1,9 +1,9 @@
+import { BackArrowIcon, UserProfile } from '@/assets'
 import { useFetch } from '@/hooks'
 import { MyPageType } from '@/types'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import * as S from './style'
-import { BackArrowIcon, UserProfile } from '@/assets'
 
 export default function MyPage() {
   const [showDetailName, setShowDetailName] = useState(false)
