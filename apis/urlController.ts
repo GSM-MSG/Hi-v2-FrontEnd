@@ -9,7 +9,7 @@ export const userUrl = {
   my: () => `/user/my-page`,
   all: () => `/user/all`,
   requestId: (userId: string) => `/user/${userId}`,
-  search: () => `/user/search`,
+  search: (keyword: string) => `/user/search?keyword=${keyword}`,
   searchStudent: () => `/user/search-student`,
   userRole: (userId: string) => `/user/${userId}/role`,
   myRole: () => `/user/my-role`,
@@ -21,10 +21,12 @@ export const homebaseUrl = {
 } as const
 
 export const reservationUrl = {
-  requestId: (reservationId: string | undefined) => `/reservation/${reservationId}`,
+  requestId: (reservationId: string | undefined) =>
+    `/reservation/${reservationId}`,
   delegate: (ids: reservationIdsType) =>
     `/reservation/${ids.reservationId}/${ids.userId}`,
-  exit: (reservationId: string | undefined) => `/reservation/${reservationId}/exit`,
+  exit: (reservationId: string | undefined) =>
+    `/reservation/${reservationId}/exit`,
   check: (reservationId: string | undefined) =>
     `/reservation/${reservationId}/check-status`,
   deleteAll: () => `/reservation/kill-all`,

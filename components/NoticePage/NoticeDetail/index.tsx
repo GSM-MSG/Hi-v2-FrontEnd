@@ -1,41 +1,39 @@
 import { Button, PageContainer } from '@/components'
-import { useFetch, useGetRole } from '@/hooks'
 import { NoticeDetailType } from '@/types'
 import { dateToString } from '@/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import * as S from './style'
 import { BackArrowIcon } from '@/assets'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { get, noticeQueryKeys, noticeUrl } from '@/apis'
+import { useGetRole } from '@/hooks'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
-  const id = router.query.id
+  const id = String(router.query.id)
 
-  const { fetch, data } = useFetch<NoticeDetailType>({
-    url: `/notice/${id}`,
-    method: 'get',
+  const { data } = useQuery<AxiosResponse<NoticeDetailType>>({
+    queryKey: noticeQueryKeys.detail(id),
+    queryFn: () => get(noticeUrl.requestId(id)),
   })
 
   const { isAdmin, isTeacher } = useGetRole()
 
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [router, fetch])
+  const { title, content, createdAt, user } = data?.data || {}
 
   const onModify = () => {
     if (data) {
       router.push(
         {
           pathname: '/notice/write',
-          query: { id, title: data.title, content: data.content },
+          query: { id, title: title, content: content },
         },
         'write'
       )
     }
   }
-
-  if (!data) return <></>
 
   return (
     <PageContainer
@@ -50,7 +48,7 @@ export default function NoticeDetailPage() {
         </Link>
         <S.DetailWrapper>
           <S.DetailTitleContainer>
-            <S.DetailTitle>{data.title}</S.DetailTitle>
+            <S.DetailTitle>{title}</S.DetailTitle>
             {(isAdmin || isTeacher) && (
               <Button
                 width='48px'
@@ -66,10 +64,10 @@ export default function NoticeDetailPage() {
             )}
           </S.DetailTitleContainer>
           <S.DetailInfo>
-            <div>작성일 : {dateToString(data.createdAt)}</div>
-            <div>작성자 : {data.user.name}</div>
+            <div>작성일 : {dateToString(createdAt ?? '')}</div>
+            <div>작성자 : {user && user.name}</div>
           </S.DetailInfo>
-          <S.DetailContent>{data.content}</S.DetailContent>
+          <S.DetailContent>{content}</S.DetailContent>
         </S.DetailWrapper>
       </S.DetailContainer>
     </PageContainer>

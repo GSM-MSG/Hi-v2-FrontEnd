@@ -1,39 +1,52 @@
-import {Portal, Button} from '@/components'
+import { Portal, Button } from '@/components'
 import * as S from './style'
 import { SelectedUser, UserList } from '@/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import {useFetch, useModal} from '@/hooks'
+import { useModal } from '@/hooks'
 import { UserItemListType } from '@/types'
+import { useMutation } from '@tanstack/react-query'
+import { get, patch, userQueryKeys, userUrl } from '@/apis'
+import { AxiosError, AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
 
 export default function StudentStateModal() {
   const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
 
-  const { fetch: userListRefetch } = useFetch<UserItemListType>({
-    url: '/user/all',
-    method: 'get',
-    onSuccess: (data) => {
-      setUserList(data.users)
-    },
+  const { mutate: userListMutate } = useMutation<
+    AxiosResponse<UserItemListType>
+  >({
+    mutationKey: userQueryKeys.list(),
+    mutationFn: () => get(userUrl.all()),
+    onSuccess: (data) => setUserList(data.data.users),
   })
 
-  const { fetch } = useFetch({
-    url: `/user/${selectedUser.userId}`,
-    method: 'patch',
-    onSuccess: closeModal,
-    successMessage: '예약 상태가 변경되었습니다.',
-    errorMessage: {
-      401: '토큰 값이 이상하거나 변질되었습니다.',
+  const { mutate } = useMutation<
+    void,
+    AxiosError,
+    { status: 'AVAILABLE' | 'UNAVAILABLE' }
+  >({
+    mutationKey: userQueryKeys.studentStatus(),
+    mutationFn: (data) => patch(userUrl.requestId(selectedUser.userId), data),
+    onSuccess: () => {
+      toast.success('예약 상태가 변경되었습니다.')
+      userListMutate()
+      closeModal()
+    },
+    onError: (error) => {
+      if (error) {
+        const status = error.status
+        if (status === 401) toast.error('토큰 값이 이상하거나 변질되었습니다.')
+      }
     },
   })
 
   const changeStudentState = async () => {
-    await fetch({
+    mutate({
       status:
         selectedUser.useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
     })
-    await userListRefetch()
   }
 
   return (

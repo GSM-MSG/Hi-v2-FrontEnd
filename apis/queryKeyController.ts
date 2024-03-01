@@ -44,7 +44,11 @@ export const reservationQueryKeys = {
     'exit',
     reservationId,
   ],
-  check: (reservationId: string | undefined) => ['reservation', 'check', reservationId],
+  check: (reservationId: string | undefined) => [
+    'reservation',
+    'check',
+    reservationId,
+  ],
   deleteAll: () => ['reservation', 'deleteAll'],
 } as const
 

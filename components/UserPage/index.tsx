@@ -5,22 +5,26 @@ import UserItemList from './UserItemList'
 import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 import { UserList } from '@/atoms'
-import { UserItemType } from '@/types/components'
-import { useGetRole, useFetch } from '@/hooks'
+import { UserItemListType } from '@/types/components'
+import { useGetRole } from '@/hooks'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { AxiosResponse } from 'axios'
 
 export default function UserPage() {
   const form = useForm({ defaultValues: { user: '' } })
   const { register, watch, handleSubmit } = form
   const setUserList = useSetRecoilState(UserList)
-  const { fetch } = useFetch<UserItemType[]>({
-    url: `/user/search?keyword=${watch('user')}`,
-    method: 'get',
-    onSuccess: (data: UserItemType[]) => {
-      setUserList(data)
-    },
+
+  const { mutate } = useMutation({
+    mutationKey: userQueryKeys.search(),
+    mutationFn: (keyword: string) =>
+      get<AxiosResponse<UserItemListType>>(userUrl.search(keyword)),
+    onSuccess: (data) => setUserList(data.data.users),
   })
+
   const { isStudent } = useGetRole()
   const router = useRouter()
 
@@ -30,7 +34,7 @@ export default function UserPage() {
     }
   }, [isStudent, router])
 
-  const onSubmit = async (data: any) => await fetch(data)
+  const onSubmit = (data: any) => mutate(data.user)
 
   return (
     <PageContainer paddingTop='6vh' paddingBottom='4vh'>

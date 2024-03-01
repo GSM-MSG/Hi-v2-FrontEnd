@@ -1,11 +1,14 @@
 import { SelectedUser, UserList } from '@/atoms'
 import { Button, Portal } from '@/components'
-import { useFetch, useModal } from '@/hooks'
+import { useModal } from '@/hooks'
 import { UserItemListType } from '@/types'
 import { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 import { SelectedCheck, XMark } from '@/assets'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { get, patch, userQueryKeys, userUrl } from '@/apis'
 
 export default function UserRoleChangeModal() {
   const setUserList = useSetRecoilState(UserList)
@@ -18,21 +21,26 @@ export default function UserRoleChangeModal() {
     { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
     { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
   ]
-
-  const { fetch: userlistRefetch } = useFetch<UserItemListType>({
-    url: '/user/all',
-    method: 'get',
-    onSuccess: (data) => {
-      setUserList(data.users)
-      closeModal()
+  const { mutate: userListMutate } = useMutation<
+    AxiosResponse<UserItemListType>
+  >({
+    mutationKey: userQueryKeys.list(),
+    mutationFn: () => get(userUrl.all()),
+    onSuccess(data) {
+      setUserList(data.data.users)
     },
   })
 
-  const { fetch: userRoleChange } = useFetch({
-    url: `/user/${selectedUser.userId}/role`,
-    method: 'patch',
-    onSuccess: () => userlistRefetch(),
-  })
+  const { mutate: userRoleChange } = useMutation<void, Error, { role: string }>(
+    {
+      mutationKey: userQueryKeys.changeRole(),
+      mutationFn: (role) => patch(userUrl.userRole(selectedUser.userId), role),
+      onSuccess: () => {
+        userListMutate()
+        closeModal()
+      },
+    }
+  )
 
   return (
     <Portal onClose={closeModal}>

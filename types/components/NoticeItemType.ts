@@ -13,6 +13,5 @@ export interface NoticeItemType {
     classNum: number
     number: number
   }
-  noticeList: (body?: any) => Promise<void>
   role: useGetRoleReturnType
 }

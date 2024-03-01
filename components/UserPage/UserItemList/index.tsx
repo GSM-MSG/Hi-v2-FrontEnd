@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react'
 import * as S from './style'
 import UserItem from '../UserItem'
-import { useFetch, useGetRole } from '@/hooks'
+import { useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types/components'
 import { useRecoilState } from 'recoil'
 import { UserList } from '@/atoms'
+import { useMutation } from '@tanstack/react-query'
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { AxiosResponse } from 'axios'
 
 export default function UserItemList() {
   const [userList, setUserList] = useRecoilState(UserList)
-  const { fetch, data } = useFetch<UserItemListType>({
-    url: '/user/all',
-    method: 'get',
-    onSuccess: (data) => {
-      setUserList(data.users)
-    },
+
+  const { mutate } = useMutation<AxiosResponse<UserItemListType>>({
+    mutationKey: userQueryKeys.list(),
+    mutationFn: () => get(userUrl.all()),
+    onSuccess: (data) => setUserList(data.data.users),
   })
 
   const role = useGetRole()
 
   useEffect(() => {
-    ;(async () => await fetch())()
+    mutate()
   }, [])
-
-  if (!data) return <></>
 
   return (
     <S.UserItemListContainer>

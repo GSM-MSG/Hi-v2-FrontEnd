@@ -1,36 +1,58 @@
 import { Button, Input, PageContainer, Textarea } from '@/components'
-import { useFetch } from '@/hooks'
 import { NoticeModifyType } from '@/types'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import * as S from './style'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
+import { toast } from 'react-toastify'
+
+interface noticeType {
+  title: string
+  content: string
+}
 
 export default function NoticeWritePage() {
   const router = useRouter()
-  const id = router.query.id
-  const [notice, setNotice] = useState<{ title: string; content: string }>({
+  const id = String(router.query.id)
+  const [notice, setNotice] = useState<noticeType>({
     title: '',
     content: '',
   })
   const { title, content } = notice
 
-  const { fetch: noticeCreate } = useFetch({
-    url: '/notice',
-    method: 'post',
-    successMessage: '공지가 등록되었습니다.',
-    errorMessage: {
-      401: '토큰 값이 이상하거나 변질되었습니다.',
-      403: '제어 권한이 없습니다.',
+  const { mutate: noticeCreate } = useMutation<void, AxiosError, noticeType>({
+    mutationKey: noticeQueryKeys.write(),
+    mutationFn: (data) => post(noticeUrl.notice(), data),
+    onError: (error) => {
+      if (error.response) {
+        const status = error.response.status
+        if (status === 401) {
+          toast.error('토큰 값이 이상하거나 변질되었습니다.')
+        }
+        if (status === 403) {
+          toast.error('제어 권한이 없습니다.')
+        }
+      }
     },
   })
 
-  const { fetch: noticeModify } = useFetch<NoticeModifyType>({
-    url: `notice/${id}`,
-    method: 'patch',
-    successMessage: '공지가 수정되었습니다.',
-    errorMessage: {
-      403: '제어 권한이 없습니다.',
-      404: '존재하지 않는 글입니다.',
+  const { mutate: noticeModify } = useMutation<void, AxiosError, noticeType>({
+    mutationKey: noticeQueryKeys.detail(id),
+    mutationFn: (data) => patch(noticeUrl.requestId(id), data),
+    onSuccess: () => toast.success('공지가 수정되었습니다.'),
+    onError: (error) => {
+      if (error.response) {
+        const status = error.response.status
+
+        if (status === 403) {
+          toast.error('제어 권한이 없습니다.')
+        }
+        if (status === 404) {
+          toast.error('존재하지 않는 글입니다.')
+        }
+      }
     },
   })
 
