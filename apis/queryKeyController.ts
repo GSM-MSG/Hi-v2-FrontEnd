@@ -8,7 +8,8 @@ export const userQueryKeys = {
   list: () => ['user', 'list'],
   roleList: () => ['user', 'roleList'],
   studentStatus: () => ['user', 'studentStatus'],
-  search: () => ['user', 'search'],
+  searchStudent: () => ['user', 'searchStudent'],
+  searchUser: () => ['user', 'searchUser'],
   changeRole: () => ['user', 'changeRole'],
   myRole: () => ['user', 'myRole'],
 } as const

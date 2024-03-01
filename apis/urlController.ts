@@ -9,8 +9,8 @@ export const userUrl = {
   my: () => `/user/my-page`,
   all: () => `/user/all`,
   requestId: (userId: string) => `/user/${userId}`,
-  search: (keyword: string) => `/user/search?keyword=${keyword}`,
-  searchStudent: () => `/user/search-student`,
+  searchUser: (keyword: string) => `/user/search?keyword=${keyword}`,
+  searchStudent: (keyword: string) => `/user/search-student?keyword=${keyword}`,
   userRole: (userId: string) => `/user/${userId}/role`,
   myRole: () => `/user/my-role`,
 } as const

@@ -7,7 +7,6 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { useFetch } from '@/hooks'
 import { GetRoleType, UserItemType } from '@/types'
 import Image from 'next/image'
 import { useEffect } from 'react'
@@ -16,6 +15,10 @@ import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 import { SearchIcon, UserProfile, XMark } from '@/assets'
+import { useQuery } from '@tanstack/react-query'
+import { get, reservationQueryKeys, userQueryKeys, userUrl } from '@/apis'
+import { AxiosResponse } from 'axios'
+import { useGetRole } from '@/hooks'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
@@ -23,34 +26,26 @@ function MemberSelect() {
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const form = useForm({ defaultValues: { member: '' } })
   const { register, watch, setValue } = form
-  const { isLoading, fetch, data } = useFetch<UserItemType[]>({
-    url: `/user/search-student?keyword=${watch('member')}`,
-    method: 'get',
-  })
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
+  const { data, refetch,isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
+    queryKey: userQueryKeys.searchStudent(),
+    queryFn: () => get(userUrl.searchStudent(watch('member'))),
   })
-
-  useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
+  const {userId} = useGetRole()
 
   useEffect(() => {
     if (!watch('member').trim()) return
-
     const delayFetch = setTimeout(() => {
-      fetch()
+      refetch()
     }, 1000)
 
     return () => clearTimeout(delayFetch)
-  }, [fetch, watch])
+  }, [refetch, watch])
 
   const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId)) {
       return toast.warning('이미 포함된 멤버입니다')
-    } else if (member.userId === roleData?.userId) {
+    } else if (member.userId === userId) {
       return toast.warning('자신을 제외한 멤버를 선택해주세요')
     }
     setShowMembers((prev) => [...prev, member])
@@ -126,7 +121,7 @@ function MemberSelect() {
         <S.LoadingMemberListBox>
           <span>학생정보를 찾는 중입니다.</span>
         </S.LoadingMemberListBox>
-      ) : data?.length === 0 ? (
+      ) : data?.data.length === 0 ? (
         <S.LoadingMemberListBox>
           <span>학생정보를 찾을 수 없습니다.</span>
         </S.LoadingMemberListBox>
@@ -134,7 +129,7 @@ function MemberSelect() {
         <S.MemberListBox>
           {watch('member')?.trim() &&
             data
-              ?.sort((a, b) => {
+              ?.data.sort((a, b) => {
                 const aStudentNum = parseInt(
                   `${a.grade}${a.classNum}${a.number
                     .toString()
