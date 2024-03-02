@@ -13,5 +13,4 @@ export interface NoticeItemType {
     classNum: number
     number: number
   }
-  role: useGetRoleReturnType
 }

@@ -34,3 +34,10 @@ export const SearchIconWrapper = styled.div`
   right: 18px;
   cursor: pointer;
 `
+
+export const UserItemListContainer = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`

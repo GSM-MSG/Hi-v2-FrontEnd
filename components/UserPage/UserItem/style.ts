@@ -18,7 +18,7 @@ export const UserItemContainer = styled.div`
   }
 `
 
-export const UserItemWrraper = styled.div`
+export const UserItemWrapper = styled.div`
   height: 66px;
   display: flex;
   align-items: center;

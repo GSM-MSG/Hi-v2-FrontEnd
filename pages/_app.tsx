@@ -10,14 +10,14 @@ import { RecoilRoot } from 'recoil'
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </QueryClientProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
-      <ToastContainer position='top-right' theme='colored' autoClose={2000} />
-    </RecoilRoot>
+        <ReactQueryDevtools initialIsOpen={true} />
+        <ToastContainer position='top-right' theme='colored' autoClose={2000} />
+      </RecoilRoot>
+    </QueryClientProvider>
   )
 }

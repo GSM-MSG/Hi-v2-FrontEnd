@@ -13,21 +13,18 @@ export default function NoticeItemList() {
     queryFn: () => get(noticeUrl.notice()),
   })
 
-  const role = useGetRole()
-
   return (
     <S.NoticeItemListContainer>
       {data &&
         Array.isArray(data.data) &&
         data.data.map(({ index, noticeId, title, createdAt, user }, idx) => (
           <NoticeItem
-            index={index}
             key={idx}
+            index={index}
             noticeId={noticeId}
             title={title}
             createdAt={createdAt}
             user={user}
-            role={role}
           />
         ))}
     </S.NoticeItemListContainer>

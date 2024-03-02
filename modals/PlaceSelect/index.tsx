@@ -2,13 +2,15 @@ import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useModal } from '@/hooks'
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 import { XMark } from '@/assets'
+import { get, homebaseQueryKeys, homebaseUrl } from '@/apis'
+import { useQuery } from '@tanstack/react-query'
 
 function PlaceSelect() {
-  const setReservationPlace =
-    useSetRecoilState(ReservationPlace)
+  const [reservationPlace, setReservationPlace] =
+    useRecoilState(ReservationPlace)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
@@ -17,12 +19,21 @@ function PlaceSelect() {
   const [floorClicked, setFloorClicked] = useState<number>(2)
   const [periodClicked, setPeriodClicked] = useState<number>(8)
   const { floors, periods } = showPlace
+  const { refetch } = useQuery({
+    queryKey: homebaseQueryKeys.list(),
+    queryFn: () => get(homebaseUrl.hombase(reservationPlace)),
+  })
 
-  const onFloor = (floor: number) => {
-    setFloorClicked(floor)
-  }
-  const onPeriod = (period: number) => {
-    setPeriodClicked(period)
+  const onApply = () => {
+    setReservationPlace((prev) => {
+      return {
+        ...prev,
+        period: periodClicked,
+        floor: floorClicked,
+      }
+    })
+    refetch()
+    closeModal()
   }
 
   return (
@@ -42,7 +53,7 @@ function PlaceSelect() {
                 key={idx}
                 clicked={floorClicked}
                 current_value={floor}
-                onClick={() => onFloor(floor)}
+                onClick={() => setFloorClicked(floor)}
               >
                 {floor}F
               </S.FloorButton>
@@ -57,7 +68,7 @@ function PlaceSelect() {
                 key={idx}
                 clicked={periodClicked}
                 current_value={period}
-                onClick={() => onPeriod(period)}
+                onClick={() => setPeriodClicked(period)}
               >
                 {period}교시
               </S.PeriodButton>
@@ -74,16 +85,7 @@ function PlaceSelect() {
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={() => {
-              setReservationPlace((prev) => {
-                return {
-                  ...prev,
-                  period: periodClicked,
-                  floor: floorClicked,
-                }
-              })
-              closeModal()
-            }}
+            onClick={onApply}
           >
             확인
           </Button>

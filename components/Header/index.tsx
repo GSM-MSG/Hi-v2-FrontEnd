@@ -13,7 +13,7 @@ function Header() {
   const router = useRouter()
   const { openModal } = useModal()
   const logout = useLogout()
-  const { isStudent } = useGetRole()
+  const { isAdmin, isTeacher } = useGetRole()
   const [loginText, setLoginText] = useState<'로그인' | '로그아웃'>('로그인')
   const tokenManager = new TokenManager()
 
@@ -27,8 +27,8 @@ function Header() {
       <Link href='/'>
         <HiLogo />
       </Link>
-      <S.MenuListBox is_admin={!isStudent}>
-        {!isStudent
+      <S.MenuListBox is_admin={isAdmin || isTeacher}>
+        {isAdmin || isTeacher
           ? headerMenuList.map((menu) => (
               <li
                 key={menu.id}
@@ -57,7 +57,9 @@ function Header() {
             ))}
       </S.MenuListBox>
       <S.LoginBtn
-        onClick={() => (tokenManager.accessToken ? logout() : openModal(<LoginModal />))}
+        onClick={() =>
+          tokenManager.accessToken ? logout() : openModal(<LoginModal />)
+        }
       >
         {loginText}
       </S.LoginBtn>

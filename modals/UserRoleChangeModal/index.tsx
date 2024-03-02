@@ -1,46 +1,40 @@
-import { SelectedUser, UserList } from '@/atoms'
+import { get, patch, userQueryKeys, userUrl } from '@/apis'
+import { SelectedCheck, XMark } from '@/assets'
+import { SelectedUser } from '@/atoms'
 import { Button, Portal } from '@/components'
 import { useModal } from '@/hooks'
 import { UserItemListType } from '@/types'
-import { useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import * as S from './style'
-import { SelectedCheck, XMark } from '@/assets'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { get, patch, userQueryKeys, userUrl } from '@/apis'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { useRecoilValue } from 'recoil'
+import * as S from './style'
 
 export default function UserRoleChangeModal() {
-  const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
   const [selectedRole, setSelectedRole] = useState('')
 
-  const Array = [
+  const roleInfo = [
     { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
     { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
     { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
   ]
-  const { mutate: userListMutate } = useMutation<
-    AxiosResponse<UserItemListType>
-  >({
-    mutationKey: userQueryKeys.list(),
-    mutationFn: () => get(userUrl.all()),
-    onSuccess(data) {
-      setUserList(data.data.users)
-    },
+  const { refetch } = useQuery<AxiosResponse<UserItemListType>>({
+    queryKey: userQueryKeys.searchUser(),
   })
 
-  const { mutate: userRoleChange } = useMutation<void, Error, { role: string }>(
-    {
-      mutationKey: userQueryKeys.changeRole(),
-      mutationFn: (role) => patch(userUrl.userRole(selectedUser.userId), role),
-      onSuccess: () => {
-        userListMutate()
-        closeModal()
-      },
-    }
-  )
+  const { mutate } = useMutation<void, Error, { role: string }>({
+    mutationKey: userQueryKeys.changeRole(),
+    mutationFn: (modifyValue) =>
+      patch(userUrl.userRole(selectedUser.userId), modifyValue),
+    onSuccess: () => {
+      toast.success('권한을 변경했습니다')
+      refetch()
+      closeModal()
+    },
+  })
 
   return (
     <Portal onClose={closeModal}>
@@ -52,7 +46,7 @@ export default function UserRoleChangeModal() {
           </div>
         </S.ModalTitleWrapper>
         <S.RoleButtonWrapper>
-          {Array.map(({ role, color, label }, idx) => (
+          {roleInfo.map(({ role, color, label }, idx) => (
             <S.RoleButtonItem
               key={idx}
               color={color}
@@ -73,11 +67,11 @@ export default function UserRoleChangeModal() {
           borderRadius='8px'
           border='none'
           color='#fff'
-          onClick={() => {
-            userRoleChange({
+          onClick={() =>
+            mutate({
               role: `${selectedRole}`,
             })
-          }}
+          }
         >
           확인
         </Button>

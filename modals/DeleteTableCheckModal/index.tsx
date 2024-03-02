@@ -1,8 +1,7 @@
 import {
-  get,
   homebaseQueryKeys,
   reservationQueryKeys,
-  reservationUrl,
+  reservationUrl
 } from '@/apis'
 import {
   Button,
@@ -11,10 +10,7 @@ import {
   Portal,
 } from '@/components'
 import { useModal } from '@/hooks'
-import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
-import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
@@ -23,14 +19,13 @@ export default function DeleteTableCheckModal({
 }: {
   reservationId: string | undefined
 }) {
-  const router = useRouter()
   const { openModal, closeModal } = useModal()
   const { refetch } = useQuery({
     queryKey: homebaseQueryKeys.list(),
   })
   const { mutate } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.delete(reservationId),
-    mutationFn: () => get(reservationUrl.requestId(reservationId)),
+    mutationFn: () => del(reservationUrl.requestId(reservationId)),
     onSuccess: () => {
       toast.success('예약 테이블을 삭제했습니다')
       closeModal()

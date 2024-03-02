@@ -7,7 +7,6 @@ export const authUrl = {
 export const userUrl = {
   user: () => `/user`,
   my: () => `/user/my-page`,
-  all: () => `/user/all`,
   requestId: (userId: string) => `/user/${userId}`,
   searchUser: (keyword: string) => `/user/search?keyword=${keyword}`,
   searchStudent: (keyword: string) => `/user/search-student?keyword=${keyword}`,

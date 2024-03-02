@@ -5,7 +5,6 @@ export const authQueryKeys = {
 
 export const userQueryKeys = {
   my: () => ['user', 'my'],
-  list: () => ['user', 'list'],
   roleList: () => ['user', 'roleList'],
   studentStatus: () => ['user', 'studentStatus'],
   searchStudent: () => ['user', 'searchStudent'],

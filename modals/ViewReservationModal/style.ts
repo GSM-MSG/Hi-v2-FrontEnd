@@ -51,8 +51,8 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
 
     span {
       color: #0b041e;
+      cursor: pointer;
     }
-
     b {
       color: #0066ff;
       font-weight: 600;

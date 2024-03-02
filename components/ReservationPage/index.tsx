@@ -45,14 +45,15 @@ function ReservationPage() {
   const [reservationTables, setReservationTables] = useState([1, 2, 3, 4, 5])
 
   useEffect(() => {
+    refetch()
     setReservationTables([1, 2, 3, 4, 5])
     setReservationTables((prev: any) =>
       prev.map(
         (e: any) => data?.data.find((obj) => obj.reservationNumber === e) || e
       )
     )
-  }, [data, setReservationTables])
-
+  }, [refetch, data, setReservationTables])
+  
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
       <S.ReservationTitleBox>

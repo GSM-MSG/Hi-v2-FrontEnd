@@ -20,15 +20,20 @@ export default function ViewReservationModal({
   reservationId: string | undefined
 }) {
   const reservationPlace = useRecoilValue(ReservationPlace)
-  const { data } = useQuery<AxiosResponse<ViewReservationData>>({
+  const { data, refetch } = useQuery<AxiosResponse<ViewReservationData>>({
     queryKey: reservationQueryKeys.detail(reservationId),
     queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
   const { isTeacher, userId } = useGetRole()
-  const { mutate } = useMutation<void, Error, boolean | undefined>({
+  const { mutate } = useMutation<
+    void,
+    Error,
+    { checkStatus: boolean | undefined }
+  >({
     mutationKey: reservationQueryKeys.check(reservationId),
-    mutationFn: (checkStatus: boolean | undefined) =>
-      patch(reservationUrl.check(reservationId), checkStatus),
+    mutationFn: (modifyValue) =>
+      patch(reservationUrl.check(reservationId), modifyValue),
+    onSuccess: () => refetch()
   })
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${reservationPlace.floor}F` },
@@ -45,7 +50,7 @@ export default function ViewReservationModal({
           <Title>
             {isTeacher && (
               <div
-                onClick={() => mutate(data?.data.checkStatus)}
+                onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
                 style={{
                   cursor: 'pointer',
                   marginTop: '0.12rem',
@@ -55,7 +60,7 @@ export default function ViewReservationModal({
                 <TableCheckIcon checkStatus={data?.data.checkStatus} />
               </div>
             )}
-            {data?.data.reservationNumber}
+            {data?.data.reservationNumber}번 테이블
           </Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
             <XMark width='24' height='24' />

@@ -18,5 +18,6 @@ export default function useGetRole(): useGetRoleReturnType {
     isTeacher: hasRole('ROLE_TEACHER'),
     isStudent: hasRole('ROLE_STUDENT'),
     userId: data?.data.userId,
+    length: data?.data.role.length
   }
 }

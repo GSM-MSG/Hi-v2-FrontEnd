@@ -20,11 +20,6 @@ export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
 
 export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })
 
-export const UserList = atom<UserItemType[]>({
-  key: 'UserList',
-  default: [],
-})
-
 export const SelectedUser = atom<UserItemType>({
   key: 'SelectedUser',
   default: {
@@ -37,6 +32,5 @@ export const SelectedUser = atom<UserItemType>({
     profileImageUrl: '',
     roles: [],
     useStatus: 'AVAILABLE',
-    role: {},
   },
 })
