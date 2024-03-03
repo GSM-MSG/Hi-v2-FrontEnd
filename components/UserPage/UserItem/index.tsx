@@ -8,6 +8,7 @@ import { SelectedUser } from '@/atoms'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
 import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
+import { useGetRole } from '@/hooks'
 
 export default function UserItem({
   userId,
@@ -19,12 +20,11 @@ export default function UserItem({
   profileImageUrl,
   roles,
   useStatus,
-  role,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
   const { openModal } = useModal()
-
+  const { isAdmin } = useGetRole()
   const roleInfo = {
     LABELS: {
       ROLE_ADMIN: '관리자',
@@ -60,7 +60,7 @@ export default function UserItem({
 
   return (
     <S.UserItemContainer>
-      <S.UserItemWrraper>
+      <S.UserItemWrapper>
         <S.UserProfileContainer>
           {profileImageUrl ? (
             <Image
@@ -81,9 +81,9 @@ export default function UserItem({
           </S.UserName>
           <S.UserEmail>{email}</S.UserEmail>
         </S.UserInfo>
-      </S.UserItemWrraper>
+      </S.UserItemWrapper>
       <S.ButtonWrapper>
-        {role.isAdmin && (
+        {isAdmin && (
           <Button
             width='78px'
             height='36px'
@@ -104,7 +104,6 @@ export default function UserItem({
                 profileImageUrl,
                 useStatus,
                 roles,
-                role,
               })
             }}
           >
@@ -131,7 +130,6 @@ export default function UserItem({
               profileImageUrl,
               useStatus,
               roles,
-              role,
             })
           }}
         >

@@ -3,4 +3,5 @@ export interface useGetRoleReturnType {
   isTeacher?: boolean
   isStudent?: boolean
   userId?: string
+  length?: number
 }

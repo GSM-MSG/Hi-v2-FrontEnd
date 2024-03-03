@@ -1,36 +1,32 @@
-import { useFetch } from '@/hooks'
+import { BackArrowIcon, UserProfile } from '@/assets'
 import { MyPageType } from '@/types'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as S from './style'
-import { BackArrowIcon, UserProfile } from '@/assets'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { get, userQueryKeys, userUrl } from '@/apis'
 
 export default function MyPage() {
   const [showDetailName, setShowDetailName] = useState(false)
 
-  const { fetch, data } = useFetch<MyPageType>({
-    url: '/user/my-page',
-    method: 'get',
-    errorMessage: {
-      401: '토큰 값이 이상하거나 변질되었습니다.',
-    },
+  const { data } = useQuery<AxiosResponse<MyPageType>>({
+    queryKey: userQueryKeys.my(),
+    queryFn: () => get(userUrl.my()),
   })
 
-  const buttonColor = data?.useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
+  const { useStatus, profileImageUrl, name, email, reservation } =
+    data?.data || {}
 
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [])
-
-  if (!data) return <div />
+  const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   return (
     <S.PageContainer>
       <S.ProfileWrapper>
         <S.ProfileImg>
-          {data.profileImageUrl ? (
+          {profileImageUrl ? (
             <Image
-              src={data.profileImageUrl}
+              src={profileImageUrl}
               alt='profileImage'
               objectFit='cover'
               width={100}
@@ -41,23 +37,23 @@ export default function MyPage() {
           )}
         </S.ProfileImg>
         <S.NameContainer>
-          <span>{data.name}</span>
+          <span>{name}</span>
           <S.ReservationState buttonColor={buttonColor}>
-            {data.useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
+            {useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
           </S.ReservationState>
         </S.NameContainer>
-        <S.Email>{data.email}</S.Email>
+        <S.Email>{email}</S.Email>
       </S.ProfileWrapper>
       <S.ReservationWrapper>
         <S.ReservationTitle>
           <span>나의 예약 현황</span>
-          {data.reservation && <span>예약 중</span>}
+          {reservation && <span>예약 중</span>}
         </S.ReservationTitle>
-        {data.reservation && (
+        {reservation && (
           <S.Reservation>
             <div>
               <span className='tableNum'>
-                {data.reservation.reservationNumber}번 테이블
+                {reservation.reservationNumber}번 테이블
               </span>
             </div>
             <div>
@@ -66,18 +62,18 @@ export default function MyPage() {
                 onClick={() => setShowDetailName((prev) => !prev)}
               >
                 <S.Name>
-                  {data.reservation.users[0].name} 외{' '}
-                  {data.reservation.users.length - 1}명
+                  {reservation.users[0].name} 외 {reservation.users.length - 1}
+                  명
                   <BackArrowIcon />
                 </S.Name>
                 {showDetailName && (
                   <S.DetailName>
-                    {data.reservation.users.map(({ name }) => name).join(', ')}
+                    {reservation.users.map(({ name }) => name).join(', ')}
                   </S.DetailName>
                 )}
               </S.NameWrapper>
               <span className='info'>
-                {data.reservation.period}교시 · {data.reservation.floor}F
+                {reservation.period}교시 · {reservation.floor}F
               </span>
             </div>
           </S.Reservation>

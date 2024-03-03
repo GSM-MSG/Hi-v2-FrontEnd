@@ -1,41 +1,55 @@
+import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
 import { Button, Input, PageContainer, Textarea } from '@/components'
-import { useFetch } from '@/hooks'
-import { NoticeModifyType } from '@/types'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import * as S from './style'
+import { NoticeType } from '@/types'
 
 export default function NoticeWritePage() {
   const router = useRouter()
-  const id = router.query.id
-  const [notice, setNotice] = useState<{ title: string; content: string }>({
+  const id = String(router.query.id)
+  const [notice, setNotice] = useState<NoticeType>({
     title: '',
     content: '',
   })
   const { title, content } = notice
 
-  const { fetch: noticeCreate } = useFetch({
-    url: '/notice',
-    method: 'post',
-    successMessage: '공지가 등록되었습니다.',
-    errorMessage: {
-      401: '토큰 값이 이상하거나 변질되었습니다.',
-      403: '제어 권한이 없습니다.',
+  const { mutate: noticeCreate } = useMutation<void, AxiosError, NoticeType>({
+    mutationKey: noticeQueryKeys.write(),
+    mutationFn: (createValue) => post(noticeUrl.notice(), createValue),
+    onError: (error) => {
+      if (error.response) {
+        const status = error.response.status
+        if (status === 401) {
+          toast.error('토큰 값이 이상하거나 변질되었습니다.')
+        }
+        if (status === 403) {
+          toast.error('제어 권한이 없습니다.')
+        }
+      }
     },
   })
 
-  const { fetch: noticeModify } = useFetch<NoticeModifyType>({
-    url: `notice/${id}`,
-    method: 'patch',
-    successMessage: '공지가 수정되었습니다.',
-    errorMessage: {
-      403: '제어 권한이 없습니다.',
-      404: '존재하지 않는 글입니다.',
+  const { mutate: noticeModify } = useMutation<void, AxiosError, NoticeType>({
+    mutationKey: noticeQueryKeys.detail(id),
+    mutationFn: (modifyValue) => patch(noticeUrl.requestId(id), modifyValue),
+    onSuccess: () => toast.success('공지가 수정되었습니다.'),
+    onError: (error) => {
+      if (error.response) {
+        const status = error.response.status
+        if (status === 403) {
+          toast.error('제어 권한이 없습니다.')
+        }
+        if (status === 404) {
+          toast.error('존재하지 않는 글입니다.')
+        }
+      }
     },
   })
-
   useEffect(() => {
-    const id = router.query.id
     const initialTitle = router.query.title as string
     const initialContent = router.query.content as string
     if (id) {
@@ -44,7 +58,7 @@ export default function NoticeWritePage() {
         content: initialContent || '',
       })
     }
-  }, [router])
+  }, [id, router])
 
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -56,12 +70,11 @@ export default function NoticeWritePage() {
     }))
   }
 
-  const onClick = async () => {
-    if (id) {
-      await noticeModify(notice)
-    } else {
-      await noticeCreate(notice)
-    }
+  const onClick = () => {
+    if (title === '' || content === '') toast.warning('제목이나 내용을 입력해주세요')
+    if (id !== 'undefined') noticeModify(notice)
+    else noticeCreate(notice)
+
     router.push('/notice', undefined, { shallow: true })
   }
 
@@ -86,8 +99,8 @@ export default function NoticeWritePage() {
               placeholder='제목을 입력해주세요.'
               border='1px solid #C0C0C0'
               borderRadius='8px'
-              onChange={(e) => onChange(e)}
               value={title}
+              onChange={(e) => onChange(e)}
               name='title'
             />
           </S.InputContainer>
@@ -102,8 +115,8 @@ export default function NoticeWritePage() {
               borderColor='#c0c0c0'
               placeholder='내용을 작성해주세요.'
               fontSize='0.8rem'
-              onChange={(e) => onChange(e)}
               value={content}
+              onChange={onChange}
               name='content'
             />
           </S.InputContainer>

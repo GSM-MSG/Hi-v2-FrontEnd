@@ -1,42 +1,37 @@
+import { get, userQueryKeys, userUrl } from '@/apis'
 import * as SVG from '@/assets/svg'
-import { Input, PageContainer } from '../commons'
-import * as S from './style'
-import UserItemList from './UserItemList'
-import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil'
-import { UserList } from '@/atoms'
-import { UserItemType } from '@/types/components'
-import { useGetRole, useFetch } from '@/hooks'
+import { useGetRole } from '@/hooks'
+import { UserItemListType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Input, PageContainer } from '../commons'
+import UserItem from './UserItem'
+import * as S from './style'
 
 export default function UserPage() {
-  const form = useForm({ defaultValues: { user: '' } })
-  const { register, watch, handleSubmit } = form
-  const setUserList = useSetRecoilState(UserList)
-  const { fetch } = useFetch<UserItemType[]>({
-    url: `/user/search?keyword=${watch('user')}`,
-    method: 'get',
-    onSuccess: (data: UserItemType[]) => {
-      setUserList(data)
-    },
+  const [user, setUser] = useState<string>('')
+  const { data, refetch } = useQuery<AxiosResponse<UserItemListType>>({
+    queryKey: userQueryKeys.searchUser(),
+    queryFn: () => get(userUrl.searchUser(user)),
   })
-  const { isStudent } = useGetRole()
+  const { length } = useGetRole()
   const router = useRouter()
 
   useEffect(() => {
-    if (isStudent) {
-      router.push('/')
-    }
-  }, [isStudent, router])
+    if (length === 1) router.push('/')
+  }, [length, router])
 
-  const onSubmit = async (data: any) => await fetch(data)
-
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    refetch()
+  }
   return (
     <PageContainer paddingTop='6vh' paddingBottom='4vh'>
       <S.UserTitleContainer>
         <h1>학생정보</h1>
-        <S.InputWrapper onSubmit={handleSubmit(onSubmit)}>
+        <S.InputWrapper onSubmit={onSubmit}>
           <Input
             width='320px'
             height='28px'
@@ -44,14 +39,45 @@ export default function UserPage() {
             borderRadius='20px'
             placeholder='이름을 입력해 주세요.'
             focus={true}
-            {...register('user')}
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
           />
-          <S.SearchIconWrapper onClick={handleSubmit(onSubmit)}>
+          <S.SearchIconWrapper onClick={onSubmit}>
             <SVG.SearchIcon />
           </S.SearchIconWrapper>
         </S.InputWrapper>
       </S.UserTitleContainer>
-      <UserItemList />
+      <S.UserItemListContainer>
+        {data?.data.map(
+          (
+            {
+              userId,
+              email,
+              name,
+              grade,
+              classNum,
+              number,
+              profileImageUrl,
+              roles,
+              useStatus,
+            },
+            idx
+          ) => (
+            <UserItem
+              key={idx}
+              userId={userId}
+              email={email}
+              name={name}
+              grade={grade}
+              classNum={classNum}
+              number={number}
+              profileImageUrl={profileImageUrl}
+              roles={roles}
+              useStatus={useStatus}
+            />
+          )
+        )}
+      </S.UserItemListContainer>
     </PageContainer>
   )
 }

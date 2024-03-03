@@ -1,6 +1,18 @@
-import { Button, ButtonContainer, CheckModalContainer, Portal } from '@/components'
-import {useFetch, useModal} from '@/hooks'
-import { useRouter } from 'next/navigation'
+import {
+  del,
+  homebaseQueryKeys,
+  reservationQueryKeys,
+  reservationUrl
+} from '@/apis'
+import {
+  Button,
+  ButtonContainer,
+  CheckModalContainer,
+  Portal,
+} from '@/components'
+import { useModal } from '@/hooks'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
 export default function DeleteTableCheckModal({
@@ -8,14 +20,17 @@ export default function DeleteTableCheckModal({
 }: {
   reservationId: string | undefined
 }) {
-  const router = useRouter()
   const { openModal, closeModal } = useModal()
-  const { fetch } = useFetch({
-    url: `/reservation/${reservationId}`,
-    method: 'delete',
-    successMessage: '예약 테이블을 삭제했습니다',
+  const { refetch } = useQuery({
+    queryKey: homebaseQueryKeys.list(),
+  })
+  const { mutate } = useMutation<void, Error>({
+    mutationKey: reservationQueryKeys.delete(reservationId),
+    mutationFn: () => del(reservationUrl.requestId(reservationId)),
     onSuccess: () => {
+      toast.success('예약 테이블을 삭제했습니다')
       closeModal()
+      refetch()
     },
   })
 
@@ -55,10 +70,7 @@ export default function DeleteTableCheckModal({
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={async () => {
-              await fetch()
-              router.refresh()
-            }}
+            onClick={() => mutate()}
           >
             확인
           </Button>

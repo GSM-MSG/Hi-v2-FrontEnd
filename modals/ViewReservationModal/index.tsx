@@ -1,18 +1,16 @@
+import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { TableCheckIcon, XMark } from '@/assets'
 import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
-import { useFetch, useModal } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import {
   DeleteTableCheckModal,
   LeaveReservationTableModal,
   RepresentativeMandateModal,
 } from '@/modals'
-import {
-  GetRoleType,
-  ViewReservationData,
-  ViewReservationDataTypes,
-} from '@/types'
-import { useEffect } from 'react'
+import { ViewReservationData, ViewReservationDataTypes } from '@/types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
 
@@ -22,56 +20,47 @@ export default function ViewReservationModal({
   reservationId: string | undefined
 }) {
   const reservationPlace = useRecoilValue(ReservationPlace)
-  const { fetch, data } = useFetch<ViewReservationData>({
-    url: `/reservation/${reservationId}`,
-    method: 'get',
+  const { data, refetch } = useQuery<AxiosResponse<ViewReservationData>>({
+    queryKey: reservationQueryKeys.detail(reservationId),
+    queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
-
-  const { fetch: updateCheck } = useFetch<GetRoleType>({
-    url: `/reservation/${reservationId}/check-status`,
-    method: 'patch',
+  const { isTeacher, userId } = useGetRole()
+  const { mutate } = useMutation<
+    void,
+    Error,
+    { checkStatus: boolean | undefined }
+  >({
+    mutationKey: reservationQueryKeys.check(reservationId),
+    mutationFn: (modifyValue) =>
+      patch(reservationUrl.check(reservationId), modifyValue),
+    onSuccess: () => refetch()
   })
-
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
-  })
-
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${reservationPlace.floor}F` },
-    { name: '예약 테이블', content: `${data?.reservationNumber}번` },
+    { name: '예약 테이블', content: `${data?.data.reservationNumber}번` },
     { name: '예약 멤버' },
-    { name: '예약 사유', content: `${data?.reason}` },
+    { name: '예약 사유', content: `${data?.data.reason}` },
   ]
-
   const { openModal, closeModal } = useModal()
-
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [fetch])
-
-  useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
 
   return (
     <Portal onClose={closeModal}>
       <S.ViewReservationModalContainer>
         <TitleBox>
           <Title>
-            {roleData?.role.includes('ROLE_TEACHER') && (
+            {isTeacher && (
               <div
-                onClick={async () => await updateCheck(data?.checkStatus)}
+                onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
                 style={{
                   cursor: 'pointer',
                   marginTop: '0.12rem',
                   marginRight: '0.3rem',
                 }}
               >
-                <TableCheckIcon checkStatus={data?.checkStatus} />
+                <TableCheckIcon checkStatus={data?.data.checkStatus} />
               </div>
             )}
-            {data?.reservationNumber}
+            {data?.data.reservationNumber}번 테이블
           </Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
             <XMark width='24' height='24' />
@@ -85,8 +74,8 @@ export default function ViewReservationModal({
                 <S.ViewReservationDataColumn key={idx} column={idx}>
                   <span>{view.name}</span>
                   <p>
-                    {data?.users.map((user) =>
-                      user.userId === data?.representativeId ? (
+                    {data?.data.users.map((user) =>
+                      user.userId === data?.data.representativeId ? (
                         <b key={user.userId}>{user.name} </b>
                       ) : (
                         <span
@@ -117,7 +106,7 @@ export default function ViewReservationModal({
           </S.ViewReservationDataContainer>
         </S.ViewReservationDataBox>
         <S.ViewReservationButtonContainer>
-          {data?.representativeId === roleData?.userId && (
+          {data?.data.representativeId === userId && (
             <Button
               width='30%'
               height='3.2rem'
@@ -129,15 +118,17 @@ export default function ViewReservationModal({
               borderRadius='8px'
               onClick={() =>
                 openModal(
-                  <DeleteTableCheckModal reservationId={data?.reservationId} />
+                  <DeleteTableCheckModal
+                    reservationId={data?.data.reservationId}
+                  />
                 )
               }
             >
               삭제
             </Button>
           )}
-          {data?.users.some((user) => user.userId === roleData?.userId) &&
-            data.representativeId !== roleData?.userId && (
+          {data?.data.users.some((user) => user.userId === userId) &&
+            data.data.representativeId !== userId && (
               <Button
                 width='30%'
                 height='3.2rem'
@@ -150,8 +141,8 @@ export default function ViewReservationModal({
                 onClick={() =>
                   openModal(
                     <LeaveReservationTableModal
-                      reservationId={data?.reservationId}
-                      reservationNumber={data.reservationNumber}
+                      reservationId={data?.data.reservationId}
+                      reservationNumber={data?.data.reservationNumber}
                     />
                   )
                 }
@@ -162,8 +153,8 @@ export default function ViewReservationModal({
 
           <Button
             width={
-              data?.users.some((user) => user.userId === roleData?.userId) ||
-              data?.representativeId === roleData?.userId
+              data?.data.users.some((user) => user.userId === userId) ||
+              data?.data.representativeId === userId
                 ? '70%'
                 : '100%'
             }

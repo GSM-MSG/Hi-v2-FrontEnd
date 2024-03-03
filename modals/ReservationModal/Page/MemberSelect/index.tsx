@@ -1,3 +1,5 @@
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { SearchIcon, UserProfile, XMark } from '@/assets'
 import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
 import {
   Button,
@@ -7,55 +9,48 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { useFetch } from '@/hooks'
-import { GetRoleType, UserItemType } from '@/types'
+import { useGetRole } from '@/hooks'
+import { UserItemType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { SearchIcon, UserProfile, XMark } from '@/assets'
 
 function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
-  const form = useForm({ defaultValues: { member: '' } })
-  const { register, watch, setValue } = form
-  const { isLoading, fetch, data } = useFetch<UserItemType[]>({
-    url: `/user/search-student?keyword=${watch('member')}`,
-    method: 'get',
-  })
+  // const form = useForm({ defaultValues: { member: '' } })
+  // const { register, watch, setValue } = form
+  const [member, setMember] = useState<string>('')
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
+  const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
+    queryKey: userQueryKeys.searchStudent(),
+    queryFn: () => get(userUrl.searchStudent(member)),
   })
+  const { userId } = useGetRole()
 
   useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
-
-  useEffect(() => {
-    if (!watch('member').trim()) return
-
+    if (!member.trim()) return
     const delayFetch = setTimeout(() => {
-      fetch()
+      refetch()
     }, 1000)
-
     return () => clearTimeout(delayFetch)
-  }, [fetch, watch])
+  }, [member, refetch])
 
   const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId)) {
       return toast.warning('이미 포함된 멤버입니다')
-    } else if (member.userId === roleData?.userId) {
+    } else if (member.userId === userId) {
       return toast.warning('자신을 제외한 멤버를 선택해주세요')
     }
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
-    setValue('member', '')
+    setMember('')
   }
 
   const deleteMembers = (member: UserItemType) => {
@@ -66,7 +61,7 @@ function MemberSelect() {
 
     setShowMembers(filteredShowMembers)
     setTeamMembers(filteredTeamMembers)
-    setValue('member', '')
+    setMember('')
   }
 
   const onNext = () => {
@@ -99,10 +94,11 @@ function MemberSelect() {
           fontSize='1rem'
           border='none'
           autoComplete='new-password'
-          {...register('member')}
+          value={member}
+          onChange={(e) => setMember(e.target.value)}
         />
-        {watch('member').length > 0 && (
-          <div className='cancelIcon' onClick={() => setValue('member', '')}>
+        {member.length > 0 && (
+          <div className='cancelIcon' onClick={() => setMember('')}>
             <XMark />
           </div>
         )}
@@ -126,15 +122,15 @@ function MemberSelect() {
         <S.LoadingMemberListBox>
           <span>학생정보를 찾는 중입니다.</span>
         </S.LoadingMemberListBox>
-      ) : data?.length === 0 ? (
+      ) : data?.data.length === 0 ? (
         <S.LoadingMemberListBox>
           <span>학생정보를 찾을 수 없습니다.</span>
         </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
-          {watch('member')?.trim() &&
-            data
-              ?.sort((a, b) => {
+          {member.trim() &&
+            data?.data
+              .sort((a, b) => {
                 const aStudentNum = parseInt(
                   `${a.grade}${a.classNum}${a.number
                     .toString()
