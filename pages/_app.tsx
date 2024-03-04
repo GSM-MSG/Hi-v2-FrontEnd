@@ -6,6 +6,57 @@ import type { AppProps } from 'next/app'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { RecoilRoot } from 'recoil'
+import localFont from 'next/font/local'
+
+const pretendard = localFont({
+  src: [
+    {
+      path: '../public/fonts/Pretendard-Black.woff',
+      weight: '900',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-ExtraBold.woff',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-Bold.woff',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-SemiBold.woff',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-Medium.woff',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-Light.woff',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-ExtraLight.woff',
+      weight: '200',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Pretendard-Thin.woff',
+      weight: '100',
+      style: 'normal',
+    },
+  ],
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -13,7 +64,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <Layout>
-          <Component {...pageProps} />
+          <main className={pretendard.className}>
+            <Component {...pageProps} />
+          </main>
         </Layout>
         <ReactQueryDevtools initialIsOpen={true} />
         <ToastContainer position='top-right' theme='colored' autoClose={2000} />
