@@ -75,8 +75,8 @@ export const TalkBox = styled.div`
     @media screen and (max-width: 600px) {
       position: static;
       background-image: url('../assets/png/HiResponsiveTalkGirl.png');
-      width: 380px;
-      height: 380px;
+      width: 500px;
+      height: 280px;
       &:last-of-type {
         margin-top: 7rem;
       }
@@ -84,7 +84,7 @@ export const TalkBox = styled.div`
 
     @media screen and (max-width: 400px) {
       width: 360px;
-      height: 380px;
+      height: 280px;
       &:last-of-type {
         margin-top: 7rem;
       }
