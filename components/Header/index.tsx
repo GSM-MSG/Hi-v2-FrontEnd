@@ -1,8 +1,11 @@
+import { authQueryKeys, authUrl, del } from '@/apis'
 import TokenManager from '@/apis/TokenManager'
 import { HiLogo } from '@/assets'
 import { headerMenuList } from '@/constants'
-import { useGetRole, useLogout, useModal } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import { LoginModal } from '@/modals'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -12,10 +15,23 @@ import * as S from './style'
 function Header() {
   const router = useRouter()
   const { openModal } = useModal()
-  const logout = useLogout()
   const { isAdmin, isTeacher } = useGetRole()
   const [loginText, setLoginText] = useState<'로그인' | '로그아웃'>('로그인')
   const tokenManager = new TokenManager()
+  const { mutate } = useMutation<void, AxiosError>({
+    mutationKey: authQueryKeys.logout(),
+    mutationFn: () =>
+      del(authUrl.auth(), {
+        headers: {
+          Authorization: `Bearer ${tokenManager.accessToken}`,
+          RefreshToken: tokenManager.refreshToken,
+        },
+      }),
+    onSuccess: () => {
+      tokenManager.removeTokens()
+      router.push('/')
+    },
+  })
 
   useEffect(() => {
     if (tokenManager.accessToken) setLoginText('로그아웃')
@@ -58,7 +74,7 @@ function Header() {
       </S.MenuListBox>
       <S.LoginBtn
         onClick={() =>
-          tokenManager.accessToken ? logout() : openModal(<LoginModal />)
+          tokenManager.accessToken ? mutate() : openModal(<LoginModal />)
         }
       >
         {loginText}

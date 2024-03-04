@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 export const HomeSection2 = styled.div`
   width: 100vw;
@@ -45,11 +45,50 @@ export const IntroductoryTextBox2 = styled.div`
 export const TalkBox = styled.div`
   position: relative;
   display: flex;
+  justify-content: space-between;
   width: 100%;
   margin-top: 3.5rem;
-
+  
   @media screen and (max-width: 600px) {
     flex-direction: column;
     align-items: center;
   }
+
+  img {
+    position: absolute;
+    background-image: url('../assets/png/HiTalkGirl.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 520px;
+    height: 280px;
+
+    &:first-of-type {
+      left: 0;
+    }
+    
+    &:last-of-type {
+      right: 0;
+      top: 12rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      position: static;
+      background-image: url('../assets/png/HiResponsiveTalkGirl.png');
+      width: 500px;
+      height: 280px;
+      &:last-of-type {
+        margin-top: 7rem;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 360px;
+      height: 280px;
+      &:last-of-type {
+        margin-top: 7rem;
+      }
+    }
+  }
+
 `
