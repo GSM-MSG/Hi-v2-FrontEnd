@@ -23,7 +23,6 @@ export const DescriptionContainer = styled.div`
   padding-right: 240px;
 
   img {
-    z-index: 9;
     box-shadow: 0px 8px 30px 0px rgba(112, 144, 176, 0.12);
   }
 `
@@ -36,6 +35,7 @@ export const Circle1 = styled.div`
   border-radius: 50%;
   top: 9%;
   left: -14%;
+  z-index: -1;
 `
 
 export const Circle2 = styled.div`
@@ -46,6 +46,7 @@ export const Circle2 = styled.div`
   border-radius: 50%;
   bottom: 17%;
   right: 20%;
+  z-index: -1;
 `
 
 export const IntroductoryTextBox3 = styled.div`
