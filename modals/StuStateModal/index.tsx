@@ -1,42 +1,41 @@
-import Portal from '@/components/Portal'
+import { get, patch, userQueryKeys, userUrl } from '@/apis'
+import { SelectedUser } from '@/atoms'
+import { Button, Portal } from '@/components'
+import { useModal } from '@/hooks'
+import { UserItemListType } from '@/types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosError, AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
+import { useRecoilValue } from 'recoil'
 import * as S from './style'
-import { SelectedUser, UserList } from '@/atoms'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
-import { UserItemListType } from '@/types/components'
-import { Button } from '@/components/commons'
 
 export default function StudentStateModal() {
-  const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
 
-  const { fetch: userlistRefetch } = useFetch<UserItemListType>({
-    url: '/user/all',
-    method: 'get',
-    onSuccess: (data) => {
-      setUserList(data.users)
-    },
+  const { refetch } = useQuery<AxiosResponse<UserItemListType>>({
+    queryKey: userQueryKeys.searchUser(),
   })
 
-  const { fetch } = useFetch({
-    url: `/user/${selectedUser.userId}`,
-    method: 'patch',
-    onSuccess: closeModal,
-    successMessage: '예약 상태가 변경되었습니다.',
-    errorMessage: {
-      401: '토큰 값이 이상하거나 변질되었습니다.',
+  const { mutate } = useMutation<
+    void,
+    AxiosError,
+    { status: 'AVAILABLE' | 'UNAVAILABLE' }
+  >({
+    mutationKey: userQueryKeys.studentStatus(),
+    mutationFn: (modifyValue) => patch(userUrl.requestId(selectedUser.userId), modifyValue),
+    onSuccess: () => {
+      toast.success('예약 상태가 변경되었습니다.')
+      refetch()
+      closeModal()
+    },
+    onError: (error) => {
+      if (error) {
+        const status = error.status
+        if (status === 401) toast.error('토큰 값이 이상하거나 변질되었습니다.')
+      }
     },
   })
-
-  const changeStudentState = async () => {
-    await fetch({
-      status:
-        selectedUser.useStatus === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE',
-    })
-    await userlistRefetch()
-  }
 
   return (
     <Portal onClose={closeModal}>
@@ -74,7 +73,14 @@ export default function StudentStateModal() {
             border='1px solid #0066FF'
             borderRadius='8px'
             color='#fff'
-            onClick={changeStudentState}
+            onClick={() =>
+              mutate({
+                status:
+                  selectedUser.useStatus === 'AVAILABLE'
+                    ? 'UNAVAILABLE'
+                    : 'AVAILABLE',
+              })
+            }
           >
             확인
           </Button>

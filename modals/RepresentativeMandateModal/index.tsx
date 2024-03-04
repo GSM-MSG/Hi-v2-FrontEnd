@@ -1,10 +1,15 @@
-import { Title, Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useModal from '@/hooks/useModal'
-import * as SVG from '@/assets/svg'
-import * as S from './style'
-import { ButtonContainer } from '../DeleteTableCheckModal/style'
-import useFetch from '@/hooks/useFetch'
+import { patch, reservationQueryKeys, reservationUrl } from '@/apis'
+import { XMark } from '@/assets'
+import {
+  Button,
+  ButtonContainer,
+  CheckModalContainer,
+  Portal,
+  Title,
+} from '@/components'
+import { useModal } from '@/hooks'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
 export default function RepresentativeMandateModal({
@@ -17,18 +22,18 @@ export default function RepresentativeMandateModal({
   reservationId: string | undefined
 }) {
   const { openModal, closeModal } = useModal()
-  const { fetch } = useFetch({
-    url: `/reservation/${reservationId}/${userId}`,
-    method: 'patch',
-    successMessage: `${username}님을 대표자로 위임했습니다`,
+  const { mutate } = useMutation<void, Error>({
+    mutationKey: reservationQueryKeys.delegate(reservationId, userId),
+    mutationFn: () => patch(reservationUrl.delegate({ reservationId, userId })),
     onSuccess: () => {
+      toast.success(`${username}님을 대표자로 위임했습니다`)
       openModal(<ViewReservationModal reservationId={reservationId} />)
     },
   })
 
   return (
     <Portal onClose={closeModal}>
-      <S.RepresentativeMandateModalContainer>
+      <CheckModalContainer style={{ height: '170px' }}>
         <Title>
           <h2>대표자 위임</h2>
           <div
@@ -37,7 +42,7 @@ export default function RepresentativeMandateModal({
             }
             style={{ cursor: 'pointer' }}
           >
-            <SVG.XMark />
+            <XMark />
           </div>
         </Title>
         <p>{username}님을 대표자로 위임하시겠습니까?</p>
@@ -51,12 +56,12 @@ export default function RepresentativeMandateModal({
             fontWeight='500'
             border='1px solid #0066ff'
             borderRadius='8px'
-            onClick={async () => await fetch()}
+            onClick={() => mutate()}
           >
-            대표자 위임
+            위임하기
           </Button>
         </ButtonContainer>
-      </S.RepresentativeMandateModalContainer>
+      </CheckModalContainer>
     </Portal>
   )
 }

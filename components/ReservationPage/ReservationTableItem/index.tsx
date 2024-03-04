@@ -1,16 +1,19 @@
-import * as S from './style'
-import * as SVG from '@/assets/svg'
-import useModal from '@/hooks/useModal'
-import { ReservationDataType } from '@/types/modals'
-import { useEffect, useState } from 'react'
-import ViewReservationModal from '@/modals/ViewReservationModal'
-import { useFetch } from '@/hooks'
-import ReservationModal from '@/modals/ReservationModal'
-import ConfirmReservationModal from '@/modals/ReservationModal/ConfirmReservationModal'
-import { useSetRecoilState } from 'recoil'
+import { BackArrowIcon } from '@/assets'
 import { ShowMembers, TeamMembers } from '@/atoms'
-import { MyPageType } from '@/types/components'
+import { useModal } from '@/hooks'
+import {
+  ConfirmReservationModal,
+  ReservationModal,
+  ViewReservationModal,
+} from '@/modals'
+import { MyPageType, ReservationDataType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useSetRecoilState } from 'recoil'
+import * as S from './style'
+import { get, userQueryKeys, userUrl } from '@/apis'
 
 export default function ReservationTableItem({
   item,
@@ -23,14 +26,10 @@ export default function ReservationTableItem({
   const setTeamMembers = useSetRecoilState(TeamMembers)
   const [showDetailName, setShowDetailName] = useState<boolean>(false)
   const { openModal } = useModal()
-  const { fetch, data } = useFetch<MyPageType>({
-    url: '/user/my-page',
-    method: 'get',
+  const { data } = useQuery<AxiosResponse<MyPageType>>({
+    queryKey: userQueryKeys.my(),
+    queryFn: () => get(userUrl.my()),
   })
-
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [fetch])
 
   const onModify = (item: ReservationDataType) => {
     setShowMembers(
@@ -56,7 +55,7 @@ export default function ReservationTableItem({
     openModal(
       typeof item !== 'number' ? (
         <ViewReservationModal reservationId={item.reservationId} />
-      ) : data?.useStatus === 'AVAILABLE' ? (
+      ) : data?.data.useStatus === 'AVAILABLE' ? (
         <ConfirmReservationModal reservationNumber={reservationNumber} />
       ) : (
         toast.info('예약이 불가능한 상태입니다')
@@ -84,7 +83,7 @@ export default function ReservationTableItem({
                   ? item.users[0].name
                   : `${item.users[0].name} 외 ${item.users.length - 1} 명`}
               </span>
-              {item.users.length !== 1 && <SVG.BackArrowIcon />}
+              {item.users.length !== 1 && <BackArrowIcon />}
             </>
           ) : (
             '예약 가능 합니다.'
@@ -102,7 +101,7 @@ export default function ReservationTableItem({
       <div
         style={{ marginTop: '7rem', overflow: 'hiddlen', whiteSpace: 'nowrap' }}
       >
-        {typeof item !== 'number' && item.representativeId === data?.userId && (
+        {typeof item !== 'number' && item.representativeId === data?.data.userId && (
           <span style={{ marginRight: '1rem' }} onClick={() => onModify(item)}>
             예약수정
           </span>

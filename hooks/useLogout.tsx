@@ -1,12 +1,11 @@
-import API from '@/apis'
+import API from '@/apis/instance'
 import TokenManager from '@/apis/TokenManager'
-import { useSetRecoilState } from 'recoil'
-import { HasLogin } from '@/atoms'
+import { useRouter } from 'next/router'
 
 export default function useLogout() {
-  const setHasLogin = useSetRecoilState<boolean>(HasLogin)
   const tokenManager = new TokenManager()
-
+  const router = useRouter()
+  
   const logout = async () => {
     await API.delete('/auth', {
       headers: {
@@ -14,8 +13,8 @@ export default function useLogout() {
         RefreshToken: tokenManager.refreshToken,
       },
     })
-    setHasLogin(false)
     tokenManager.removeTokens()
+    router.push('/')
   }
 
   return logout

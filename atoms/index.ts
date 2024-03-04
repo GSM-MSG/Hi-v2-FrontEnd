@@ -1,5 +1,4 @@
 import { UserItemType } from '@/types/components'
-import { getStorage } from '@/utils/Storage'
 import { ReactNode } from 'react'
 import { atom } from 'recoil'
 
@@ -12,11 +11,6 @@ export const ReservationPlace = atom<{ floor: number; period: number }>({
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
 
-export const HasLogin = atom<boolean>({
-  key: 'HasLogin',
-  default: false,
-})
-
 export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
   default: [],
@@ -25,11 +19,6 @@ export const ShowMembers = atom<UserItemType[]>({
 export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
 
 export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })
-
-export const UserList = atom<UserItemType[]>({
-  key: 'UserList',
-  default: [],
-})
 
 export const SelectedUser = atom<UserItemType>({
   key: 'SelectedUser',
@@ -43,6 +32,5 @@ export const SelectedUser = atom<UserItemType>({
     profileImageUrl: '',
     roles: [],
     useStatus: 'AVAILABLE',
-    role: {},
   },
 })

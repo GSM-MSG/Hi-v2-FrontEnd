@@ -1,5 +1,5 @@
-import MyPage from '@/components/MyPage'
-import SEO from '@/components/SEO'
+import { MyPage, SEO } from "@/components";
+
 
 export default function user() {
   return (
