@@ -1,3 +1,4 @@
+import { ReservationDataType } from '@/types'
 import { UserItemType } from '@/types/components'
 import { ReactNode } from 'react'
 import { atom } from 'recoil'
@@ -7,6 +8,11 @@ export const IsModal = atom<ReactNode>({ key: 'IsModal', default: null })
 export const ReservationPlace = atom<{ floor: number; period: number }>({
   key: 'Place',
   default: { floor: 2, period: 8 },
+})
+
+export const ReservationTables = atom<number[] | ReservationDataType[]>({
+  key: 'ReservationTables',
+  default: [1, 2, 3, 4, 5],
 })
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })

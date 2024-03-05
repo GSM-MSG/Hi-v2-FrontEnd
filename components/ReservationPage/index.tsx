@@ -6,21 +6,23 @@ import {
   reservationQueryKeys,
   reservationUrl,
 } from '@/apis'
-import { ReservationPlace } from '@/atoms'
+import { ReservationPlace, ReservationTables } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
 import { PlaceSelect } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
+  const [reservationTables, setReservationTables] =
+    useRecoilState(ReservationTables)
   const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
     queryKey: homebaseQueryKeys.list(),
     queryFn: () =>
@@ -42,18 +44,16 @@ function ReservationPage() {
   })
   const { isAdmin } = useGetRole()
   const { openModal } = useModal()
-  const [reservationTables, setReservationTables] = useState([1, 2, 3, 4, 5])
 
   useEffect(() => {
-    refetch()
     setReservationTables([1, 2, 3, 4, 5])
     setReservationTables((prev: any) =>
       prev.map(
         (e: any) => data?.data.find((obj) => obj.reservationNumber === e) || e
       )
     )
-  }, [refetch, data, setReservationTables])
-  
+  }, [data?.data, setReservationTables])
+
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
       <S.ReservationTitleBox>
