@@ -102,6 +102,8 @@ export default function NoticeWritePage() {
               value={title}
               onChange={(e) => onChange(e)}
               name='title'
+              focus={true}
+              maxLength={20}
             />
           </S.InputContainer>
           <S.InputContainer>
@@ -118,6 +120,7 @@ export default function NoticeWritePage() {
               value={content}
               onChange={onChange}
               name='content'
+              maxLength={200}
             />
           </S.InputContainer>
           <Button
