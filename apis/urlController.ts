@@ -22,8 +22,6 @@ export const homebaseUrl = {
 export const reservationUrl = {
   requestId: (reservationId: string | undefined) =>
     `/reservation/${reservationId}`,
-  delegate: (ids: reservationIdsType) =>
-    `/reservation/${ids.reservationId}/${ids.userId}`,
   exit: (reservationId: string | undefined) =>
     `/reservation/${reservationId}/exit`,
   check: (reservationId: string | undefined) =>

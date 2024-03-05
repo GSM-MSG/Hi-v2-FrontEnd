@@ -2,10 +2,10 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 export const ModalContainer = styled.div`
-  width: 320px;
-  height: 210px;
+  width: 338px;
+  height: 217px;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   padding: 16px 20px;

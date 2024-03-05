@@ -66,7 +66,7 @@ export default function LeaveReservationTableModal({
             borderRadius='8px'
             onClick={() => mutate()}
           >
-            확인
+            나가기
           </Button>
         </ButtonContainer>
       </CheckModalContainer>

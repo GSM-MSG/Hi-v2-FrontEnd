@@ -1,23 +1,23 @@
 export default function CompltedImg() {
   return (
     <svg
-      width='100'
-      height='100'
-      viewBox='0 0 120 120'
+      width='72'
+      height='72'
+      viewBox='0 0 72 72'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
       <circle
-        cx='60'
-        cy='60'
-        r='56.3636'
+        cx='36'
+        cy='36'
+        r='33.8182'
         stroke='#0066FF'
-        strokeWidth='7.27273'
+        strokeWidth='4.36364'
       />
       <path
-        d='M38.2773 60.9434L55.7496 79.1239L85.9718 43.9434'
+        d='M22.9688 36.5652L33.4521 47.4736L51.5854 26.3652'
         stroke='#0066FF'
-        strokeWidth='7.27273'
+        strokeWidth='4.36364'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
