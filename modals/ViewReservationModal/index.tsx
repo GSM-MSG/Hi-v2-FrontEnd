@@ -33,7 +33,7 @@ export default function ViewReservationModal({
     mutationKey: reservationQueryKeys.check(reservationId),
     mutationFn: (modifyValue) =>
       patch(reservationUrl.check(reservationId), modifyValue),
-    onSuccess: () => refetch()
+    onSuccess: () => refetch(),
   })
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${reservationPlace.floor}F` },
@@ -49,16 +49,11 @@ export default function ViewReservationModal({
         <TitleBox>
           <Title>
             {isTeacher && (
-              <div
+              <S.TableCheckBox
                 onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
-                style={{
-                  cursor: 'pointer',
-                  marginTop: '0.12rem',
-                  marginRight: '0.3rem',
-                }}
               >
                 <TableCheckIcon checkStatus={data?.data.checkStatus} />
-              </div>
+              </S.TableCheckBox>
             )}
             {data?.data.reservationNumber}번 테이블
           </Title>

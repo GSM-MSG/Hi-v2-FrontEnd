@@ -5,6 +5,12 @@ export const ViewReservationModalContainer = styled(PlaceSelectContainer)`
   height: 480px;
 `
 
+export const TableCheckBox = styled.div`
+  cursor: pointer;
+  margin-top: 4px;
+  margin-right: 4px;
+`
+
 export const ViewReservationDataBox = styled.div`
   width: 100%;
   height: 223px;
