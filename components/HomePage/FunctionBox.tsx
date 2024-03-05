@@ -1,9 +1,7 @@
+import { HiFunctionIcon1, HiFunctionIcon2, HiFunctionIcon3 } from '@/assets'
+import { FunctionBoxPropsType } from '@/types'
 import styled from '@emotion/styled'
 import Image from 'next/image'
-import HiFunctionIcon1 from '@/assets/png/HiFunctionIcon1.png'
-import HiFunctionIcon2 from '@/assets/png/HiFunctionIcon2.png'
-import HiFunctionIcon3 from '@/assets/png/HiFunctionIcon3.png'
-import { FunctionBoxPropsType } from '@/types/components'
 
 const FunctionBoxBlock = styled.div`
   display: flex;

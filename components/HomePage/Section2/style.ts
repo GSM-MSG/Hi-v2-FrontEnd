@@ -56,10 +56,6 @@ export const TalkBox = styled.div`
 
   img {
     position: absolute;
-    background-image: url('../assets/png/HiTalkGirl.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     width: 520px;
     height: 280px;
 
@@ -74,7 +70,6 @@ export const TalkBox = styled.div`
 
     @media screen and (max-width: 600px) {
       position: static;
-      background-image: url('../assets/png/HiResponsiveTalkGirl.png');
       width: 500px;
       height: 280px;
       &:last-of-type {
