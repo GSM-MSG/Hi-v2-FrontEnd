@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
 export const ModalContainer = styled.div`
-  width: 300px;
+  width: 312px;
   height: 200px;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;

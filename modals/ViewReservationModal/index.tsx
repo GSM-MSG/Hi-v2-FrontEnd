@@ -5,8 +5,7 @@ import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import {
   DeleteTableCheckModal,
-  LeaveReservationTableModal,
-  RepresentativeMandateModal,
+  LeaveReservationTableModal
 } from '@/modals'
 import { ViewReservationData, ViewReservationDataTypes } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -73,20 +72,7 @@ export default function ViewReservationModal({
                       user.userId === data?.data.representativeId ? (
                         <b key={user.userId}>{user.name} </b>
                       ) : (
-                        <span
-                          key={user.userId}
-                          onClick={() =>
-                            openModal(
-                              <RepresentativeMandateModal
-                                username={user.name}
-                                userId={user.userId}
-                                reservationId={reservationId}
-                              />
-                            )
-                          }
-                        >
-                          {user.name}{' '}
-                        </span>
+                        <span key={user.userId}>{user.name} </span>
                       )
                     )}
                   </p>

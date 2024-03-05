@@ -21,7 +21,7 @@ export default function ConfirmReservationModal({
         <p>{reservationNumber}번 테이블을 예약하시겠습니까?</p>
         <ButtonContainer style={{ marginTop: '2rem' }}>
           <Button
-            width='48%'
+            width='142px'
             height='2.7rem'
             background='none'
             color='#c0c0c0'
@@ -37,7 +37,7 @@ export default function ConfirmReservationModal({
             취소
           </Button>
           <Button
-            width='48%'
+            width='142px'
             height='2.7rem'
             background='#0066ff'
             color='#ffffff'

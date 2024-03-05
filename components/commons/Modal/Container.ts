@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const CheckModalContainer = styled.div`
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 310px;
   height: 195px;
   padding: 1.6rem 1.4rem;
