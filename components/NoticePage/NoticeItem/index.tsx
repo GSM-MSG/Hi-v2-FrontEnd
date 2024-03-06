@@ -50,13 +50,13 @@ export default function NoticeItem({
         <S.NoticeIDXContainer>
           <S.NoticeIDX>{index}</S.NoticeIDX>
         </S.NoticeIDXContainer>
-        <S.NoticeTitle>{title}</S.NoticeTitle>
+        <S.NoticeTitle>
+          {title.length > 60 ? `${title.slice(0, 61)}...` : title}
+        </S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
         {(isAdmin || isTeacher) && (
-          <S.SVG onClick={onDelete}>
-            <XMark />
-          </S.SVG>
+          <XMark onClick={onDelete} width='24px' height='24px' />
         )}
       </S.NoticeItemWrapper>
     </S.NoticeItemContainer>

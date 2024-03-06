@@ -17,9 +17,9 @@ export const ShowCompleted = styled.div`
   justify-content: space-between;
 
   h2 {
-    color: #191919;
-    font-size: 1.3rem;
-    font-weight: 600;
+    ${({ theme }) => theme.typography.title.regular};
+    letter-spacing: -2px;
+    color: ${({ theme }) => theme.color.black};
   }
 `
 

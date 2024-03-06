@@ -108,7 +108,7 @@ function Reason({
           setReasonText(e.target.value)
         }
         height='18rem'
-        placeholder='예약 사유를 입력해주세요.'
+        placeholder='사유입력'
       />
       <S.ButtonContainer>
         <Button

@@ -67,7 +67,7 @@ export const IntroductoryTextBox3 = styled.div`
   }
 
   p {
-    color: #6c6c6c;
+    color: ${({theme}) => theme.color.Grayscale.gray07};
     font-size: 1.1rem;
     font-weight: 600;
   }

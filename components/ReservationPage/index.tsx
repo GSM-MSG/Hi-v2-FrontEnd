@@ -67,15 +67,11 @@ function ReservationPage() {
             {reservationPlace.floor}층 &#12685; {reservationPlace.period}교시
           </div>
         </S.ReservationTitle>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <S.ButtonContainer>
           <Button
-            width='3.8rem'
-            height='1.7rem'
             border='1px solid #0066ff'
-            borderRadius='4px'
+            borderRadius='8px'
             color='#0066ff'
-            fontSize='0.81rem'
-            fontWeight='500'
             background='none'
             hoverBackground='#0066ff'
             hoverColor='#ffffff'
@@ -85,23 +81,18 @@ function ReservationPage() {
           </Button>
           {isAdmin && (
             <Button
-              width='3.8rem'
-              height='1.7rem'
               border='1px solid #FF002E'
-              borderRadius='4px'
+              borderRadius='8px'
               color='#FF002E'
-              fontSize='0.81rem'
-              fontWeight='500'
               background='none'
               hoverBackground='#FF002E'
               hoverColor='#ffffff'
-              style={{ marginLeft: '0.3rem' }}
               onClick={() => mutate()}
             >
               전체삭제
             </Button>
           )}
-        </div>
+        </S.ButtonContainer>
       </S.ReservationTitleBox>
       <S.ReservationTableContainer>
         {reservationTables

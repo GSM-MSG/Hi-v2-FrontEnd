@@ -3,7 +3,16 @@ import { InputPropsType } from '@/types'
 import * as S from './style'
 
 function Input(
-  { width, height, border, borderRadius, focus, ...rest }: InputPropsType,
+  {
+    width,
+    height,
+    border,
+    borderRadius,
+    fontWeight,
+    lineHeight,
+    focus,
+    ...rest
+  }: InputPropsType,
   ref: any
 ) {
   return (

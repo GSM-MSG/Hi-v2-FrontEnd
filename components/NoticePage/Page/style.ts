@@ -6,8 +6,9 @@ export const NoticeTitleContainer = styled.div`
   align-items: center;
 
   h1 {
-    font-size: 1.6rem;
-    color: #3c3c43;
+    ${({theme}) => theme.typography.h4.bold};
+    color: ${({theme}) => theme.color.Grayscale.gray09};
+    line-height: 33.41px;
   }
 
   button {

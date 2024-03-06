@@ -9,9 +9,11 @@ import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { get, noticeQueryKeys, noticeUrl } from '@/apis'
 import { useGetRole } from '@/hooks'
+import { useEffect, useState } from 'react'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
+  const [isMounted, setIsMounted] = useState<boolean>(false)
   const id = String(router.query.id)
 
   const { data } = useQuery<AxiosResponse<NoticeDetailType>>({
@@ -20,9 +22,7 @@ export default function NoticeDetailPage() {
   })
 
   const { isAdmin, isTeacher } = useGetRole()
-
   const { title, content, createdAt, user } = data?.data || {}
-
   const onModify = () => {
     if (data) {
       router.push(
@@ -34,6 +34,10 @@ export default function NoticeDetailPage() {
       )
     }
   }
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <PageContainer
@@ -51,9 +55,12 @@ export default function NoticeDetailPage() {
             <S.DetailTitle>{title}</S.DetailTitle>
             {(isAdmin || isTeacher) && (
               <Button
-                width='48px'
-                height='26px'
+                width='45px'
+                height='24px'
                 border='none'
+                fontSize='12px'
+                fontWeight='500'
+                lineHeight='20px'
                 borderRadius='16px'
                 color='#9E9E9E'
                 background='#F5F5F5'
@@ -64,8 +71,8 @@ export default function NoticeDetailPage() {
             )}
           </S.DetailTitleContainer>
           <S.DetailInfo>
-            <div>작성일 : {dateToString(createdAt ?? '')}</div>
-            <div>작성자 : {user && user.name}</div>
+            <div>작성일 : { isMounted && dateToString(createdAt ?? '')}</div>
+            <div>작성자 : { isMounted && user?.name}</div>
           </S.DetailInfo>
           <S.DetailContent>{content}</S.DetailContent>
         </S.DetailWrapper>

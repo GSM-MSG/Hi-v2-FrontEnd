@@ -1,14 +1,14 @@
-import { Button } from '@/components/commons'
-import * as S from './style'
-import * as SVG from '@/assets/svg'
-import { UserItemType } from '@/types/components'
-import Image from 'next/image'
-import { useSetRecoilState } from 'recoil'
 import { SelectedUser } from '@/atoms'
+import { Button } from '@/components/commons'
+import { useGetRole } from '@/hooks'
 import useModal from '@/hooks/useModal'
 import StudentStateModal from '@/modals/StuStateModal'
 import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
-import { useGetRole } from '@/hooks'
+import { UserItemType } from '@/types/components'
+import Image from 'next/image'
+import { useSetRecoilState } from 'recoil'
+import * as S from './style'
+import { InfoProfile } from '@/assets'
 
 export default function UserItem({
   userId,
@@ -64,13 +64,14 @@ export default function UserItem({
         <S.UserProfileContainer>
           {profileImageUrl ? (
             <Image
+              width={48}
+              height={48}
               src={profileImageUrl}
               alt='profileImage'
-              layout='fill'
               objectFit='cover'
             />
           ) : (
-            <SVG.UserProfile />
+            <InfoProfile />
           )}
         </S.UserProfileContainer>
         <S.UserInfo>

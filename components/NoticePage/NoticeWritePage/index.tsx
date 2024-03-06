@@ -71,7 +71,8 @@ export default function NoticeWritePage() {
   }
 
   const onClick = () => {
-    if (title === '' || content === '') toast.warning('제목이나 내용을 입력해주세요')
+    if (title === '' || content === '')
+      toast.warning('제목이나 내용을 입력해주세요')
     if (id !== 'undefined') noticeModify(notice)
     else noticeCreate(notice)
 
@@ -96,6 +97,7 @@ export default function NoticeWritePage() {
             <Input
               width='100%'
               height='5vh'
+              fontSize='14px'
               placeholder='제목을 입력해주세요.'
               border='1px solid #C0C0C0'
               borderRadius='8px'
@@ -114,9 +116,8 @@ export default function NoticeWritePage() {
             </S.WriteInputTitle>
             <Textarea
               height='35vh'
-              borderColor='#c0c0c0'
               placeholder='내용을 작성해주세요.'
-              fontSize='0.8rem'
+              fontSize='14px'
               value={content}
               onChange={onChange}
               name='content'
@@ -127,10 +128,12 @@ export default function NoticeWritePage() {
             width='100%'
             height='6vh'
             background='#0066FF'
-            color='#fff'
+            color='#ffffff'
             border='none'
             borderRadius='8px'
-            fontWeight='600'
+            fontSize='18px'
+            lineHeight='21.48px'
+            fontWeight='700'
             onClick={onClick}
           >
             작성완료

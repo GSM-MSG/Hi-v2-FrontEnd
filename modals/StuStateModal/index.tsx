@@ -46,18 +46,18 @@ export default function StudentStateModal() {
           {selectedUser.number.toString().length === 2
             ? selectedUser.number
             : '0' + selectedUser.number}{' '}
-          {selectedUser.name}
+          {selectedUser.name}{' '}
           님을{' '}
           {selectedUser.useStatus === 'AVAILABLE'
-            ? '예약불가 상태'
-            : '예약가능 상태'}
-          로<br />
-          변경하시겠습니까?
+            ? '예약불가'
+            : '예약가능'}
+          <br />
+          하게 하시겠습니까?
         </p>
         <S.ButtonWrapper>
           <Button
-            width='120px'
-            height='44px'
+            width='130px'
+            height='48px'
             background='#fff'
             border='1px solid #0066FF'
             borderRadius='8px'
@@ -67,8 +67,8 @@ export default function StudentStateModal() {
             취소
           </Button>
           <Button
-            width='120px'
-            height='44px'
+            width='130px'
+            height='48px'
             background='#0066FF'
             border='1px solid #0066FF'
             borderRadius='8px'

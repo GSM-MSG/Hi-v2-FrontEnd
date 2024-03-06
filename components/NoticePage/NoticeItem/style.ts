@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 
 export const NoticeItemContainer = styled.div`
+  ${({ theme }) => theme.typography.body1.regular};
+  line-height: 22px;
   position: relative;
   width: 100%;
   height: 7vh;
@@ -21,14 +23,25 @@ export const NoticeItemWrapper = styled.div`
   align-items: center;
 `
 
+export const NoticeIDXContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
+`
+
 export const NoticeIDX = styled.div`
+  ${({ theme }) => theme.typography.body1.regular};
+  line-height: 22px;
   width: 36px;
   height: 36px;
   text-align: center;
-  line-height: 36px;
   border-radius: 8px;
   margin-left: 16px;
   background-color: #ebf3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 600px) {
     background-color: #fff;
@@ -36,20 +49,13 @@ export const NoticeIDX = styled.div`
   }
 `
 
-export const NoticeIDXContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #b1b1b1;
-`
-
 export const NoticeTitle = styled.div`
+  color: ${({ theme }) => theme.color.Grayscale.gray08};
   width: 44vw;
   padding-right: 20px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #606060;
   margin-left: 27px;
   padding-right: 6vw;
 
@@ -63,8 +69,8 @@ export const NoticeTitle = styled.div`
 `
 
 export const NoticeDate = styled.div`
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
   text-align: center;
-  color: #b1b1b1;
   text-align: center;
 
   @media screen and (max-width: 600px) {
@@ -77,9 +83,8 @@ export const NoticeDate = styled.div`
 `
 
 export const NoticeUser = styled.div`
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
   width: 120px;
-  text-align: center;
-  color: #b1b1b1;
   text-align: center;
 
   @media screen and (max-width: 600px) {

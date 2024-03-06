@@ -16,10 +16,9 @@ export const PlaceSelectBox = styled.div`
   margin-top: 2rem;
 
   span {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #191919;
-    margin-bottom: 12px;
+    ${({ theme }) => theme.typography.body1.regular};
+    line-height: 32px;
+    color: ${({ theme }) => theme.color.Grayscale.gray08};
   }
 `
 
@@ -40,16 +39,19 @@ export const FloorButton = styled.button<{
 }>`
   width: 4rem;
   height: 2.8rem;
-  background: ${({ clicked, current_value }) =>
-    clicked === current_value ? '#0066ff' : 'none'};
+  background: ${({ clicked, current_value, theme }) =>
+    clicked === current_value ? theme.color.primary : 'none'};
   border: 1px solid
-    ${({ clicked, current_value }) =>
-      clicked === current_value ? '#0066ff' : '#9E9E9E'};
+    ${({ clicked, current_value, theme }) =>
+      clicked === current_value
+        ? theme.color.primary
+        : theme.color.Grayscale.gray06};
   border-radius: 8px;
-  color: ${({ clicked, current_value }) =>
-    clicked === current_value ? '#ffffff' : '#9E9E9E'};
-  font-size: 1rem;
-  font-weight: 500;
+  color: ${({ clicked, current_value, theme }) =>
+    clicked === current_value
+      ? theme.color.white
+      : theme.color.Grayscale.gray06};
+  ${({ theme }) => theme.typography.body2.medium};
   cursor: pointer;
 `
 

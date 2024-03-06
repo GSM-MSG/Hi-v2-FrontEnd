@@ -16,17 +16,13 @@ export default function ConfirmReservationModal({
 
   return (
     <Portal onClose={closeModal}>
-      <CheckModalContainer style={{ height: '180px' }}>
+      <CheckModalContainer>
         <h2>예약확인</h2>
         <p>{reservationNumber}번 테이블을 예약하시겠습니까?</p>
         <ButtonContainer style={{ marginTop: '2rem' }}>
           <Button
-            width='142px'
-            height='2.7rem'
             background='none'
             color='#c0c0c0'
-            fontSize='1rem'
-            fontWeight='500'
             border='1px solid #c0c0c0'
             borderRadius='8px'
             style={{
@@ -37,12 +33,8 @@ export default function ConfirmReservationModal({
             취소
           </Button>
           <Button
-            width='142px'
-            height='2.7rem'
             background='#0066ff'
             color='#ffffff'
-            fontSize='1rem'
-            fontWeight='500'
             border='none'
             borderRadius='8px'
             onClick={() =>

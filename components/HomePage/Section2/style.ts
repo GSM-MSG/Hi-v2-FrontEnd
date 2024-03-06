@@ -24,9 +24,8 @@ export const IntroductoryTextBox2 = styled.div`
   margin-top: 0;
 
   h2 {
-    font-size: 2.3rem;
+    ${({ theme }) => theme.typography.h2.bold};
     color: #000000;
-    font-weight: 700;
     margin-bottom: 0.9rem;
     text-align: center;
 
@@ -36,9 +35,8 @@ export const IntroductoryTextBox2 = styled.div`
   }
 
   p {
-    color: #6c6c6c;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: ${({theme}) => theme.color.Grayscale.gray07};
+    ${({ theme }) => theme.typography.title.semibold};
   }
 `
 
@@ -48,7 +46,7 @@ export const TalkBox = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 3.5rem;
-  
+
   @media screen and (max-width: 600px) {
     flex-direction: column;
     align-items: center;
@@ -62,7 +60,7 @@ export const TalkBox = styled.div`
     &:first-of-type {
       left: 0;
     }
-    
+
     &:last-of-type {
       right: 0;
       top: 12rem;
@@ -85,5 +83,4 @@ export const TalkBox = styled.div`
       }
     }
   }
-
 `
