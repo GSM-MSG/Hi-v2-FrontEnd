@@ -1,16 +1,18 @@
-import API from '@/apis/instance'
+import { API } from '@/apis'
+import { IsModal } from '@/atoms'
 import { Footer, Header } from '@/components'
+import { theme } from '@/styles/theme'
+import {
+  accessExpiredAtStorage,
+  accessTokenStorage,
+  refreshExpiredAtStorage,
+  refreshTokenStorage,
+} from '@/types'
 import { GAUTH_CLIENT_ID, REDIRECT_URI, setStorage } from '@/utils'
+import { ThemeProvider } from '@emotion/react'
 import { GauthProvider } from '@msg-team/gauth-react'
 import { useRouter } from 'next/router'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { IsModal } from '@/atoms'
-import {
-  accessTokenStorage,
-  refreshTokenStorage,
-  accessExpiredAtStorage,
-  refreshExpiredAtStorage,
-} from '@/types'
+import { useRecoilValue } from 'recoil'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
@@ -40,10 +42,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }}
       clientId={GAUTH_CLIENT_ID}
     >
-      <Header />
-      {children}
-      <Footer />
-      {isModal && <>{isModal}</>}
+      <ThemeProvider theme={theme}>
+        <Header />
+        {children}
+        <Footer />
+        {isModal && <>{isModal}</>}
+      </ThemeProvider>
     </GauthProvider>
   )
 }

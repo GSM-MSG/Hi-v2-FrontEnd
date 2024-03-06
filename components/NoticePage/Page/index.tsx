@@ -15,10 +15,12 @@ function NoticePage() {
         <Link href='notice/write'>
           {(isAdmin || isTeacher) && (
             <Button
-              width='80px'
-              height='4vh'
+              width='92px'
+              height='36px'
               border='1px solid #0066FF'
-              fontSize='14px'
+              fontSize='15px'
+              fontWeight='500'
+              lineHeight='19.09px'
               color='#0066FF'
               borderRadius='8px'
             >

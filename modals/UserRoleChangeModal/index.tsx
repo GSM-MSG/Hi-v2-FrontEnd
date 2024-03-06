@@ -41,9 +41,6 @@ export default function UserRoleChangeModal() {
       <S.ModalContainer>
         <S.ModalTitleWrapper>
           <span>권한 변경</span>
-          <div onClick={closeModal}>
-            <XMark />
-          </div>
         </S.ModalTitleWrapper>
         <S.RoleButtonWrapper>
           {roleInfo.map(({ role, color, label }, idx) => (
@@ -65,6 +62,9 @@ export default function UserRoleChangeModal() {
           height='50px'
           background='#0066FF'
           borderRadius='8px'
+          fontSize='16px'
+          fontWeight='500'
+          lineHeight='28px'
           border='none'
           color='#fff'
           onClick={() =>

@@ -42,15 +42,17 @@ export const UserInfo = styled.div`
 `
 
 export const UserName = styled.p`
-  color: #3c3c43;
+  ${({ theme }) => theme.typography.body1.bold};
+  color: ${({ theme }) => theme.color.Grayscale.gray09};
 `
 
 export const UserEmail = styled.p`
-  color: #9e9e9e;
-  font-size: 15px;
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
+  ${({ theme }) => theme.typography.body2.regular};
 `
 
 export const ButtonWrapper = styled.div`
   display: flex;
   gap: 8px;
+  ${({ theme }) => theme.typography.body1.medium};
 `

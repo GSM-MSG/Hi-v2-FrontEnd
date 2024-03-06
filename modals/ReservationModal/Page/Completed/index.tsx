@@ -21,11 +21,12 @@ export default function Completed({ isModify }: { isModify: boolean }) {
       <S.ButtonContainer>
         <Button
           width='100%'
-          height='3rem'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
-          fontWeight='500'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
           border='none'
           borderRadius='8px'
           onClick={async () => {

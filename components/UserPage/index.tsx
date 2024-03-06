@@ -1,5 +1,4 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
-import * as SVG from '@/assets/svg'
 import { useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
@@ -9,6 +8,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Input, PageContainer } from '../commons'
 import UserItem from './UserItem'
 import * as S from './style'
+import { SearchIcon } from '@/assets'
 
 export default function UserPage() {
   const [user, setUser] = useState<string>('')
@@ -43,7 +43,7 @@ export default function UserPage() {
             onChange={(e) => setUser(e.target.value)}
           />
           <S.SearchIconWrapper onClick={onSubmit}>
-            <SVG.SearchIcon />
+            <SearchIcon />
           </S.SearchIconWrapper>
         </S.InputWrapper>
       </S.UserTitleContainer>

@@ -12,15 +12,15 @@ export const ReservationTitle = styled.div`
   align-items: center;
 
   h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #3c3c43;
+    ${({ theme }) => theme.typography.h4.bold};
+    line-height: 33.41px;
+    color: ${({ theme }) => theme.color.Grayscale.gray09};
     margin-right: 0.7rem;
   }
 
   div {
-    background-color: #f5f5f5;
-    color: #9e9e9e;
+    background-color: ${({ theme }) => theme.color.Background.sub};
+    color: ${({ theme }) => theme.color.Grayscale.gray06};
     font-size: 0.8rem;
     width: 5.4rem;
     height: 1.8rem;
@@ -44,5 +44,17 @@ export const ReservationTableContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  button {
+    width: 76px;
+    height: 38px;
+    ${({ theme }) => theme.typography.body1.regular};
   }
 `

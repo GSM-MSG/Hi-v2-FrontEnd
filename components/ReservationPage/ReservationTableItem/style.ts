@@ -7,13 +7,16 @@ export const TableBox = styled.div<{ reserved: boolean }>`
   height: 11rem;
   background-color: ${({ reserved }) =>
     reserved ? 'none' : 'rgba(0, 102, 255, 0.04)'};
-  border: 1px solid ${({ reserved }) => (reserved ? '#b1b1b1' : '#0066ff')};
+  border: 1px solid
+    ${({ reserved, theme }) =>
+      reserved ? theme.color.Grayscale.gray05 : theme.color.primary};
   border-radius: 12px;
   padding: 1.5rem;
 
   span {
+    color: ${({ reserved, theme }) =>
+      reserved ? theme.color.Grayscale.gray06 : theme.color.primary};
     cursor: pointer;
-    color: ${({ reserved }) => (reserved ? '#9e9e9e' : '#0066ff')};
     &:hover {
       text-decoration: underline;
     }
@@ -40,7 +43,8 @@ export const TableInfoBox = styled.div<{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    ${({ theme }) => theme.typography.caption.regular};
+    line-height: 14.32px;
     width: 3.5rem;
     height: 1.5rem;
     color: ${({ reserved }) => (reserved ? '#929292' : '#0066ff')};
@@ -52,19 +56,19 @@ export const TableInfoBox = styled.div<{
   }
 
   h2 {
-    font-size: 1.3rem;
-    color: #606060;
+    ${({ theme }) => theme.typography.title.bold};
+    color: ${({ theme }) => theme.color.Grayscale.gray08};
+    line-height: 28.64px;
     margin-bottom: 0.7rem;
   }
 
   span {
+    ${({ theme }) => theme.typography.body1.medium};
     margin-top: 0;
-    color: ${({ reserved }) => (reserved ? '#6c6c6c' : '#9e9e9e')};
+    color: ${({ reserved, theme }) =>
+      reserved ? theme.color.Grayscale.gray07 : theme.color.Grayscale.gray06};
     letter-spacing: -1px;
-    font-weight: 500;
-    font-size: 1rem;
     cursor: ${({ reserved }) => !reserved && 'default'};
-
     &:hover {
       text-decoration: none;
     }
@@ -77,4 +81,9 @@ export const TableInfoBox = styled.div<{
         show_detail_name ? 'rotate(270deg)' : 'rotate(180deg)'};
     }
   }
+`
+
+export const ShowDetailName = styled.span`
+  margin-top: 4.8px;
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
 `

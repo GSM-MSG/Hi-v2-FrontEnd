@@ -57,17 +57,17 @@ export const IntroductoryTextBox3 = styled.div`
 
   h2 {
     font-size: 2.3rem;
-    color: #000000;
+    color: ${({ theme }) => theme.color.black};
     font-weight: 700;
     white-space: nowrap;
 
     span {
-      color: #0066ff;
+      color: ${({ theme }) => theme.color.primary};
     }
   }
 
   p {
-    color: #6c6c6c;
+    color: ${({theme}) => theme.color.Grayscale.gray07};
     font-size: 1.1rem;
     font-weight: 600;
   }

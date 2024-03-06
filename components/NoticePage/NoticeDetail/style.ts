@@ -76,9 +76,8 @@ export const DetailTitleContainer = styled.div`
 
 export const DetailTitle = styled.h1`
   width: 84%;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #3c3c43;
+  ${({ theme }) => theme.typography.title.bold};
+  color: ${({ theme }) => theme.color.Grayscale.gray09};
 
   @media screen and (max-width: 750px) {
     font-size: 20px;
@@ -90,16 +89,15 @@ export const DetailTitle = styled.h1`
 `
 
 export const DetailInfo = styled.p`
-  font-size: 0.8rem;
-  color: #9e9e9e;
+  ${({ theme }) => theme.typography.caption.medium};
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
   display: flex;
   gap: 8px;
 `
 
 export const DetailContent = styled.p`
-  font-size: 1rem;
-  color: #3c3c43;
-  line-height: 28px;
+  ${({ theme }) => theme.typography.body1.regular};
+  color: ${({ theme }) => theme.color.Grayscale.gray09};
   margin-top: 4px;
   white-space: pre-wrap;
   overflow: auto;

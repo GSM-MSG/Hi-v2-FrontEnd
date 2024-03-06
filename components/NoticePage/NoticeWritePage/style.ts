@@ -30,19 +30,17 @@ export const InputContainer = styled.div`
 `
 
 export const WriteInputTitle = styled.div`
-  font-size: 0.9rem;
+  ${({ theme }) => theme.typography.body2.medium};
   display: flex;
 
   p:nth-of-type(1) {
     margin-right: 4px;
-    color: #6c6c6c;
+    color: ${({ theme }) => theme.color.Grayscale.gray07};
   }
-
   p:nth-of-type(2) {
-    color: #b1b1b1;
+    color: ${({ theme }) => theme.color.Grayscale.gray05};
   }
-
   p:nth-of-type(3) {
-    color: #ff005c;
+    color: ${({ theme }) => theme.color.sub};
   }
 `

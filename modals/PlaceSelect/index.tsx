@@ -1,4 +1,4 @@
-import { ReservationPlace } from '@/atoms'
+import { ReservationPlace, ReservationTables } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useModal } from '@/hooks'
 import { useState } from 'react'
@@ -7,10 +7,13 @@ import * as S from './style'
 import { XMark } from '@/assets'
 import { get, homebaseQueryKeys, homebaseUrl } from '@/apis'
 import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { ReservationDataType } from '@/types'
 
 function PlaceSelect() {
   const [reservationPlace, setReservationPlace] =
     useRecoilState(ReservationPlace)
+  const setReservationTables = useSetRecoilState(ReservationTables)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
@@ -19,19 +22,38 @@ function PlaceSelect() {
   const [floorClicked, setFloorClicked] = useState<number>(2)
   const [periodClicked, setPeriodClicked] = useState<number>(8)
   const { floors, periods } = showPlace
-  const { refetch } = useQuery({
+  const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
     queryKey: homebaseQueryKeys.list(),
-    queryFn: () => get(homebaseUrl.hombase(reservationPlace)),
+    queryFn: () =>
+      get(
+        homebaseUrl.hombase({
+          period: reservationPlace.period,
+          floor: reservationPlace.floor,
+        })
+      ),
   })
 
-  const onApply = () => {
+  const onFloorClick = (floor: number) => {
+    setFloorClicked(floor)
     setReservationPlace((prev) => {
       return {
         ...prev,
-        period: periodClicked,
-        floor: floorClicked,
+        floor,
       }
     })
+  }
+
+  const onPeriodClick = (period: number) => {
+    setPeriodClicked(period)
+    setReservationPlace((prev) => {
+      return {
+        ...prev,
+        period,
+      }
+    })
+  }
+
+  const onApply = () => {
     refetch()
     closeModal()
   }
@@ -53,7 +75,7 @@ function PlaceSelect() {
                 key={idx}
                 clicked={floorClicked}
                 current_value={floor}
-                onClick={() => setFloorClicked(floor)}
+                onClick={() => onFloorClick(floor)}
               >
                 {floor}F
               </S.FloorButton>
@@ -68,7 +90,7 @@ function PlaceSelect() {
                 key={idx}
                 clicked={periodClicked}
                 current_value={period}
-                onClick={() => setPeriodClicked(period)}
+                onClick={() => onPeriodClick(period)}
               >
                 {period}교시
               </S.PeriodButton>

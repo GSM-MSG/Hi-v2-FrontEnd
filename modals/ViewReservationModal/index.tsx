@@ -5,8 +5,7 @@ import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import {
   DeleteTableCheckModal,
-  LeaveReservationTableModal,
-  RepresentativeMandateModal,
+  LeaveReservationTableModal
 } from '@/modals'
 import { ViewReservationData, ViewReservationDataTypes } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -33,7 +32,7 @@ export default function ViewReservationModal({
     mutationKey: reservationQueryKeys.check(reservationId),
     mutationFn: (modifyValue) =>
       patch(reservationUrl.check(reservationId), modifyValue),
-    onSuccess: () => refetch()
+    onSuccess: () => refetch(),
   })
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${reservationPlace.floor}F` },
@@ -49,16 +48,11 @@ export default function ViewReservationModal({
         <TitleBox>
           <Title>
             {isTeacher && (
-              <div
+              <S.TableCheckBox
                 onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
-                style={{
-                  cursor: 'pointer',
-                  marginTop: '0.12rem',
-                  marginRight: '0.3rem',
-                }}
               >
                 <TableCheckIcon checkStatus={data?.data.checkStatus} />
-              </div>
+              </S.TableCheckBox>
             )}
             {data?.data.reservationNumber}번 테이블
           </Title>
@@ -78,20 +72,7 @@ export default function ViewReservationModal({
                       user.userId === data?.data.representativeId ? (
                         <b key={user.userId}>{user.name} </b>
                       ) : (
-                        <span
-                          key={user.userId}
-                          onClick={() =>
-                            openModal(
-                              <RepresentativeMandateModal
-                                username={user.name}
-                                userId={user.userId}
-                                reservationId={reservationId}
-                              />
-                            )
-                          }
-                        >
-                          {user.name}{' '}
-                        </span>
+                        <span key={user.userId}>{user.name} </span>
                       )
                     )}
                   </p>

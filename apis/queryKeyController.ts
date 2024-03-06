@@ -1,6 +1,6 @@
 export const authQueryKeys = {
   login: () => ['auth', 'login'],
-  logout: () => ['auth', 'login'],
+  logout: () => ['auth', 'logout'],
 } as const
 
 export const userQueryKeys = {
@@ -32,11 +32,6 @@ export const reservationQueryKeys = {
   modify: (reservationId: string | undefined) => [
     'reservation',
     'modify',
-    reservationId,
-  ],
-  delegate: (reservationId: string | undefined, userId: string) => [
-    'reservation',
-    'delegate',
     reservationId,
   ],
   exit: (reservationId: string | undefined) => [
