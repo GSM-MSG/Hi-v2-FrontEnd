@@ -4,7 +4,7 @@ export const HomeSection2 = styled.div`
   width: 100vw;
   padding: 0 18vw;
   height: 54rem;
-  background-color: #f4f8ff;
+  background-color: ${({ theme }) => theme.color.Background.main};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,12 +25,12 @@ export const IntroductoryTextBox2 = styled.div`
 
   h2 {
     ${({ theme }) => theme.typography.h2.bold};
-    color: #000000;
+    color: ${({ theme }) => theme.color.black};
     margin-bottom: 0.9rem;
     text-align: center;
 
     span {
-      color: #0066ff;
+      color: ${({ theme }) => theme.color.primary};
     }
   }
 

@@ -48,7 +48,7 @@ export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
 
   .choice {
     cursor: pointer;
-    color: #000000;
+    color: ${({ theme }) => theme.color.black};
     font-weight: 600;
   }
 

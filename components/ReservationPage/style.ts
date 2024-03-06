@@ -12,14 +12,14 @@ export const ReservationTitle = styled.div`
   align-items: center;
 
   h2 {
-    ${({theme}) => theme.typography.h4.bold};
+    ${({ theme }) => theme.typography.h4.bold};
     line-height: 33.41px;
     color: ${({ theme }) => theme.color.Grayscale.gray09};
     margin-right: 0.7rem;
   }
 
   div {
-    background-color: #f5f5f5;
+    background-color: ${({ theme }) => theme.color.Background.sub};
     color: ${({ theme }) => theme.color.Grayscale.gray06};
     font-size: 0.8rem;
     width: 5.4rem;

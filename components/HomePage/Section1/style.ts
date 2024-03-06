@@ -61,7 +61,7 @@ export const IntroductoryTextBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  color: #ffffff;
+  color: ${({ theme }) => theme.color.white};
   animation: ${fadeUp} 1.2s linear 0s;
 
   h2 {

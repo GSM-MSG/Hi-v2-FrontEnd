@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const CheckModalContainer = styled.div`
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 16px;
   width: 340px;
   height: 199px;
