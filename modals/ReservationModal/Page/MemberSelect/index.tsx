@@ -15,7 +15,6 @@ import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
@@ -24,8 +23,6 @@ function MemberSelect() {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
-  // const form = useForm({ defaultValues: { member: '' } })
-  // const { register, watch, setValue } = form
   const [member, setMember] = useState<string>('')
 
   const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
@@ -91,7 +88,6 @@ function MemberSelect() {
           placeholder='팀원을 검색하세요.'
           width='100%'
           height='2rem'
-          fontSize='1rem'
           border='none'
           autoComplete='new-password'
           value={member}
@@ -151,8 +147,8 @@ function MemberSelect() {
                       <Image
                         src={item.profileImageUrl}
                         alt='profileImage'
-                        width='40'
-                        height='40'
+                        width='36'
+                        height='36'
                       />
                     ) : (
                       <UserProfile />
@@ -175,7 +171,7 @@ function MemberSelect() {
                     color='#0066ff'
                     width='3.5rem'
                     height='1.8rem'
-                    fontSize='0.9rem'
+                    fontSize='14px'
                     fontWeight='500'
                     hoverBackground='#0066ff'
                     hoverBorder='none'
@@ -185,7 +181,7 @@ function MemberSelect() {
                     }}
                     disabled={item.useStatus === 'AVAILABLE' ? false : true}
                   >
-                    선택
+                    <span>선택</span>
                   </Button>
                 </S.MemberBox>
               ))}

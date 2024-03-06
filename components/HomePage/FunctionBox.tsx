@@ -6,7 +6,7 @@ import Image from 'next/image'
 const FunctionBoxBlock = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   width: 20rem;
   height: 25rem;
@@ -24,18 +24,18 @@ const FunctionBoxBlock = styled.div`
   }
 
   h3 {
-    color: #000000;
-    font-weight: 700;
-    font-size: 1.295rem;
+    ${({ theme }) => theme.typography.title.bold};
+    color: ${({ theme }) => theme.color.black};
+    line-height: 31.03px;
     margin-top: 1rem;
   }
 
   p {
+    ${({ theme }) => theme.typography.h5.regular};
+    color: ${({ theme }) => theme.color.Grayscale.gray08};
+    line-height: 27.57px;
     margin-top: 1.3rem;
-    font-weight: 400;
-    color: #606060;
-    font-size: 1.025rem;
-    width: 9.8rem;
+    width: 200px;
     text-align: center;
   }
 

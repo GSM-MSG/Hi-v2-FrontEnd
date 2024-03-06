@@ -24,7 +24,7 @@ export default function ReservationTableItem({
 }) {
   const setShowMembers = useSetRecoilState(ShowMembers)
   const setTeamMembers = useSetRecoilState(TeamMembers)
-  const [showDetailName, setShowDetailName] = useState<boolean>(false)
+  const [isShowDetail, setIsShowDetail] = useState<boolean>(false)
   const { openModal } = useModal()
   const { data } = useQuery<AxiosResponse<MyPageType>>({
     queryKey: userQueryKeys.my(),
@@ -67,13 +67,13 @@ export default function ReservationTableItem({
     <S.TableBox reserved={typeof item !== 'number' ? true : false}>
       <S.TableInfoBox
         reserved={typeof item !== 'number' ? true : false}
-        show_detail_name={showDetailName}
+        show_detail_name={isShowDetail}
       >
         <div>{typeof item !== 'number' ? '예약불가' : '예약가능'}</div>
         <h2>{reservationNumber}번 테이블</h2>
         <span
           onClick={() =>
-            typeof item !== 'number' && setShowDetailName((prev) => !prev)
+            typeof item !== 'number' && setIsShowDetail((prev) => !prev)
           }
         >
           {typeof item !== 'number' ? (
@@ -89,13 +89,11 @@ export default function ReservationTableItem({
             '예약 가능 합니다.'
           )}
         </span>
-        {showDetailName && (
-          <span
-            style={{ marginTop: '0.3rem', color: '#b1b1b1', cursor: 'default' }}
-          >
+        {isShowDetail && (
+          <S.ShowDetailName>          
             {typeof item !== 'number' &&
               item.users.map((user) => user.name).join(', ')}
-          </span>
+          </S.ShowDetailName>
         )}
       </S.TableInfoBox>
       <div

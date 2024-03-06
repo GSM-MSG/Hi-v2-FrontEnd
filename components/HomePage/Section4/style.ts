@@ -9,7 +9,7 @@ export const HomeSection4 = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 6rem;
-  background-color: #f4f8ff;
+  background-color: ${({ theme }) => theme.color.Background.main};
 
   @media screen and (max-width: 600px) {
     height: 120rem;

@@ -61,38 +61,33 @@ export const IntroductoryTextBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  color: #ffffff;
+  color: ${({ theme }) => theme.color.white};
   animation: ${fadeUp} 1.2s linear 0s;
 
   h2 {
     margin: 0;
-    font-size: 3rem;
-    font-weight: 500;
-    letter-spacing: 0.1rem;
+    letter-spacing: 2%;
+    ${({ theme }) => theme.typography.h1.semibold};
+    line-height: 64px;
   }
 
   p {
-    font-size: 1rem;
     margin-top: 1.5rem;
     margin-bottom: 2.3rem;
-    letter-spacing: 1px;
+    font-size: 20px;
+    line-height: 23.87px;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  a {
-    text-decoration-line: none;
-
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-      margin: 0;
-      margin-left: 0.3rem;
-    }
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    margin-left: 0.3rem;
   }
 
   @media screen and (max-width: 600px) {

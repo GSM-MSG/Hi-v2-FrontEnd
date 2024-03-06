@@ -3,8 +3,10 @@ import '@emotion/react'
 const color = {
   primary: '#0066FF',
   sub: '#FF005C',
+  green: '#04B600',
   white: '#FFFFFF',
   black: '#000000',
+  orange: '#FF9B05',
   Background: {
     main: '#F4F8FF',
     sub: '#f5f5f5',
@@ -222,7 +224,7 @@ const typography = {
       fontWeight: '400',
     },
   },
-}
+} as const
 
 export const theme = {
   color,

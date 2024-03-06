@@ -4,7 +4,7 @@ export const HomeSection2 = styled.div`
   width: 100vw;
   padding: 0 18vw;
   height: 54rem;
-  background-color: #f4f8ff;
+  background-color: ${({ theme }) => theme.color.Background.main};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,21 +24,19 @@ export const IntroductoryTextBox2 = styled.div`
   margin-top: 0;
 
   h2 {
-    font-size: 2.3rem;
-    color: #000000;
-    font-weight: 700;
+    ${({ theme }) => theme.typography.h2.bold};
+    color: ${({ theme }) => theme.color.black};
     margin-bottom: 0.9rem;
     text-align: center;
 
     span {
-      color: #0066ff;
+      color: ${({ theme }) => theme.color.primary};
     }
   }
 
   p {
-    color: #6c6c6c;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: ${({theme}) => theme.color.Grayscale.gray07};
+    ${({ theme }) => theme.typography.title.semibold};
   }
 `
 
@@ -48,7 +46,7 @@ export const TalkBox = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 3.5rem;
-  
+
   @media screen and (max-width: 600px) {
     flex-direction: column;
     align-items: center;
@@ -62,7 +60,7 @@ export const TalkBox = styled.div`
     &:first-of-type {
       left: 0;
     }
-    
+
     &:last-of-type {
       right: 0;
       top: 12rem;
@@ -85,5 +83,4 @@ export const TalkBox = styled.div`
       }
     }
   }
-
 `

@@ -6,16 +6,18 @@ export const Input = styled.input<InputPropsType>`
   height: ${(props) => props.height};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
-  padding: 16px;
-  color: #c0c0c0;
+  padding-top: 2px;
+  padding-left: 14px;
+  color: ${({ theme }) => theme.color.Grayscale.gray04};
   outline: none;
-
   &:focus {
-    color: ${(props) => props.focus && '#6c6c6c'};
-    border: ${(props) => props.focus && '1px solid #6c6c6c'};
+    color: ${({ focus, theme }) => focus && theme.color.Grayscale.gray07};
+    border: ${({ focus, theme }) =>
+      focus && `1px solid ${theme.color.Grayscale.gray07}`};
   }
 
-  ::placeholder {
-    color: #c0c0c0;
+  &::placeholder {
+    ${({ theme }) => theme.typography.body1.regular};
+    color: ${({ theme }) => theme.color.Grayscale.gray04};
   }
 `

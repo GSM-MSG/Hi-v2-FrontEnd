@@ -39,7 +39,7 @@ export default function MyPage() {
         <S.NameContainer>
           <span>{name}</span>
           <S.ReservationState buttonColor={buttonColor}>
-            {useStatus === 'AVAILABLE' ? '예약가능' : '예약불가'}
+            {useStatus === 'AVAILABLE' ? '신청가능' : '예약불가'}
           </S.ReservationState>
         </S.NameContainer>
         <S.Email>{email}</S.Email>

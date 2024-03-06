@@ -18,7 +18,7 @@ export const ModalTitleWrapper = styled.div`
   align-items: center;
 
   > span {
-    font-weight: 600;
+    ${({ theme }) => theme.typography.h5.bold};
   }
 
   svg {
@@ -30,6 +30,7 @@ export const RoleButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  ${({ theme }) => theme.typography.body1.medium};
 `
 
 export const RoleButtonItem = styled.div<{ color: string; isClicked: boolean }>`
@@ -37,8 +38,8 @@ export const RoleButtonItem = styled.div<{ color: string; isClicked: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 50px;
+  width: 94px;
+  height: 54px;
   border: 1px solid ${({ color }) => color};
   color: ${({ color }) => color};
   border-radius: 8px;

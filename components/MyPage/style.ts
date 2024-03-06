@@ -41,8 +41,7 @@ export const NameContainer = styled.div`
   margin-top: 2vh;
 
   span:nth-of-type(1) {
-    font-weight: 600;
-    font-size: 22px;
+    ${({ theme }) => theme.typography.h4.bold};
   }
 `
 
@@ -50,17 +49,18 @@ export const ReservationState = styled.span<{ buttonColor: string }>`
   width: auto;
   white-space: nowrap;
   position: absolute;
-  left: 64px;
+  left: 85px;
   border: ${(props) => `1.2px solid ${props.buttonColor}`};
   border-radius: 40px;
   padding: 4px 6px;
   color: ${(props) => props.buttonColor};
-  font-size: 14px;
+  ${({ theme }) => theme.typography.caption.medium};
 `
 
 export const Email = styled.span`
-  color: #9e9e9e;
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
   margin-top: 1vh;
+  ${({ theme }) => theme.typography.h5.regular};
 `
 
 export const ReservationWrapper = styled.div`
@@ -88,19 +88,18 @@ export const ReservationTitle = styled.div`
   align-items: center;
   gap: 8px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid ${({ theme }) => theme.color.Grayscale.gray03};
 
   span:nth-of-type(1) {
-    font-size: 22px;
-    font-weight: 600;
+    ${({ theme }) => theme.typography.title.semibold};
   }
 
   span:nth-of-type(2) {
-    border: 1.2px solid #ff9b05;
+    border: 1.2px solid ${({ theme }) => theme.color.orange};
     border-radius: 40px;
     padding: 4px 6px;
-    color: #ff9b05;
-    font-size: 14px;
+    color: ${({ theme }) => theme.color.orange};
+    ${({ theme }) => theme.typography.caption.medium};
   }
 `
 
@@ -120,14 +119,15 @@ export const Reservation = styled.div`
   }
 
   .tableNum {
-    color: #0066ff;
+    color: ${({ theme }) => theme.color.primary};
+    font-size: 22px;
     font-weight: 700;
-    font-size: 20px;
+    line-height: 27px;
   }
 
   .info {
-    color: #9e9e9e;
-    font-size: 14px;
+    ${({ theme }) => theme.typography.body2.regular};
+    color: ${({ theme }) => theme.color.Grayscale.gray06};
   }
 `
 
@@ -147,13 +147,14 @@ export const NameWrapper = styled.span<{ showDetailName: boolean }>`
 `
 
 export const Name = styled.div`
+  ${({ theme }) => theme.typography.body1.medium};
   display: flex;
   align-items: center;
   justify-content: unset;
 `
 
 export const DetailName = styled.span`
-  color: #9e9e9e;
-  font-size: 12px;
+  ${({ theme }) => theme.typography.caption.medium};
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
   margin-top: 4px;
 `
