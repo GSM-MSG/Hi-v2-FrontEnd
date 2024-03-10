@@ -32,8 +32,8 @@ function Reason({
   isModify: boolean
   reservationId: string | undefined
 }) {
-  const setModalPage = useSetRecoilState(ModalPage)
   const reservationPlace = useRecoilValue(ReservationPlace)
+  const setModalPage = useSetRecoilState(ModalPage)
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
 

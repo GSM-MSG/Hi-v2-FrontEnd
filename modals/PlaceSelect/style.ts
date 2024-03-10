@@ -62,7 +62,7 @@ export const PeriodButton = styled(FloorButton)`
 
 export const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 10%;
+  bottom: 1.8125rem;
   width: 88%;
   display: flex;
   align-items: center;

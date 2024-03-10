@@ -1,17 +1,14 @@
 import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { TableCheckIcon, XMark } from '@/assets'
-import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
-import {
-  DeleteTableCheckModal,
-  LeaveReservationTableModal
-} from '@/modals'
+import { DeleteTableCheckModal, LeaveReservationTableModal } from '@/modals'
 import { ViewReservationData, ViewReservationDataTypes } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
+import { ReservationPlace } from '@/atoms'
 
 export default function ViewReservationModal({
   reservationId,
