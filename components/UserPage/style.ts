@@ -8,9 +8,9 @@ export const UserTitleContainer = styled.div`
   padding-bottom: 20px;
 
   h1 {
-    ${({theme}) => theme.typography.h4.bold};
+    ${({ theme }) => theme.typography.h4.bold};
     line-height: 33.41px;
-    color: ${({theme}) => theme.color.Grayscale.gray09};;
+    color: ${({ theme }) => theme.color.Grayscale.gray09};
   }
 `
 
@@ -24,11 +24,11 @@ export const InputWrapper = styled.form`
   }
 
   input {
-    ${({theme}) => theme.typography.body2.medium};
+    ${({ theme }) => theme.typography.body2.medium};
     padding: 16px;
 
     &::placeholder {
-      ${({theme}) => theme.typography.body2.medium};
+      ${({ theme }) => theme.typography.body2.medium};
     }
   }
 `
