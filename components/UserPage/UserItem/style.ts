@@ -6,15 +6,10 @@ export const UserItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   border-radius: 8px;
 
   &:hover {
     background: #f9f9f9;
-  }
-
-  button {
-    margin-right: 8px;
   }
 `
 
@@ -53,6 +48,12 @@ export const UserEmail = styled.p`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 12px;
   ${({ theme }) => theme.typography.body1.medium};
+
+  @media screen and (max-width: 480px) {
+    button {
+      width: 14vw;
+    }
+  }
 `
