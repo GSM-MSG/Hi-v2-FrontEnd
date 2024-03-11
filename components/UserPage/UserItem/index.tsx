@@ -42,7 +42,7 @@ export default function UserItem({
     },
   }
 
-  const getRoleLabel = (role: string) => {
+  const getRoleLabel = (role: RoleTypes) => {
     if (role === 'ROLE_ADMIN') {
       return roleInfo.LABELS.ROLE_ADMIN
     } else if (role === 'ROLE_TEACHER') {
@@ -52,7 +52,7 @@ export default function UserItem({
     }
   }
 
-  const getRoleColor = (role: string) => {
+  const getRoleColor = (role: RoleTypes) => {
     if (role === 'ROLE_ADMIN') {
       return roleInfo.COLORS.ROLE_ADMIN
     } else if (role === 'ROLE_TEACHER') {
