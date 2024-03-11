@@ -58,7 +58,7 @@ export default function UserPage() {
               classNum,
               number,
               profileImageUrl,
-              roles,
+              role,
               useStatus,
             },
             idx
@@ -72,7 +72,7 @@ export default function UserPage() {
               classNum={classNum}
               number={number}
               profileImageUrl={profileImageUrl}
-              roles={roles}
+              role={role}
               useStatus={useStatus}
             />
           )
