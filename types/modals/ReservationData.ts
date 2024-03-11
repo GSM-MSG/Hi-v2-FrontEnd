@@ -8,4 +8,5 @@ export interface ReservationDataType {
   reservationNumber: number
   homeBaseId: string
   users: UserItemType[]
+  checkStatus: boolean
 }
