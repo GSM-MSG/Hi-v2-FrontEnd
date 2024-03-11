@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
 import { InfoProfile } from '@/assets'
+import { RoleTypes } from '@/types'
 
 export default function UserItem({
   userId,
@@ -25,7 +26,10 @@ export default function UserItem({
   const setSelectedUser = useSetRecoilState(SelectedUser)
   const { openModal } = useModal()
   const { isAdmin } = useGetRole()
-  const roleInfo = {
+  const roleInfo: {
+    LABELS: Record<RoleTypes, string>
+    COLORS: Record<RoleTypes, string>
+  } = {
     LABELS: {
       ROLE_ADMIN: '관리자',
       ROLE_TEACHER: '선생님',
