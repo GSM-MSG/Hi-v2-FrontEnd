@@ -36,7 +36,7 @@ export const SelectedUser = atom<UserItemType>({
     classNum: 1,
     number: 1,
     profileImageUrl: '',
-    role: '',
+    role: 'ROLE_STUDENT',
     useStatus: 'AVAILABLE',
   },
 })
