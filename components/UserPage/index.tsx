@@ -16,12 +16,12 @@ export default function UserPage() {
     queryKey: userQueryKeys.searchUser(),
     queryFn: () => get(userUrl.searchUser(user)),
   })
-  const { length } = useGetRole()
+  const { isAdmin } = useGetRole()
   const router = useRouter()
 
   useEffect(() => {
-    if (length === 1) router.push('/')
-  }, [length, router])
+    if (!isAdmin) router.push('/')
+  }, [isAdmin, router])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()

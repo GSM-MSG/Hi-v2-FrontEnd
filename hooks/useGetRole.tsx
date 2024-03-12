@@ -1,6 +1,6 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
 import TokenManager from '@/apis/TokenManager'
-import { GetRoleType, useGetRoleReturnType } from '@/types'
+import { GetRoleType, RoleTypes, useGetRoleReturnType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
@@ -12,15 +12,12 @@ export default function useGetRole(): useGetRoleReturnType {
     enabled: !!tokenManager.accessToken,
   })
 
-  const hasRole = (role: string) => {
-    return data?.data.role.includes(role)
-  }
+  const hasRole = (role: RoleTypes) => role === data?.data.role
 
   return {
     isAdmin: hasRole('ROLE_ADMIN'),
     isTeacher: hasRole('ROLE_TEACHER'),
     isStudent: hasRole('ROLE_STUDENT'),
     userId: data?.data.userId,
-    length: data?.data.role.length,
   }
 }
