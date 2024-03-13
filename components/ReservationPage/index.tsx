@@ -8,7 +8,7 @@ import {
 } from '@/apis'
 import { ReservationPlace, ReservationTables } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
-import { PlaceSelect } from '@/modals'
+import { AllDeleteTableCheckModal, PlaceSelect } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -87,7 +87,11 @@ function ReservationPage() {
               background='none'
               hoverBackground='#FF002E'
               hoverColor='#ffffff'
-              onClick={() => mutate()}
+              onClick={() =>
+                openModal(
+                  <AllDeleteTableCheckModal onDelete={() => mutate()} />
+                )
+              }
             >
               전체삭제
             </Button>
@@ -96,7 +100,14 @@ function ReservationPage() {
       </S.ReservationTitleBox>
       <S.ReservationTableContainer>
         {reservationTables
-          .slice(0, reservationPlace.floor === 3 ? 5 : 4)
+          .slice(
+            0,
+            reservationPlace.floor === 3
+              ? 5
+              : reservationPlace.floor === 2
+              ? 3
+              : 4
+          )
           .map((item, idx) => (
             <ReservationTableItem
               key={idx}

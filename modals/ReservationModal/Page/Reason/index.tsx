@@ -108,16 +108,17 @@ function Reason({
           setReasonText(e.target.value)
         }
         height='18rem'
-        placeholder='사유입력'
+        placeholder='사유입력(500자 이하)'
       />
       <S.ButtonContainer>
         <Button
-          width='30%'
-          height='3rem'
+          width='112px'
+          height='52px'
           background='none'
           color='#0066ff'
-          fontSize='1rem'
-          fontWeight='700'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
           borderRadius='8px'
           border='1px solid #0066ff'
           onClick={() => setModalPage(1)}
@@ -125,12 +126,12 @@ function Reason({
           돌아가기
         </Button>
         <Button
-          width='68%'
-          height='3rem'
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
-          fontWeight='700'
+          fontSize='16px'
+          fontWeight='600'
           border='none'
           borderRadius='8px'
           onClick={onReserve}

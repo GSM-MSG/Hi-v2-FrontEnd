@@ -1,6 +1,6 @@
 import { BackArrowIcon } from '@/assets'
 import { ShowMembers, TeamMembers } from '@/atoms'
-import { useModal } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import {
   ConfirmReservationModal,
   ReservationModal,
@@ -30,17 +30,16 @@ export default function ReservationTableItem({
     queryKey: userQueryKeys.my(),
     queryFn: () => get(userUrl.my()),
   })
+  const { userId } = useGetRole()
 
   const onModify = (item: ReservationDataType) => {
     setShowMembers(
-      item.users
-        .map((user) => user)
-        .filter((user) => user.userId !== item.representativeId)
+      item.users.filter((user) => user.userId !== userId)
     )
     setTeamMembers(
       item.users
         .map((user) => user.userId)
-        .filter((userId) => userId !== item.representativeId)
+        .filter((user) => user !== userId)
     )
     openModal(
       <ReservationModal
@@ -90,7 +89,7 @@ export default function ReservationTableItem({
           )}
         </span>
         {isShowDetail && (
-          <S.ShowDetailName>          
+          <S.ShowDetailName>
             {typeof item !== 'number' &&
               item.users.map((user) => user.name).join(', ')}
           </S.ShowDetailName>
@@ -99,7 +98,7 @@ export default function ReservationTableItem({
       <div
         style={{ marginTop: '7rem', overflow: 'hiddlen', whiteSpace: 'nowrap' }}
       >
-        {typeof item !== 'number' && item.representativeId === data?.data.userId && (
+        {typeof item !== 'number' && (
           <span style={{ marginRight: '1rem' }} onClick={() => onModify(item)}>
             예약수정
           </span>

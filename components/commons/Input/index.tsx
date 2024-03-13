@@ -8,8 +8,6 @@ function Input(
     height,
     border,
     borderRadius,
-    fontWeight,
-    lineHeight,
     focus,
     ...rest
   }: InputPropsType,
@@ -23,6 +21,7 @@ function Input(
       border={border}
       borderRadius={borderRadius}
       focus={focus}
+      maxLength={4}
       {...rest}
     />
   )

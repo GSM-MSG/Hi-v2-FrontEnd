@@ -38,7 +38,7 @@ function HomeSection1() {
           </Button>
         </S.IntroductoryTextBox>
         <S.HiCharacterBox>
-          <Image src={HiCharacter} alt='HiCharacter' />
+          <Image src={HiCharacter} alt='HiCharacter' priority />
         </S.HiCharacterBox>
       </S.IntroductoryBox>
       <S.ScrollIcon>

@@ -8,8 +8,10 @@ export const Input = styled.input<InputPropsType>`
   border-radius: ${(props) => props.borderRadius};
   padding-top: 2px;
   padding-left: 14px;
-  color: ${({ theme }) => theme.color.Grayscale.gray04};
+  color: #0B041E;
   outline: none;
+  ${({theme}) => theme.typography.body1.regular};
+
   &:focus {
     color: ${({ focus, theme }) => focus && theme.color.Grayscale.gray07};
     border: ${({ focus, theme }) =>

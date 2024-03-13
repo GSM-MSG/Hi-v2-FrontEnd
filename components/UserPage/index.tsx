@@ -19,9 +19,9 @@ export default function UserPage() {
   const { isAdmin } = useGetRole()
   const router = useRouter()
 
-  useEffect(() => {
-    if (!isAdmin) router.push('/')
-  }, [isAdmin, router])
+  // useEffect(() => {
+  //   if (isAdmin === true) router.push('/')
+  // }, [isAdmin, router])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -34,10 +34,10 @@ export default function UserPage() {
         <S.InputWrapper onSubmit={onSubmit}>
           <Input
             width='320px'
-            height='28px'
+            height='40px'
             border='1px solid #B1B1B1'
             borderRadius='20px'
-            placeholder='이름을 입력해 주세요.'
+            placeholder='이름을 입력 해주세요.'
             focus={true}
             value={user}
             onChange={(e) => setUser(e.target.value)}

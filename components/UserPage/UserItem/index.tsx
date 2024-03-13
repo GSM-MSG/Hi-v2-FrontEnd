@@ -92,10 +92,10 @@ export default function UserItem({
           <Button
             width='78px'
             height='36px'
-            border={`solid 1px ${getRoleColor(role)}}`}
-            borderRadius='8px'
+            border={`1px solid ${getRoleColor(role)}`}
             background='none'
             fontWeight='600'
+            borderRadius='8px'
             color={getRoleColor(role)}
             onClick={() => {
               openModal(<UserRoleChangeModal />)

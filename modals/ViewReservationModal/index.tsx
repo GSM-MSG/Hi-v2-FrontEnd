@@ -1,5 +1,6 @@
 import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { TableCheckIcon, XMark } from '@/assets'
+import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import { DeleteTableCheckModal, LeaveReservationTableModal } from '@/modals'
@@ -8,7 +9,6 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
-import { ReservationPlace } from '@/atoms'
 
 export default function ViewReservationModal({
   reservationId,
@@ -43,7 +43,7 @@ export default function ViewReservationModal({
     <Portal onClose={closeModal}>
       <S.ViewReservationModalContainer>
         <TitleBox>
-          <Title>
+          <S.TitleLeftBox>
             {isTeacher && (
               <S.TableCheckBox
                 onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
@@ -51,8 +51,30 @@ export default function ViewReservationModal({
                 <TableCheckIcon checkStatus={data?.data.checkStatus} />
               </S.TableCheckBox>
             )}
-            {data?.data.reservationNumber}번 테이블
-          </Title>
+            <Title>{data?.data.reservationNumber}번 테이블</Title>
+            {data?.data.users.some((user) => user.userId === userId) && (
+              <Button
+                width='41px'
+                height='26px'
+                color='#FF002E'
+                border='1px solid #FF002E'
+                borderRadius='8px'
+                fontSize='14px'
+                lineHeight='22px'
+                fontWeight='400'
+                background='#FFFFFF'
+                hoverColor='#FFFFFF'
+                hoverBackground='#FF002E'
+                onClick={() =>
+                  openModal(
+                    <DeleteTableCheckModal reservationId={reservationId} />
+                  )
+                }
+              >
+                삭제
+              </Button>
+            )}
+          </S.TitleLeftBox>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
             <XMark width='24' height='24' />
           </div>
@@ -65,13 +87,9 @@ export default function ViewReservationModal({
                 <S.ViewReservationDataColumn key={idx} column={idx}>
                   <span>{view.name}</span>
                   <p>
-                    {data?.data.users.map((user) =>
-                      user.userId === data?.data.representativeId ? (
-                        <b key={user.userId}>{user.name} </b>
-                      ) : (
-                        <span key={user.userId}>{user.name} </span>
-                      )
-                    )}
+                    {data?.data.users.map((user) => (
+                      <span key={user.userId}>{user.name} </span>
+                    ))}
                   </p>
                 </S.ViewReservationDataColumn>
               ) : (
@@ -84,63 +102,40 @@ export default function ViewReservationModal({
           </S.ViewReservationDataContainer>
         </S.ViewReservationDataBox>
         <S.ViewReservationButtonContainer>
-          {data?.data.representativeId === userId && (
+          {data?.data.users.some((user) => user.userId === userId) && (
             <Button
               width='30%'
               height='3.2rem'
-              background='#FF002E'
-              color='#ffffff'
+              background='none'
+              color='#0066ff'
               fontSize='1.2rem'
-              fontWeight='500'
-              border='none'
+              fontWeight='700'
+              border='1px solid #0066ff'
               borderRadius='8px'
               onClick={() =>
                 openModal(
-                  <DeleteTableCheckModal
+                  <LeaveReservationTableModal
                     reservationId={data?.data.reservationId}
+                    reservationNumber={data?.data.reservationNumber}
                   />
                 )
               }
             >
-              삭제
+              나가기
             </Button>
           )}
-          {data?.data.users.some((user) => user.userId === userId) &&
-            data.data.representativeId !== userId && (
-              <Button
-                width='30%'
-                height='3.2rem'
-                background='none'
-                color='#0066ff'
-                fontSize='1.2rem'
-                fontWeight='700'
-                border='1px solid #0066ff'
-                borderRadius='8px'
-                onClick={() =>
-                  openModal(
-                    <LeaveReservationTableModal
-                      reservationId={data?.data.reservationId}
-                      reservationNumber={data?.data.reservationNumber}
-                    />
-                  )
-                }
-              >
-                나가기
-              </Button>
-            )}
-
           <Button
             width={
-              data?.data.users.some((user) => user.userId === userId) ||
-              data?.data.representativeId === userId
+              data?.data.users.some((user) => user.userId === userId)
                 ? '70%'
                 : '100%'
             }
             height='3.2rem'
             background='#0066ff'
             color='#ffffff'
-            fontSize='1.2rem'
-            fontWeight='500'
+            fontSize='18px'
+            lineHeight='27px'
+            fontWeight='600'
             border='none'
             borderRadius='8px'
             onClick={closeModal}

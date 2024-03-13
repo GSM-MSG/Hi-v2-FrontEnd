@@ -6,5 +6,4 @@ export interface ViewReservationData {
   reservationId: string
   reservationNumber: number
   users: UserItemType[]
-  representativeId: string
 }

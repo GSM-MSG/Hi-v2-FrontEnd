@@ -1,24 +1,23 @@
 import {
-  Button,
-  ButtonContainer,
-  CheckModalContainer,
-  Portal,
+    Button,
+    ButtonContainer,
+    CheckModalContainer,
+    Portal,
 } from '@/components'
 import { useModal } from '@/hooks'
-import ReservationModal from '../ReservationModal'
 
-export default function ConfirmReservationModal({
-  reservationNumber,
+export default function AllDeleteTableCheckModal({
+  onDelete,
 }: {
-  reservationNumber: number
+  onDelete: () => void
 }) {
-  const { openModal, closeModal } = useModal()
+  const { closeModal } = useModal()
 
   return (
     <Portal onClose={closeModal}>
       <CheckModalContainer>
-        <h2>예약확인</h2>
-        <p>{reservationNumber}번 테이블을 예약하시겠습니까?</p>
+        <h2>전체삭제</h2>
+        <p>정말로 모든 테이블을 삭제하시겠습니까?</p>
         <ButtonContainer>
           <Button
             width='142px'
@@ -38,14 +37,7 @@ export default function ConfirmReservationModal({
             color='#ffffff'
             border='none'
             borderRadius='8px'
-            onClick={() =>
-              openModal(
-                <ReservationModal
-                  reservationNumber={reservationNumber}
-                  isModify={false}
-                />
-              )
-            }
+            onClick={onDelete}
           >
             확인
           </Button>
