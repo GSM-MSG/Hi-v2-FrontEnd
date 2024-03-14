@@ -1,12 +1,13 @@
 import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
 import { Button, Input, PageContainer, Textarea } from '@/components'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosError, AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import * as S from './style'
-import { NoticeType } from '@/types'
+import { NoticeItemListType, NoticeType } from '@/types'
+import { get } from 'http'
 
 export default function NoticeWritePage() {
   const router = useRouter()
@@ -17,17 +18,27 @@ export default function NoticeWritePage() {
   })
   const { title, content } = notice
 
+  const { refetch } = useQuery<AxiosResponse<NoticeItemListType[]>, AxiosError>(
+    {
+      queryKey: noticeQueryKeys.list(),
+    }
+  )
   const { mutate: noticeCreate } = useMutation<void, AxiosError, NoticeType>({
     mutationKey: noticeQueryKeys.write(),
     mutationFn: (createValue) => post(noticeUrl.notice(), createValue),
+    onSuccess: () => {
+      router.push('/notice', undefined, { shallow: true })
+      toast.success('공지사항을 추가했습니다')
+      refetch()
+    },
     onError: (error) => {
       if (error.response) {
         const status = error.response.status
         if (status === 401) {
-          toast.error('토큰 값이 이상하거나 변질되었습니다.')
+          toast.error('토큰 값이 이상하거나 변질되었습니다')
         }
         if (status === 403) {
-          toast.error('제어 권한이 없습니다.')
+          toast.error('제어 권한이 없습니다')
         }
       }
     },
@@ -36,7 +47,11 @@ export default function NoticeWritePage() {
   const { mutate: noticeModify } = useMutation<void, AxiosError, NoticeType>({
     mutationKey: noticeQueryKeys.detail(id),
     mutationFn: (modifyValue) => patch(noticeUrl.requestId(id), modifyValue),
-    onSuccess: () => toast.success('공지가 수정되었습니다.'),
+    onSuccess: () => {
+      router.push('/notice', undefined, { shallow: true })
+      toast.success('공지사항을 수정했습니다')
+      refetch()
+    },
     onError: (error) => {
       if (error.response) {
         const status = error.response.status
@@ -72,11 +87,9 @@ export default function NoticeWritePage() {
 
   const onClick = () => {
     if (title === '' || content === '')
-      toast.warning('제목이나 내용을 입력해주세요')
+      return toast.warning('제목이나 내용을 입력해주세요')
     if (id !== 'undefined') noticeModify(notice)
     else noticeCreate(notice)
-
-    router.push('/notice', undefined, { shallow: true })
   }
 
   return (

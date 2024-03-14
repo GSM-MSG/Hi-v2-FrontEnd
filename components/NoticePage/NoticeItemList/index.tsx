@@ -8,7 +8,7 @@ import { AxiosResponse } from 'axios'
 import { get, noticeQueryKeys, noticeUrl } from '@/apis'
 
 export default function NoticeItemList() {
-  const { data } = useQuery<AxiosResponse<NoticeItemListType>>({
+  const { data } = useQuery<AxiosResponse<NoticeItemListType[]>>({
     queryKey: noticeQueryKeys.list(),
     queryFn: () => get(noticeUrl.notice()),
   })
