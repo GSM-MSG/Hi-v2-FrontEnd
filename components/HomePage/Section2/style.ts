@@ -11,7 +11,7 @@ export const HomeSection2 = styled.div`
   padding-top: 6rem;
 
   @media screen and (max-width: 600px) {
-    height: 88rem;
+    height: 64rem;
     padding-top: 7rem;
   }
 `
@@ -29,13 +29,17 @@ export const IntroductoryTextBox2 = styled.div`
     margin-bottom: 0.9rem;
     text-align: center;
 
+    @media screen and (max-width: 700px) {
+      font-size: 2.25rem;
+    }
+
     span {
       color: ${({ theme }) => theme.color.primary};
     }
   }
 
   p {
-    color: ${({theme}) => theme.color.Grayscale.gray07};
+    color: ${({ theme }) => theme.color.Grayscale.gray07};
     ${({ theme }) => theme.typography.title.semibold};
   }
 `
@@ -64,20 +68,29 @@ export const TalkBox = styled.div`
     &:last-of-type {
       right: 0;
       top: 12rem;
+
+      @media screen and (max-width: 920px) {
+        top: 16rem;
+      }
+    }
+
+    @media screen and (max-width: 1050px) {
+      width: 450px;
+      height: auto;
     }
 
     @media screen and (max-width: 600px) {
       position: static;
-      width: 500px;
-      height: 280px;
+      width: 420px;
+      height: auto;
       &:last-of-type {
         margin-top: 7rem;
       }
     }
 
     @media screen and (max-width: 400px) {
-      width: 360px;
-      height: 280px;
+      width: 300px;
+      height: auto;
       &:last-of-type {
         margin-top: 7rem;
       }
