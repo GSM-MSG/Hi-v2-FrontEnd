@@ -114,8 +114,8 @@ export const HiCharacterBox = styled.div`
     height: 26rem;
 
     @media screen and (max-width: 1440px) {
-      width: 24rem;
-      height: 22rem;
+      width: 20rem;
+      height: auto;
     }
 
     @media screen and (max-width: 600px) {
