@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 export const HomeSection3 = styled.div`
@@ -5,55 +6,65 @@ export const HomeSection3 = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 2431px;
-  padding: 388px 0;
-  gap: 396px;
-
-  @media screen and (max-width: 600px) {
-    height: 125rem;
-  }
 `
 
-export const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.div<{ flexEnd?: boolean }>`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding-right: 240px;
+  margin-bottom: 100px;
+
+  ${({ flexEnd }) =>
+    flexEnd &&
+    css`
+      justify-content: flex-end;
+    `}
 
   img {
-    box-shadow: 0px 8px 30px 0px rgba(112, 144, 176, 0.12);
+    height: auto;
+  }
+
+  @media screen and (max-width: 1384px) {
+    img {
+      width: 80%;
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 1060px) {
+    img {
+      width: 50%;
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 930px) {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    img {
+      display: none;
+    }
   }
 `
 
-export const Circle1 = styled.div`
-  position: absolute;
-  width: 597px;
-  height: 595px;
-  background-color: #f0f5ff;
-  border-radius: 50%;
-  top: 9%;
-  left: -14%;
-  z-index: -1;
-`
-
-export const Circle2 = styled.div`
-   position: absolute;
-  width: 553px;
-  height: 551px;
-  background-color: #f0f5ff;
-  border-radius: 50%;
-  bottom: 17%;
-  right: 20%;
-  z-index: -1;
-`
-
-export const IntroductoryTextBox3 = styled.div`
+export const IntroductoryTextBox3 = styled.div<{
+  marginRight?: boolean
+}>`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 10px;
+  margin-left: 8vw;
+
+  ${({ marginRight }) =>
+    marginRight &&
+    css`
+      margin: 0;
+      margin-right: 8vw;
+    `}
 
   h2 {
     font-size: 2.3rem;
@@ -67,8 +78,25 @@ export const IntroductoryTextBox3 = styled.div`
   }
 
   p {
-    color: ${({theme}) => theme.color.Grayscale.gray07};
+    color: ${({ theme }) => theme.color.Grayscale.gray07};
     font-size: 1.1rem;
     font-weight: 600;
+  }
+
+  @media screen and (max-width: 930px) {
+    margin: 0;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    h2 {
+      font-size: 1.5rem;
+    }
   }
 `
