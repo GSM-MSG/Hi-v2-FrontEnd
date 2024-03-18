@@ -15,7 +15,14 @@ const FunctionBoxBlock = styled.div`
   align-items: center;
   padding: 3rem 2rem 2rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  margin-right: 2rem;
+
+  @media screen and (max-width: 875px) {
+    width: 30vw;
+  }
+
+  @media screen and (max-width: 660px) {
+    width: 20rem;
+  }
 
   img {
     width: 140px;

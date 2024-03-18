@@ -1,8 +1,7 @@
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 export const HomeSection4 = styled.div`
   width: 100vw;
-  padding: 0 18vw;
   height: 60rem;
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@ export const HomeSection4 = styled.div`
   padding-top: 6rem;
   background-color: ${({ theme }) => theme.color.Background.main};
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 660px) {
     height: 120rem;
   }
 `
@@ -21,8 +20,10 @@ export const FunctionIntroductoryBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 2rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 660px) {
     flex-direction: column;
   }
 `

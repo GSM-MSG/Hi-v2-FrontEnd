@@ -27,7 +27,7 @@ export const HeaderContainer = styled.header`
   }
 
   @media screen and (max-width: 450px) {
-    padding: 0 8vw;
+    padding: 0 5vw;
   }
 `
 
@@ -50,11 +50,6 @@ export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
     cursor: pointer;
     color: ${({ theme }) => theme.color.black};
     font-weight: 600;
-  }
-
-  @media screen and (max-width: 600px) {
-    font-size: 0.95rem;
-    width: 12rem;
   }
 `
 
