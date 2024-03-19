@@ -1,7 +1,9 @@
 export interface ReserveMutationValues {
-    users: string[],
-    reason: string
-    reservationNumber: number
+  users: string[]
+  reason: string
 }
 
-export type ReserveModifyMutationValues = Omit<ReserveMutationValues, 'reservationNumber'>
+export type ReserveModifyMutationValues = Omit<
+  ReserveMutationValues,
+  'reservationNumber'
+>

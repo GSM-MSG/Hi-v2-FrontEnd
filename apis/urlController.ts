@@ -17,6 +17,12 @@ export const userUrl = {
 export const homebaseUrl = {
   hombase: (queryString: { period: number; floor: number }) =>
     `/homebase?period=${queryString.period}&floor=${queryString.floor}`,
+  hombaseReserve: (queryString: {
+    period: number
+    floor: number
+    homeBaseNumber: number
+  }) =>
+    `/homebase?period=${queryString.period}&floor=${queryString.floor}&homeBaseNumber=${queryString.homeBaseNumber}`,
 } as const
 
 export const reservationUrl = {

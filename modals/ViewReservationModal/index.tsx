@@ -1,13 +1,11 @@
 import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { TableCheckIcon, XMark } from '@/assets'
-import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import { DeleteTableCheckModal, LeaveReservationTableModal } from '@/modals'
 import { ViewReservationData, ViewReservationDataTypes } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { useRecoilValue } from 'recoil'
 import * as S from './style'
 
 export default function ViewReservationModal({
@@ -15,11 +13,11 @@ export default function ViewReservationModal({
 }: {
   reservationId: string | undefined
 }) {
-  const reservationPlace = useRecoilValue(ReservationPlace)
   const { data, refetch } = useQuery<AxiosResponse<ViewReservationData>>({
     queryKey: reservationQueryKeys.detail(reservationId),
     queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
+  const { homeBase, reason, users, checkStatus } = data?.data || {}
   const { isTeacher, userId } = useGetRole()
   const { mutate } = useMutation<
     void,
@@ -32,10 +30,10 @@ export default function ViewReservationModal({
     onSuccess: () => refetch(),
   })
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
-    { name: '예약층', content: `${reservationPlace.floor}F` },
-    { name: '예약 테이블', content: `${data?.data.reservationNumber}번` },
+    { name: '예약층', content: `${homeBase?.floor}F` },
+    { name: '예약 테이블', content: `${homeBase?.homeBaseNumber}번` },
     { name: '예약 멤버' },
-    { name: '예약 사유', content: `${data?.data.reason}` },
+    { name: '예약 사유', content: `${reason}` },
   ]
   const { openModal, closeModal } = useModal()
 
@@ -46,13 +44,13 @@ export default function ViewReservationModal({
           <S.TitleLeftBox>
             {isTeacher && (
               <S.TableCheckBox
-                onClick={() => mutate({ checkStatus: !data?.data.checkStatus })}
+                onClick={() => mutate({ checkStatus: !checkStatus })}
               >
-                <TableCheckIcon checkStatus={data?.data.checkStatus} />
+                <TableCheckIcon checkStatus={checkStatus} />
               </S.TableCheckBox>
             )}
-            <Title>{data?.data.reservationNumber}번 테이블</Title>
-            {data?.data.users.some((user) => user.userId === userId) && (
+            <Title>{homeBase?.homeBaseNumber}번 테이블</Title>
+            {users?.some((user) => user.userId === userId) && (
               <Button
                 width='41px'
                 height='26px'
@@ -87,7 +85,7 @@ export default function ViewReservationModal({
                 <S.ViewReservationDataColumn key={idx} column={idx}>
                   <span>{view.name}</span>
                   <p>
-                    {data?.data.users.map((user) => (
+                    {users?.map((user) => (
                       <span key={user.userId}>{user.name} </span>
                     ))}
                   </p>
@@ -102,7 +100,7 @@ export default function ViewReservationModal({
           </S.ViewReservationDataContainer>
         </S.ViewReservationDataBox>
         <S.ViewReservationButtonContainer>
-          {data?.data.users.some((user) => user.userId === userId) && (
+          {users?.some((user) => user.userId === userId) && (
             <Button
               width='30%'
               height='3.2rem'
@@ -115,8 +113,8 @@ export default function ViewReservationModal({
               onClick={() =>
                 openModal(
                   <LeaveReservationTableModal
-                    reservationId={data?.data.reservationId}
-                    reservationNumber={data?.data.reservationNumber}
+                    reservationId={homeBase?.homeBaseId}
+                    reservationNumber={homeBase?.homeBaseNumber}
                   />
                 )
               }
@@ -126,9 +124,7 @@ export default function ViewReservationModal({
           )}
           <Button
             width={
-              data?.data.users.some((user) => user.userId === userId)
-                ? '70%'
-                : '100%'
+              users?.some((user) => user.userId === userId) ? '70%' : '100%'
             }
             height='3.2rem'
             background='#0066ff'

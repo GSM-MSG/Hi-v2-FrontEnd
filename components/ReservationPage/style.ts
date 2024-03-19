@@ -53,8 +53,8 @@ export const ButtonContainer = styled.div`
   gap: 8px;
 
   button {
-    width: 76px;
-    height: 38px;
+    width: 80px;
+    height: 36px;
     ${({ theme }) => theme.typography.body1.regular};
   }
 `

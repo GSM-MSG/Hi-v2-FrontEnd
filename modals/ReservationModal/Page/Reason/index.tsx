@@ -24,11 +24,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
 function Reason({
-  reservationNumber,
+  homeBaseNumber,
   isModify,
   reservationId,
 }: {
-  reservationNumber: number
+  homeBaseNumber: number
   isModify: boolean
   reservationId: string | undefined
 }) {
@@ -41,9 +41,10 @@ function Reason({
     mutationKey: homebaseQueryKeys.reserve(),
     mutationFn: (reserveValues) =>
       post(
-        homebaseUrl.hombase({
+        homebaseUrl.hombaseReserve({
           period: reservationPlace.period,
           floor: reservationPlace.floor,
+          homeBaseNumber,
         }),
         reserveValues
       ),
@@ -86,7 +87,6 @@ function Reason({
       mutate({
         users: filteredTeam,
         reason: reasonText,
-        reservationNumber,
       })
   }
 
@@ -107,8 +107,9 @@ function Reason({
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           setReasonText(e.target.value)
         }
-        height='18rem'
+        height='15.75rem'
         placeholder='사유입력(500자 이하)'
+        maxLength={500}
       />
       <S.ButtonContainer>
         <Button

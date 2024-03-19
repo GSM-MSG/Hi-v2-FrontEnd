@@ -6,23 +6,20 @@ import {
   reservationQueryKeys,
   reservationUrl,
 } from '@/apis'
-import { ReservationPlace, ReservationTables } from '@/atoms'
+import { ReservationPlace } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
 import { AllDeleteTableCheckModal, PlaceSelect } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
-  const [reservationTables, setReservationTables] =
-    useRecoilState(ReservationTables)
   const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
     queryKey: homebaseQueryKeys.list(),
     queryFn: () =>
@@ -44,15 +41,6 @@ function ReservationPage() {
   })
   const { isAdmin } = useGetRole()
   const { openModal } = useModal()
-
-  useEffect(() => {
-    setReservationTables([1, 2, 3, 4, 5])
-    setReservationTables((prev: any) =>
-      prev.map(
-        (e: any) => data?.data.find((obj) => obj.reservationNumber === e) || e
-      )
-    )
-  }, [data?.data, setReservationTables])
 
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
@@ -99,22 +87,9 @@ function ReservationPage() {
         </S.ButtonContainer>
       </S.ReservationTitleBox>
       <S.ReservationTableContainer>
-        {reservationTables
-          .slice(
-            0,
-            reservationPlace.floor === 3
-              ? 5
-              : reservationPlace.floor === 2
-              ? 3
-              : 4
-          )
-          .map((item, idx) => (
-            <ReservationTableItem
-              key={idx}
-              item={item}
-              reservationNumber={idx + 1}
-            />
-          ))}
+        {data?.data.map((item, idx) => (
+          <ReservationTableItem key={idx} item={item} />
+        ))}
       </S.ReservationTableContainer>
     </PageContainer>
   )

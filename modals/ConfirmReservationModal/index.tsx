@@ -8,9 +8,9 @@ import { useModal } from '@/hooks'
 import ReservationModal from '../ReservationModal'
 
 export default function ConfirmReservationModal({
-  reservationNumber,
+  homeBaseNumber,
 }: {
-  reservationNumber: number
+  homeBaseNumber: number
 }) {
   const { openModal, closeModal } = useModal()
 
@@ -18,7 +18,7 @@ export default function ConfirmReservationModal({
     <Portal onClose={closeModal}>
       <CheckModalContainer>
         <h2>예약확인</h2>
-        <p>{reservationNumber}번 테이블을 예약하시겠습니까?</p>
+        <p>{homeBaseNumber}번 테이블을 예약하시겠습니까?</p>
         <ButtonContainer>
           <Button
             width='142px'
@@ -41,7 +41,7 @@ export default function ConfirmReservationModal({
             onClick={() =>
               openModal(
                 <ReservationModal
-                  reservationNumber={reservationNumber}
+                  homeBaseNumber={homeBaseNumber}
                   isModify={false}
                 />
               )
