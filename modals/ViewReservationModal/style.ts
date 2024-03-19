@@ -2,7 +2,13 @@ import styled from '@emotion/styled'
 import { ButtonContainer, PlaceSelectContainer } from '../PlaceSelect/style'
 
 export const ViewReservationModalContainer = styled(PlaceSelectContainer)`
-  height: 480px;
+  height: 475px;
+`
+
+export const TitleLeftBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `
 
 export const TableCheckBox = styled.div`
@@ -41,7 +47,7 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
   align-items: flex-start;
   ${({ theme }) => theme.typography.body2.semibold};
   gap: ${({ column }) =>
-    column > 1 ? '32px' : column === 0 ? '47px' : '20px'};
+    column > 1 ? '32px' : column === 0 ? '53px' : '20px'};
 
   span {
     color: ${({ theme }) => theme.color.Grayscale.gray05};
@@ -53,11 +59,6 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
     color: #0b041e;
     span {
       color: #0b041e;
-      cursor: pointer;
-    }
-    b {
-      color: ${({theme}) => theme.color.primary};
-      font-weight: 600;
     }
   }
 `

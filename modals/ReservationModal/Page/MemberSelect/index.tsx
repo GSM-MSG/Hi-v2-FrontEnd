@@ -9,7 +9,7 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { useGetRole } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import { UserItemType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -24,6 +24,7 @@ function MemberSelect() {
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const [member, setMember] = useState<string>('')
+  const { closeModal } = useModal()
 
   const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
     queryKey: userQueryKeys.searchStudent(),
@@ -87,7 +88,7 @@ function MemberSelect() {
           disabled={showMembers.length === 5 ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
-          height='2rem'
+          height='28px'
           border='none'
           autoComplete='new-password'
           value={member}
@@ -189,11 +190,25 @@ function MemberSelect() {
       )}
       <S.ButtonContainer>
         <Button
-          width='100%'
-          height='3rem'
+          width='112px'
+          height='52px'
+          background='none'
+          color='#0066ff'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
+          borderRadius='8px'
+          border='1px solid #0066ff'
+          onClick={closeModal}
+        >
+          돌아가기
+        </Button>
+        <Button
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
+          fontSize='16px'
           fontWeight='500'
           border='none'
           borderRadius='8px'

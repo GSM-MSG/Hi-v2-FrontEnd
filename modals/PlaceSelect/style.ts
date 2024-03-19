@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 
 export const PlaceSelectContainer = styled.div`
   position: relative;
-  width: 400px;
-  height: 430px;
+  width: 416px;
+  height: 488px;
   background: #ffffff;
   border-radius: 8px;
   padding: 1.5rem;

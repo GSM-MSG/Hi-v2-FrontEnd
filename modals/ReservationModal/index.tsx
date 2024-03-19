@@ -6,11 +6,11 @@ import { Completed, MemberSelect, Reason } from './Page'
 import * as S from './style'
 
 function ReservationModal({
-  reservationNumber,
+  homeBaseNumber,
   isModify,
   reservationId,
 }: {
-  reservationNumber: number
+  homeBaseNumber: number
   isModify: boolean
   reservationId?: string
 }) {
@@ -29,7 +29,7 @@ function ReservationModal({
         {page === 1 && <MemberSelect />}
         {page === 2 && (
           <Reason
-            reservationNumber={reservationNumber}
+            homeBaseNumber={homeBaseNumber}
             isModify={isModify}
             reservationId={reservationId}
           />

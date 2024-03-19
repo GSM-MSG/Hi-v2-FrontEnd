@@ -24,11 +24,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
 function Reason({
-  reservationNumber,
+  homeBaseNumber,
   isModify,
   reservationId,
 }: {
-  reservationNumber: number
+  homeBaseNumber: number
   isModify: boolean
   reservationId: string | undefined
 }) {
@@ -41,9 +41,10 @@ function Reason({
     mutationKey: homebaseQueryKeys.reserve(),
     mutationFn: (reserveValues) =>
       post(
-        homebaseUrl.hombase({
+        homebaseUrl.hombaseReserve({
           period: reservationPlace.period,
           floor: reservationPlace.floor,
+          homeBaseNumber,
         }),
         reserveValues
       ),
@@ -86,7 +87,6 @@ function Reason({
       mutate({
         users: filteredTeam,
         reason: reasonText,
-        reservationNumber,
       })
   }
 
@@ -107,17 +107,19 @@ function Reason({
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           setReasonText(e.target.value)
         }
-        height='18rem'
-        placeholder='사유입력'
+        height='15.75rem'
+        placeholder='사유입력(500자 이하)'
+        maxLength={500}
       />
       <S.ButtonContainer>
         <Button
-          width='30%'
-          height='3rem'
+          width='112px'
+          height='52px'
           background='none'
           color='#0066ff'
-          fontSize='1rem'
-          fontWeight='700'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
           borderRadius='8px'
           border='1px solid #0066ff'
           onClick={() => setModalPage(1)}
@@ -125,12 +127,12 @@ function Reason({
           돌아가기
         </Button>
         <Button
-          width='68%'
-          height='3rem'
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
-          fontWeight='700'
+          fontSize='16px'
+          fontWeight='600'
           border='none'
           borderRadius='8px'
           onClick={onReserve}
