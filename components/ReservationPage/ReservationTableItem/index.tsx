@@ -7,7 +7,7 @@ import {
   ReservationModal,
   ViewReservationModal,
 } from '@/modals'
-import { theme } from '@/styles/theme'
+import { theme } from '@/styles'
 import { MyPageType, ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
