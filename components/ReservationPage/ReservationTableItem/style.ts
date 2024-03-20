@@ -5,8 +5,7 @@ export const TableBox = styled.div<{ reserved: boolean }>`
   justify-content: space-between;
   width: 31.5vw;
   height: 190px;
-  background-color: ${({ reserved }) =>
-    reserved ? 'none' : 'rgba(0, 102, 255, 0.04)'};
+  background-color: none;
   border: 1px solid
     ${({ reserved, theme }) =>
       reserved ? theme.color.Grayscale.gray05 : theme.color.primary};

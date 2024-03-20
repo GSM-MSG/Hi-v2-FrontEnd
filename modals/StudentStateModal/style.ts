@@ -10,14 +10,13 @@ export const ModalContainer = styled.div`
   align-items: center;
   gap: 40px;
   padding-top: 40px;
-  ${({ theme }) => theme.typography.h5.medium};
 
   p {
     text-align: center;
-    /* font-size: 16.3px;
-    letter-spacing: -1.5px; */
+    ${({ theme }) => theme.typography.h5.medium};
   }
 `
+
 export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
