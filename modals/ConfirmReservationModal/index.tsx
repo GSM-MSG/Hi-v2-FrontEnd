@@ -8,8 +8,10 @@ import { useModal } from '@/hooks'
 import ReservationModal from '../ReservationModal'
 
 export default function ConfirmReservationModal({
+  maxCapacity,
   homeBaseNumber,
 }: {
+  maxCapacity: number
   homeBaseNumber: number
 }) {
   const { openModal, closeModal } = useModal()
@@ -41,6 +43,7 @@ export default function ConfirmReservationModal({
             onClick={() =>
               openModal(
                 <ReservationModal
+                  maxCapacity={maxCapacity}
                   homeBaseNumber={homeBaseNumber}
                   isModify={false}
                 />

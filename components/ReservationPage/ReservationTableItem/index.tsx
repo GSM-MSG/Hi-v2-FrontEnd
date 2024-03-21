@@ -39,6 +39,7 @@ export default function ReservationTableItem({
     )
     openModal(
       <ReservationModal
+        maxCapacity={item.homeBase.maxCapacity}
         isModify={true}
         homeBaseNumber={item.homeBase.homeBaseNumber}
         reservationId={item.reservationId}
@@ -52,6 +53,7 @@ export default function ReservationTableItem({
         <ViewReservationModal reservationId={item.reservationId} />
       ) : useStatus === 'AVAILABLE' ? (
         <ConfirmReservationModal
+          maxCapacity={item.homeBase.maxCapacity}
           homeBaseNumber={item.homeBase.homeBaseNumber}
         />
       ) : (
