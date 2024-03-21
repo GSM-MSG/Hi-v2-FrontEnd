@@ -1,9 +1,9 @@
 import { UserItemType } from './UserItemType'
 export interface MyPageType extends UserItemType {
-  reservation: {
-    reservationId: string
-    users: [
-      {
+  reservations: [
+    {
+      reservationId: string
+      users: {
         userId: string
         email: string
         name: string
@@ -11,11 +11,16 @@ export interface MyPageType extends UserItemType {
         classNum: number
         number: number
         profileImageUrl: string
+        userStatus: 'AVAILABLE' | 'UNAVAILABLE'
+      }[]
+      checkStatus: boolean
+      homeBase: {
+        homeBaseId: string
+        floor: number
+        period: number
+        homeBaseNumber: number
+        maxCapacity: number
       }
-    ]
-    reservationNumber: number
-    homeBaseId: string
-    floor: number
-    period: number
-  }
+    }
+  ]
 }

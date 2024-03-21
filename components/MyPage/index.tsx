@@ -15,7 +15,7 @@ export default function MyPage() {
     queryFn: () => get(userUrl.my()),
   })
 
-  const { useStatus, profileImageUrl, name, email, reservation } =
+  const { useStatus, profileImageUrl, name, email, reservations } =
     data?.data || {}
 
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
@@ -47,13 +47,13 @@ export default function MyPage() {
       <S.ReservationWrapper>
         <S.ReservationTitle>
           <span>나의 예약 현황</span>
-          {reservation && <span>예약 중</span>}
+          {reservations && <span>예약 중</span>}
         </S.ReservationTitle>
-        {reservation && (
-          <S.Reservation>
+        {reservations?.map((i, idx) => (
+          <S.Reservation key={idx}>
             <div>
               <span className='tableNum'>
-                {reservation.reservationNumber}번 테이블
+                {i.homeBase.homeBaseNumber}번 테이블
               </span>
             </div>
             <div>
@@ -62,22 +62,21 @@ export default function MyPage() {
                 onClick={() => setShowDetailName((prev) => !prev)}
               >
                 <S.Name>
-                  {reservation.users[0].name} 외 {reservation.users.length - 1}
-                  명
+                  {i.users[0].name} 외 {i.users.length - 1} 명
                   <BackArrowIcon />
                 </S.Name>
                 {showDetailName && (
                   <S.DetailName>
-                    {reservation.users.map(({ name }) => name).join(', ')}
+                    {i.users.map(({ name }) => name).join(', ')}
                   </S.DetailName>
                 )}
               </S.NameWrapper>
               <span className='info'>
-                {reservation.period}교시 · {reservation.floor}F
+                {i.homeBase.period}교시 · {i.homeBase.floor}F
               </span>
             </div>
           </S.Reservation>
-        )}
+        ))}
       </S.ReservationWrapper>
     </S.PageContainer>
   )

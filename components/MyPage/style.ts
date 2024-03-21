@@ -68,6 +68,7 @@ export const ReservationWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 30px;
 
   @media screen and (max-width: 645px) {
     width: 500px;
