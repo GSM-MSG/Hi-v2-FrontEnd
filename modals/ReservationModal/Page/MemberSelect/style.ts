@@ -9,39 +9,38 @@ export const MemberSelectContainer = styled.div`
 
 export const InputBlock = styled.div`
   width: 100%;
+  height: 44px;
   display: flex;
   align-items: center;
-  padding: 0.3rem 0.9rem;
-  border: 1px solid #b1b1b1;
+  padding: 4.8px 14.4px;
+  border: 1px solid ${({ theme }) => theme.color.Grayscale.gray05};
   border-radius: 8px;
+  input {
+    ${({ theme }) => theme.typography.body1.regular};
+  }
 
   .searchIcon,
   .cancelIcon {
     cursor: pointer;
     margin-top: 0.3rem;
   }
-
-  &:focus {
-    border: 1px solid red;
-  }
 `
 
 export const ShowMemberListBox = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 10px;
 `
 
 export const ShowMemberBox = styled.div`
-  width: 4.1rem;
-  height: 1.8rem;
+  ${({ theme }) => theme.typography.caption.regular};
+  width: 68px;
+  height: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.74rem;
-  font-weight: 400;
   background: #f5f5f5;
-  color: #b1b1b1;
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
   padding: 0.1rem 0.5rem;
   border-radius: 6px;
   margin-right: 0.5rem;
@@ -53,7 +52,6 @@ export const MemberListBox = styled.div`
   align-items: center;
   width: 100%;
   height: 14rem;
-  margin-top: 0.5rem;
   margin-bottom: 4rem;
   overflow-y: auto;
 
@@ -65,7 +63,7 @@ export const MemberListBox = styled.div`
 export const LoadingMemberListBox = styled(MemberListBox)`
   justify-content: center;
   span {
-    color: #9e9e9e;
+    color: ${({ theme }) => theme.color.Grayscale.gray06};
   }
 `
 
@@ -96,9 +94,9 @@ export const InfoBox = styled.div`
   }
 
   span {
+    ${({ theme }) => theme.typography.body1.medium};
     font-size: 1rem;
-    font-weight: 500;
-    color: #606060;
+    color: ${({ theme }) => theme.color.Grayscale.gray08};
     margin-left: 0.2rem;
   }
 `
@@ -107,4 +105,6 @@ export const ButtonContainer = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 `

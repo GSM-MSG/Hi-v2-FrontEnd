@@ -1,10 +1,9 @@
 import { UserItemType } from '../components'
+import { HomeBaseTypes } from './ReservationData'
 
 export interface ViewReservationData {
-  checkStatus: boolean
-  reason: string
-  reservationId: string
-  reservationNumber: number
   users: UserItemType[]
-  representativeId: string
+  reason: string
+  checkStatus: boolean
+  homeBase: HomeBaseTypes
 }

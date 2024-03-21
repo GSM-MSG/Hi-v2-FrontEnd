@@ -1,15 +1,11 @@
-import * as SVG from '@/assets/svg'
-import { ReservationPlace } from '@/atoms'
-import { Title, TitleBox, Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import { useFetch, useModal } from '@/hooks'
-import DeleteTableCheckModal from '../DeleteTableCheckModal'
-import RepresentativeMandateModal from '../RepresentativeMandateModal'
-import { GetRoleType } from '@/types/components'
-import { ViewReservationData } from '@/types/modals'
-import { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
-import LeaveReservationTableModal from '../LeaveReservationTableModal'
+import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
+import { TableCheckIcon, XMark } from '@/assets'
+import { Button, Portal, Title, TitleBox } from '@/components'
+import { useGetRole, useModal } from '@/hooks'
+import { DeleteTableCheckModal, LeaveReservationTableModal } from '@/modals'
+import { ViewReservationData, ViewReservationDataTypes } from '@/types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import * as S from './style'
 
 export default function ViewReservationModal({
@@ -17,164 +13,125 @@ export default function ViewReservationModal({
 }: {
   reservationId: string | undefined
 }) {
-  const reservationPlace = useRecoilValue(ReservationPlace)
-  const { fetch, data } = useFetch<ViewReservationData>({
-    url: `/reservation/${reservationId}`,
-    method: 'get',
+  const { data, refetch } = useQuery<AxiosResponse<ViewReservationData>>({
+    queryKey: reservationQueryKeys.detail(reservationId),
+    queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
-
-  const { fetch: updateCheck } = useFetch<GetRoleType>({
-    url: `/reservation/${reservationId}/check-status`,
-    method: 'patch',
+  const { homeBase, reason, users, checkStatus } = data?.data || {}
+  const { isTeacher, userId } = useGetRole()
+  const { mutate } = useMutation<
+    void,
+    Error,
+    { checkStatus: boolean | undefined }
+  >({
+    mutationKey: reservationQueryKeys.check(reservationId),
+    mutationFn: (modifyValue) =>
+      patch(reservationUrl.check(reservationId), modifyValue),
+    onSuccess: () => refetch(),
   })
-
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
-  })
-
-  const ViewReservationDatas = [
-    { id: 1, name: '층', content: `${reservationPlace.floor}F` },
-    { id: 2, name: '테이블', content: `${data?.reservationNumber}번` },
-    {
-      id: 3,
-      name: '확인상태',
-      content: !data?.checkStatus ? '미확인' : '확인',
-    },
-    {
-      id: 4,
-      name: '멤버',
-    },
+  const ViewReservationDataColumns: ViewReservationDataTypes[] = [
+    { name: '예약층', content: `${homeBase?.floor}F` },
+    { name: '예약 테이블', content: `${homeBase?.homeBaseNumber}번` },
+    { name: '예약 멤버' },
+    { name: '예약 사유', content: `${reason}` },
   ]
-
   const { openModal, closeModal } = useModal()
-
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [fetch])
-
-  useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
 
   return (
     <Portal onClose={closeModal}>
       <S.ViewReservationModalContainer>
         <TitleBox>
-          <Title>
-            {roleData?.role.includes('ROLE_TEACHER') && (
-              <div
-                onClick={async () => await updateCheck(data?.checkStatus)}
-                style={{
-                  cursor: 'pointer',
-                  marginTop: '0.12rem',
-                  marginRight: '0.3rem',
-                }}
+          <S.TitleLeftBox>
+            {isTeacher && (
+              <S.TableCheckBox
+                onClick={() => mutate({ checkStatus: !checkStatus })}
               >
-                <SVG.TableCheckIcon checkStatus={data?.checkStatus} />
-              </div>
+                <TableCheckIcon checkStatus={checkStatus} />
+              </S.TableCheckBox>
             )}
-            예약조회
-          </Title>
-          <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-            <SVG.XMark width='24' height='24' />
-          </div>
-        </TitleBox>
-        <S.ViewReservationDataContainer>
-          {ViewReservationDatas.map((viewData) => (
-            <S.ViewReservationDataColumn
-              key={viewData.id}
-              name={viewData.name === '멤버' ? '멤버' : ''}
-            >
-              <span>{viewData.name}</span>
-
-              <S.ViewDataBox name={viewData.name === '멤버' ? '멤버' : ''}>
-                {viewData.name === '멤버' ? (
-                  data?.users.map((item) => (
-                    <S.Member
-                      key={item.userId}
-                      isRepresentative={data.representativeId === item.userId}
-                      onClick={() =>
-                        data.representativeId === roleData?.userId &&
-                        data.representativeId !== item.userId &&
-                        openModal(
-                          <RepresentativeMandateModal
-                            username={item.name}
-                            userId={item.userId}
-                            reservationId={reservationId}
-                          />
-                        )
-                      }
-                    >
-                      {data.representativeId === item.userId && (
-                        <SVG.RepresentativeIcon />
-                      )}
-                      {item.name}
-                    </S.Member>
-                  ))
-                ) : (
-                  <span>{viewData.content}</span>
-                )}
-              </S.ViewDataBox>
-            </S.ViewReservationDataColumn>
-          ))}
-        </S.ViewReservationDataContainer>
-        <S.ViewReservationButtonContainer>
-          {data?.representativeId === roleData?.userId && (
-            <Button
-              width='30%'
-              height='3.2rem'
-              background='#FF002E'
-              color='#ffffff'
-              fontSize='1.2rem'
-              fontWeight='500'
-              border='none'
-              borderRadius='8px'
-              onClick={() =>
-                openModal(
-                  <DeleteTableCheckModal reservationId={data?.reservationId} />
-                )
-              }
-            >
-              삭제
-            </Button>
-          )}
-          {data?.users.some((user) => user.userId === roleData?.userId) &&
-            data.representativeId !== roleData?.userId && (
+            <Title>{homeBase?.homeBaseNumber}번 테이블</Title>
+            {users?.some((user) => user.userId === userId) && (
               <Button
-                width='30%'
-                height='3.2rem'
-                background='#c0c0c0'
-                color='#ffffff'
-                fontSize='1.2rem'
-                fontWeight='500'
-                border='none'
+                width='41px'
+                height='26px'
+                color='#FF002E'
+                border='1px solid #FF002E'
                 borderRadius='8px'
+                fontSize='14px'
+                lineHeight='22px'
+                fontWeight='400'
+                background='#FFFFFF'
+                hoverColor='#FFFFFF'
+                hoverBackground='#FF002E'
                 onClick={() =>
                   openModal(
-                    <LeaveReservationTableModal
-                      reservationId={data?.reservationId}
-                      reservationNumber={data.reservationNumber}
-                    />
+                    <DeleteTableCheckModal reservationId={reservationId} />
                   )
                 }
               >
-                나가기
+                삭제
               </Button>
             )}
-
+          </S.TitleLeftBox>
+          <div style={{ cursor: 'pointer' }} onClick={closeModal}>
+            <XMark width='24' height='24' />
+          </div>
+        </TitleBox>
+        <S.ViewReservationDataBox>
+          <S.ViewReservationText>예약정보 확인</S.ViewReservationText>
+          <S.ViewReservationDataContainer>
+            {ViewReservationDataColumns.map((view, idx) =>
+              view.name === '예약 멤버' ? (
+                <S.ViewReservationDataColumn key={idx} column={idx}>
+                  <span>{view.name}</span>
+                  <p>
+                    {users?.map((user) => (
+                      <span key={user.userId}>{user.name} </span>
+                    ))}
+                  </p>
+                </S.ViewReservationDataColumn>
+              ) : (
+                <S.ViewReservationDataColumn key={idx} column={idx}>
+                  <span>{view.name}</span>
+                  <p>{view.content}</p>
+                </S.ViewReservationDataColumn>
+              )
+            )}
+          </S.ViewReservationDataContainer>
+        </S.ViewReservationDataBox>
+        <S.ViewReservationButtonContainer>
+          {users?.some((user) => user.userId === userId) && (
+            <Button
+              width='30%'
+              height='3.2rem'
+              background='none'
+              color='#0066ff'
+              fontSize='1.2rem'
+              fontWeight='700'
+              border='1px solid #0066ff'
+              borderRadius='8px'
+              onClick={() =>
+                openModal(
+                  <LeaveReservationTableModal
+                    reservationId={homeBase?.homeBaseId}
+                    reservationNumber={homeBase?.homeBaseNumber}
+                  />
+                )
+              }
+            >
+              나가기
+            </Button>
+          )}
           <Button
             width={
-              data?.users.some((user) => user.userId === roleData?.userId) ||
-              data?.representativeId === roleData?.userId
-                ? '70%'
-                : '100%'
+              users?.some((user) => user.userId === userId) ? '70%' : '100%'
             }
             height='3.2rem'
             background='#0066ff'
             color='#ffffff'
-            fontSize='1.2rem'
-            fontWeight='500'
+            fontSize='18px'
+            lineHeight='27px'
+            fontWeight='600'
             border='none'
             borderRadius='8px'
             onClick={closeModal}

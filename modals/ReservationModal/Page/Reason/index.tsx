@@ -1,84 +1,93 @@
+import {
+  homebaseQueryKeys,
+  homebaseUrl,
+  patch,
+  post,
+  reservationQueryKeys,
+  reservationUrl,
+} from '@/apis'
 import { ModalPage, ReasonText, ReservationPlace, TeamMembers } from '@/atoms'
 import {
+  Button,
   PageToggleBox,
   SubTitle,
+  Textarea,
   Title,
   TitleBox,
-  Button,
-  Textarea,
-} from '@/components/commons'
-import useFetch from '@/hooks/useFetch'
-import { GetRoleType } from '@/types/components'
-import { useEffect } from 'react'
+} from '@/components'
+import { useGetRole } from '@/hooks'
+import { ReserveModifyMutationValues, ReserveMutationValues } from '@/types'
+import { useMutation } from '@tanstack/react-query'
+import { ChangeEvent, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
 function Reason({
-  reservationNumber,
+  homeBaseNumber,
   isModify,
   reservationId,
 }: {
-  reservationNumber: number
+  homeBaseNumber: number
   isModify: boolean
   reservationId: string | undefined
 }) {
-  const setModalPage = useSetRecoilState(ModalPage)
   const reservationPlace = useRecoilValue(ReservationPlace)
-
+  const setModalPage = useSetRecoilState(ModalPage)
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
 
-  const { fetch } = useFetch({
-    url: `/homebase?floor=${reservationPlace.floor}&period=${reservationPlace.period}`,
-    method: 'post',
+  const { mutate } = useMutation<void, Error, ReserveMutationValues>({
+    mutationKey: homebaseQueryKeys.reserve(),
+    mutationFn: (reserveValues) =>
+      post(
+        homebaseUrl.hombaseReserve({
+          period: reservationPlace.period,
+          floor: reservationPlace.floor,
+          homeBaseNumber,
+        }),
+        reserveValues
+      ),
     onSuccess: () => {
+      toast.success('예약이 완료되었습니다')
       setModalPage(3)
-    },
-    successMessage: '예약이 완료되었습니다.',
-    errorMessage: {
-      401: '잘못된 유저정보입니다.',
-      403: '예약이 불가능한 상태입니다.',
     },
   })
 
-  const { fetch: updateTable } = useFetch({
-    url: `/reservation/${reservationId}`,
-    method: 'patch',
+  const { mutate: updateTable } = useMutation<
+    void,
+    Error,
+    ReserveModifyMutationValues
+  >({
+    mutationKey: reservationQueryKeys.modify(reservationId),
+    mutationFn: (modifyValues) =>
+      patch(reservationUrl.requestId(reservationId), modifyValues),
     onSuccess: () => {
+      toast.success('예약테이블을 수정했습니다')
       setModalPage(3)
     },
-    successMessage: '예약 테이블을 수정했습니다',
   })
-
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-page',
-    method: 'get',
-  })
+  const { userId } = useGetRole()
 
   useEffect(() => {
-    ;(async () => await fetchRole())()
-    setTeamMembers((prev) => [...prev, roleData?.userId || ''])
-  }, [fetchRole, roleData?.userId, setTeamMembers])
+    setTeamMembers((prev) => [...prev, userId || ''])
+  }, [setTeamMembers, userId])
 
-  const onReserve = async () => {
+  const onReserve = () => {
     const filteredTeam = teamMembers.filter(
       (member, idx) => teamMembers.indexOf(member) === idx && member.length
     )
-
-    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요.')
-    else if (isModify) {
-      await updateTable({
+    if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요')
+    else if (isModify)
+      updateTable({
         users: filteredTeam,
         reason: reasonText,
       })
-    } else {
-      await fetch({
+    else
+      mutate({
         users: filteredTeam,
         reason: reasonText,
-        reservationNumber,
       })
-    }
   }
 
   return (
@@ -95,30 +104,35 @@ function Reason({
       <SubTitle>홈베이스를 신청하는 사유를 알려주세요.</SubTitle>
       <Textarea
         value={reasonText}
-        onChange={(e) => setReasonText(e.target.value)}
-        height='18rem'
-        placeholder='예약 사유를 입력해주세요.'
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          setReasonText(e.target.value)
+        }
+        height='15.75rem'
+        placeholder='사유입력(500자 이하)'
+        maxLength={500}
       />
       <S.ButtonContainer>
         <Button
-          width='30%'
-          height='3rem'
-          background='#d9d9d9'
-          color='#ffffff'
-          fontSize='1rem'
+          width='112px'
+          height='52px'
+          background='none'
+          color='#0066ff'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
           borderRadius='8px'
-          border='none'
+          border='1px solid #0066ff'
           onClick={() => setModalPage(1)}
         >
           돌아가기
         </Button>
         <Button
-          width='68%'
-          height='3rem'
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
-          fontWeight='500'
+          fontSize='16px'
+          fontWeight='600'
           border='none'
           borderRadius='8px'
           onClick={onReserve}

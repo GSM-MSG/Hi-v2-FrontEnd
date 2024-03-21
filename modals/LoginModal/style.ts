@@ -8,7 +8,7 @@ export const ModalContainer = styled.div`
   padding: 52px 0 40px 0;
 `
 
-export const SVGConatiner = styled.div`
+export const SVGContainer = styled.div`
   width: 0px;
   height: 0px;
   cursor: pointer;

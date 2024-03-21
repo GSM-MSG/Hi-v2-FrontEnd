@@ -2,10 +2,10 @@ import styled from '@emotion/styled'
 
 export const ReservationModalContainer = styled.div`
   position: relative;
-  width: 450px;
-  height: 530px;
+  width: 416px;
+  height: 484px;
   background: #ffffff;
   border-radius: 8px;
-  padding: 2rem;
+  padding: 28px;
   margin-bottom: 3rem;
 `

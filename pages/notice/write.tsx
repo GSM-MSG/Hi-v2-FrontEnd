@@ -1,11 +1,10 @@
-import WritePage from '@/components/NoticePage/WritePage'
-import SEO from '@/components/SEO'
+import { NoticeWritePage, SEO } from '@/components'
 
 export default function write() {
   return (
     <>
       <SEO title='| 공지페이지' />
-      <WritePage />
+      <NoticeWritePage />
     </>
   )
 }

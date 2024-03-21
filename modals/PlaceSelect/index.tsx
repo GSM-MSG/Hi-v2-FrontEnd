@@ -1,9 +1,12 @@
+import { get, homebaseQueryKeys, homebaseUrl } from '@/apis'
+import { XMark } from '@/assets'
 import { ReservationPlace } from '@/atoms'
-import { Title, TitleBox, Button } from '@/components/commons'
-import * as SVG from '@/assets/svg'
-import Portal from '@/components/Portal'
-import useModal from '@/hooks/useModal'
-import { useState } from 'react'
+import { Button, Portal, Title, TitleBox } from '@/components'
+import { useModal } from '@/hooks'
+import { ReservationDataType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import * as S from './style'
 
@@ -15,19 +18,36 @@ function PlaceSelect() {
     floors: [2, 3, 4],
     periods: [8, 9, 10, 11],
   })
-
-  const [floorClicked, setFloorClicked] = useState<number>(2)
-  const [periodClicked, setPeriodClicked] = useState<number>(8)
-
   const { floors, periods } = showPlace
+  const { refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
+    queryKey: homebaseQueryKeys.list(),
+    queryFn: () =>
+      get(
+        homebaseUrl.hombase({
+          period: reservationPlace.period,
+          floor: reservationPlace.floor,
+        })
+      ),
+  })
 
-  const onFloor = (floor: number) => {
-    setFloorClicked(floor)
-  }
+  const onFloorClick = (floor: number) =>
+    setReservationPlace((prev) => {
+      return {
+        ...prev,
+        floor,
+      }
+    })
+  const onPeriodClick = (period: number) =>
+    setReservationPlace((prev) => {
+      return {
+        ...prev,
+        period,
+      }
+    })
 
-  const onPeriod = (period: number) => {
-    setPeriodClicked(period)
-  }
+  useEffect(() => {
+    refetch()
+  }, [reservationPlace])
 
   return (
     <Portal onClose={closeModal}>
@@ -35,7 +55,7 @@ function PlaceSelect() {
         <TitleBox>
           <Title>상세정보 선택</Title>
           <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-            <SVG.XMark width='24' height='24' />
+            <XMark width='24' height='24' />
           </div>
         </TitleBox>
         <S.PlaceSelectBox>
@@ -44,9 +64,9 @@ function PlaceSelect() {
             {floors.map((floor, idx) => (
               <S.FloorButton
                 key={idx}
-                clicked={floorClicked}
+                clicked={reservationPlace.floor}
                 current_value={floor}
-                onClick={() => onFloor(floor)}
+                onClick={() => onFloorClick(floor)}
               >
                 {floor}F
               </S.FloorButton>
@@ -59,9 +79,9 @@ function PlaceSelect() {
             {periods.map((period, idx) => (
               <S.PeriodButton
                 key={idx}
-                clicked={periodClicked}
+                clicked={reservationPlace.period}
                 current_value={period}
-                onClick={() => onPeriod(period)}
+                onClick={() => onPeriodClick(period)}
               >
                 {period}교시
               </S.PeriodButton>
@@ -78,16 +98,7 @@ function PlaceSelect() {
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={() => {
-              setReservationPlace((prev) => {
-                return {
-                  ...prev,
-                  period: periodClicked,
-                  floor: floorClicked,
-                }
-              })
-              closeModal()
-            }}
+            onClick={closeModal}
           >
             확인
           </Button>

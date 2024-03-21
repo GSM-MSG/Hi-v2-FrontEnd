@@ -1,41 +1,56 @@
+import { authQueryKeys, authUrl, del } from '@/apis'
+import TokenManager from '@/apis/TokenManager'
+import { HiLogo } from '@/assets'
+import { headerMenuList } from '@/constants'
+import { useGetRole, useModal } from '@/hooks'
+import { LoginModal } from '@/modals'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import * as S from './style'
-import * as SVG from '@/assets/svg'
 import { useEffect, useState } from 'react'
-import { HasLogin } from '@/atoms'
-import { useRecoilValue } from 'recoil'
-import { useModal } from '@/hooks'
-import { useGetRole, useLogout } from '@/hooks'
-import { headerMenuList } from '@/constants/headerObject'
 import { toast } from 'react-toastify'
-import LoginModal from '@/modals/LoginModal'
+import * as S from './style'
 
 function Header() {
   const router = useRouter()
-  const hasLogin = useRecoilValue<boolean>(HasLogin)
-  const [loginText, setLoginText] = useState<'로그아웃' | '로그인'>('로그인')
   const { openModal } = useModal()
-  const logout = useLogout()
-  const { isStudent } = useGetRole()
+  const { isAdmin, isTeacher } = useGetRole()
+  const [loginText, setLoginText] = useState<'로그인' | '로그아웃'>('로그인')
+  const tokenManager = new TokenManager()
+  const { mutate } = useMutation<void, AxiosError>({
+    mutationKey: authQueryKeys.logout(),
+    mutationFn: () =>
+      del(authUrl.auth(), {
+        headers: {
+          Authorization: `Bearer ${tokenManager.accessToken}`,
+          RefreshToken: tokenManager.refreshToken,
+        },
+      }),
+    onSuccess: () => {
+      tokenManager.removeTokens()
+      router.push('/')
+    },
+  })
 
   useEffect(() => {
-    setLoginText(hasLogin ? '로그아웃' : '로그인')
-  }, [hasLogin])
+    if (tokenManager.accessToken) setLoginText('로그아웃')
+    else setLoginText('로그인')
+  }, [tokenManager.accessToken])
 
   return (
     <S.HeaderContainer>
       <Link href='/'>
-        <SVG.HiLogo />
+        <HiLogo />
       </Link>
-      <S.MenuListBox is_admin={!isStudent}>
-        {!isStudent
+      <S.MenuListBox is_admin={isAdmin || isTeacher}>
+        {isAdmin || isTeacher
           ? headerMenuList.map((menu) => (
               <li
                 key={menu.id}
                 className={router.pathname === menu.link ? 'choice' : ''}
                 onClick={() =>
-                  hasLogin
+                  tokenManager.accessToken
                     ? router.push(`${menu.link}`)
                     : toast.info('로그인 후에 이용해주세요')
                 }
@@ -48,7 +63,7 @@ function Header() {
                 key={menu.id}
                 className={router.pathname === menu.link ? 'choice' : ''}
                 onClick={() =>
-                  hasLogin
+                  tokenManager.accessToken
                     ? router.push(`${menu.link}`)
                     : toast.info('로그인 후에 이용해주세요')
                 }
@@ -57,13 +72,13 @@ function Header() {
               </li>
             ))}
       </S.MenuListBox>
-      {hasLogin ? (
-        <S.LoginBtn onClick={logout}>{loginText}</S.LoginBtn>
-      ) : (
-        <S.LoginBtn onClick={() => openModal(<LoginModal />)}>
-          {loginText}
-        </S.LoginBtn>
-      )}
+      <S.LoginBtn
+        onClick={() =>
+          tokenManager.accessToken ? mutate() : openModal(<LoginModal />)
+        }
+      >
+        {loginText}
+      </S.LoginBtn>
     </S.HeaderContainer>
   )
 }

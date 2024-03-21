@@ -1,61 +1,54 @@
-import * as SVG from '@/assets/svg'
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { SearchIcon, UserProfile, XMark } from '@/assets'
+import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
 import {
+  Button,
+  Input,
   PageToggleBox,
   SubTitle,
   Title,
   TitleBox,
-  Button,
-  Input,
-} from '@/components/commons'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { ModalPage, ShowMembers, TeamMembers } from '@/atoms'
-import * as S from './style'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import useFetch from '@/hooks/useFetch'
-import { toast } from 'react-toastify'
-import { UserItemType, GetRoleType } from '@/types/components'
+} from '@/components'
+import { useGetRole, useModal } from '@/hooks'
+import { UserItemType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import * as S from './style'
 
-function MemberSelect() {
+function MemberSelect({maxCapacity}: {maxCapacity: number}) {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
-  const form = useForm({ defaultValues: { member: '' } })
-  const { register, watch, setValue } = form
-  const { isLoading, fetch, data } = useFetch<UserItemType[]>({
-    url: `/user/search-student?keyword=${watch('member')}`,
-    method: 'get',
-  })
+  const [member, setMember] = useState<string>('')
+  const { closeModal } = useModal()
 
-  const { fetch: fetchRole, data: roleData } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
+  const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
+    queryKey: userQueryKeys.searchStudent(),
+    queryFn: () => get(userUrl.searchStudent(member)),
   })
+  const { userId } = useGetRole()
 
   useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
-
-  useEffect(() => {
-    if (!watch('member').trim()) return
-
+    if (!member.trim()) return
     const delayFetch = setTimeout(() => {
-      fetch()
+      refetch()
     }, 1000)
-
     return () => clearTimeout(delayFetch)
-  }, [fetch, watch])
+  }, [member, refetch])
 
   const addMembers = (member: UserItemType) => {
     if (teamMembers.includes(member.userId)) {
       return toast.warning('이미 포함된 멤버입니다')
-    } else if (member.userId === roleData?.userId) {
+    } else if (member.userId === userId) {
       return toast.warning('자신을 제외한 멤버를 선택해주세요')
     }
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
-    setValue('member', '')
+    setMember('')
   }
 
   const deleteMembers = (member: UserItemType) => {
@@ -66,7 +59,7 @@ function MemberSelect() {
 
     setShowMembers(filteredShowMembers)
     setTeamMembers(filteredTeamMembers)
-    setValue('member', '')
+    setMember('')
   }
 
   const onNext = () => {
@@ -89,21 +82,21 @@ function MemberSelect() {
       <SubTitle>같이할 팀원을 선택해주세요.</SubTitle>
       <S.InputBlock>
         <div className='searchIcon'>
-          <SVG.SearchIcon />
+          <SearchIcon />
         </div>
         <Input
-          disabled={showMembers.length === 5 ? true : false}
+          disabled={showMembers.length === maxCapacity ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
-          height='2rem'
-          fontSize='1rem'
+          height='28px'
           border='none'
           autoComplete='new-password'
-          {...register('member')}
+          value={member}
+          onChange={(e) => setMember(e.target.value)}
         />
-        {watch('member').length > 0 && (
-          <div className='cancelIcon' onClick={() => setValue('member', '')}>
-            <SVG.XMark />
+        {member.length > 0 && (
+          <div className='cancelIcon' onClick={() => setMember('')}>
+            <XMark />
           </div>
         )}
       </S.InputBlock>
@@ -116,7 +109,7 @@ function MemberSelect() {
               onClick={() => deleteMembers(showMember)}
             >
               <div style={{ marginTop: '0.125rem' }}>
-                <SVG.XMark width='11' height='11' />
+                <XMark width='11' height='11' />
               </div>
             </div>
           </S.ShowMemberBox>
@@ -126,15 +119,15 @@ function MemberSelect() {
         <S.LoadingMemberListBox>
           <span>학생정보를 찾는 중입니다.</span>
         </S.LoadingMemberListBox>
-      ) : data?.length === 0 ? (
+      ) : data?.data.length === 0 ? (
         <S.LoadingMemberListBox>
           <span>학생정보를 찾을 수 없습니다.</span>
         </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
-          {watch('member')?.trim() &&
-            data
-              ?.sort((a, b) => {
+          {member.trim() &&
+            data?.data
+              .sort((a, b) => {
                 const aStudentNum = parseInt(
                   `${a.grade}${a.classNum}${a.number
                     .toString()
@@ -155,11 +148,11 @@ function MemberSelect() {
                       <Image
                         src={item.profileImageUrl}
                         alt='profileImage'
-                        width='40'
-                        height='40'
+                        width='36'
+                        height='36'
                       />
                     ) : (
-                      <SVG.UserProfile />
+                      <UserProfile />
                     )}
                     <div style={{ whiteSpace: 'nowrap' }}>
                       <span>
@@ -179,7 +172,7 @@ function MemberSelect() {
                     color='#0066ff'
                     width='3.5rem'
                     height='1.8rem'
-                    fontSize='0.9rem'
+                    fontSize='14px'
                     fontWeight='500'
                     hoverBackground='#0066ff'
                     hoverBorder='none'
@@ -189,7 +182,7 @@ function MemberSelect() {
                     }}
                     disabled={item.useStatus === 'AVAILABLE' ? false : true}
                   >
-                    선택
+                    <span>선택</span>
                   </Button>
                 </S.MemberBox>
               ))}
@@ -197,11 +190,25 @@ function MemberSelect() {
       )}
       <S.ButtonContainer>
         <Button
-          width='100%'
-          height='3rem'
+          width='112px'
+          height='52px'
+          background='none'
+          color='#0066ff'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
+          borderRadius='8px'
+          border='1px solid #0066ff'
+          onClick={closeModal}
+        >
+          돌아가기
+        </Button>
+        <Button
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
+          fontSize='16px'
           fontWeight='500'
           border='none'
           borderRadius='8px'

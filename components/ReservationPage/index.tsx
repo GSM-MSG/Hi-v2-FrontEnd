@@ -1,60 +1,46 @@
-import { PageContainer, Button } from '../commons'
-import { useRecoilValue } from 'recoil'
+import {
+  del,
+  get,
+  homebaseQueryKeys,
+  homebaseUrl,
+  reservationQueryKeys,
+  reservationUrl,
+} from '@/apis'
 import { ReservationPlace } from '@/atoms'
-import useFetch from '@/hooks/useFetch'
-import { useEffect, useState } from 'react'
+import { useGetRole, useModal } from '@/hooks'
+import { AllDeleteTableCheckModal, PlaceSelect } from '@/modals'
+import { ReservationDataType } from '@/types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
+import { useRecoilValue } from 'recoil'
+import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
-import useModal from '@/hooks/useModal'
-import PlaceSelect from '@/modals/PlaceSelect'
-import { GetRoleType } from '@/types/components'
-import { ReservationDataType } from '@/types/modals'
-import { useRouter } from 'next/navigation'
 
 function ReservationPage() {
-  const router = useRouter()
   const reservationPlace = useRecoilValue(ReservationPlace)
-  const { fetch, data } = useFetch<ReservationDataType[]>({
-    url: `/homebase?period=${reservationPlace.period}&floor=${reservationPlace.floor}`,
-    method: 'get',
+  const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
+    queryKey: homebaseQueryKeys.list(),
+    queryFn: () =>
+      get(
+        homebaseUrl.hombase({
+          period: reservationPlace.period,
+          floor: reservationPlace.floor,
+        })
+      ),
   })
-
   const today: Date = new Date()
-
-  const { fetch: deleteTable } = useFetch({
-    url: '/reservation/kill-all',
-    method: 'delete',
+  const { mutate } = useMutation<void, Error>({
+    mutationKey: reservationQueryKeys.deleteAll(),
+    mutationFn: () => del(reservationUrl.deleteAll()),
     onSuccess: () => {
-      router.refresh()
+      refetch()
+      toast.success('예약 테이블을 모두 삭제했습니다.')
     },
-    successMessage: '예약 테이블을 모두 삭제했습니다.',
   })
-
-  const { fetch: fetchRole, data: roleDate } = useFetch<GetRoleType>({
-    url: '/user/my-role',
-    method: 'get',
-  })
-
+  const { isAdmin } = useGetRole()
   const { openModal } = useModal()
-
-  const [reservationTables, setReservationTables] = useState([1, 2, 3, 4, 5])
-
-  useEffect(() => {
-    ;(async () => await fetch())()
-  }, [fetch])
-
-  useEffect(() => {
-    ;(async () => await fetchRole())()
-  }, [fetchRole])
-
-  useEffect(() => {
-    setReservationTables([1, 2, 3, 4, 5])
-    setReservationTables((prev: any) =>
-      prev.map(
-        (e: any) => data?.find((obj) => obj.reservationNumber === e) || e
-      )
-    )
-  }, [data, setReservationTables])
 
   return (
     <PageContainer paddingTop='8vh' paddingBottom='5vh' background='#ffffff'>
@@ -69,15 +55,11 @@ function ReservationPage() {
             {reservationPlace.floor}층 &#12685; {reservationPlace.period}교시
           </div>
         </S.ReservationTitle>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <S.ButtonContainer>
           <Button
-            width='3.8rem'
-            height='1.7rem'
             border='1px solid #0066ff'
-            borderRadius='4px'
+            borderRadius='8px'
             color='#0066ff'
-            fontSize='0.81rem'
-            fontWeight='500'
             background='none'
             hoverBackground='#0066ff'
             hoverColor='#ffffff'
@@ -85,36 +67,29 @@ function ReservationPage() {
           >
             상세조회
           </Button>
-          {roleDate?.role.includes('ROLE_ADMIN') && (
+          {isAdmin && (
             <Button
-              width='3.8rem'
-              height='1.7rem'
               border='1px solid #FF002E'
-              borderRadius='4px'
+              borderRadius='8px'
               color='#FF002E'
-              fontSize='0.81rem'
-              fontWeight='500'
               background='none'
               hoverBackground='#FF002E'
               hoverColor='#ffffff'
-              style={{ marginLeft: '0.3rem' }}
-              onClick={async () => await deleteTable()}
+              onClick={() =>
+                openModal(
+                  <AllDeleteTableCheckModal onDelete={() => mutate()} />
+                )
+              }
             >
               전체삭제
             </Button>
           )}
-        </div>
+        </S.ButtonContainer>
       </S.ReservationTitleBox>
       <S.ReservationTableContainer>
-        {reservationTables
-          .slice(0, reservationPlace.floor === 3 ? 5 : 4)
-          .map((item, idx) => (
-            <ReservationTableItem
-              key={idx}
-              item={item}
-              reservationNumber={idx + 1}
-            />
-          ))}
+        {data?.data.map((item, idx) => (
+          <ReservationTableItem key={idx} item={item} />
+        ))}
       </S.ReservationTableContainer>
     </PageContainer>
   )

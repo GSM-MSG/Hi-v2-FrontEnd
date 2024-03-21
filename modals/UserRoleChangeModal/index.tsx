@@ -1,39 +1,39 @@
-import * as SVG from '@/assets/svg'
-import { SelectedUser, UserList } from '@/atoms'
-import { Button } from '@/components/commons'
-import Portal from '@/components/Portal'
-import useFetch from '@/hooks/useFetch'
-import useModal from '@/hooks/useModal'
-import { UserItemListType } from '@/types/components'
+import { patch, userQueryKeys, userUrl } from '@/apis'
+import { SelectedCheck } from '@/assets'
+import { SelectedUser } from '@/atoms'
+import { Button, Portal } from '@/components'
+import { useGetRole, useModal } from '@/hooks'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { toast } from 'react-toastify'
+import { useRecoilValue } from 'recoil'
 import * as S from './style'
+import { get } from 'http'
+import { AxiosResponse } from 'axios'
+import { GetRoleType } from '@/types'
+
+const roleInfo = [
+  { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
+  { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
+  { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
+]
 
 export default function UserRoleChangeModal() {
-  const setUserList = useSetRecoilState(UserList)
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
   const [selectedRole, setSelectedRole] = useState('')
-
-  const Array = [
-    { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
-    { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
-    { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
-  ]
-
-  const { fetch: userlistRefetch } = useFetch<UserItemListType>({
-    url: '/user/all',
-    method: 'get',
-    onSuccess: (data) => {
-      setUserList(data.users)
-      closeModal()
-    },
+  const { refetch } = useQuery<AxiosResponse<GetRoleType>>({
+    queryKey: userQueryKeys.myRole(),
   })
-
-  const { fetch: userRoleChange } = useFetch({
-    url: `/user/${selectedUser.userId}/role`,
-    method: 'patch',
-    onSuccess: () => userlistRefetch(),
+  const { mutate } = useMutation<void, Error, { role: string }>({
+    mutationKey: userQueryKeys.changeRole(),
+    mutationFn: (modifyValue) =>
+      patch(userUrl.userRole(selectedUser.userId), modifyValue),
+    onSuccess: () => {
+      closeModal()
+      refetch()
+      toast.success('권한을 변경했습니다')
+    },
   })
 
   return (
@@ -41,12 +41,9 @@ export default function UserRoleChangeModal() {
       <S.ModalContainer>
         <S.ModalTitleWrapper>
           <span>권한 변경</span>
-          <div onClick={closeModal}>
-            <SVG.XMark />
-          </div>
         </S.ModalTitleWrapper>
         <S.RoleButtonWrapper>
-          {Array.map(({ role, color, label }, idx) => (
+          {roleInfo.map(({ role, color, label }, idx) => (
             <S.RoleButtonItem
               key={idx}
               color={color}
@@ -55,7 +52,7 @@ export default function UserRoleChangeModal() {
               }}
               isClicked={selectedRole === label}
             >
-              <SVG.SelectedCheck stroke={color} />
+              <SelectedCheck stroke={color} />
               {role}
             </S.RoleButtonItem>
           ))}
@@ -65,13 +62,16 @@ export default function UserRoleChangeModal() {
           height='50px'
           background='#0066FF'
           borderRadius='8px'
+          fontSize='16px'
+          fontWeight='500'
+          lineHeight='28px'
           border='none'
           color='#fff'
-          onClick={() => {
-            userRoleChange({
+          onClick={() =>
+            mutate({
               role: `${selectedRole}`,
             })
-          }}
+          }
         >
           확인
         </Button>

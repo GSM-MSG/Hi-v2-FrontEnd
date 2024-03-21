@@ -1,10 +1,9 @@
 import { memo } from 'react'
-import { TextareaPropsType } from '@/types/components'
+import { TextareaPropsType } from '@/types'
 import * as S from './style'
 
 function Textarea({
   height,
-  borderColor,
   fontSize,
   margin,
   ...rest
@@ -12,7 +11,6 @@ function Textarea({
   return (
     <S.Textarea
       height={height}
-      borderColor={borderColor}
       fontSize={fontSize}
       margin={margin}
       {...rest}

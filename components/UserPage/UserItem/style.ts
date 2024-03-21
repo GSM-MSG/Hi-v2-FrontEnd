@@ -6,19 +6,14 @@ export const UserItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   border-radius: 8px;
 
   &:hover {
     background: #f9f9f9;
   }
-
-  button {
-    margin-right: 8px;
-  }
 `
 
-export const UserItemWrraper = styled.div`
+export const UserItemWrapper = styled.div`
   height: 66px;
   display: flex;
   align-items: center;
@@ -42,15 +37,23 @@ export const UserInfo = styled.div`
 `
 
 export const UserName = styled.p`
-  color: #3c3c43;
+  ${({ theme }) => theme.typography.body1.bold};
+  color: ${({ theme }) => theme.color.Grayscale.gray09};
 `
 
 export const UserEmail = styled.p`
-  color: #9e9e9e;
-  font-size: 15px;
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
+  ${({ theme }) => theme.typography.body2.regular};
 `
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  ${({ theme }) => theme.typography.body1.medium};
+
+  @media screen and (max-width: 480px) {
+    button {
+      width: 14vw;
+    }
+  }
 `

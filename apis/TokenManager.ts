@@ -1,14 +1,13 @@
-import { TokensType } from '@/types/apis'
-import { getStorage, removeStorage, setStorage } from '@/utils/Storage'
-import { BASE_URL } from '@/utils/env'
-import axios from 'axios'
-import Router from 'next/router'
 import {
+  TokensType,
   accessTokenStorage,
   refreshTokenStorage,
   accessExpiredAtStorage,
   refreshExpiredAtStorage,
-} from '@/types/apis'
+} from '@/types'
+import { BASE_URL, getStorage, removeStorage, setStorage } from '@/utils'
+import axios from 'axios'
+import Router from 'next/router'
 
 class TokenManager {
   private _accessToken: string | null = null

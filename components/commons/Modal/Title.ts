@@ -32,11 +32,10 @@ export const PageToggleBox = styled.div`
 export const Title = styled.h3`
   display: flex;
   align-items: flex-start;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #3c3c43;
+  color: ${({ theme }) => theme.color.Grayscale.gray09};
   gap: 5px;
   justify-content: space-between;
+  ${({ theme }) => theme.typography.title.bold};
 
   span {
     border-radius: 50%;
@@ -47,9 +46,9 @@ export const Title = styled.h3`
 `
 
 export const SubTitle = styled.p`
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: #b1b1b1;
+  ${({ theme }) => theme.typography.body1.regular};
+  line-height: 22px;
+  color: ${({ theme }) => theme.color.Grayscale.gray05};
   margin-bottom: 10px;
   letter-spacing: 0.4px;
 `

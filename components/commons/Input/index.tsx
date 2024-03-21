@@ -1,9 +1,16 @@
 import React, { forwardRef, memo } from 'react'
-import { InputPropsType } from '@/types/components'
+import { InputPropsType } from '@/types'
 import * as S from './style'
 
 function Input(
-  { width, height, border, borderRadius, focus, ...rest }: InputPropsType,
+  {
+    width,
+    height,
+    border,
+    borderRadius,
+    focus,
+    ...rest
+  }: InputPropsType,
   ref: any
 ) {
   return (
@@ -14,6 +21,7 @@ function Input(
       border={border}
       borderRadius={borderRadius}
       focus={focus}
+      maxLength={4}
       {...rest}
     />
   )

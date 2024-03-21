@@ -1,57 +1,83 @@
-import * as SVG from '@/assets/svg'
-import { Input, PageContainer } from '../commons'
-import * as S from './style'
-import UserItemList from './UserItemList'
-import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil'
-import { UserList } from '@/atoms'
-import { UserItemType } from '@/types/components'
-import { useGetRole, useFetch } from '@/hooks'
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { useGetRole } from '@/hooks'
+import { UserItemListType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Input, PageContainer } from '../commons'
+import UserItem from './UserItem'
+import * as S from './style'
+import { SearchIcon } from '@/assets'
 
 export default function UserPage() {
-  const form = useForm({ defaultValues: { user: '' } })
-  const { register, watch, handleSubmit } = form
-  const setUserList = useSetRecoilState(UserList)
-  const { fetch } = useFetch<UserItemType[]>({
-    url: `/user/search?keyword=${watch('user')}`,
-    method: 'get',
-    onSuccess: (data: UserItemType[]) => {
-      setUserList(data)
-    },
+  const [user, setUser] = useState<string>('')
+  const { data, refetch } = useQuery<AxiosResponse<UserItemListType>>({
+    queryKey: userQueryKeys.searchUser(),
+    queryFn: () => get(userUrl.searchUser(user)),
   })
-  const { isStudent } = useGetRole()
+  const { isAdmin } = useGetRole()
   const router = useRouter()
 
-  useEffect(() => {
-    if (isStudent) {
-      router.push('/')
-    }
-  }, [isStudent, router])
+  // useEffect(() => {
+  //   if (isAdmin === true) router.push('/')
+  // }, [isAdmin, router])
 
-  const onSubmit = async (data: any) => await fetch(data)
-
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    refetch()
+  }
   return (
     <PageContainer paddingTop='6vh' paddingBottom='4vh'>
       <S.UserTitleContainer>
         <h1>학생정보</h1>
-        <S.InputWrapper onSubmit={handleSubmit(onSubmit)}>
+        <S.InputWrapper onSubmit={onSubmit}>
           <Input
             width='320px'
-            height='28px'
+            height='40px'
             border='1px solid #B1B1B1'
             borderRadius='20px'
-            placeholder='이름을 입력해 주세요.'
+            placeholder='이름을 입력 해주세요.'
             focus={true}
-            {...register('user')}
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
           />
-          <S.SearchIconWrapper onClick={handleSubmit(onSubmit)}>
-            <SVG.SearchIcon />
+          <S.SearchIconWrapper onClick={onSubmit}>
+            <SearchIcon />
           </S.SearchIconWrapper>
         </S.InputWrapper>
       </S.UserTitleContainer>
-      <UserItemList />
+      <S.UserItemListContainer>
+        {data?.data.map(
+          (
+            {
+              userId,
+              email,
+              name,
+              grade,
+              classNum,
+              number,
+              profileImageUrl,
+              role,
+              useStatus,
+            },
+            idx
+          ) => (
+            <UserItem
+              key={idx}
+              userId={userId}
+              email={email}
+              name={name}
+              grade={grade}
+              classNum={classNum}
+              number={number}
+              profileImageUrl={profileImageUrl}
+              role={role}
+              useStatus={useStatus}
+            />
+          )
+        )}
+      </S.UserItemListContainer>
     </PageContainer>
   )
 }

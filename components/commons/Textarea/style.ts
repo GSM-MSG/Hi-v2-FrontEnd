@@ -2,23 +2,25 @@ import { TextareaPropsType } from '@/types/components'
 import styled from '@emotion/styled'
 
 export const Textarea = styled.textarea<TextareaPropsType>`
-  padding: 1rem;
+  padding: 16px;
   border-radius: 8px;
-  border: 1px solid ${(props) => props.borderColor};
+  border: 1px solid ${({ theme }) => theme.color.Grayscale.gray05};
   resize: none;
   width: 100%;
   height: ${(props) => props.height};
   outline: none;
-  color: #c0c0c0;
+  color: ${({ theme }) => theme.color.black};
   font-size: ${(props) => props.fontSize};
   margin: ${(props) => props.margin};
+  ${({ theme }) => theme.typography.body2.regular};
 
   &:focus {
-    border: 1px solid #6c6c6c;
-    color: #6c6c6c;
+    border: 1px solid ${({ theme }) => theme.color.Grayscale.gray07};
+    color: ${({ theme }) => theme.color.Grayscale.gray07};
   }
 
   &::placeholder {
-    color: #c0c0c0;
+    ${({ theme }) => theme.typography.body2.regular};
+    color: ${({ theme }) => theme.color.Grayscale.gray04};
   }
 `

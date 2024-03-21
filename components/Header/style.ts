@@ -27,7 +27,7 @@ export const HeaderContainer = styled.header`
   }
 
   @media screen and (max-width: 450px) {
-    padding: 0 8vw;
+    padding: 0 5vw;
   }
 `
 
@@ -37,37 +37,34 @@ export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1rem;
-  font-weight: 500;
   padding: 0;
 
   li {
-    color: #191919;
-    font-weight: 400;
+    ${({ theme }) => theme.typography.h5.regular};
+    font-size: 16px;
+    color: ${({ theme }) => theme.color.Grayscale.gray10};
     cursor: pointer;
   }
 
   .choice {
     cursor: pointer;
-    color: #000000;
+    color: ${({ theme }) => theme.color.black};
     font-weight: 600;
-  }
-
-  @media screen and (max-width: 600px) {
-    font-size: 0.95rem;
-    width: 12rem;
   }
 `
 
 export const LoginBtn = styled.button`
   border: none;
   border-radius: 8px;
-  padding: 0.4rem 0.6rem;
+  padding: 0.5rem 0.8rem 0.3rem 0.8rem;
   cursor: pointer;
-  background: #0066ff;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 500;
+  background: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.white};
+  ${({ theme }) => theme.typography.body1.semibold};
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 600px) {
     font-size: 0.8rem;

@@ -1,4 +1,4 @@
-import { useGetRoleReturnType } from '../hooks'
+import { RoleTypes } from '../common'
 
 export interface UserItemType {
   userId: string
@@ -8,7 +8,6 @@ export interface UserItemType {
   classNum: number
   number: number
   profileImageUrl: string
-  roles: string[]
+  role: RoleTypes
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
-  role: useGetRoleReturnType
 }

@@ -6,11 +6,12 @@ export interface ButtonPropsType
   width?: string
   height?: string
   fontSize?: string
+  lineHeight?: string
+  fontWeight?: string
   color?: string
   background?: string
   border?: string
   borderRadius?: string
-  fontWeight?: string
   hoverBackground?: string
   hoverBorder?: string
   hoverColor?: string
