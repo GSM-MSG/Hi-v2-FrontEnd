@@ -222,11 +222,6 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@msg-team/gauth-react@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/@msg-team/gauth-react/-/gauth-react-1.4.1.tgz"
-  integrity sha512-ryBDMgx+5iLJXQ9IZiPyrT8IaPKRQFGqwsAH3vohzufmOgCCwszgjl0FSTvuaNev/kfKFMOH7ePUEZtscx72dQ==
-
 "@next/env@13.4.12":
   version "13.4.12"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.4.12.tgz"
