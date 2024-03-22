@@ -19,7 +19,7 @@ import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function MemberSelect() {
+function MemberSelect({maxCapacity}: {maxCapacity: number}) {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
@@ -85,7 +85,7 @@ function MemberSelect() {
           <SearchIcon />
         </div>
         <Input
-          disabled={showMembers.length === 5 ? true : false}
+          disabled={showMembers.length === maxCapacity ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
           height='28px'

@@ -1,5 +1,5 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
-import { BackArrowIcon } from '@/assets'
+import { BackArrowIcon, TableCheckIcon } from '@/assets'
 import { ShowMembers, TeamMembers } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
 import {
@@ -7,7 +7,7 @@ import {
   ReservationModal,
   ViewReservationModal,
 } from '@/modals'
-import { theme } from '@/styles/theme'
+import { theme } from '@/styles'
 import { MyPageType, ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -30,7 +30,7 @@ export default function ReservationTableItem({
     queryFn: () => get(userUrl.my()),
   })
   const { useStatus } = data?.data || {}
-  const { userId } = useGetRole()
+  const { isTeacher, userId } = useGetRole()
 
   const onModify = () => {
     setShowMembers(item.users.filter((user) => user.userId !== userId))
@@ -39,6 +39,7 @@ export default function ReservationTableItem({
     )
     openModal(
       <ReservationModal
+        maxCapacity={item.homeBase.maxCapacity}
         isModify={true}
         homeBaseNumber={item.homeBase.homeBaseNumber}
         reservationId={item.reservationId}
@@ -52,6 +53,7 @@ export default function ReservationTableItem({
         <ViewReservationModal reservationId={item.reservationId} />
       ) : useStatus === 'AVAILABLE' ? (
         <ConfirmReservationModal
+          maxCapacity={item.homeBase.maxCapacity}
           homeBaseNumber={item.homeBase.homeBaseNumber}
         />
       ) : (
@@ -70,6 +72,9 @@ export default function ReservationTableItem({
           {item.reservationId !== null ? '예약불가' : '예약가능'}
         </S.TableStatusBox>
         <S.TableNumberBox>
+          {item.reservationId !== null && isTeacher && item.checkStatus && (
+            <TableCheckIcon checkStatus={item.checkStatus} />
+          )}
           <h2>{item.homeBase.homeBaseNumber}번 테이블</h2>
           {item.reservationId === null && (
             <h3>(최대 {item.homeBase.maxCapacity}명)</h3>

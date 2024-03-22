@@ -71,8 +71,8 @@ export default function NoticeDetailPage() {
             )}
           </S.DetailTitleContainer>
           <S.DetailInfo>
-            <div>작성일 : { isMounted && dateToString(createdAt ?? '')}</div>
-            <div>작성자 : { isMounted && user?.name}</div>
+            <span>작성일 : {isMounted && dateToString(createdAt ?? '')}</span>
+            <span>작성자 : {isMounted && user?.name}</span>
           </S.DetailInfo>
           <S.DetailContent>{content}</S.DetailContent>
         </S.DetailWrapper>

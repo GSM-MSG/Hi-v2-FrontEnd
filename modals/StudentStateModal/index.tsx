@@ -1,4 +1,4 @@
-import { get, patch, userQueryKeys, userUrl } from '@/apis'
+import { patch, userQueryKeys, userUrl } from '@/apis'
 import { SelectedUser } from '@/atoms'
 import { Button, Portal } from '@/components'
 import { useModal } from '@/hooks'
@@ -12,11 +12,9 @@ import * as S from './style'
 export default function StudentStateModal() {
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
-
   const { refetch } = useQuery<AxiosResponse<UserItemListType>>({
     queryKey: userQueryKeys.searchUser(),
   })
-
   const { mutate } = useMutation<
     void,
     AxiosError,
