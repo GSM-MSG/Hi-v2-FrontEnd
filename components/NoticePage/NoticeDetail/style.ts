@@ -88,7 +88,7 @@ export const DetailTitle = styled.h1`
   }
 `
 
-export const DetailInfo = styled.p`
+export const DetailInfo = styled.div`
   ${({ theme }) => theme.typography.caption.medium};
   color: ${({ theme }) => theme.color.Grayscale.gray06};
   display: flex;
