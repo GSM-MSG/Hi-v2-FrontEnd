@@ -15,21 +15,28 @@ export const ReservationTitle = styled.div`
     ${({ theme }) => theme.typography.h4.bold};
     line-height: 33.41px;
     color: ${({ theme }) => theme.color.Grayscale.gray09};
-    margin-right: 0.7rem;
+    margin-right: 11.2px;
   }
 
   div {
     background-color: ${({ theme }) => theme.color.Background.sub};
     color: ${({ theme }) => theme.color.Grayscale.gray06};
-    font-size: 0.8rem;
-    width: 5.4rem;
-    height: 1.8rem;
+    font-size: 12.8px;
+    width: 86.4px;
+    height: 28.8px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 0.4rem;
     border-radius: 8px;
   }
+
+  @media screen and (max-width: 670px){
+    div {
+      display: none;
+    }
+  }
+
 `
 
 export const ReservationTableContainer = styled.div`
@@ -59,6 +66,14 @@ export const ButtonContainer = styled.div`
 
     &:hover {
       color: ${({theme}) => theme.color.white};
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    button {
+      &:nth-child(2) {
+        display: none;
+      }
     }
   }
 `
