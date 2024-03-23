@@ -1,7 +1,7 @@
-import { ReservationItemType } from '@/types'
-import * as S from './style'
 import { BackArrowIcon } from '@/assets'
+import { ReservationItemType } from '@/types'
 import { useState } from 'react'
+import * as S from './style'
 
 function ReservationItem({ reservation }: { reservation: ReservationItemType }) {
   const [showDetailName, setShowDetailName] = useState(false)

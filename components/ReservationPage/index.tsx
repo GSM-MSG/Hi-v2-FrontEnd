@@ -8,7 +8,7 @@ import {
 } from '@/apis'
 import { ReservationPlace } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
-import { AllDeleteTableCheckModal, PlaceSelect } from '@/modals'
+import { AllDeleteTableCheckModal, FloorLocationModal, PlaceSelect } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -57,24 +57,32 @@ function ReservationPage() {
         </S.ReservationTitle>
         <S.ButtonContainer>
           <Button
+          width='80px'
+          height='36px'
             border='1px solid #0066ff'
-            borderRadius='8px'
             color='#0066ff'
-            background='none'
             hoverBackground='#0066ff'
-            hoverColor='#ffffff'
             onClick={() => openModal(<PlaceSelect />)}
           >
             상세조회
           </Button>
+          <Button
+          width='98px'
+          height='36px'
+            border='1px solid #0066ff'
+            color='#0066ff'
+            hoverBackground='#0066ff'
+            onClick={() => openModal(<FloorLocationModal />)}
+          >
+            테이블 위치
+          </Button>
           {isAdmin && (
             <Button
+            width='80px'
+          height='36px'
               border='1px solid #FF002E'
-              borderRadius='8px'
               color='#FF002E'
-              background='none'
               hoverBackground='#FF002E'
-              hoverColor='#ffffff'
               onClick={() =>
                 openModal(
                   <AllDeleteTableCheckModal onDelete={() => mutate()} />
