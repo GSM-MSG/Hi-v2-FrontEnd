@@ -36,7 +36,7 @@ function MemberSelect({maxCapacity}: {maxCapacity: number}) {
     if (!member.trim()) return
     const delayFetch = setTimeout(() => {
       refetch()
-    }, 1000)
+    }, 500)
     return () => clearTimeout(delayFetch)
   }, [member, refetch])
 

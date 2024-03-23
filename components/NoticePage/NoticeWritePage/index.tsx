@@ -1,13 +1,12 @@
 import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
 import { Button, Input, PageContainer, Textarea } from '@/components'
+import { NoticeItemListType, NoticeType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import * as S from './style'
-import { NoticeItemListType, NoticeType } from '@/types'
-import { get } from 'http'
 
 export default function NoticeWritePage() {
   const router = useRouter()

@@ -19,7 +19,6 @@ export const CheckModalContainer = styled.div`
   p {
     color: ${({ theme }) => theme.color.Grayscale.gray06};
     font-size: 17px;
-    letter-spacing: -2px;
     margin-bottom: 29px;
 
     b {
