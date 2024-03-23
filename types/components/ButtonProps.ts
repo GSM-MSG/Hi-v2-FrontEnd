@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react'
 
-export interface ButtonPropsType
+export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   width?: string

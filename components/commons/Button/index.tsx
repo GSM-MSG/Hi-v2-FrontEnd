@@ -1,4 +1,4 @@
-import { ButtonPropsType } from '@/types'
+import { ButtonProps } from '@/types'
 import { memo } from 'react'
 import * as S from './style'
 
@@ -17,7 +17,7 @@ function Button({
   hoverBorder,
   hoverColor,
   ...rest
-}: ButtonPropsType) {
+}: ButtonProps) {
   return (
     <S.Button
       width={width}

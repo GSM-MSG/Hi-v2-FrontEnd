@@ -14,12 +14,12 @@ import { UserItemType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function MemberSelect({maxCapacity}: {maxCapacity: number}) {
+function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
@@ -92,7 +92,9 @@ function MemberSelect({maxCapacity}: {maxCapacity: number}) {
           border='none'
           autoComplete='new-password'
           value={member}
-          onChange={(e) => setMember(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setMember(e.target.value)
+          }
         />
         {member.length > 0 && (
           <div className='cancelIcon' onClick={() => setMember('')}>

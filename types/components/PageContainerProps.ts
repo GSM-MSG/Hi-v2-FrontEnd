@@ -1,4 +1,4 @@
-export interface PageContainerPropsType {
+export interface PageContainerProps {
   children: React.ReactNode
   display?: string
   alignItems?: string

@@ -1,7 +1,7 @@
-import { InputPropsType } from '@/types/components'
+import { InputProps } from '@/types/components'
 import styled from '@emotion/styled'
 
-export const Input = styled.input<InputPropsType>`
+export const Input = styled.input<InputProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: ${(props) => props.border};

@@ -1,9 +1,9 @@
-import { PortalPropsType } from '@/types'
+import { PortalProps } from '@/types'
 import { MouseEvent, cloneElement, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import * as S from './style'
 
-function Portal({ children, onClose }: PortalPropsType) {
+function Portal({ children, onClose }: PortalProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false)
 
   useEffect(() => {
