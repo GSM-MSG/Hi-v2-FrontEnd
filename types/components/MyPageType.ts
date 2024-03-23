@@ -1,21 +1,15 @@
+import { HomeBaseTypes } from '../modals'
 import { UserItemType } from './UserItemType'
+
+export interface ReservationItemType {
+  reservationId: string
+  users: UserItemType[]
+  checkStatus: boolean
+  homeBase: HomeBaseTypes
+}
+
+export type ReservationListType = ReservationItemType[]
+
 export interface MyPageType extends UserItemType {
-  reservation: {
-    reservationId: string
-    users: [
-      {
-        userId: string
-        email: string
-        name: string
-        grade: number
-        classNum: number
-        number: number
-        profileImageUrl: string
-      }
-    ]
-    reservationNumber: number
-    homeBaseId: string
-    floor: number
-    period: number
-  }
+  reservations: ReservationListType
 }
