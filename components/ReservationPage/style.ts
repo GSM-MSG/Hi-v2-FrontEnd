@@ -53,8 +53,12 @@ export const ButtonContainer = styled.div`
   gap: 8px;
 
   button {
-    width: 80px;
-    height: 36px;
     ${({ theme }) => theme.typography.body1.regular};
+    border-radius: 8px;
+    background-color: ${({theme}) => theme.color.white};
+
+    &:hover {
+      color: ${({theme}) => theme.color.white};
+    }
   }
 `
