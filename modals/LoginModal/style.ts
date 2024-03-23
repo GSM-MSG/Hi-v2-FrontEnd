@@ -28,6 +28,21 @@ export const ModalContent = styled.div`
   align-items: center;
 `
 
+export const GAuthLoginButton = styled.button`
+  width: 268px;
+  height: 50px;
+  background-color: #2e80cc;
+  color: ${({ theme }) => theme.color.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 17px;
+`
+
 export const LoginTitle = styled.div`
   display: flex;
   align-items: center;
