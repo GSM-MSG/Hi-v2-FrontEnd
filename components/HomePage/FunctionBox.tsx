@@ -1,5 +1,5 @@
 import { HiFunctionIcon1, HiFunctionIcon2, HiFunctionIcon3 } from '@/assets'
-import { FunctionBoxPropsType } from '@/types'
+import { FunctionBoxProps } from '@/types'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 
@@ -53,7 +53,7 @@ const FunctionBoxBlock = styled.div`
   }
 `
 
-function FunctionBox({ number, title, description }: FunctionBoxPropsType) {
+function FunctionBox({ number, title, description }: FunctionBoxProps) {
   return (
     <FunctionBoxBlock>
       {number === 1 && <Image src={HiFunctionIcon1} alt='Hi 기능1' />}

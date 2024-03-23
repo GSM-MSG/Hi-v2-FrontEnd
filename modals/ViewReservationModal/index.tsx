@@ -3,9 +3,14 @@ import { TableCheckIcon, XMark } from '@/assets'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import { DeleteTableCheckModal, LeaveReservationTableModal } from '@/modals'
-import { ViewReservationData, ViewReservationDataTypes } from '@/types'
+import {
+  ViewReservationDataResponseTypes,
+  ViewReservationDataTypes,
+} from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
+import LoadingViewReservation from './LoadingComponent'
+import ViewReservationData from './ViewReservationData'
 import * as S from './style'
 
 export default function ViewReservationModal({
@@ -13,7 +18,9 @@ export default function ViewReservationModal({
 }: {
   reservationId: string | undefined
 }) {
-  const { data, refetch } = useQuery<AxiosResponse<ViewReservationData>>({
+  const { data, isLoading, refetch } = useQuery<
+    AxiosResponse<ViewReservationDataResponseTypes>
+  >({
     queryKey: reservationQueryKeys.detail(reservationId),
     queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
@@ -77,28 +84,16 @@ export default function ViewReservationModal({
             <XMark width='24' height='24' />
           </div>
         </TitleBox>
-        <S.ViewReservationDataBox>
-          <S.ViewReservationText>예약정보 확인</S.ViewReservationText>
-          <S.ViewReservationDataContainer>
-            {ViewReservationDataColumns.map((view, idx) =>
-              view.name === '예약 멤버' ? (
-                <S.ViewReservationDataColumn key={idx} column={idx}>
-                  <span>{view.name}</span>
-                  <p>
-                    {users?.map((user) => (
-                      <span key={user.userId}>{user.name} </span>
-                    ))}
-                  </p>
-                </S.ViewReservationDataColumn>
-              ) : (
-                <S.ViewReservationDataColumn key={idx} column={idx}>
-                  <span>{view.name}</span>
-                  <p>{view.content}</p>
-                </S.ViewReservationDataColumn>
-              )
-            )}
-          </S.ViewReservationDataContainer>
-        </S.ViewReservationDataBox>
+        <S.ViewReservationDataWrapper isLoading={isLoading}>
+          {isLoading ? (
+            <LoadingViewReservation />
+          ) : (
+            <ViewReservationData
+              ViewReservationDataColumns={ViewReservationDataColumns}
+              users={users}
+            />
+          )}
+        </S.ViewReservationDataWrapper>
         <S.ViewReservationButtonContainer>
           {users?.some((user) => user.userId === userId) && (
             <Button

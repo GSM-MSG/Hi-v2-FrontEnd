@@ -15,7 +15,7 @@ export default function FloorLocationModal() {
         {reservationPlace.floor === 2 && <Image src={Floor2} alt="테이블 위치" />}
         {reservationPlace.floor === 3 && <Image src={Floor3} alt="테이블 위치" />}
         {reservationPlace.floor === 4 && <Image src={Floor4} alt="테이블 위치" />}
-        <Button>닫기</Button>
+        <Button onClick={closeModal}>닫기</Button>
       </S.FloorLocationModalContainer>
     </Portal>
   )

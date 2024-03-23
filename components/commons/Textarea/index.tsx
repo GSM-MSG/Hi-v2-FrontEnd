@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { TextareaPropsType } from '@/types'
+import { TextareaProps } from '@/types'
 import * as S from './style'
 
 function Textarea({
@@ -7,7 +7,7 @@ function Textarea({
   fontSize,
   margin,
   ...rest
-}: TextareaPropsType) {
+}: TextareaProps) {
   return (
     <S.Textarea
       height={height}

@@ -1,5 +1,5 @@
 import React, { forwardRef, memo } from 'react'
-import { InputPropsType } from '@/types'
+import { InputProps } from '@/types'
 import * as S from './style'
 
 function Input(
@@ -10,7 +10,7 @@ function Input(
     borderRadius,
     focus,
     ...rest
-  }: InputPropsType,
+  }: InputProps,
   ref: any
 ) {
   return (
