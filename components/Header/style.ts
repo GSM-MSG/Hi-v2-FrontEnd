@@ -53,10 +53,11 @@ export const MenuListBox = styled.ul<{ is_admin?: boolean }>`
   }
 `
 
-export const LoginBtn = styled.button`
+export const LoginBtn = styled.div`
+  width: 84px;
+  height: 36px;
   border: none;
   border-radius: 8px;
-  padding: 0.5rem 0.8rem 0.3rem 0.8rem;
   cursor: pointer;
   background: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
@@ -65,8 +66,15 @@ export const LoginBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
-  @media screen and (max-width: 600px) {
-    font-size: 0.8rem;
+  @media screen and (max-width: 670px) {
+    width: 70px;
+    height: 30px;
+    ${({ theme }) => theme.typography.body2.semibold};
+  }
+
+  @media screen and (max-width: 450px) {
+    ${({ theme }) => theme.typography.caption.semibold};
   }
 `
