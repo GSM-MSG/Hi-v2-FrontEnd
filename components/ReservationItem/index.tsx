@@ -3,11 +3,7 @@ import * as S from './style'
 import { BackArrowIcon } from '@/assets'
 import { useState } from 'react'
 
-interface ReservationItemProps {
-  reservation: ReservationItemType
-}
-
-function ReservationItem({ reservation }: ReservationItemProps) {
+function ReservationItem({ reservation }: { reservation: ReservationItemType }) {
   const [showDetailName, setShowDetailName] = useState(false)
 
   return (
