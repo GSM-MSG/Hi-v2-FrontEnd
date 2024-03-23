@@ -17,7 +17,7 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
   align-items: flex-start;
   ${({ theme }) => theme.typography.body2.semibold};
   gap: ${({ column }) =>
-    column > 1 ? '32px' : column === 0 ? '53px' : '20px'};
+    column > 1 ? '32px' : column === 0 ? '48px' : '20px'};
 
   span {
     color: ${({ theme }) => theme.color.Grayscale.gray05};
