@@ -99,9 +99,10 @@ export default function ReservationTableItem({
         </S.ShowDetailName>
       </S.TableInfoBox>
       <S.ReservationButtonContainer>
-        {item.reservationId !== null && (
-          <span onClick={onModify}>예약수정</span>
-        )}
+        {item.reservationId !== null &&
+          item.users.some((user) => user.userId === userId) && (
+            <span onClick={onModify}>예약수정</span>
+          )}
         <span onClick={onReservationCase}>
           {item.reservationId !== null ? '예약조회' : '예약하기'}
         </span>
