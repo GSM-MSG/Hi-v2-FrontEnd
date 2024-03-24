@@ -1,14 +1,12 @@
-import { useGetRole } from '@/hooks'
+import { get, noticeQueryKeys, noticeUrl } from '@/apis'
 import { NoticeItemListType } from '@/types'
-import { useEffect } from 'react'
-import NoticeItem from '../NoticeItem'
-import * as S from './style'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { get, noticeQueryKeys, noticeUrl } from '@/apis'
+import NoticeItem from '../NoticeItem'
+import * as S from './style'
 
 export default function NoticeItemList() {
-  const { data } = useQuery<AxiosResponse<NoticeItemListType>>({
+  const { data } = useQuery<AxiosResponse<NoticeItemListType[]>>({
     queryKey: noticeQueryKeys.list(),
     queryFn: () => get(noticeUrl.notice()),
   })

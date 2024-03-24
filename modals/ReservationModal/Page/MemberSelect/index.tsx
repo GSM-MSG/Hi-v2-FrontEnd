@@ -9,21 +9,22 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { useGetRole } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import { UserItemType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function MemberSelect() {
+function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const [member, setMember] = useState<string>('')
+  const { closeModal } = useModal()
 
   const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
     queryKey: userQueryKeys.searchStudent(),
@@ -35,7 +36,7 @@ function MemberSelect() {
     if (!member.trim()) return
     const delayFetch = setTimeout(() => {
       refetch()
-    }, 1000)
+    }, 500)
     return () => clearTimeout(delayFetch)
   }, [member, refetch])
 
@@ -84,14 +85,16 @@ function MemberSelect() {
           <SearchIcon />
         </div>
         <Input
-          disabled={showMembers.length === 5 ? true : false}
+          disabled={showMembers.length === maxCapacity ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
-          height='2rem'
+          height='28px'
           border='none'
           autoComplete='new-password'
           value={member}
-          onChange={(e) => setMember(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setMember(e.target.value)
+          }
         />
         {member.length > 0 && (
           <div className='cancelIcon' onClick={() => setMember('')}>
@@ -189,11 +192,25 @@ function MemberSelect() {
       )}
       <S.ButtonContainer>
         <Button
-          width='100%'
-          height='3rem'
+          width='112px'
+          height='52px'
+          background='none'
+          color='#0066ff'
+          fontSize='16px'
+          fontWeight='600'
+          lineHeight='28px'
+          borderRadius='8px'
+          border='1px solid #0066ff'
+          onClick={closeModal}
+        >
+          돌아가기
+        </Button>
+        <Button
+          width='240px'
+          height='52px'
           background='#0066ff'
           color='#ffffff'
-          fontSize='1rem'
+          fontSize='16px'
           fontWeight='500'
           border='none'
           borderRadius='8px'

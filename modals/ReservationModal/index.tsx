@@ -1,19 +1,17 @@
 import { ModalPage } from '@/atoms'
 import { Portal } from '@/components'
 import { useDeleteReservationStatus, useModal } from '@/hooks'
+import { ReservationModalProps } from '@/types'
 import { useRecoilValue } from 'recoil'
 import { Completed, MemberSelect, Reason } from './Page'
 import * as S from './style'
 
 function ReservationModal({
-  reservationNumber,
+  maxCapacity,
+  homeBaseNumber,
   isModify,
   reservationId,
-}: {
-  reservationNumber: number
-  isModify: boolean
-  reservationId?: string
-}) {
+}: ReservationModalProps) {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
   const page = useRecoilValue<number>(ModalPage)
@@ -26,10 +24,10 @@ function ReservationModal({
   return (
     <Portal onClose={onClose}>
       <S.ReservationModalContainer>
-        {page === 1 && <MemberSelect />}
+        {page === 1 && <MemberSelect maxCapacity={maxCapacity}/>}
         {page === 2 && (
           <Reason
-            reservationNumber={reservationNumber}
+            homeBaseNumber={homeBaseNumber}
             isModify={isModify}
             reservationId={reservationId}
           />

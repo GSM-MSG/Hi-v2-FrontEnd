@@ -1,14 +1,16 @@
+import { InfoProfile } from '@/assets'
 import { SelectedUser } from '@/atoms'
-import { Button } from '@/components/commons'
-import { useGetRole } from '@/hooks'
-import useModal from '@/hooks/useModal'
-import StudentStateModal from '@/modals/StuStateModal'
-import UserRoleChangeModal from '@/modals/UserRoleChangeModal'
-import { UserItemType } from '@/types/components'
+import { Button } from '@/components'
+import { useGetRole, useModal } from '@/hooks'
+import { StudentStateModal, UserRoleChangeModal } from '@/modals'
+import { RoleTypes, UserItemListType, UserItemType } from '@/types'
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { InfoProfile } from '@/assets'
+import { AxiosResponse } from 'axios'
+import { userQueryKeys, userUrl } from '@/apis'
+import { get } from 'http'
 
 export default function UserItem({
   userId,
@@ -18,14 +20,17 @@ export default function UserItem({
   classNum,
   number,
   profileImageUrl,
-  roles,
+  role,
   useStatus,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
   const { openModal } = useModal()
   const { isAdmin } = useGetRole()
-  const roleInfo = {
+  const roleInfo: {
+    LABELS: Record<RoleTypes, string>
+    COLORS: Record<RoleTypes, string>
+  } = {
     LABELS: {
       ROLE_ADMIN: '관리자',
       ROLE_TEACHER: '선생님',
@@ -38,20 +43,20 @@ export default function UserItem({
     },
   }
 
-  const getRoleLabel = (roles: string[]) => {
-    if (roles.includes('ROLE_ADMIN')) {
+  const getRoleLabel = (role: RoleTypes) => {
+    if (role === 'ROLE_ADMIN') {
       return roleInfo.LABELS.ROLE_ADMIN
-    } else if (roles.includes('ROLE_TEACHER')) {
+    } else if (role === 'ROLE_TEACHER') {
       return roleInfo.LABELS.ROLE_TEACHER
     } else {
       return roleInfo.LABELS.ROLE_STUDENT
     }
   }
 
-  const getRoleColor = (roles: string[]) => {
-    if (roles.includes('ROLE_ADMIN')) {
+  const getRoleColor = (role: RoleTypes) => {
+    if (role === 'ROLE_ADMIN') {
       return roleInfo.COLORS.ROLE_ADMIN
-    } else if (roles.includes('ROLE_TEACHER')) {
+    } else if (role === 'ROLE_TEACHER') {
       return roleInfo.COLORS.ROLE_TEACHER
     } else {
       return roleInfo.COLORS.ROLE_STUDENT
@@ -88,11 +93,11 @@ export default function UserItem({
           <Button
             width='78px'
             height='36px'
-            border={`solid 1px ${getRoleColor(roles)}`}
-            borderRadius='8px'
+            border={`1px solid ${getRoleColor(role)}`}
             background='none'
             fontWeight='600'
-            color={getRoleColor(roles)}
+            borderRadius='8px'
+            color={getRoleColor(role)}
             onClick={() => {
               openModal(<UserRoleChangeModal />)
               setSelectedUser({
@@ -104,11 +109,11 @@ export default function UserItem({
                 number,
                 profileImageUrl,
                 useStatus,
-                roles,
+                role,
               })
             }}
           >
-            {getRoleLabel(roles)}
+            {getRoleLabel(role)}
           </Button>
         )}
         <Button
@@ -130,7 +135,7 @@ export default function UserItem({
               number,
               profileImageUrl,
               useStatus,
-              roles,
+              role,
             })
           }}
         >

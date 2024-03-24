@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 
 export const PlaceSelectContainer = styled.div`
   position: relative;
-  width: 400px;
-  height: 430px;
+  width: 416px;
+  height: 488px;
   background: #ffffff;
   border-radius: 8px;
   padding: 1.5rem;
@@ -62,7 +62,7 @@ export const PeriodButton = styled(FloorButton)`
 
 export const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 10%;
+  bottom: 1.8125rem;
   width: 88%;
   display: flex;
   align-items: center;

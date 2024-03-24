@@ -1,7 +1,7 @@
-import { PageContainerPropsType } from '@/types/components'
+import { PageContainerProps } from '@/types/components'
 import styled from '@emotion/styled'
 
-export const PageContainer = styled.div<PageContainerPropsType>`
+export const PageContainer = styled.div<PageContainerProps>`
   width: 100vw;
   min-height: calc(100vh - 7.8rem);
   height: 100%;

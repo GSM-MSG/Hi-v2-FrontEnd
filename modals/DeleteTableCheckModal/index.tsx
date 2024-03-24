@@ -2,7 +2,7 @@ import {
   del,
   homebaseQueryKeys,
   reservationQueryKeys,
-  reservationUrl
+  reservationUrl,
 } from '@/apis'
 import {
   Button,
@@ -36,10 +36,10 @@ export default function DeleteTableCheckModal({
 
   return (
     <Portal onClose={closeModal}>
-      <CheckModalContainer>
+      <CheckModalContainer style={{ height: '223px' }}>
         <h2>테이블 삭제</h2>
         <p>
-          삭제하면 오늘 하루동안 예약이 불가합니다. <br />
+          삭제하면 오늘 <b>하루동안</b> 예약이 <b>불가</b>합니다. <br />
           정말로 예약을 삭제하시겠습니까?
         </p>
         <ButtonContainer>

@@ -1,28 +1,25 @@
-import { ReservationPlace, ReservationTables } from '@/atoms'
+import { get, homebaseQueryKeys, homebaseUrl } from '@/apis'
+import { XMark } from '@/assets'
+import { ReservationPlace } from '@/atoms'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useModal } from '@/hooks'
-import { useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import * as S from './style'
-import { XMark } from '@/assets'
-import { get, homebaseQueryKeys, homebaseUrl } from '@/apis'
+import { ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { ReservationDataType } from '@/types'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import * as S from './style'
 
 function PlaceSelect() {
   const [reservationPlace, setReservationPlace] =
     useRecoilState(ReservationPlace)
-  const setReservationTables = useSetRecoilState(ReservationTables)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
     periods: [8, 9, 10, 11],
   })
-  const [floorClicked, setFloorClicked] = useState<number>(2)
-  const [periodClicked, setPeriodClicked] = useState<number>(8)
   const { floors, periods } = showPlace
-  const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
+  const { refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
     queryKey: homebaseQueryKeys.list(),
     queryFn: () =>
       get(
@@ -33,30 +30,24 @@ function PlaceSelect() {
       ),
   })
 
-  const onFloorClick = (floor: number) => {
-    setFloorClicked(floor)
+  const onFloorClick = (floor: number) =>
     setReservationPlace((prev) => {
       return {
         ...prev,
         floor,
       }
     })
-  }
-
-  const onPeriodClick = (period: number) => {
-    setPeriodClicked(period)
+  const onPeriodClick = (period: number) =>
     setReservationPlace((prev) => {
       return {
         ...prev,
         period,
       }
     })
-  }
 
-  const onApply = () => {
+  useEffect(() => {
     refetch()
-    closeModal()
-  }
+  }, [reservationPlace])
 
   return (
     <Portal onClose={closeModal}>
@@ -73,7 +64,7 @@ function PlaceSelect() {
             {floors.map((floor, idx) => (
               <S.FloorButton
                 key={idx}
-                clicked={floorClicked}
+                clicked={reservationPlace.floor}
                 current_value={floor}
                 onClick={() => onFloorClick(floor)}
               >
@@ -88,7 +79,7 @@ function PlaceSelect() {
             {periods.map((period, idx) => (
               <S.PeriodButton
                 key={idx}
-                clicked={periodClicked}
+                clicked={reservationPlace.period}
                 current_value={period}
                 onClick={() => onPeriodClick(period)}
               >
@@ -107,7 +98,7 @@ function PlaceSelect() {
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={onApply}
+            onClick={closeModal}
           >
             확인
           </Button>

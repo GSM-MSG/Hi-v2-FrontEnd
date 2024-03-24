@@ -1,8 +1,8 @@
-import { TextareaPropsType } from '@/types/components'
+import { TextareaProps } from '@/types/components'
 import styled from '@emotion/styled'
 
-export const Textarea = styled.textarea<TextareaPropsType>`
-  padding: 1rem;
+export const Textarea = styled.textarea<TextareaProps>`
+  padding: 16px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.color.Grayscale.gray05};
   resize: none;

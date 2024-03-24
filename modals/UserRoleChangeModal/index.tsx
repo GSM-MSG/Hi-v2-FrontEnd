@@ -1,38 +1,38 @@
-import { get, patch, userQueryKeys, userUrl } from '@/apis'
-import { SelectedCheck, XMark } from '@/assets'
+import { patch, userQueryKeys, userUrl } from '@/apis'
+import { SelectedCheck } from '@/assets'
 import { SelectedUser } from '@/atoms'
 import { Button, Portal } from '@/components'
-import { useModal } from '@/hooks'
-import { UserItemListType } from '@/types'
+import { useGetRole, useModal } from '@/hooks'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
+import { get } from 'http'
+import { AxiosResponse } from 'axios'
+import { GetRoleType } from '@/types'
+
+const roleInfo = [
+  { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
+  { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
+  { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
+]
 
 export default function UserRoleChangeModal() {
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
   const [selectedRole, setSelectedRole] = useState('')
-
-  const roleInfo = [
-    { role: '학생', color: '#2E80CC', label: 'ROLE_STUDENT' },
-    { role: '선생님', color: '#FF3838', label: 'ROLE_TEACHER' },
-    { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
-  ]
-  const { refetch } = useQuery<AxiosResponse<UserItemListType>>({
-    queryKey: userQueryKeys.searchUser(),
+  const { refetch } = useQuery<AxiosResponse<GetRoleType>>({
+    queryKey: userQueryKeys.myRole(),
   })
-
   const { mutate } = useMutation<void, Error, { role: string }>({
     mutationKey: userQueryKeys.changeRole(),
     mutationFn: (modifyValue) =>
       patch(userUrl.userRole(selectedUser.userId), modifyValue),
     onSuccess: () => {
-      toast.success('권한을 변경했습니다')
-      refetch()
       closeModal()
+      refetch()
+      toast.success('권한을 변경했습니다')
     },
   })
 

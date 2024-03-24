@@ -1,3 +1,4 @@
 export * from './ReservationData'
-export * from './ViewReservationData'
+export * from './ViewReservationDataResponseTypes'
 export * from './ViewReservationDataTypes'
+export * from './ViewReservationDataProps'

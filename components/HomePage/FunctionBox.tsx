@@ -1,5 +1,5 @@
 import { HiFunctionIcon1, HiFunctionIcon2, HiFunctionIcon3 } from '@/assets'
-import { FunctionBoxPropsType } from '@/types'
+import { FunctionBoxProps } from '@/types'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 
@@ -15,7 +15,14 @@ const FunctionBoxBlock = styled.div`
   align-items: center;
   padding: 3rem 2rem 2rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  margin-right: 2rem;
+
+  @media screen and (max-width: 875px) {
+    width: 30vw;
+  }
+
+  @media screen and (max-width: 660px) {
+    width: 20rem;
+  }
 
   img {
     width: 140px;
@@ -46,7 +53,7 @@ const FunctionBoxBlock = styled.div`
   }
 `
 
-function FunctionBox({ number, title, description }: FunctionBoxPropsType) {
+function FunctionBox({ number, title, description }: FunctionBoxProps) {
   return (
     <FunctionBoxBlock>
       {number === 1 && <Image src={HiFunctionIcon1} alt='Hi 기능1' />}

@@ -1,6 +1,6 @@
 import { ChangeEvent, TextareaHTMLAttributes } from 'react'
 
-export interface TextareaPropsType
+export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   height: string
   placeholder?: string

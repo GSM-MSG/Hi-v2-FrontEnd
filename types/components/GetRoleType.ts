@@ -1,4 +1,6 @@
+import { RoleTypes } from "../common"
+
 export interface GetRoleType {
-  role: string[]
+  role: RoleTypes
   userId: string
 }

@@ -1,11 +1,13 @@
-import { BackArrowIcon } from '@/assets'
+import { get, userQueryKeys, userUrl } from '@/apis'
+import { BackArrowIcon, TableCheckIcon } from '@/assets'
 import { ShowMembers, TeamMembers } from '@/atoms'
-import { useModal } from '@/hooks'
+import { useGetRole, useModal } from '@/hooks'
 import {
   ConfirmReservationModal,
   ReservationModal,
   ViewReservationModal,
 } from '@/modals'
+import { theme } from '@/styles'
 import { MyPageType, ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -13,14 +15,11 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { get, userQueryKeys, userUrl } from '@/apis'
 
 export default function ReservationTableItem({
   item,
-  reservationNumber,
 }: {
-  item: ReservationDataType | number
-  reservationNumber: number
+  item: ReservationDataType
 }) {
   const setShowMembers = useSetRecoilState(ShowMembers)
   const setTeamMembers = useSetRecoilState(TeamMembers)
@@ -30,33 +29,33 @@ export default function ReservationTableItem({
     queryKey: userQueryKeys.my(),
     queryFn: () => get(userUrl.my()),
   })
+  const { useStatus } = data?.data || {}
+  const { isTeacher, userId } = useGetRole()
 
-  const onModify = (item: ReservationDataType) => {
-    setShowMembers(
-      item.users
-        .map((user) => user)
-        .filter((user) => user.userId !== item.representativeId)
-    )
+  const onModify = () => {
+    setShowMembers(item.users.filter((user) => user.userId !== userId))
     setTeamMembers(
-      item.users
-        .map((user) => user.userId)
-        .filter((userId) => userId !== item.representativeId)
+      item.users.map((user) => user.userId).filter((user) => user !== userId)
     )
     openModal(
       <ReservationModal
+        maxCapacity={item.homeBase.maxCapacity}
         isModify={true}
-        reservationNumber={reservationNumber}
+        homeBaseNumber={item.homeBase.homeBaseNumber}
         reservationId={item.reservationId}
       />
     )
   }
 
-  const onReservationCase = (item: ReservationDataType | number) => {
+  const onReservationCase = () => {
     openModal(
-      typeof item !== 'number' ? (
+      item.reservationId !== null ? (
         <ViewReservationModal reservationId={item.reservationId} />
-      ) : data?.data.useStatus === 'AVAILABLE' ? (
-        <ConfirmReservationModal reservationNumber={reservationNumber} />
+      ) : useStatus === 'AVAILABLE' ? (
+        <ConfirmReservationModal
+          maxCapacity={item.homeBase.maxCapacity}
+          homeBaseNumber={item.homeBase.homeBaseNumber}
+        />
       ) : (
         toast.info('예약이 불가능한 상태입니다')
       )
@@ -64,19 +63,25 @@ export default function ReservationTableItem({
   }
 
   return (
-    <S.TableBox reserved={typeof item !== 'number' ? true : false}>
+    <S.TableBox reserved={item.reservationId !== null ? true : false}>
       <S.TableInfoBox
-        reserved={typeof item !== 'number' ? true : false}
+        reserved={item.reservationId !== null ? true : false}
         show_detail_name={isShowDetail}
       >
-        <div>{typeof item !== 'number' ? '예약불가' : '예약가능'}</div>
-        <h2>{reservationNumber}번 테이블</h2>
-        <span
-          onClick={() =>
-            typeof item !== 'number' && setIsShowDetail((prev) => !prev)
-          }
-        >
-          {typeof item !== 'number' ? (
+        <S.TableStatusBox reserved={item.reservationId !== null ? true : false}>
+          {item.reservationId !== null ? '예약불가' : '예약가능'}
+        </S.TableStatusBox>
+        <S.TableNumberBox>
+          {item.reservationId !== null && isTeacher && item.checkStatus && (
+            <TableCheckIcon checkStatus={item.checkStatus} />
+          )}
+          <h2>{item.homeBase.homeBaseNumber}번 테이블</h2>
+          {item.reservationId === null && (
+            <h3>(최대 {item.homeBase.maxCapacity}명)</h3>
+          )}
+        </S.TableNumberBox>
+        {item.reservationId !== null ? (
+          <span onClick={() => setIsShowDetail((prev) => !prev)}>
             <>
               <span>
                 {item.users.length === 1
@@ -85,29 +90,22 @@ export default function ReservationTableItem({
               </span>
               {item.users.length !== 1 && <BackArrowIcon />}
             </>
-          ) : (
-            '예약 가능 합니다.'
-          )}
-        </span>
-        {isShowDetail && (
-          <S.ShowDetailName>          
-            {typeof item !== 'number' &&
-              item.users.map((user) => user.name).join(', ')}
-          </S.ShowDetailName>
-        )}
-      </S.TableInfoBox>
-      <div
-        style={{ marginTop: '7rem', overflow: 'hiddlen', whiteSpace: 'nowrap' }}
-      >
-        {typeof item !== 'number' && item.representativeId === data?.data.userId && (
-          <span style={{ marginRight: '1rem' }} onClick={() => onModify(item)}>
-            예약수정
           </span>
+        ) : (
+          <span>예약 가능 합니다.</span>
         )}
-        <span onClick={() => onReservationCase(item)}>
-          {typeof item !== 'number' ? '예약조회' : '예약하기'}
+        <S.ShowDetailName style={{ color: theme.color.Grayscale.gray05 }}>
+          {isShowDetail && item.users.map((user) => user.name).join(', ')}
+        </S.ShowDetailName>
+      </S.TableInfoBox>
+      <S.ReservationButtonContainer>
+        {item.reservationId !== null && (
+          <span onClick={onModify}>예약수정</span>
+        )}
+        <span onClick={onReservationCase}>
+          {item.reservationId !== null ? '예약조회' : '예약하기'}
         </span>
-      </div>
+      </S.ReservationButtonContainer>
     </S.TableBox>
   )
 }

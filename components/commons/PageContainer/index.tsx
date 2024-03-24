@@ -1,7 +1,7 @@
-import { PageContainerPropsType } from '@/types'
+import { PageContainerProps } from '@/types'
 import * as S from './style'
 
-function PageContainer(props: PageContainerPropsType) {
+function PageContainer(props: PageContainerProps) {
   return (
     <S.PageContainer
       display={props.display}
