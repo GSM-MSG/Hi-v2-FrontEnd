@@ -59,7 +59,7 @@ function Reason({
     },
     onError: (error) => {
       if (error.message === 'Network Error')
-        toast.error('같은 교시에 예약하실 수 없습니다')
+        toast.error('같은 교시에 예약이 불가합니다')
     },
   })
 

@@ -1,6 +1,6 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
 import { BackArrowIcon, TableCheckIcon } from '@/assets'
-import { ShowMembers, TeamMembers } from '@/atoms'
+import { ReasonText, ShowMembers, TeamMembers } from '@/atoms'
 import { useGetRole, useModal } from '@/hooks'
 import {
   ConfirmReservationModal,
@@ -23,6 +23,7 @@ export default function ReservationTableItem({
 }) {
   const setShowMembers = useSetRecoilState(ShowMembers)
   const setTeamMembers = useSetRecoilState(TeamMembers)
+  const setReasonText = useSetRecoilState(ReasonText)
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false)
   const { openModal } = useModal()
   const { data } = useQuery<AxiosResponse<MyPageType>>({
@@ -37,6 +38,7 @@ export default function ReservationTableItem({
     setTeamMembers(
       item.users.map((user) => user.userId).filter((user) => user !== userId)
     )
+    setReasonText(item.reason)
     openModal(
       <ReservationModal
         maxCapacity={item.homeBase.maxCapacity}
@@ -98,15 +100,17 @@ export default function ReservationTableItem({
           {isShowDetail && item.users.map((user) => user.name).join(', ')}
         </S.ShowDetailName>
       </S.TableInfoBox>
-      <S.ReservationButtonContainer>
-        {item.reservationId !== null &&
-          item.users.some((user) => user.userId === userId) && (
-            <span onClick={onModify}>예약수정</span>
-          )}
-        <span onClick={onReservationCase}>
-          {item.reservationId !== null ? '예약조회' : '예약하기'}
-        </span>
-      </S.ReservationButtonContainer>
+      {!isTeacher && (
+        <S.ReservationButtonContainer>
+          {item.reservationId !== null &&
+            item.users.some((user) => user.userId === userId) && (
+              <span onClick={onModify}>예약수정</span>
+            )}
+          <span onClick={onReservationCase}>
+            {item.reservationId !== null ? '예약조회' : '예약하기'}
+          </span>
+        </S.ReservationButtonContainer>
+      )}
     </S.TableBox>
   )
 }
