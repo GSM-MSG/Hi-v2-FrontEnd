@@ -21,6 +21,7 @@ import { useRecoilValue } from 'recoil'
 import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
+import { useState } from 'react'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
@@ -34,7 +35,7 @@ function ReservationPage() {
         })
       ),
   })
-  const today: Date = new Date()
+  const [date, setDate] = useState<Date>(new Date())
   const { mutate } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.deleteAll(),
     mutationFn: () => del(reservationUrl.deleteAll()),
@@ -52,8 +53,8 @@ function ReservationPage() {
         <S.ReservationTitle>
           <h2>예약현황</h2>
           <div>
-            {today.getFullYear()}.{today.getMonth().toString().padStart(2, '0')}
-            .{today.getDay().toString().padStart(2, '0')}
+            {date.getFullYear()}.{date.getMonth().toString().padStart(2, '0')}
+            .{date.getDate().toString().padStart(2, '0')}
           </div>
           <div>
             {reservationPlace.floor}층 &#12685; {reservationPlace.period}교시
