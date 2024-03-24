@@ -69,6 +69,22 @@ export const IntroductoryTextBox = styled.div`
     letter-spacing: 2%;
     ${({ theme }) => theme.typography.h1.semibold};
     line-height: 64px;
+
+    @media screen and (max-width: 540px) {
+      font-size: 3rem;
+    }
+
+    @media screen and (max-width: 490px) {
+      font-size: 2.75rem;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: 2.5rem;
+    }
+
+    @media screen and (max-width: 410px) {
+      font-size: 2.25rem;
+    }
   }
 
   p {
@@ -93,10 +109,6 @@ export const IntroductoryTextBox = styled.div`
   @media screen and (max-width: 600px) {
     align-items: center;
     text-align: center;
-
-    h2 {
-      font-size: 2.8rem;
-    }
 
     p {
       font-size: 0.9rem;
