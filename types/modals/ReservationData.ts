@@ -16,5 +16,6 @@ export interface ReservationDataType {
   homeBaseId: string
   users: UserItemType[]
   checkStatus: boolean
+  reason: string
   homeBase: HomeBaseTypes
 }
