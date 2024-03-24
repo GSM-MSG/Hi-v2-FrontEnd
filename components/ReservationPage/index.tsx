@@ -25,7 +25,9 @@ import { useState } from 'react'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
-  const { data, refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
+  const { data, isLoading, refetch } = useQuery<
+    AxiosResponse<ReservationDataType[]>
+  >({
     queryKey: homebaseQueryKeys.list(),
     queryFn: () =>
       get(
@@ -53,8 +55,9 @@ function ReservationPage() {
         <S.ReservationTitle>
           <h2>예약현황</h2>
           <div>
-            {date.getFullYear()}.{(date.getMonth()+1).toString().padStart(2, '0')}
-            .{date.getDate().toString().padStart(2, '0')}
+            {date.getFullYear()}.
+            {(date.getMonth() + 1).toString().padStart(2, '0')}.
+            {date.getDate().toString().padStart(2, '0')}
           </div>
           <div>
             {reservationPlace.floor}층 &#12685; {reservationPlace.period}교시
@@ -99,10 +102,12 @@ function ReservationPage() {
           )}
         </S.ButtonContainer>
       </S.ReservationTitleBox>
-      <S.ReservationTableContainer>
-        {data?.data.map((item, idx) => (
-          <ReservationTableItem key={idx} item={item} />
-        ))}
+      <S.ReservationTableContainer isLoading={isLoading}>
+        {isLoading
+          ? <S.LoadingText>예약 현황을 가져오는 중입니다..</S.LoadingText>
+          : data?.data.map((item, idx) => (
+              <ReservationTableItem key={idx} item={item} />
+            ))}
       </S.ReservationTableContainer>
     </PageContainer>
   )
