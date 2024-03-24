@@ -33,7 +33,6 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const { userId } = useGetRole()
 
   useEffect(() => {
-    if (!member.trim()) return
     const delayFetch = setTimeout(() => {
       refetch()
     }, 500)
@@ -127,8 +126,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
         </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
-          {member.trim() &&
-            data?.data
+{            data?.data
               .sort((a, b) => {
                 const aStudentNum = parseInt(
                   `${a.grade}${a.classNum}${a.number
