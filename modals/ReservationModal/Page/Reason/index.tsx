@@ -18,6 +18,7 @@ import {
 import { useGetRole } from '@/hooks'
 import { ReserveModifyMutationValues, ReserveMutationValues } from '@/types'
 import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { ChangeEvent, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -37,7 +38,11 @@ function Reason({
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
 
-  const { mutate } = useMutation<void, Error, ReserveMutationValues>({
+  const { mutate: reserveTable, error } = useMutation<
+    void,
+    AxiosError,
+    ReserveMutationValues
+  >({
     mutationKey: homebaseQueryKeys.reserve(),
     mutationFn: (reserveValues) =>
       post(
@@ -51,6 +56,10 @@ function Reason({
     onSuccess: () => {
       toast.success('예약이 완료되었습니다')
       setModalPage(3)
+    },
+    onError: (error) => {
+      if (error.message === 'Network Error')
+        toast.error('같은 교시에 예약하실 수 없습니다')
     },
   })
 
@@ -84,7 +93,7 @@ function Reason({
         reason: reasonText,
       })
     else
-      mutate({
+      reserveTable({
         users: filteredTeam,
         reason: reasonText,
       })
