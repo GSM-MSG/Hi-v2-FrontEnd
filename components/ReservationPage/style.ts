@@ -31,15 +31,14 @@ export const ReservationTitle = styled.div`
     border-radius: 8px;
   }
 
-  @media screen and (max-width: 670px){
+  @media screen and (max-width: 670px) {
     div {
       display: none;
     }
   }
-
 `
 
-export const ReservationTableContainer = styled.div`
+export const ReservationTableContainer = styled.div<{ isLoading: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
@@ -62,10 +61,10 @@ export const ButtonContainer = styled.div`
   button {
     ${({ theme }) => theme.typography.body1.regular};
     border-radius: 8px;
-    background-color: ${({theme}) => theme.color.white};
+    background-color: ${({ theme }) => theme.color.white};
 
     &:hover {
-      color: ${({theme}) => theme.color.white};
+      color: ${({ theme }) => theme.color.white};
     }
   }
 
@@ -76,4 +75,13 @@ export const ButtonContainer = styled.div`
       }
     }
   }
+`
+
+export const LoadingText = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.color.Grayscale.gray07};
+  ${({ theme }) => theme.typography.body1};
 `

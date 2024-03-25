@@ -63,6 +63,7 @@ class TokenManager {
     removeStorage(refreshTokenStorage)
     removeStorage(accessExpiredAtStorage)
     removeStorage(refreshExpiredAtStorage)
+    Router.push('/')
   }
 
   async reissueToken({ refreshToken }: { refreshToken: string | null }) {
@@ -84,7 +85,6 @@ class TokenManager {
       return true
     } catch (error) {
       this.removeTokens()
-      Router.push('/')
       return false
     }
   }

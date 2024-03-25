@@ -41,6 +41,7 @@ export const GAuthLoginButton = styled.button`
   border-radius: 6px;
   font-weight: 600;
   font-size: 17px;
+  cursor: pointer;
 `
 
 export const LoginTitle = styled.div`

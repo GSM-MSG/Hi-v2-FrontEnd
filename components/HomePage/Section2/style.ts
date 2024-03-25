@@ -41,6 +41,10 @@ export const IntroductoryTextBox2 = styled.div`
   p {
     color: ${({ theme }) => theme.color.Grayscale.gray07};
     ${({ theme }) => theme.typography.title.semibold};
+
+    @media screen and (max-width: 415px) {
+      font-size: 1.25rem;
+    }
   }
 `
 
