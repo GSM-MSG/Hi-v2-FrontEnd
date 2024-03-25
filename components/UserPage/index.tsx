@@ -2,14 +2,18 @@ import { get, userQueryKeys, userUrl } from '@/apis'
 import { UserItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Input, PageContainer } from '../commons'
 import UserItem from './UserItem'
 import * as S from './style'
 import { SearchIcon } from '@/assets'
+import { useGetRole } from '@/hooks'
+import { useRouter } from 'next/router'
 
 export default function UserPage() {
+  const { isStudent } = useGetRole()
   const [user, setUser] = useState<string>('')
+  const router = useRouter()
   const { data, refetch } = useQuery<AxiosResponse<UserItemListType>>({
     queryKey: userQueryKeys.searchUser(),
     queryFn: () => get(userUrl.searchUser(user)),
@@ -19,6 +23,13 @@ export default function UserPage() {
     e.preventDefault()
     refetch()
   }
+
+  useEffect(() => {
+    if (isStudent) {
+      router.push('/')
+    }
+  }, [isStudent])
+
   return (
     <PageContainer paddingTop='6vh' paddingBottom='4vh'>
       <S.UserTitleContainer>
