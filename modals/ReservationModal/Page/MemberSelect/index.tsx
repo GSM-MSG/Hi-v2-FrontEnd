@@ -111,7 +111,8 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
       </S.InputBlock>
       <S.ShowMemberListBox>
         {showMembers.map((showMember) => (
-          <S.ShowMemberBox key={showMember.userId}>
+          <div key={showMember.userId}>
+          <S.ShowMemberBox>
             <span>{showMember.name}</span>
             <div
               style={{ cursor: 'pointer' }}
@@ -122,6 +123,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
               </div>
             </div>
           </S.ShowMemberBox>
+          </div>
         ))}
       </S.ShowMemberListBox>
       {isLoading ? (
