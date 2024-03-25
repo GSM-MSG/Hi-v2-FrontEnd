@@ -1,5 +1,5 @@
 import { Button, PageContainer } from '@/components'
-import { NoticeDetailType } from '@/types'
+import { MyPageType, NoticeDetailType } from '@/types'
 import { dateToString } from '@/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -7,8 +7,7 @@ import * as S from './style'
 import { BackArrowIcon } from '@/assets'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { get, noticeQueryKeys, noticeUrl } from '@/apis'
-import { useGetRole } from '@/hooks'
+import { get, noticeQueryKeys, noticeUrl, userQueryKeys, userUrl } from '@/apis'
 import { useEffect, useState } from 'react'
 
 export default function NoticeDetailPage() {
@@ -21,7 +20,13 @@ export default function NoticeDetailPage() {
     queryFn: () => get(noticeUrl.requestId(id)),
   })
 
-  const { isAdmin, isTeacher } = useGetRole()
+  const { data: myData } = useQuery<AxiosResponse<MyPageType>>({
+    queryKey: userQueryKeys.my(),
+    queryFn: () => get(userUrl.my()),
+  })
+
+  const { userId } = myData?.data || ({} as MyPageType)
+
   const { title, content, createdAt, user } = data?.data || {}
   const onModify = () => {
     if (data) {
@@ -53,7 +58,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{title}</S.DetailTitle>
-            {(isAdmin || isTeacher) && (
+            {userId === user?.userId && (
               <Button
                 width='45px'
                 height='24px'
