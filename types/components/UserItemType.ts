@@ -1,3 +1,4 @@
+import { UseQueryResult } from '@tanstack/react-query'
 import { RoleTypes } from '../common'
 
 export interface UserItemType {
@@ -10,5 +11,5 @@ export interface UserItemType {
   profileImageUrl: string
   role: RoleTypes
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
-  userListRefetch?: () => void
+  userListRefetch?: () => Promise<UseQueryResult>
 }
