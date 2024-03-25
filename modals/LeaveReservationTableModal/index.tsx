@@ -29,14 +29,15 @@ export default function LeaveReservationTableModal({
       refetch()
       closeModal()
     },
+    onError: () => toast.error('홈베이스 최소 인원은 2명입니다')
   })
 
   return (
     <Portal onClose={closeModal}>
-      <CheckModalContainer style={{ height: '180px' }}>
+      <CheckModalContainer>
         <h2>테이블 나가기</h2>
         <p>정말로 {reservationNumber}번 테이블을 나가시겠습니까?</p>
-        <ButtonContainer style={{ marginTop: '2rem' }}>
+        <ButtonContainer>
           <Button
             width='48%'
             height='2.7rem'

@@ -108,7 +108,7 @@ export default function ViewReservationModal({
               onClick={() =>
                 openModal(
                   <LeaveReservationTableModal
-                    reservationId={homeBase?.homeBaseId}
+                    reservationId={reservationId}
                     reservationNumber={homeBase?.homeBaseNumber}
                   />
                 )
