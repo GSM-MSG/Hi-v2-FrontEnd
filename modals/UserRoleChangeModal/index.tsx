@@ -20,7 +20,7 @@ const roleInfo = [
 export default function UserRoleChangeModal({
   userListRefetch,
 }: {
-  userListRefetch: () => Promise<UseQueryResult>
+  userListRefetch?: () => Promise<UseQueryResult>
 }) {
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
