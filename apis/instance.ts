@@ -1,10 +1,13 @@
-import { BASE_URL } from '@/utils'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import TokenManager from './TokenManager'
+import { BASE_URL } from '@/utils'
 
 const API = axios.create({
-  baseURL: BASE_URL,
+  baseURL: '/server',
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 API.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {

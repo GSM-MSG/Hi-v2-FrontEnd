@@ -25,6 +25,7 @@ import { useState } from 'react'
 
 function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
+  const { closeModal } = useModal()
   const { data, isLoading, refetch } = useQuery<
     AxiosResponse<ReservationDataType[]>
   >({
@@ -42,6 +43,7 @@ function ReservationPage() {
     mutationKey: reservationQueryKeys.deleteAll(),
     mutationFn: () => del(reservationUrl.deleteAll()),
     onSuccess: () => {
+      closeModal()
       refetch()
       toast.success('예약 테이블을 모두 삭제했습니다.')
     },
@@ -103,11 +105,13 @@ function ReservationPage() {
         </S.ButtonContainer>
       </S.ReservationTitleBox>
       <S.ReservationTableContainer isLoading={isLoading}>
-        {isLoading
-          ? <S.LoadingText>예약 현황을 가져오는 중입니다..</S.LoadingText>
-          : data?.data.map((item, idx) => (
-              <ReservationTableItem key={idx} item={item} />
-            ))}
+        {isLoading ? (
+          <S.LoadingText>예약 현황을 가져오는 중입니다..</S.LoadingText>
+        ) : (
+          data?.data.map((item, idx) => (
+            <ReservationTableItem key={idx} item={item} />
+          ))
+        )}
       </S.ReservationTableContainer>
     </PageContainer>
   )

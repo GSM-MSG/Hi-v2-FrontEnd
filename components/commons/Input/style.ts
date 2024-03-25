@@ -22,4 +22,8 @@ export const Input = styled.input<InputProps>`
     ${({ theme }) => theme.typography.body1.regular};
     color: ${({ theme }) => theme.color.Grayscale.gray04};
   }
+
+  &:disabled {
+    background: none;
+  }
 `
