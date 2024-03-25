@@ -45,6 +45,8 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
       return toast.warning('이미 포함된 멤버입니다')
     } else if (member.userId === userId) {
       return toast.warning('자신을 제외한 멤버를 선택해주세요')
+    } else if (teamMembers.length === maxCapacity) {
+      return toast.warning('테이블 최대 인원입니다')
     }
     setShowMembers((prev) => [...prev, member])
     setTeamMembers((prev) => [...prev, member.userId])
