@@ -92,7 +92,7 @@ export default function NoticeWritePage() {
         setDebouncedClick(false)
       }, 1000)
 
-      if (title === '' || content === '') {
+      if (title.trim() === '' || content.trim() === '') {
         toast.warning('제목이나 내용을 입력해주세요')
       } else {
         if (id !== 'undefined') {
