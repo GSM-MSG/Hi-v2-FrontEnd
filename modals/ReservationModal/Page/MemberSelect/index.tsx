@@ -9,7 +9,7 @@ import {
   Title,
   TitleBox,
 } from '@/components'
-import { useGetRole, useModal } from '@/hooks'
+import { useDeleteReservationStatus, useGetRole, useModal } from '@/hooks'
 import { UserItemType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
@@ -25,6 +25,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const [member, setMember] = useState<string>('')
   const { closeModal } = useModal()
+  const { delReserveStatus } = useDeleteReservationStatus()
 
   const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
     queryKey: userQueryKeys.searchStudent(),
@@ -65,6 +66,11 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
     if (showMembers.length < 1)
       return toast.warning('최소 1명이상의 팀원을 등록해주세요')
     setModalPage(2)
+  }
+
+  const onClose = () => {
+    closeModal()
+    delReserveStatus()
   }
 
   return (
@@ -126,66 +132,62 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
         </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
-{            data?.data
-              .sort((a, b) => {
-                const aStudentNum = parseInt(
-                  `${a.grade}${a.classNum}${a.number
-                    .toString()
-                    .padStart(2, '0')}`
-                )
-                const bStudentNum = parseInt(
-                  `${b.grade}${b.classNum}${b.number
-                    .toString()
-                    .padStart(2, '0')}`
-                )
+          {data?.data
+            .sort((a, b) => {
+              const aStudentNum = parseInt(
+                `${a.grade}${a.classNum}${a.number.toString().padStart(2, '0')}`
+              )
+              const bStudentNum = parseInt(
+                `${b.grade}${b.classNum}${b.number.toString().padStart(2, '0')}`
+              )
 
-                return aStudentNum - bStudentNum
-              })
-              .map((item) => (
-                <S.MemberBox key={item.userId}>
-                  <S.InfoBox>
-                    {item.profileImageUrl !== '' ? (
-                      <Image
-                        src={item.profileImageUrl}
-                        alt='profileImage'
-                        width='36'
-                        height='36'
-                      />
-                    ) : (
-                      <UserProfile />
-                    )}
-                    <div style={{ whiteSpace: 'nowrap' }}>
-                      <span>
-                        {parseInt(
-                          `${item.grade}${item.classNum}${item.number
-                            .toString()
-                            .padStart(2, '0')}`
-                        )}
-                      </span>
-                      <span>{item.name}</span>
-                    </div>
-                  </S.InfoBox>
-                  <Button
-                    background='none'
-                    border='1px solid #0066ff'
-                    borderRadius='4px'
-                    color='#0066ff'
-                    width='3.5rem'
-                    height='1.8rem'
-                    fontSize='14px'
-                    fontWeight='500'
-                    hoverBackground='#0066ff'
-                    hoverBorder='none'
-                    hoverColor='#ffffff'
-                    onClick={() => {
-                      addMembers(item)
-                    }}
-                    disabled={item.useStatus === 'AVAILABLE' ? false : true}
-                  >
-                    <span>선택</span>
-                  </Button>
-                </S.MemberBox>
-              ))}
+              return aStudentNum - bStudentNum
+            })
+            .map((item) => (
+              <S.MemberBox key={item.userId}>
+                <S.InfoBox>
+                  {item.profileImageUrl !== '' ? (
+                    <Image
+                      src={item.profileImageUrl}
+                      alt='profileImage'
+                      width='36'
+                      height='36'
+                    />
+                  ) : (
+                    <UserProfile />
+                  )}
+                  <div style={{ whiteSpace: 'nowrap' }}>
+                    <span>
+                      {parseInt(
+                        `${item.grade}${item.classNum}${item.number
+                          .toString()
+                          .padStart(2, '0')}`
+                      )}
+                    </span>
+                    <span>{item.name}</span>
+                  </div>
+                </S.InfoBox>
+                <Button
+                  background='none'
+                  border='1px solid #0066ff'
+                  borderRadius='4px'
+                  color='#0066ff'
+                  width='3.5rem'
+                  height='1.8rem'
+                  fontSize='14px'
+                  fontWeight='500'
+                  hoverBackground='#0066ff'
+                  hoverBorder='none'
+                  hoverColor='#ffffff'
+                  onClick={() => {
+                    addMembers(item)
+                  }}
+                  disabled={item.useStatus === 'AVAILABLE' ? false : true}
+                >
+                  <span>선택</span>
+                </Button>
+              </S.MemberBox>
+            ))}
         </S.MemberListBox>
       )}
       <S.ButtonContainer>
@@ -199,7 +201,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
           lineHeight='28px'
           borderRadius='8px'
           border='1px solid #0066ff'
-          onClick={closeModal}
+          onClick={onClose}
         >
           돌아가기
         </Button>
