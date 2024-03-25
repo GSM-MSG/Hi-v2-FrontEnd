@@ -1,5 +1,5 @@
-import { get, noticeQueryKeys, noticeUrl } from '@/apis'
-import { NoticeItemListType } from '@/types'
+import { get, noticeQueryKeys, noticeUrl, userQueryKeys, userUrl } from '@/apis'
+import { MyPageType, NoticeItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import NoticeItem from '../NoticeItem'
@@ -10,6 +10,13 @@ export default function NoticeItemList() {
     queryKey: noticeQueryKeys.list(),
     queryFn: () => get(noticeUrl.notice()),
   })
+
+  const { data: myData } = useQuery<AxiosResponse<MyPageType>>({
+    queryKey: userQueryKeys.my(),
+    queryFn: () => get(userUrl.my()),
+  })
+
+  const { userId } = myData?.data || ({} as MyPageType)
 
   return (
     <S.NoticeItemListContainer>
@@ -23,6 +30,7 @@ export default function NoticeItemList() {
             title={title}
             createdAt={createdAt}
             user={user}
+            userId={userId}
           />
         ))}
     </S.NoticeItemListContainer>

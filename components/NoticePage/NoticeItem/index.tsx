@@ -7,7 +7,6 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { del, get, noticeQueryKeys, noticeUrl } from '@/apis'
 import { toast } from 'react-toastify'
 import { AxiosError, AxiosResponse } from 'axios'
-import { useGetRole } from '@/hooks'
 
 export default function NoticeItem({
   index,
@@ -15,6 +14,7 @@ export default function NoticeItem({
   title,
   createdAt,
   user,
+  userId,
 }: NoticeItemType) {
   const { refetch } = useQuery<AxiosResponse<NoticeItemListType>>({
     queryKey: noticeQueryKeys.list(),
@@ -22,7 +22,6 @@ export default function NoticeItem({
     enabled: false,
   })
   const router = useRouter()
-  const { isAdmin, isTeacher } = useGetRole()
   const { mutate } = useMutation<void, AxiosError>({
     mutationKey: noticeQueryKeys.delete(noticeId),
     mutationFn: () => del(noticeUrl.requestId(noticeId)),
@@ -55,7 +54,7 @@ export default function NoticeItem({
         </S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
-        {(isAdmin || isTeacher) && (
+        {userId === user.userId && (
           <XMark onClick={onDelete} width='24px' height='24px' />
         )}
       </S.NoticeItemWrapper>

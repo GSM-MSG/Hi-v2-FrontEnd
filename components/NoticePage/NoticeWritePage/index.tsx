@@ -16,6 +16,7 @@ export default function NoticeWritePage() {
     content: '',
   })
   const { title, content } = notice
+  const [debouncedClick, setDebouncedClick] = useState(false)
 
   const { refetch } = useQuery<AxiosResponse<NoticeItemListType[]>, AxiosError>(
     {
@@ -85,10 +86,22 @@ export default function NoticeWritePage() {
   }
 
   const onClick = () => {
-    if (title === '' || content === '')
-      return toast.warning('제목이나 내용을 입력해주세요')
-    if (id !== 'undefined') noticeModify(notice)
-    else noticeCreate(notice)
+    if (!debouncedClick) {
+      setDebouncedClick(true)
+      setTimeout(() => {
+        setDebouncedClick(false)
+      }, 1000)
+
+      if (title.trim() === '' || content.trim() === '') {
+        toast.warning('제목이나 내용을 입력해주세요')
+      } else {
+        if (id !== 'undefined') {
+          noticeModify(notice)
+        } else {
+          noticeCreate(notice)
+        }
+      }
+    }
   }
 
   return (
