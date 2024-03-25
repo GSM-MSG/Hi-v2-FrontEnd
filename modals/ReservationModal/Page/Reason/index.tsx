@@ -57,10 +57,8 @@ function Reason({
       toast.success('예약이 완료되었습니다')
       setModalPage(3)
     },
-    onError: (error) => {
-      if (error.message === 'Network Error')
-        toast.error('같은 교시에 예약이 불가합니다')
-    },
+    onError: () => toast.error('같은 교시에 예약이 불가합니다')
+    ,
   })
 
   const { mutate: updateTable } = useMutation<
@@ -75,6 +73,7 @@ function Reason({
       toast.success('예약테이블을 수정했습니다')
       setModalPage(3)
     },
+    onError: () => toast.error('같은 교시에 예약이 불가합니다')
   })
   const { userId } = useGetRole()
 
