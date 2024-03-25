@@ -2,13 +2,12 @@ import { patch, userQueryKeys, userUrl } from '@/apis'
 import { SelectedCheck } from '@/assets'
 import { SelectedUser } from '@/atoms'
 import { Button, Portal } from '@/components'
-import { useGetRole, useModal } from '@/hooks'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useModal } from '@/hooks'
+import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
-import { get } from 'http'
 import { AxiosResponse } from 'axios'
 import { GetRoleType } from '@/types'
 
@@ -18,7 +17,11 @@ const roleInfo = [
   { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
 ]
 
-export default function UserRoleChangeModal() {
+export default function UserRoleChangeModal({
+  userListRefetch,
+}: {
+  userListRefetch?: () => Promise<UseQueryResult>
+}) {
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
   const [selectedRole, setSelectedRole] = useState('')
@@ -33,6 +36,7 @@ export default function UserRoleChangeModal() {
       closeModal()
       refetch()
       toast.success('권한을 변경했습니다')
+      userListRefetch && userListRefetch()
     },
   })
 

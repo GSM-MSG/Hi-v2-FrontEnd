@@ -3,14 +3,10 @@ import { SelectedUser } from '@/atoms'
 import { Button } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
 import { StudentStateModal, UserRoleChangeModal } from '@/modals'
-import { RoleTypes, UserItemListType, UserItemType } from '@/types'
-import { useQuery } from '@tanstack/react-query'
+import { RoleTypes, UserItemType } from '@/types'
 import Image from 'next/image'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
-import { AxiosResponse } from 'axios'
-import { userQueryKeys, userUrl } from '@/apis'
-import { get } from 'http'
 
 export default function UserItem({
   userId,
@@ -22,6 +18,7 @@ export default function UserItem({
   profileImageUrl,
   role,
   useStatus,
+  userListRefetch,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
@@ -99,7 +96,9 @@ export default function UserItem({
             borderRadius='8px'
             color={getRoleColor(role)}
             onClick={() => {
-              openModal(<UserRoleChangeModal />)
+              openModal(
+                <UserRoleChangeModal userListRefetch={userListRefetch} />
+              )
               setSelectedUser({
                 userId,
                 email,
