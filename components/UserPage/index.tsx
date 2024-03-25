@@ -1,10 +1,8 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
-import { useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { useRouter } from 'next/router'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Input, PageContainer } from '../commons'
 import UserItem from './UserItem'
 import * as S from './style'
@@ -16,12 +14,6 @@ export default function UserPage() {
     queryKey: userQueryKeys.searchUser(),
     queryFn: () => get(userUrl.searchUser(user)),
   })
-  const { isAdmin } = useGetRole()
-  const router = useRouter()
-
-  // useEffect(() => {
-  //   if (isAdmin === true) router.push('/')
-  // }, [isAdmin, router])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -74,6 +66,7 @@ export default function UserPage() {
               profileImageUrl={profileImageUrl}
               role={role}
               useStatus={useStatus}
+              userListRefetch={refetch}
             />
           )
         )}

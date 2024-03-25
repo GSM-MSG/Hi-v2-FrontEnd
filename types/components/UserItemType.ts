@@ -10,4 +10,5 @@ export interface UserItemType {
   profileImageUrl: string
   role: RoleTypes
   useStatus: 'AVAILABLE' | 'UNAVAILABLE'
+  userListRefetch?: () => void
 }

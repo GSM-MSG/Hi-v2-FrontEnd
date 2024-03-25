@@ -18,7 +18,13 @@ const roleInfo = [
   { role: '관리자', color: '#FF9B05', label: 'ROLE_ADMIN' },
 ]
 
-export default function UserRoleChangeModal() {
+interface UserRoleChangeModalProps {
+  userListRefetch?: () => void
+}
+
+export default function UserRoleChangeModal({
+  userListRefetch,
+}: UserRoleChangeModalProps) {
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
   const [selectedRole, setSelectedRole] = useState('')
@@ -33,6 +39,7 @@ export default function UserRoleChangeModal() {
       closeModal()
       refetch()
       toast.success('권한을 변경했습니다')
+      userListRefetch && userListRefetch()
     },
   })
 
