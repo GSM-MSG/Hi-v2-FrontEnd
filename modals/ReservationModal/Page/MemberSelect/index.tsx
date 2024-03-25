@@ -44,8 +44,8 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
     if (teamMembers.includes(member.userId)) {
       return toast.warning('이미 포함된 멤버입니다')
     } else if (member.userId === userId) {
-      return toast.warning('자신을 제외한 멤버를 선택해주세요')
-    } else if (teamMembers.length === maxCapacity) {
+      return toast.warning('본인을 제외한 멤버를 선택해주세요')
+    } else if (showMembers.length === maxCapacity - 1) {
       return toast.warning('테이블 최대 인원입니다')
     }
     setShowMembers((prev) => [...prev, member])
@@ -92,7 +92,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
           <SearchIcon />
         </div>
         <Input
-          disabled={showMembers.length === maxCapacity ? true : false}
+          disabled={showMembers.length === maxCapacity - 1 ? true : false}
           placeholder='팀원을 검색하세요.'
           width='100%'
           height='28px'
@@ -112,17 +112,17 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
       <S.ShowMemberListBox>
         {showMembers.map((showMember) => (
           <div key={showMember.userId}>
-          <S.ShowMemberBox>
-            <span>{showMember.name}</span>
-            <div
-              style={{ cursor: 'pointer' }}
-              onClick={() => deleteMembers(showMember)}
-            >
-              <div style={{ marginTop: '0.125rem' }}>
-                <XMark width='11' height='11' />
+            <S.ShowMemberBox>
+              <span>{showMember.name}</span>
+              <div
+                style={{ cursor: 'pointer' }}
+                onClick={() => deleteMembers(showMember)}
+              >
+                <div style={{ marginTop: '0.125rem' }}>
+                  <XMark width='11' height='11' />
+                </div>
               </div>
-            </div>
-          </S.ShowMemberBox>
+            </S.ShowMemberBox>
           </div>
         ))}
       </S.ShowMemberListBox>

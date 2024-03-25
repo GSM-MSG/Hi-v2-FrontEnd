@@ -30,6 +30,14 @@ export const ShowMemberListBox = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: 8px;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const ShowMemberBox = styled.div`
@@ -51,8 +59,7 @@ export const MemberListBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 14rem;
-  margin-bottom: 4rem;
+  height: 12rem;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
