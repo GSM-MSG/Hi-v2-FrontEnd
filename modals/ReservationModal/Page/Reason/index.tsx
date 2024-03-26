@@ -54,8 +54,8 @@ function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
       setModalPage(3)
     },
     onError: ({ response }) => {
-      if (response?.status === 403) toast.error('같은 교시에 예약이 불가합니다')
-      else if (response?.status === 409)
+      if (response?.status === 409) toast.error('같은 교시에 예약이 불가합니다')
+      else if (response?.status === 403)
         toast.error('예약 가능한 시간이 아닙니다')
     },
   })
