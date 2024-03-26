@@ -49,9 +49,13 @@ export const ShowMemberBox = styled.div`
   align-items: center;
   background: #f5f5f5;
   color: ${({ theme }) => theme.color.Grayscale.gray05};
-  padding: 0.1rem 0.5rem;
+  padding: 1.6px 8px;
   border-radius: 6px;
-  margin-right: 0.5rem;
+  margin-right: 8px;
+
+  div {
+    cursor: pointer;
+  }
 `
 
 export const MemberListBox = styled.div`
@@ -59,7 +63,7 @@ export const MemberListBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 12rem;
+  height: 192px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -77,7 +81,7 @@ export const LoadingMemberListBox = styled(MemberListBox)`
 export const MemberBox = styled.div`
   width: 100%;
   background: none;
-  height: 1rem;
+  height: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -93,8 +97,8 @@ export const MemberBox = styled.div`
 export const InfoBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 8.8vw;
+  gap: 16px;
 
   img {
     border-radius: 50%;
@@ -102,9 +106,8 @@ export const InfoBox = styled.div`
 
   span {
     ${({ theme }) => theme.typography.body1.medium};
-    font-size: 1rem;
+    font-size: 16px;
     color: ${({ theme }) => theme.color.Grayscale.gray08};
-    margin-left: 0.2rem;
   }
 `
 

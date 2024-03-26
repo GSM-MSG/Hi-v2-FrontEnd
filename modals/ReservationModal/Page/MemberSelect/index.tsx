@@ -114,10 +114,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
           <div key={showMember.userId}>
             <S.ShowMemberBox>
               <span>{showMember.name}</span>
-              <div
-                style={{ cursor: 'pointer' }}
-                onClick={() => deleteMembers(showMember)}
-              >
+              <div onClick={() => deleteMembers(showMember)}>
                 <div style={{ marginTop: '0.125rem' }}>
                   <XMark width='11' height='11' />
                 </div>
