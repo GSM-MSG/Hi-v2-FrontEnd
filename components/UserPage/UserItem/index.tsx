@@ -80,7 +80,12 @@ export default function UserItem({
           <S.UserName>
             {grade}
             {classNum}
-            {number.toString().length === 2 ? number : '0' + number} {name}
+            {number
+              ? number.toString().length === 2
+                ? number
+                : '0' + number
+              : ''}{' '}
+            {name}
           </S.UserName>
           <S.UserEmail>{email}</S.UserEmail>
         </S.UserInfo>
