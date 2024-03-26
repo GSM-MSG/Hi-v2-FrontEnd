@@ -1,6 +1,6 @@
 import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
 import { Button, Input, PageContainer, Textarea } from '@/components'
-import { NoticeItemListType, NoticeType } from '@/types'
+import { NoticeItemType, NoticeType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
@@ -18,11 +18,9 @@ export default function NoticeWritePage() {
   const { title, content } = notice
   const [debouncedClick, setDebouncedClick] = useState(false)
 
-  const { refetch } = useQuery<AxiosResponse<NoticeItemListType[]>, AxiosError>(
-    {
-      queryKey: noticeQueryKeys.list(),
-    }
-  )
+  const { refetch } = useQuery<AxiosResponse<NoticeItemType[]>, AxiosError>({
+    queryKey: noticeQueryKeys.list(),
+  })
   const { mutate: noticeCreate } = useMutation<void, AxiosError, NoticeType>({
     mutationKey: noticeQueryKeys.write(),
     mutationFn: (createValue) => post(noticeUrl.notice(), createValue),

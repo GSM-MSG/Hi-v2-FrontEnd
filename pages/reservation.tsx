@@ -1,4 +1,4 @@
-import { ReservationPage, SEO } from "@/components"
+import { ReservationPage, SEO } from '@/components'
 
 function Reservation() {
   return (

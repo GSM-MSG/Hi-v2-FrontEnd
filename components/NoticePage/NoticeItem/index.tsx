@@ -1,5 +1,5 @@
 import * as S from './style'
-import { NoticeItemListType, NoticeItemType } from '@/types'
+import { NoticeItemType } from '@/types'
 import { dateToString } from '@/utils'
 import { useRouter } from 'next/router'
 import { XMark } from '@/assets'
@@ -14,9 +14,8 @@ export default function NoticeItem({
   title,
   createdAt,
   user,
-  userId,
 }: NoticeItemType) {
-  const { refetch } = useQuery<AxiosResponse<NoticeItemListType>>({
+  const { refetch } = useQuery<AxiosResponse<NoticeItemType>>({
     queryKey: noticeQueryKeys.list(),
     queryFn: () => get(noticeUrl.notice()),
     enabled: false,
@@ -54,7 +53,7 @@ export default function NoticeItem({
         </S.NoticeTitle>
         <S.NoticeDate>{dateToString(createdAt)}</S.NoticeDate>
         <S.NoticeUser>{user.name}</S.NoticeUser>
-        {userId === user.userId && (
+        {user.isWriter && (
           <XMark onClick={onDelete} width='24px' height='24px' />
         )}
       </S.NoticeItemWrapper>
