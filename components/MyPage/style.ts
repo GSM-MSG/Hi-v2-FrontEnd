@@ -34,11 +34,11 @@ export const ProfileImg = styled.div`
 `
 
 export const NameContainer = styled.div`
-  display: flex;
-  position: relative;
+  margin-top: 2vh;
   display: flex;
   align-items: center;
-  margin-top: 2vh;
+  justify-content: center;
+  gap: 12px;
 
   span:nth-of-type(1) {
     ${({ theme }) => theme.typography.h4.bold};
@@ -48,8 +48,6 @@ export const NameContainer = styled.div`
 export const ReservationState = styled.span<{ buttonColor: string }>`
   width: auto;
   white-space: nowrap;
-  position: absolute;
-  left: 85px;
   border: ${(props) => `1.2px solid ${props.buttonColor}`};
   border-radius: 40px;
   padding: 4px 6px;
