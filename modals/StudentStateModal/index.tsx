@@ -21,7 +21,8 @@ export default function StudentStateModal() {
     { status: 'AVAILABLE' | 'UNAVAILABLE' }
   >({
     mutationKey: userQueryKeys.studentStatus(),
-    mutationFn: (modifyValue) => patch(userUrl.requestId(selectedUser.userId), modifyValue),
+    mutationFn: (modifyValue) =>
+      patch(userUrl.requestId(selectedUser.userId), modifyValue),
     onSuccess: () => {
       toast.success('예약 상태가 변경되었습니다.')
       refetch()
@@ -41,14 +42,13 @@ export default function StudentStateModal() {
         <p>
           {selectedUser.grade}
           {selectedUser.classNum}
-          {selectedUser.number.toString().length === 2
-            ? selectedUser.number
-            : '0' + selectedUser.number}{' '}
-          {selectedUser.name}{' '}
-          님을{' '}
-          {selectedUser.useStatus === 'AVAILABLE'
-            ? '예약불가'
-            : '예약가능'}
+          {selectedUser.number
+            ? selectedUser.number.toString().length === 2
+              ? selectedUser.number
+              : '0' + selectedUser.number
+            : ''}{' '}
+          {selectedUser.name} 님을{' '}
+          {selectedUser.useStatus === 'AVAILABLE' ? '예약불가' : '예약가능'}
           <br />
           하게 하시겠습니까?
         </p>
