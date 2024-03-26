@@ -139,10 +139,14 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
           {data?.data
             .sort((a, b) => {
               const aStudentNum = parseInt(
-                `${a.grade}${a.classNum}${a.number.toString().padStart(2, '0')}`
+                `${a.grade}${a.classNum}${
+                  a.number && a.number.toString().padStart(2, '0')
+                }`
               )
               const bStudentNum = parseInt(
-                `${b.grade}${b.classNum}${b.number.toString().padStart(2, '0')}`
+                `${b.grade}${b.classNum}${
+                  b.number && b.number.toString().padStart(2, '0')
+                }`
               )
 
               return aStudentNum - bStudentNum
@@ -163,9 +167,9 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
                   <div style={{ whiteSpace: 'nowrap' }}>
                     <span>
                       {parseInt(
-                        `${item.grade}${item.classNum}${item.number
-                          .toString()
-                          .padStart(2, '0')}`
+                        `${item.grade}${item.classNum}${
+                          item.number && item.number.toString().padStart(2, '0')
+                        }`
                       )}
                     </span>
                     <span>{item.name}</span>
