@@ -24,7 +24,7 @@ function ReservationItem({ reservation }: { reservation: ReservationItemType }) 
           </S.Name>
           {showDetailName && (
             <S.DetailName>
-              {reservation.users.map(({ name }: any) => name).join(', ')}
+              {reservation.users?.map(({ name }: any) => name).join(', ')}
             </S.DetailName>
           )}
         </S.NameWrapper>
