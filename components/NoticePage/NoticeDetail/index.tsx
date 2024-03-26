@@ -7,7 +7,7 @@ import * as S from './style'
 import { BackArrowIcon } from '@/assets'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { get, noticeQueryKeys, noticeUrl, userQueryKeys, userUrl } from '@/apis'
+import { get, noticeQueryKeys, noticeUrl } from '@/apis'
 import { useEffect, useState } from 'react'
 
 export default function NoticeDetailPage() {
@@ -51,7 +51,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{title}</S.DetailTitle>
-            {data?.data.user.isWriter && (
+            {user?.isWriter && (
               <Button
                 width='45px'
                 height='24px'
