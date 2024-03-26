@@ -100,17 +100,22 @@ export default function ReservationTableItem({
           {isShowDetail && item.users.map((user) => user.name).join(', ')}
         </S.ShowDetailName>
       </S.TableInfoBox>
-      {!isTeacher && (
-        <S.ReservationButtonContainer>
-          {item.reservationId !== null &&
-            item.users.some((user) => user.userId === userId) && (
-              <span onClick={onModify}>예약수정</span>
-            )}
+      <S.ReservationButtonContainer>
+        {item.reservationId !== null &&
+          item.users.some((user) => user.userId === userId) && (
+            <span onClick={onModify}>예약수정</span>
+          )}
+        {!isTeacher && (
           <span onClick={onReservationCase}>
             {item.reservationId !== null ? '예약조회' : '예약하기'}
           </span>
-        </S.ReservationButtonContainer>
-      )}
+        )}
+        {isTeacher && (
+          <span onClick={onReservationCase}>
+            {item.reservationId !== null ? '예약조회' : null}
+          </span>
+        )}
+      </S.ReservationButtonContainer>
     </S.TableBox>
   )
 }

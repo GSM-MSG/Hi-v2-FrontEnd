@@ -1,4 +1,4 @@
-import { get, patch, reservationQueryKeys, reservationUrl } from '@/apis'
+import { get, homebaseQueryKeys, patch, reservationQueryKeys, reservationUrl } from '@/apis'
 import { TableCheckIcon, XMark } from '@/assets'
 import { Button, Portal, Title, TitleBox } from '@/components'
 import { useGetRole, useModal } from '@/hooks'
@@ -7,7 +7,7 @@ import {
   ViewReservationDataResponseTypes,
   ViewReservationDataTypes,
 } from '@/types'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import LoadingViewReservation from './LoadingComponent'
 import ViewReservationData from './ViewReservationData'
@@ -24,6 +24,11 @@ export default function ViewReservationModal({
     queryKey: reservationQueryKeys.detail(reservationId),
     queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
+  const { refetch: refetchHomeBaseList } = useQuery<
+    AxiosResponse<ViewReservationDataResponseTypes>
+  >({
+    queryKey: homebaseQueryKeys.list(),
+  })
   const { homeBase, reason, users, checkStatus } = data?.data || {}
   const { isTeacher, userId } = useGetRole()
   const { mutate } = useMutation<
@@ -34,7 +39,10 @@ export default function ViewReservationModal({
     mutationKey: reservationQueryKeys.check(reservationId),
     mutationFn: (modifyValue) =>
       patch(reservationUrl.check(reservationId), modifyValue),
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch()
+      refetchHomeBaseList()
+    },
   })
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${homeBase?.floor}F` },
