@@ -20,13 +20,6 @@ export default function NoticeDetailPage() {
     queryFn: () => get(noticeUrl.requestId(id)),
   })
 
-  const { data: myData } = useQuery<AxiosResponse<MyPageType>>({
-    queryKey: userQueryKeys.my(),
-    queryFn: () => get(userUrl.my()),
-  })
-
-  const { userId } = myData?.data || ({} as MyPageType)
-
   const { title, content, createdAt, user } = data?.data || {}
   const onModify = () => {
     if (data) {
@@ -58,7 +51,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{title}</S.DetailTitle>
-            {userId === user?.userId && (
+            {data?.data.user.isWriter && (
               <Button
                 width='45px'
                 height='24px'

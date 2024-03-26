@@ -1,4 +1,4 @@
-import { NoticeDetailPage, SEO } from "@/components";
+import { NoticeDetailPage, SEO } from '@/components'
 
 export default function detail() {
   return (
