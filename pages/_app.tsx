@@ -7,10 +7,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppProps } from 'next/app'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 import { useState } from 'react'
 import { Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { RecoilRoot } from 'recoil'
+import * as gtag from '../libs/gtag'
 
 const pretendard = localFont({
   src: [
@@ -67,6 +69,25 @@ export default function App({ Component, pageProps }: AppProps) {
           toastStyle={{
             backgroundColor: theme.color.white,
             color: theme.color.Grayscale.gray10,
+          }}
+        />
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <Script
+          strategy='afterInteractive'
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+        />
+        <Script
+          id='gtag-init'
+          strategy='afterInteractive'
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
           }}
         />
       </RecoilRoot>
