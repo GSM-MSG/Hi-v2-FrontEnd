@@ -13,14 +13,13 @@ import { useEffect, useState } from 'react'
 export default function NoticeDetailPage() {
   const router = useRouter()
   const [isMounted, setIsMounted] = useState<boolean>(false)
-  const id = String(router.query.id)
+  const { id } = router.query
 
   const { data } = useQuery<AxiosResponse<NoticeDetailType>>({
-    queryKey: noticeQueryKeys.detail(id),
-    queryFn: () => get(noticeUrl.requestId(id)),
-    enabled: !!id,
+    queryKey: noticeQueryKeys.detail(id + ''),
+    queryFn: () => get(noticeUrl.requestId(id + '')),
+    enabled: typeof id === 'string',
   })
-
   const { title, content, createdAt, user } = data?.data || {}
   const onModify = () => {
     if (data) {
