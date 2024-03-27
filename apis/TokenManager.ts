@@ -75,7 +75,7 @@ class TokenManager {
           baseURL: BASE_URL,
           withCredentials: true,
           headers: {
-            RefreshToken: this.refreshToken && `Bearer ${refreshToken}`,
+            RefreshToken: this.refreshToken && `Bearer ${encodeURI(refreshToken || '')}`,
           },
         }
       )
