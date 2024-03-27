@@ -150,7 +150,7 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
             })
             .map((item) => (
               <S.MemberBox key={item.userId}>
-                <S.InfoBox>
+                <S.MemeberContentsBox>
                   {item.profileImageUrl !== '' ? (
                     <Image
                       src={item.profileImageUrl}
@@ -161,17 +161,14 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
                   ) : (
                     <UserProfile />
                   )}
-                  <div style={{ whiteSpace: 'nowrap' }}>
-                    <span>
-                      {parseInt(
-                        `${item.grade}${item.classNum}${
-                          item.number && item.number.toString().padStart(2, '0')
-                        }`
-                      )}
-                    </span>
-                    <span>{item.name}</span>
-                  </div>
-                </S.InfoBox>
+                  <S.InfoBox>
+                    {parseInt(
+                      `${item.grade}${item.classNum}${
+                        item.number && item.number.toString().padStart(2, '0')
+                      }`
+                    )} {item.name}
+                  </S.InfoBox>
+                </S.MemeberContentsBox>
                 <Button
                   background='none'
                   border='1px solid #0066ff'

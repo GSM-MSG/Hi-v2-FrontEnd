@@ -34,7 +34,7 @@ export const ShowMemberListBox = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   margin-bottom: 8px;
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -94,21 +94,20 @@ export const MemberBox = styled.div`
   }
 `
 
-export const InfoBox = styled.div`
+export const MemeberContentsBox = styled.div`
   display: flex;
   align-items: center;
-  width: 8.8vw;
   gap: 16px;
 
   img {
     border-radius: 50%;
   }
+`
 
-  span {
-    ${({ theme }) => theme.typography.body1.medium};
-    font-size: 16px;
-    color: ${({ theme }) => theme.color.Grayscale.gray08};
-  }
+export const InfoBox = styled.span`
+  ${({ theme }) => theme.typography.body1.medium};
+  font-size: 16px;
+  color: ${({ theme }) => theme.color.Grayscale.gray08};
 `
 
 export const ButtonContainer = styled.div`
