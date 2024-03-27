@@ -46,9 +46,13 @@ export default function MyPage() {
           <span>나의 예약 현황</span>
           {reservations?.length !== 0 && <span>예약 중</span>}
         </S.ReservationTitle>
-        {reservations?.map((i, idx) => (
-          <ReservationItem reservation={i} key={idx} />
-        ))}
+        {reservations?.length !== 0 ? (
+          reservations?.map((i, idx) => (
+            <ReservationItem reservation={i} key={idx} />
+          ))
+        ) : (
+          <S.NoReservation>예약 내역이 존재하지 않습니다. </S.NoReservation>
+        )}
       </S.ReservationWrapper>
     </S.PageContainer>
   )

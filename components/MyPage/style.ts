@@ -101,3 +101,10 @@ export const ReservationTitle = styled.div`
     ${({ theme }) => theme.typography.caption.medium};
   }
 `
+
+export const NoReservation = styled.span`
+  ${({ theme }) => theme.typography.h5}
+  text-align: center;
+  margin-top: 9.375rem;
+  color: ${({ theme }) => theme.color.Grayscale.gray06};
+`
