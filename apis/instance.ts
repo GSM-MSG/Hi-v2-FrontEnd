@@ -20,7 +20,7 @@ API.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
     tokenManager.refreshExpiredAt,
     tokenManager.refreshToken
   )
-  
+
   if (!accessTokenIsValid && refreshTokenIsValid) {
     await tokenManager.reissueToken({ refreshToken: tokenManager.refreshToken })
     tokenManager.initToken()
@@ -45,10 +45,10 @@ API.interceptors.response.use(
         })
         tokenManager.initToken()
         error.config.headers['Authorization'] = tokenManager.accessToken
-      ? `Bearer ${encodeURI(tokenManager.accessToken)}`
-      : undefined
-      return API(error.config)
-      } catch(err) {
+          ? `Bearer ${encodeURI(tokenManager.accessToken)}`
+          : undefined
+        return API(error.config)
+      } catch (err) {
         console.log(error)
       }
     }
