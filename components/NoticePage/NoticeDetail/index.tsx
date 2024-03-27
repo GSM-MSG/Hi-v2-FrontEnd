@@ -8,7 +8,6 @@ import { BackArrowIcon } from '@/assets'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { get, noticeQueryKeys, noticeUrl } from '@/apis'
-import { useGetRole } from '@/hooks'
 import { useEffect, useState } from 'react'
 
 export default function NoticeDetailPage() {
@@ -19,10 +18,9 @@ export default function NoticeDetailPage() {
   const { data } = useQuery<AxiosResponse<NoticeDetailType>>({
     queryKey: noticeQueryKeys.detail(id),
     queryFn: () => get(noticeUrl.requestId(id)),
-    enabled: !!id
+    enabled: !!id,
   })
 
-  const { isAdmin, isTeacher } = useGetRole()
   const { title, content, createdAt, user } = data?.data || {}
   const onModify = () => {
     if (data) {
@@ -54,7 +52,7 @@ export default function NoticeDetailPage() {
         <S.DetailWrapper>
           <S.DetailTitleContainer>
             <S.DetailTitle>{title}</S.DetailTitle>
-            {(isAdmin || isTeacher) && (
+            {user?.isWriter && (
               <Button
                 width='45px'
                 height='24px'
@@ -72,8 +70,8 @@ export default function NoticeDetailPage() {
             )}
           </S.DetailTitleContainer>
           <S.DetailInfo>
-            <div>작성일 : { isMounted && dateToString(createdAt ?? '')}</div>
-            <div>작성자 : { isMounted && user?.name}</div>
+            <div>작성일 : {isMounted && dateToString(createdAt ?? '')}</div>
+            <div>작성자 : {isMounted && user?.name}</div>
           </S.DetailInfo>
           <S.DetailContent>{content}</S.DetailContent>
         </S.DetailWrapper>
