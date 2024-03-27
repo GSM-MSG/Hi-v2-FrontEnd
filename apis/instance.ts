@@ -21,11 +21,7 @@ API.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
     tokenManager.refreshToken
   )
 
-  if (!accessTokenIsValid && refreshTokenIsValid) {
-    await tokenManager.reissueToken({ refreshToken: tokenManager.refreshToken })
-    tokenManager.initToken()
-  } else if (!accessTokenIsValid && !refreshTokenIsValid)
-    tokenManager.removeTokens()
+  if (!accessTokenIsValid && !refreshTokenIsValid) tokenManager.removeTokens()
 
   config.headers['Authorization'] = tokenManager.accessToken
     ? `Bearer ${encodeURI(tokenManager.accessToken)}`
@@ -45,11 +41,12 @@ API.interceptors.response.use(
           refreshToken: tokenManager.refreshToken,
         })
         tokenManager.initToken()
-        error.config.headers[
-          'Authorization'
-        ] = `Bearer ${tokenManager.accessToken}`
-      } catch (err) {
-        console.log(err)
+        error.config.headers['Authorization'] = tokenManager.accessToken
+      ? `Bearer ${encodeURI(tokenManager.accessToken)}`
+      : undefined
+      return API(error.config)
+      } catch(err) {
+        console.log(error)
       }
     }
   }
