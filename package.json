@@ -27,6 +27,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.19",
     "@types/parse-json": "^4.0.0"
   }
 }
