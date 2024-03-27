@@ -81,7 +81,7 @@ class TokenManager {
       )
 
       this.setTokens(data)
-
+      Router.push(window.location.href)
       return true
     } catch (error) {
       this.removeTokens()
