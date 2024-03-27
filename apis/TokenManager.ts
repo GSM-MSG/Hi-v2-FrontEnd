@@ -81,7 +81,7 @@ class TokenManager {
       )
 
       this.setTokens(data)
-
+      Router.reload()
       return true
     } catch (error) {
       this.removeTokens()
