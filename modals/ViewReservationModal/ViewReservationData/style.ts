@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 export const ViewReservationText = styled.h2`
   ${({ theme }) => theme.typography.body1.bold};
@@ -27,8 +27,14 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
     width: ${({ column }) => (column === 2 ? '196px' : '182px')};
     ${({ theme }) => theme.typography.body2.regular};
     color: #0b041e;
+
     span {
       color: #0b041e;
     }
+  }
+
+  .last-content {
+    max-height: 60px;
+    overflow: auto;
   }
 `
