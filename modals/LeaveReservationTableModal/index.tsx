@@ -32,7 +32,7 @@ export default function LeaveReservationTableModal({
   const { refetch } = useQuery({
     queryKey: homebaseQueryKeys.list(),
   })
-  const { mutate } = useMutation<void, Error, UseMutationOptions>({
+  const { mutate } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.exit(reservationId),
     mutationFn: () => del(reservationUrl.exit(reservationId)),
     onSuccess: () => {
