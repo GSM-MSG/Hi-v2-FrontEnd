@@ -34,7 +34,7 @@ function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
 
-  const { mutate: reserveTable } = useMutation<
+  const { mutate: reserveTable, isPending } = useMutation<
     void,
     AxiosError,
     ReserveMutationValues
@@ -85,6 +85,7 @@ function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
       (member, idx) => teamMembers.indexOf(member) === idx && member.length
     )
     if (reasonText.length === 0) return toast.warning('예약 사유를 적어주세요')
+    else if (isPending) return
     else if (isModify)
       updateTable({
         users: filteredTeam,
