@@ -45,9 +45,10 @@ function PlaceSelect() {
       }
     })
 
-  useEffect(() => {
+  const onClick = () => {
     refetch()
-  }, [reservationPlace])
+    closeModal()
+  }
 
   return (
     <Portal onClose={closeModal}>
@@ -98,7 +99,7 @@ function PlaceSelect() {
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={closeModal}
+            onClick={onClick}
           >
             확인
           </Button>
