@@ -22,7 +22,7 @@ export default function ViewReservationData({
           ) : (
             <S.ViewReservationDataColumn key={idx} column={idx}>
               <span>{view.name}</span>
-              <p>{view.content}</p>
+              <p className={idx === 3 ? 'last-content' : ''}>{view.content}</p>
             </S.ViewReservationDataColumn>
           )
         )}
