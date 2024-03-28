@@ -1,4 +1,9 @@
-import { del, homebaseQueryKeys, reservationQueryKeys, reservationUrl } from '@/apis'
+import {
+  del,
+  homebaseQueryKeys,
+  reservationQueryKeys,
+  reservationUrl,
+} from '@/apis'
 import {
   Button,
   ButtonContainer,
@@ -6,9 +11,15 @@ import {
   Portal,
 } from '@/components'
 import { useModal } from '@/hooks'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+  UseMutationOptions,
+  UseQueryOptions,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
+import { useEffect } from 'react'
 
 export default function LeaveReservationTableModal({
   reservationId,
@@ -29,7 +40,7 @@ export default function LeaveReservationTableModal({
       refetch()
       closeModal()
     },
-    onError: () => toast.error('홈베이스 최소 인원은 2명입니다')
+    onError: () => toast.error('홈베이스 최소 인원은 2명입니다'),
   })
 
   return (
