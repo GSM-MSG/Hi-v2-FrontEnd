@@ -96,6 +96,7 @@ export const TableNumberBox = styled.div`
 export const ShowDetailName = styled.span`
   margin-top: 4.8px;
   height: 19px;
+  word-break: keep-all;
 `
 
 export const ReservationButtonContainer = styled.div`
