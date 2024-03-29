@@ -1,6 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import TokenManager from './TokenManager'
-import { BASE_URL } from '@/utils'
 
 const API = axios.create({
   baseURL: '/server',
