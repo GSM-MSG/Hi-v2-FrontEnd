@@ -34,10 +34,19 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const { userId } = useGetRole()
 
   useEffect(() => {
-    const delayFetch = setTimeout(() => {
-      refetch()
-    }, 500)
-    return () => clearTimeout(delayFetch)
+    // 타이머를 저장할 변수
+    let delayTimer: NodeJS.Timeout
+
+    // 디바운싱을 구현한 함수
+    const delayedFetch = (): void => {
+      clearTimeout(delayTimer)
+      delayTimer = setTimeout(() => {
+        refetch()
+      }, 500)
+    }
+    delayedFetch()
+
+    return () => clearTimeout(delayTimer)
   }, [member, refetch])
 
   const addMembers = (member: UserItemType) => {
@@ -166,7 +175,8 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
                       `${item.grade}${item.classNum}${
                         item.number && item.number.toString().padStart(2, '0')
                       }`
-                    )} {item.name}
+                    )}{' '}
+                    {item.name}
                   </S.InfoBox>
                 </S.MemeberContentsBox>
                 <Button
