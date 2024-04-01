@@ -13,7 +13,7 @@ import {
   ViewReservationDataResponseTypes,
   ViewReservationDataTypes,
 } from '@/types'
-import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import LoadingViewReservation from './LoadingComponent'
 import ViewReservationData from './ViewReservationData'

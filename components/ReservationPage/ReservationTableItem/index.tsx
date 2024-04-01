@@ -97,7 +97,7 @@ export default function ReservationTableItem({
           <span>예약 가능 합니다.</span>
         )}
         <S.ShowDetailName style={{ color: theme.color.Grayscale.gray05 }}>
-          {isShowDetail && item.users.map((user) => user.name).join(', ')}
+          {isShowDetail && item.users?.map((user) => user.name).join(', ')}
         </S.ShowDetailName>
       </S.TableInfoBox>
       <S.ReservationButtonContainer>
