@@ -16,16 +16,16 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
   display: flex;
   align-items: flex-start;
   ${({ theme }) => theme.typography.body2.semibold};
-  gap: ${({ column }) =>
-    column > 1 ? '32px' : column === 0 ? '48px' : '20px'};
+  gap: 20px;
 
   span {
     color: ${({ theme }) => theme.color.Grayscale.gray05};
+    width: 66px;
   }
 
   p {
-    width: ${({ column }) => (column === 2 ? '196px' : '182px')};
     ${({ theme }) => theme.typography.body2.regular};
+    line-height: 15px;
     color: #0b041e;
 
     span {
