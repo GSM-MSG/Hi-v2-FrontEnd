@@ -137,7 +137,7 @@ function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
         <Button
           width='240px'
           height='52px'
-          background='#0066ff'
+          background={isPending ? '#c0c0c0' :'#0066ff'}
           color='#ffffff'
           fontSize='16px'
           fontWeight='600'

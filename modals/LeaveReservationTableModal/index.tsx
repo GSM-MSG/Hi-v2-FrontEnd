@@ -12,14 +12,11 @@ import {
 } from '@/components'
 import { useModal } from '@/hooks'
 import {
-  UseMutationOptions,
-  UseQueryOptions,
   useMutation,
-  useQuery,
+  useQuery
 } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
-import { useEffect } from 'react'
 
 export default function LeaveReservationTableModal({
   reservationId,
@@ -32,7 +29,7 @@ export default function LeaveReservationTableModal({
   const { refetch } = useQuery({
     queryKey: homebaseQueryKeys.list(),
   })
-  const { mutate } = useMutation<void, Error>({
+  const { mutate, isPending } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.exit(reservationId),
     mutationFn: () => del(reservationUrl.exit(reservationId)),
     onSuccess: () => {
@@ -70,13 +67,13 @@ export default function LeaveReservationTableModal({
           <Button
             width='48%'
             height='2.7rem'
-            background='#0066ff'
+            background={isPending ? '#c0c0c0' : '#0066ff'}
             color='#ffffff'
-            fontSize='1rem'
+            fontSize='16px'
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={() => mutate()}
+            onClick={() => !isPending && mutate()}
           >
             나가기
           </Button>

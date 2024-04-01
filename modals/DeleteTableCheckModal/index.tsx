@@ -24,7 +24,7 @@ export default function DeleteTableCheckModal({
   const { refetch } = useQuery({
     queryKey: homebaseQueryKeys.list(),
   })
-  const { mutate } = useMutation<void, Error>({
+  const { mutate, isPending } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.delete(reservationId),
     mutationFn: () => del(reservationUrl.requestId(reservationId)),
     onSuccess: () => {
@@ -64,13 +64,13 @@ export default function DeleteTableCheckModal({
           <Button
             width='48%'
             height='2.7rem'
-            background='#0066ff'
+            background={isPending ? '#c0c0c0' : '#0066ff'}
             color='#ffffff'
             fontSize='1rem'
             fontWeight='500'
             border='none'
             borderRadius='8px'
-            onClick={() => mutate()}
+            onClick={() => !isPending && mutate()}
           >
             확인
           </Button>
