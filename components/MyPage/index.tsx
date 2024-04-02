@@ -14,7 +14,6 @@ export default function MyPage() {
   })
   const { useStatus, profileImageUrl, name, email, reservations } =
     data?.data || {}
-
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
 
   return (
@@ -28,6 +27,7 @@ export default function MyPage() {
               objectFit='cover'
               width={100}
               height={100}
+              loading='lazy'
             />
           ) : (
             <UserProfile />
