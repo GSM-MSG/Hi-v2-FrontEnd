@@ -3,7 +3,7 @@ import { ReservationItemType } from '@/types'
 import { useState } from 'react'
 import * as S from './style'
 
-function ReservationItem({ reservation }: { reservation: ReservationItemType }) {
+export default function ReservationItem({ reservation }: { reservation: ReservationItemType }) {
   const [showDetailName, setShowDetailName] = useState(false)
 
   return (
@@ -35,5 +35,3 @@ function ReservationItem({ reservation }: { reservation: ReservationItemType }) 
     </S.Reservation>
   )
 }
-
-export default ReservationItem

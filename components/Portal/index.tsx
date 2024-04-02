@@ -3,7 +3,7 @@ import { MouseEvent, cloneElement, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import * as S from './style'
 
-function Portal({ children, onClose }: PortalProps) {
+export default function Portal({ children, onClose }: PortalProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false)
 
   useEffect(() => {
@@ -26,5 +26,3 @@ function Portal({ children, onClose }: PortalProps) {
     el
   )
 }
-
-export default Portal

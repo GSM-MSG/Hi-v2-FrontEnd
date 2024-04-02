@@ -1,6 +1,6 @@
 import { ReservationPage, SEO } from '@/components'
 
-function Reservation() {
+export default function Reservation() {
   return (
     <>
       <SEO title='| 예약페이지' />
@@ -8,5 +8,3 @@ function Reservation() {
     </>
   )
 }
-
-export default Reservation

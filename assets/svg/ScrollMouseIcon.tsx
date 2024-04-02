@@ -1,4 +1,4 @@
-function ScrollMouseIcon() {
+export default function ScrollMouseIcon() {
   return (
     <svg
       width='37'
@@ -22,5 +22,3 @@ function ScrollMouseIcon() {
     </svg>
   )
 }
-
-export default ScrollMouseIcon

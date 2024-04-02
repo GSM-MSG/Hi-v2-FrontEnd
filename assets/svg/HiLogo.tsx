@@ -1,4 +1,4 @@
-function HiLogo() {
+export default function HiLogo() {
   return (
     <svg
       width='34'
@@ -36,5 +36,3 @@ function HiLogo() {
     </svg>
   )
 }
-
-export default HiLogo

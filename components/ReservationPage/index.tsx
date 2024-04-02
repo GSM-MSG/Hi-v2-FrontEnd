@@ -23,7 +23,7 @@ import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
 import { useState } from 'react'
 
-function ReservationPage() {
+export default function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
   const { closeModal } = useModal()
   const { data, isLoading, refetch } = useQuery<
@@ -116,5 +116,3 @@ function ReservationPage() {
     </PageContainer>
   )
 }
-
-export default ReservationPage

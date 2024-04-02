@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import { Completed, MemberSelect, Reason } from './Page'
 import * as S from './style'
 
-function ReservationModal({
+export default function ReservationModal({
   maxCapacity,
   homeBaseNumber,
   isModify,
@@ -37,5 +37,3 @@ function ReservationModal({
     </Portal>
   )
 }
-
-export default ReservationModal
