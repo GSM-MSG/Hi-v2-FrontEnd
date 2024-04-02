@@ -1,5 +1,4 @@
-import UserPage from '@/components/UserPage'
-import SEO from '@/components/SEO'
+import { SEO, UserPage } from "@/components";
 
 export default function user() {
   return (
