@@ -1,4 +1,4 @@
-function GAuthLogo() {
+export default function GAuthLogo() {
   return (
     <svg
       width='16'
@@ -16,5 +16,3 @@ function GAuthLogo() {
     </svg>
   )
 }
-
-export default GAuthLogo

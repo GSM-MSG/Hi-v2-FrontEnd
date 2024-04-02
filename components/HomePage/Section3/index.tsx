@@ -1,8 +1,8 @@
 import { DescriptionImg1, DescriptionImg2 } from '@/assets'
-import * as S from './style'
 import Image from 'next/image'
+import * as S from './style'
 
-function HomeSection3() {
+export default function HomeSection3() {
   return (
     <S.HomeSection3>
       <S.DescriptionContainer>
@@ -26,5 +26,3 @@ function HomeSection3() {
     </S.HomeSection3>
   )
 }
-
-export default HomeSection3

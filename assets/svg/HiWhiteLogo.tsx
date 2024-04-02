@@ -1,4 +1,4 @@
-function HiWhiteLogo() {
+export default function HiWhiteLogo() {
   return (
     <svg
       width='37'
@@ -36,5 +36,3 @@ function HiWhiteLogo() {
     </svg>
   )
 }
-
-export default HiWhiteLogo

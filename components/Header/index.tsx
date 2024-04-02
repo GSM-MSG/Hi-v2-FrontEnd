@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import * as S from './style'
 
-function Header() {
+export default function Header() {
   const router = useRouter()
   const { openModal } = useModal()
   const { isAdmin, isTeacher } = useGetRole()
@@ -82,5 +82,3 @@ function Header() {
     </S.HeaderContainer>
   )
 }
-
-export default Header

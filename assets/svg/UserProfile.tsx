@@ -1,6 +1,4 @@
-import React from 'react'
-
-function UserProfile() {
+export default function UserProfile() {
   return (
     <svg
       width='36'
@@ -17,5 +15,3 @@ function UserProfile() {
     </svg>
   )
 }
-
-export default UserProfile

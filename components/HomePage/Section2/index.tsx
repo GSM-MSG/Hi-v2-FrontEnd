@@ -1,8 +1,8 @@
+import { HiTalkBoy, HiTalkGirl } from '@/assets'
 import Image from 'next/image'
 import * as S from './style'
-import { HiTalkGirl, HiTalkBoy } from '@/assets'
 
-function HomeSection2() {
+export default function HomeSection2() {
   return (
     <S.HomeSection2>
       <S.IntroductoryTextBox2>
@@ -18,5 +18,3 @@ function HomeSection2() {
     </S.HomeSection2>
   )
 }
-
-export default HomeSection2

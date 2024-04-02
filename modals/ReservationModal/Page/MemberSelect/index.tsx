@@ -19,7 +19,7 @@ import { toast } from 'react-toastify'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
+export default function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const setModalPage = useSetRecoilState(ModalPage)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
@@ -234,5 +234,3 @@ function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
     </S.MemberSelectContainer>
   )
 }
-
-export default MemberSelect

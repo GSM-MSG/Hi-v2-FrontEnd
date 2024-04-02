@@ -28,7 +28,7 @@ import { toast } from 'react-toastify'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import * as S from './style'
 
-function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
+export default function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
   const reservationPlace = useRecoilValue(ReservationPlace)
   const setModalPage = useSetRecoilState(ModalPage)
   const [reasonText, setReasonText] = useRecoilState(ReasonText)
@@ -151,5 +151,3 @@ function Reason({ homeBaseNumber, isModify, reservationId }: ReasonProps) {
     </S.ReasonContainer>
   )
 }
-
-export default Reason

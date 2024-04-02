@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import * as S from './style'
 
-function PlaceSelectModal() {
+export default function PlaceSelectModal() {
   const [isMonday] = useState<boolean>(new Date().getDay() === 1)
   const [reservationPlace, setReservationPlace] =
     useRecoilState(ReservationPlace)
@@ -110,5 +110,3 @@ function PlaceSelectModal() {
     </Portal>
   )
 }
-
-export default PlaceSelectModal
