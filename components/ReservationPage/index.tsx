@@ -11,7 +11,7 @@ import { useGetRole, useModal } from '@/hooks'
 import {
   AllDeleteTableCheckModal,
   FloorLocationModal,
-  PlaceSelect,
+  PlaceSelectModal,
 } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -72,7 +72,7 @@ function ReservationPage() {
             border='1px solid #0066ff'
             color='#0066ff'
             hoverBackground='#0066ff'
-            onClick={() => openModal(<PlaceSelect />)}
+            onClick={() => openModal(<PlaceSelectModal />)}
           >
             상세조회
           </Button>

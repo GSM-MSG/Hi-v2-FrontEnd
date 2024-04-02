@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { ButtonContainer, PlaceSelectContainer } from '../PlaceSelect/style'
+import { ButtonContainer, PlaceSelectContainer } from '../PlaceSelectModal/style'
 
 export const ViewReservationModalContainer = styled(PlaceSelectContainer)`
   height: 475px;

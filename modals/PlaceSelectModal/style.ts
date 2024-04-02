@@ -22,23 +22,25 @@ export const PlaceSelectBox = styled.div`
   }
 `
 
-export const FloorSelectButtonBox = styled.div`
+export const SelectButtonBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 13rem;
-`
+  gap: 8px;
 
-export const PeriodSelectButtonBox = styled(FloorSelectButtonBox)`
-  width: 20rem;
+  button {
+    height: 48px;
+    ${({ theme }) => theme.typography.body2.medium};
+    border-radius: 8px;
+    cursor: pointer;
+  }
 `
 
 export const FloorButton = styled.button<{
   clicked: number
   current_value: number
 }>`
-  width: 4rem;
-  height: 2.8rem;
+  width: 72px;
   background: ${({ clicked, current_value, theme }) =>
     clicked === current_value ? theme.color.primary : 'none'};
   border: 1px solid
@@ -46,18 +48,14 @@ export const FloorButton = styled.button<{
       clicked === current_value
         ? theme.color.primary
         : theme.color.Grayscale.gray06};
-  border-radius: 8px;
   color: ${({ clicked, current_value, theme }) =>
     clicked === current_value
       ? theme.color.white
       : theme.color.Grayscale.gray06};
-  ${({ theme }) => theme.typography.body2.medium};
-  cursor: pointer;
 `
 
-export const PeriodButton = styled(FloorButton)`
-  width: 4.8rem;
-  font-size: 0.885rem;
+export const PeriodButton = styled(FloorButton)<{isMonday: boolean}>`
+  width: ${({isMonday}) => isMonday ? '64px' : '80px'}
 `
 
 export const ButtonContainer = styled.div`
