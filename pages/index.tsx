@@ -1,11 +1,12 @@
-import { HomePage, SEO } from '@/components'
+import { HomePage } from '@/components'
 import { usePostLogin } from '@/hooks'
+import { NextSeo } from 'next-seo'
 
 export default function Home() {
   usePostLogin()
   return (
     <>
-      <SEO />
+      <NextSeo />
       <HomePage />
     </>
   )
