@@ -1,9 +1,10 @@
-import { NoticeDetailPage, SEO } from '@/components'
+import { NoticeDetailPage } from '@/components'
+import { NextSeo } from 'next-seo'
 
 export default function detail() {
   return (
     <>
-      <SEO title='| 공지페이지' />
+      <NextSeo title='공지페이지' />
       <NoticeDetailPage />
     </>
   )

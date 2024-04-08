@@ -1,9 +1,10 @@
-import { NoticePage, SEO } from '@/components'
+import { NoticePage } from '@/components'
+import { NextSeo } from 'next-seo'
 
 export default function notice() {
   return (
     <>
-      <SEO title='| 공지페이지' />
+      <NextSeo title='공지페이지' />
       <NoticePage />
     </>
   )
