@@ -1,4 +1,4 @@
-function HiLoginLogo() {
+export default function HiLoginLogo() {
   return (
     <svg
       width='100'
@@ -76,5 +76,3 @@ function HiLoginLogo() {
     </svg>
   )
 }
-
-export default HiLoginLogo

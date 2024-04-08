@@ -5,7 +5,7 @@ import Link from 'next/link'
 import NoticeItemList from '../NoticeItemList'
 import * as S from './style'
 
-function NoticePage() {
+export default function NoticePage() {
   const { isAdmin, isTeacher } = useGetRole()
 
   return (
@@ -34,5 +34,3 @@ function NoticePage() {
     </PageContainer>
   )
 }
-
-export default NoticePage

@@ -6,17 +6,18 @@ import { useModal } from '@/hooks'
 import { ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import * as S from './style'
 
-function PlaceSelect() {
+export default function PlaceSelectModal() {
+  const [isMonday] = useState<boolean>(new Date().getDay() === 1)
   const [reservationPlace, setReservationPlace] =
     useRecoilState(ReservationPlace)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
-    periods: [8, 9, 10, 11],
+    periods: isMonday ? [7, 8, 9, 10, 11] : [8, 9, 10, 11],
   })
   const { floors, periods } = showPlace
   const { refetch } = useQuery<AxiosResponse<ReservationDataType[]>>({
@@ -61,7 +62,7 @@ function PlaceSelect() {
         </TitleBox>
         <S.PlaceSelectBox>
           <span>층</span>
-          <S.FloorSelectButtonBox>
+          <S.SelectButtonBox>
             {floors.map((floor, idx) => (
               <S.FloorButton
                 key={idx}
@@ -72,22 +73,23 @@ function PlaceSelect() {
                 {floor}F
               </S.FloorButton>
             ))}
-          </S.FloorSelectButtonBox>
+          </S.SelectButtonBox>
         </S.PlaceSelectBox>
         <S.PlaceSelectBox style={{ marginTop: '30px' }}>
           <span>교시</span>
-          <S.PeriodSelectButtonBox>
+          <S.SelectButtonBox>
             {periods.map((period, idx) => (
               <S.PeriodButton
                 key={idx}
                 clicked={reservationPlace.period}
                 current_value={period}
                 onClick={() => onPeriodClick(period)}
+                isMonday={isMonday}
               >
                 {period}교시
               </S.PeriodButton>
             ))}
-          </S.PeriodSelectButtonBox>
+          </S.SelectButtonBox>
         </S.PlaceSelectBox>
         <S.ButtonContainer>
           <Button
@@ -108,5 +110,3 @@ function PlaceSelect() {
     </Portal>
   )
 }
-
-export default PlaceSelect

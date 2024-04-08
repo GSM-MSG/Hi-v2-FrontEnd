@@ -3,10 +3,10 @@ import { ArrowIcon, HiCharacter, ScrollMouseIcon } from '@/assets'
 import { Button } from '@/components'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import * as S from './style'
 import { toast } from 'react-toastify'
+import * as S from './style'
 
-function HomeSection1() {
+export default function HomeSection1() {
   const tokenManager = new TokenManager()
   const router = useRouter()
   return (
@@ -47,5 +47,3 @@ function HomeSection1() {
     </S.HomeSection1>
   )
 }
-
-export default HomeSection1

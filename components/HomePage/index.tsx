@@ -4,7 +4,7 @@ import HomeSection3 from './Section3'
 import HomeSection4 from './Section4'
 import * as S from './style'
 
-function HomePage() {
+export default function HomePage() {
   return (
     <S.HomePageContainer>
       <HomeSection1 />
@@ -14,5 +14,3 @@ function HomePage() {
     </S.HomePageContainer>
   )
 }
-
-export default HomePage
