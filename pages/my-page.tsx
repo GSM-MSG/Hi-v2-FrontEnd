@@ -1,9 +1,10 @@
-import { MyPage, SEO } from '@/components'
+import { MyPage } from '@/components'
+import { NextSeo } from 'next-seo'
 
 export default function user() {
   return (
     <>
-      <SEO title='| 마이페이지' />
+      <NextSeo title='마이페이지' />
       <MyPage />
     </>
   )

@@ -1,9 +1,10 @@
-import { ReservationPage, SEO } from '@/components'
+import { ReservationPage } from '@/components'
+import { NextSeo } from 'next-seo'
 
 export default function Reservation() {
   return (
     <>
-      <SEO title='| 예약페이지' />
+      <NextSeo title='예약페이지' />
       <ReservationPage />
     </>
   )
