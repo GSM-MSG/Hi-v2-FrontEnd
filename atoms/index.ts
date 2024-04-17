@@ -17,7 +17,7 @@ const currentPeriod = (): number => {
   else if (currentTime < time8) return 8
   else if (currentTime < time9) return 9
   else if (currentTime < time10) return 10
-  else return 8
+  else return 11
 }
 
 export const IsModal = atom<ReactNode>({ key: 'IsModal', default: null })
