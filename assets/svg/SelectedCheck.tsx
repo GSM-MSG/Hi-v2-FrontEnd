@@ -13,14 +13,14 @@ export default function SelectedCheck({ stroke }: { stroke?: string }) {
         r='9'
         fill='white'
         stroke={stroke}
-        stroke-width='2'
+        strokeWidth='2'
       />
       <path
         d='M6.875 10.3125L9.375 12.8125L13.125 7.1875'
         stroke={stroke}
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )
