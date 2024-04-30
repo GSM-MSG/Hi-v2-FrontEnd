@@ -1,14 +1,14 @@
 import { get, userQueryKeys, userUrl } from '@/apis'
+import { SearchIcon } from '@/assets'
+import { useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
+import { useRouter } from 'next/router'
 import { FormEvent, useEffect, useState } from 'react'
 import { Input, PageContainer } from '../commons'
 import UserItem from './UserItem'
 import * as S from './style'
-import { SearchIcon } from '@/assets'
-import { useGetRole } from '@/hooks'
-import { useRouter } from 'next/router'
 
 export default function UserPage() {
   const { isStudent } = useGetRole()
@@ -77,7 +77,6 @@ export default function UserPage() {
               profileImageUrl={profileImageUrl}
               role={role}
               useStatus={useStatus}
-              userListRefetch={refetch}
             />
           )
         )}
