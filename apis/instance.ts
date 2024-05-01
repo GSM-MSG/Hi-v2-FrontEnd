@@ -1,5 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import TokenManager from './TokenManager'
+import Router from 'next/router'
+import { toast } from 'react-toastify'
 
 const API = axios.create({
   baseURL: '/server',
@@ -49,6 +51,8 @@ API.interceptors.response.use(
         return API(error.config)
       } catch (err) {
         console.log(error)
+        toast.error('알 수 없는 에러가 발생했습니다.')
+        Router.push('/')
       }
     }
     return Promise.reject(error)

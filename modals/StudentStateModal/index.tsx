@@ -2,19 +2,16 @@ import { patch, userQueryKeys, userUrl } from '@/apis'
 import { SelectedUser } from '@/atoms'
 import { Button, Portal } from '@/components'
 import { useModal } from '@/hooks'
-import { UserItemListType } from '@/types'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { useRecoilValue } from 'recoil'
 import * as S from './style'
 
 export default function StudentStateModal() {
+  const queryClient = useQueryClient()
   const selectedUser = useRecoilValue(SelectedUser)
   const { closeModal } = useModal()
-  const { refetch } = useQuery<AxiosResponse<UserItemListType>>({
-    queryKey: userQueryKeys.searchUser(),
-  })
   const { mutate } = useMutation<
     void,
     AxiosError,
@@ -24,8 +21,8 @@ export default function StudentStateModal() {
     mutationFn: (modifyValue) =>
       patch(userUrl.requestId(selectedUser.userId), modifyValue),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userQueryKeys.searchUser() })
       toast.success('예약 상태가 변경되었습니다.')
-      refetch()
       closeModal()
     },
     onError: (error) => {

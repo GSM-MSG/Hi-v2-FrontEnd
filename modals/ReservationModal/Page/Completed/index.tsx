@@ -2,15 +2,13 @@ import { homebaseQueryKeys } from '@/apis'
 import { CompletedImg } from '@/assets'
 import { Button } from '@/components'
 import { useDeleteReservationStatus, useModal } from '@/hooks'
-import { useQuery } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import * as S from './style'
 
 export default function Completed({ isModify }: { isModify: boolean }) {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
-  const { refetch } = useQuery({
-    queryKey: homebaseQueryKeys.list(),
-  })
+  const queryClient = useQueryClient()
 
   return (
     <S.CompletedContainer>
@@ -30,7 +28,9 @@ export default function Completed({ isModify }: { isModify: boolean }) {
           border='none'
           borderRadius='8px'
           onClick={async () => {
-            refetch()
+            queryClient.invalidateQueries({
+              queryKey: homebaseQueryKeys.list(),
+            })
             delReserveStatus()
             closeModal()
           }}
