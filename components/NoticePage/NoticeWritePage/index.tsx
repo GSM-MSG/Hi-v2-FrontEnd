@@ -1,14 +1,15 @@
 import { noticeQueryKeys, noticeUrl, patch, post } from '@/apis'
 import { Button, Input, PageContainer, Textarea } from '@/components'
-import { NoticeItemType, NoticeType } from '@/types'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
+import { NoticeType } from '@/types'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import * as S from './style'
 
 export default function NoticeWritePage() {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const id = String(router.query.id)
   const [notice, setNotice] = useState<NoticeType>({
@@ -18,17 +19,16 @@ export default function NoticeWritePage() {
   const { title, content } = notice
   const [debouncedClick, setDebouncedClick] = useState(false)
 
-  const { refetch } = useQuery<AxiosResponse<NoticeItemType[]>, AxiosError>({
-    queryKey: noticeQueryKeys.list(),
-  })
+  const onSuccessWrite = (writeType: '추가' | '수정') => {
+    router.push('/notice', undefined, { shallow: true })
+    if (writeType === '추가') toast.success('공지사항을 추가했습니다')
+    else if (writeType === '수정') toast.success('공지사항을 수정했습니다')
+    queryClient.invalidateQueries({ queryKey: noticeQueryKeys.list() })
+  }
   const { mutate: noticeCreate } = useMutation<void, AxiosError, NoticeType>({
     mutationKey: noticeQueryKeys.write(),
     mutationFn: (createValue) => post(noticeUrl.notice(), createValue),
-    onSuccess: () => {
-      router.push('/notice', undefined, { shallow: true })
-      toast.success('공지사항을 추가했습니다')
-      refetch()
-    },
+    onSuccess: () => onSuccessWrite('추가'),
     onError: (error) => {
       if (error.response) {
         const status = error.response.status
@@ -45,11 +45,7 @@ export default function NoticeWritePage() {
   const { mutate: noticeModify } = useMutation<void, AxiosError, NoticeType>({
     mutationKey: noticeQueryKeys.detail(id),
     mutationFn: (modifyValue) => patch(noticeUrl.requestId(id), modifyValue),
-    onSuccess: () => {
-      router.push('/notice', undefined, { shallow: true })
-      toast.success('공지사항을 수정했습니다')
-      refetch()
-    },
+    onSuccess: () => onSuccessWrite('수정'),
     onError: (error) => {
       if (error.response) {
         const status = error.response.status
@@ -73,9 +69,7 @@ export default function NoticeWritePage() {
     }
   }, [id, router])
 
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setNotice((prevNotice) => ({
       ...prevNotice,

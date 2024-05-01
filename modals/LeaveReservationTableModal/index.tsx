@@ -11,10 +11,7 @@ import {
   Portal,
 } from '@/components'
 import { useModal } from '@/hooks'
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import ViewReservationModal from '../ViewReservationModal'
 
@@ -25,16 +22,14 @@ export default function LeaveReservationTableModal({
   reservationId: string | undefined
   reservationNumber: number | undefined
 }) {
+  const queryClient = useQueryClient()
   const { openModal, closeModal } = useModal()
-  const { refetch } = useQuery({
-    queryKey: homebaseQueryKeys.list(),
-  })
   const { mutate, isPending } = useMutation<void, Error>({
     mutationKey: reservationQueryKeys.exit(reservationId),
     mutationFn: () => del(reservationUrl.exit(reservationId)),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: homebaseQueryKeys.list() })
       toast.success('예약테이블을 나갔습니다')
-      refetch()
       closeModal()
     },
     onError: () => toast.error('홈베이스 최소 인원은 2명입니다'),

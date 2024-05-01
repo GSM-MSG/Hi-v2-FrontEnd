@@ -1,12 +1,12 @@
-import * as S from './style'
+import { del, noticeQueryKeys, noticeUrl } from '@/apis'
+import { XMark } from '@/assets'
 import { NoticeItemType } from '@/types'
 import { dateToString } from '@/utils'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
-import { XMark } from '@/assets'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { del, get, noticeQueryKeys, noticeUrl } from '@/apis'
 import { toast } from 'react-toastify'
-import { AxiosError, AxiosResponse } from 'axios'
+import * as S from './style'
 
 export default function NoticeItem({
   index,
@@ -15,18 +15,14 @@ export default function NoticeItem({
   createdAt,
   user,
 }: NoticeItemType) {
-  const { refetch } = useQuery<AxiosResponse<NoticeItemType>>({
-    queryKey: noticeQueryKeys.list(),
-    queryFn: () => get(noticeUrl.notice()),
-    enabled: false,
-  })
   const router = useRouter()
+  const queryClient = useQueryClient()
   const { mutate } = useMutation<void, AxiosError>({
     mutationKey: noticeQueryKeys.delete(noticeId),
     mutationFn: () => del(noticeUrl.requestId(noticeId)),
     onSuccess: () => {
       toast.success('공지가 삭제되었습니다.')
-      refetch()
+      queryClient.invalidateQueries({ queryKey: noticeQueryKeys.list() })
     },
     onError: (error) => {
       if (error.response) {

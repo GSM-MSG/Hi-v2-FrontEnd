@@ -8,6 +8,22 @@ import Image from 'next/image'
 import { useSetRecoilState } from 'recoil'
 import * as S from './style'
 
+const roleInfo: {
+  LABELS: Record<RoleTypes, string>
+  COLORS: Record<RoleTypes, string>
+} = {
+  LABELS: {
+    ROLE_ADMIN: '관리자',
+    ROLE_TEACHER: '선생님',
+    ROLE_STUDENT: '학생',
+  },
+  COLORS: {
+    ROLE_ADMIN: '#FF9B05',
+    ROLE_TEACHER: '#FF3838',
+    ROLE_STUDENT: '#2E80CC',
+  },
+}
+
 export default function UserItem({
   userId,
   email,
@@ -18,27 +34,11 @@ export default function UserItem({
   profileImageUrl,
   role,
   useStatus,
-  userListRefetch,
 }: UserItemType) {
   const buttonColor = useStatus === 'AVAILABLE' ? '#00A441' : '#C0C0C0'
   const setSelectedUser = useSetRecoilState(SelectedUser)
   const { openModal } = useModal()
   const { isAdmin } = useGetRole()
-  const roleInfo: {
-    LABELS: Record<RoleTypes, string>
-    COLORS: Record<RoleTypes, string>
-  } = {
-    LABELS: {
-      ROLE_ADMIN: '관리자',
-      ROLE_TEACHER: '선생님',
-      ROLE_STUDENT: '학생',
-    },
-    COLORS: {
-      ROLE_ADMIN: '#FF9B05',
-      ROLE_TEACHER: '#FF3838',
-      ROLE_STUDENT: '#2E80CC',
-    },
-  }
 
   const getRoleLabel = (role: RoleTypes) => {
     if (role === 'ROLE_ADMIN') {
@@ -101,9 +101,7 @@ export default function UserItem({
             borderRadius='8px'
             color={getRoleColor(role)}
             onClick={() => {
-              openModal(
-                <UserRoleChangeModal userListRefetch={userListRefetch} />
-              )
+              openModal(<UserRoleChangeModal />)
               setSelectedUser({
                 userId,
                 email,
