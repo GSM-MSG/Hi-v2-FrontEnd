@@ -6,7 +6,7 @@ import HeaderLogo from './HeaderLogo'
 import HeaderMenuList from './HeaderMenuList'
 import * as S from './style'
 
-export default function Header() {
+export default function Header({isManager}: {isManager: boolean}) {
   const tokenManager = new TokenManager()
   const router = useRouter()
   const { isStudent } = useGetRole()
@@ -15,6 +15,7 @@ export default function Header() {
     <S.HeaderContainer>
       <HeaderLogo />
       <HeaderMenuList isManager={!isStudent} pathname={router.pathname} accessToken={tokenManager.accessToken} push={router.push}/>
+      <HeaderMenuList isManager={isManager} pathname={router.pathname} accessToken={tokenManager.accessToken} push={router.push}/>
       <AuthButton
         isLogin={!!tokenManager.accessToken}
         accessToken={tokenManager.accessToken}

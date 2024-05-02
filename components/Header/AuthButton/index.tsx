@@ -7,8 +7,6 @@ import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import * as S from './style'
-import { MemberSelect } from "@/modals/ReservationModal/Page"
-import Portal from "@/components/Portal"
 import styled from "@emotion/styled"
 
 export const ReservationModalContainer = styled.div`
@@ -31,7 +29,6 @@ interface AuthButtonProps {
 export default function AuthButton({ isLogin, accessToken, refreshToken, removeTokens }: AuthButtonProps) {
   const [loginText, setLoginText] = useState<'로그인' | '로그아웃'>('로그인')
   const { openModal } = useModal()
-
   const { mutate: logout } = useMutation<void, AxiosError>({
     mutationKey: authQueryKeys.logout(),
     mutationFn: () =>
@@ -46,7 +43,6 @@ export default function AuthButton({ isLogin, accessToken, refreshToken, removeT
       toast.success('로그아웃 됐습니다')
     },
   })
-
   const onClick = () => {
     if (accessToken) logout()
     else openModal(<LoginModal />)
