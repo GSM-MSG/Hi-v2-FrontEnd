@@ -1,18 +1,20 @@
 import TokenManager from '@/apis/TokenManager'
+import { useGetRole } from '@/hooks'
 import { useRouter } from 'next/router'
-import * as S from './style'
+import AuthButton from './AuthButton'
 import HeaderLogo from './HeaderLogo'
 import HeaderMenuList from './HeaderMenuList'
-import AuthButton from './AuthButton'
+import * as S from './style'
 
-export default function Header({isManager}: {isManager: boolean}) {
+export default function Header() {
   const tokenManager = new TokenManager()
   const router = useRouter()
+  const { isStudent } = useGetRole()
 
   return (
     <S.HeaderContainer>
       <HeaderLogo />
-      <HeaderMenuList isManager={isManager} pathname={router.pathname} accessToken={tokenManager.accessToken} push={router.push}/>
+      <HeaderMenuList isManager={!isStudent} pathname={router.pathname} accessToken={tokenManager.accessToken} push={router.push}/>
       <AuthButton
         isLogin={!!tokenManager.accessToken}
         accessToken={tokenManager.accessToken}
