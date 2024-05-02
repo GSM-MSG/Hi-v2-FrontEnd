@@ -33,7 +33,6 @@ export default function AuthButton({ isLogin, accessToken, refreshToken, removeT
       toast.success('로그아웃 됐습니다')
     },
   })
-  console.log(removeTokens)
 
   const onClick = () => {
     if (accessToken) logout()
