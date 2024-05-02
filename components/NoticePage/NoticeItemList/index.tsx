@@ -6,16 +6,14 @@ import NoticeItem from '../NoticeItem'
 import * as S from './style'
 
 export default function NoticeItemList() {
-  const { data } = useQuery<AxiosResponse<NoticeItemType[]>>({
+  const { data: noticeList } = useQuery<NoticeItemType[]>({
     queryKey: noticeQueryKeys.list(),
     queryFn: () => get(noticeUrl.notice()),
   })
 
   return (
     <S.NoticeItemListContainer>
-      {data &&
-        Array.isArray(data.data) &&
-        data.data.map(({ index, noticeId, title, createdAt, user }, idx) => (
+      {noticeList?.map(({ index, noticeId, title, createdAt, user }, idx) => (
           <NoticeItem
             key={idx}
             index={index}

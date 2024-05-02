@@ -27,7 +27,7 @@ export default function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
   const { closeModal } = useModal()
   const { delReserveStatus } = useDeleteReservationStatus()
 
-  const { data, refetch, isLoading } = useQuery<AxiosResponse<UserItemType[]>>({
+  const { data: memberList, refetch, isLoading } = useQuery<UserItemType[]>({
     queryKey: userQueryKeys.searchStudent(),
     queryFn: () => get(userUrl.searchStudent(member)),
   })
@@ -136,14 +136,13 @@ export default function MemberSelect({ maxCapacity }: { maxCapacity: number }) {
         <S.LoadingMemberListBox>
           <span>학생정보를 찾는 중입니다.</span>
         </S.LoadingMemberListBox>
-      ) : data?.data.length === 0 ? (
+      ) : memberList?.length === 0 ? (
         <S.LoadingMemberListBox>
           <span>학생정보를 찾을 수 없습니다.</span>
         </S.LoadingMemberListBox>
       ) : (
         <S.MemberListBox>
-          {data?.data
-            .sort((a, b) => {
+          {memberList?.sort((a, b) => {
               const aStudentNum = parseInt(
                 `${a.grade}${a.classNum}${
                   a.number && a.number.toString().padStart(2, '0')

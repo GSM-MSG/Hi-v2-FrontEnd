@@ -35,7 +35,7 @@ API.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
 
 API.interceptors.response.use(
   (res) => {
-    return res
+    return res.data
   },
   async (error) => {
     const tokenManager = new TokenManager()

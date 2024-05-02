@@ -15,20 +15,18 @@ import {
 } from '@/modals'
 import { ReservationDataType } from '@/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRecoilValue } from 'recoil'
 import { Button, PageContainer } from '../commons'
 import ReservationTableItem from './ReservationTableItem'
 import * as S from './style'
-import { useState } from 'react'
 
 export default function ReservationPage() {
   const reservationPlace = useRecoilValue(ReservationPlace)
   const { closeModal } = useModal()
-  const { data, isLoading, refetch } = useQuery<
-    AxiosResponse<ReservationDataType[]>
-  >({
+  const { data: reservationList, isLoading, refetch } = useQuery<ReservationDataType[], AxiosError>({
     queryKey: homebaseQueryKeys.list(),
     queryFn: () =>
       get(
@@ -108,7 +106,7 @@ export default function ReservationPage() {
         {isLoading ? (
           <S.LoadingText>예약 현황을 가져오는 중입니다..</S.LoadingText>
         ) : (
-          data?.data.map((item, idx) => (
+          reservationList?.map((item, idx) => (
             <ReservationTableItem key={idx} item={item} />
           ))
         )}

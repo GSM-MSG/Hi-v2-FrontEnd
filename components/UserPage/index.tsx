@@ -3,7 +3,7 @@ import { SearchIcon } from '@/assets'
 import { useGetRole } from '@/hooks'
 import { UserItemListType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { FormEvent, useEffect, useState } from 'react'
 import { Input, PageContainer } from '../commons'
@@ -14,7 +14,7 @@ export default function UserPage() {
   const { isStudent } = useGetRole()
   const [user, setUser] = useState<string>('')
   const router = useRouter()
-  const { data, refetch } = useQuery<AxiosResponse<UserItemListType>>({
+  const { data: userList, refetch } = useQuery<UserItemListType, AxiosError>({
     queryKey: userQueryKeys.searchUser(),
     queryFn: () => get(userUrl.searchUser(user)),
   })
@@ -51,7 +51,7 @@ export default function UserPage() {
         </S.InputWrapper>
       </S.UserTitleContainer>
       <S.UserItemListContainer>
-        {data?.data.map(
+        {userList?.map(
           (
             {
               userId,
