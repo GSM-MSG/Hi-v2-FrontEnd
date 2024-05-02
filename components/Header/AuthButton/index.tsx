@@ -18,7 +18,7 @@ interface AuthButtonProps {
 export default function AuthButton({ isLogin, accessToken, refreshToken, removeTokens }: AuthButtonProps) {
   const [loginText, setLoginText] = useState<'로그인' | '로그아웃'>('로그인')
   const { openModal } = useModal()
-  
+
   const { mutate: logout } = useMutation<void, AxiosError>({
     mutationKey: authQueryKeys.logout(),
     mutationFn: () =>
@@ -29,7 +29,6 @@ export default function AuthButton({ isLogin, accessToken, refreshToken, removeT
         },
       }),
     onSuccess: () => {
-      console.log('안녕')
       removeTokens()
       toast.success('로그아웃 됐습니다')
     },
