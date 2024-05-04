@@ -1,26 +1,24 @@
+import { get, noticeQueryKeys, noticeUrl } from '@/apis'
+import { BackArrowIcon } from '@/assets'
 import { Button, PageContainer } from '@/components'
 import { NoticeDetailType } from '@/types'
 import { dateToString } from '@/utils'
+import { useQuery } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from './style'
-import { BackArrowIcon } from '@/assets'
-import { useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
-import { get, noticeQueryKeys, noticeUrl } from '@/apis'
-import { useEffect, useState } from 'react'
 
 export default function NoticeDetailPage() {
   const router = useRouter()
-  const [isMounted, setIsMounted] = useState<boolean>(false)
   const { id } = router.query
 
-  const { data } = useQuery<AxiosResponse<NoticeDetailType>>({
+  const { data } = useQuery<NoticeDetailType, AxiosError>({
     queryKey: noticeQueryKeys.detail(id + ''),
     queryFn: () => get(noticeUrl.requestId(id + '')),
     enabled: typeof id === 'string',
   })
-  const { title, content, createdAt, user } = data?.data || {}
+  const { title, content, createdAt, user } = data || {}
   const onModify = () => {
     if (data) {
       router.push(
@@ -32,10 +30,6 @@ export default function NoticeDetailPage() {
       )
     }
   }
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   return (
     <PageContainer
@@ -69,8 +63,8 @@ export default function NoticeDetailPage() {
             )}
           </S.DetailTitleContainer>
           <S.DetailInfo>
-            <div>작성일 : {isMounted && dateToString(createdAt ?? '')}</div>
-            <div>작성자 : {isMounted && user?.name}</div>
+            <div>작성일 : {dateToString(createdAt ?? '')}</div>
+            <div>작성자 : {user?.name}</div>
           </S.DetailInfo>
           <S.DetailContent>{content}</S.DetailContent>
         </S.DetailWrapper>

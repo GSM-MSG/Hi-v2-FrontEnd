@@ -2,7 +2,7 @@ import { authQueryKeys, authUrl, post } from '@/apis'
 import TokenManager from '@/apis/TokenManager'
 import { TokensType } from '@/types'
 import { useMutation } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -12,8 +12,8 @@ export default function usePostLogin() {
   const gauthCode = router.query.code?.toString()
 
   const { mutate } = useMutation<
-    AxiosResponse<TokensType>,
-    Error,
+    TokensType,
+    AxiosError,
     { code: string }
   >({
     mutationKey: authQueryKeys.login(),
@@ -21,7 +21,7 @@ export default function usePostLogin() {
     onSuccess: (data) => {
       if (typeof window !== 'undefined') {
         const tokenManager = new TokenManager()
-        tokenManager.setTokens(data?.data)
+        tokenManager.setTokens(data)
       }
       router.replace('')
       toast.success('로그인 되었습니다.')

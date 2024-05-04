@@ -13,8 +13,8 @@ import {
   ViewReservationDataResponseTypes,
   ViewReservationDataTypes,
 } from '@/types'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import LoadingViewReservation from './LoadingComponent'
 import ViewReservationData from './ViewReservationData'
 import * as S from './style'
@@ -24,19 +24,15 @@ export default function ViewReservationModal({
 }: {
   reservationId: string | undefined
 }) {
-  const { data, isLoading, refetch } = useQuery<
-    AxiosResponse<ViewReservationDataResponseTypes>
-  >({
+  const queryClient = useQueryClient()
+  const { data: detailReservation, isLoading, refetch } = useQuery<ViewReservationDataResponseTypes, AxiosError>({
     queryKey: reservationQueryKeys.detail(reservationId),
     queryFn: () => get(reservationUrl.requestId(reservationId)),
   })
-  const { refetch: refetchHomeBaseList } = useQuery<
-    AxiosResponse<ViewReservationDataResponseTypes>
-  >({
-    queryKey: homebaseQueryKeys.list(),
-  })
-  const { homeBase, reason, users, checkStatus } = data?.data || {}
+  const { openModal, closeModal } = useModal()
+  const { homeBase, reason, users, checkStatus } = detailReservation || {}
   const { isTeacher, userId } = useGetRole()
+
   const { mutate } = useMutation<
     void,
     Error,
@@ -47,16 +43,17 @@ export default function ViewReservationModal({
       patch(reservationUrl.check(reservationId), modifyValue),
     onSuccess: () => {
       refetch()
-      refetchHomeBaseList()
+      queryClient.invalidateQueries({ queryKey: homebaseQueryKeys.list() })
     },
   })
+  
   const ViewReservationDataColumns: ViewReservationDataTypes[] = [
     { name: '예약층', content: `${homeBase?.floor}F` },
     { name: '예약 테이블', content: `${homeBase?.homeBaseNumber}번` },
     { name: '예약 멤버' },
     { name: '예약 사유', content: `${reason}` },
   ]
-  const { openModal, closeModal } = useModal()
+  
 
   return (
     <Portal onClose={closeModal}>
