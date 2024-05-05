@@ -24,9 +24,12 @@ export default function usePostLogin() {
         tokenManager.setTokens(data)
       }
       router.replace('')
-      toast.success('로그인 되었습니다.')
+      toast.success('로그인 되었습니다')
     },
-    onError: () => router.replace(''),
+    onError: () => {
+      router.replace('')
+      toast.error('로그인에 오류가 발생했습니다')
+    },
   })
 
   useEffect(() => {
