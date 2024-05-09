@@ -1,4 +1,4 @@
-import { RoleTypes } from "../common"
+import { RoleTypes } from '@/types'
 
 export interface GetRoleType {
   role: RoleTypes

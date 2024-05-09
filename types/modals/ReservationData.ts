@@ -13,7 +13,6 @@ export interface ReservationDataType {
   period: number
   reservationId: string
   reservationNumber: number
-  homeBaseId: string
   users: UserItemType[]
   checkStatus: boolean
   reason: string
