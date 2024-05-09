@@ -1,5 +1,4 @@
-import { UseQueryResult } from '@tanstack/react-query'
-import { RoleTypes } from '../common'
+import { RoleTypes } from '@/types'
 
 export interface UserItemType {
   userId: string
