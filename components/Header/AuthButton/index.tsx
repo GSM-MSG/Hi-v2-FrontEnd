@@ -7,6 +7,19 @@ import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import * as S from './style'
+import { MemberSelect } from "@/modals/ReservationModal/Page"
+import Portal from "@/components/Portal"
+import styled from "@emotion/styled"
+
+export const ReservationModalContainer = styled.div`
+  position: relative;
+  width: 416px;
+  height: 484px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 3rem;
+`
 
 interface AuthButtonProps {
   isLogin: boolean
@@ -36,7 +49,9 @@ export default function AuthButton({ isLogin, accessToken, refreshToken, removeT
 
   const onClick = () => {
     if (accessToken) logout()
-    else openModal(<LoginModal />)
+    else openModal(<Portal onClose={() => {}}>
+       <ReservationModalContainer>
+<MemberSelect maxCapacity={7} /></ReservationModalContainer></Portal>)
   }
 
   useEffect(() => {

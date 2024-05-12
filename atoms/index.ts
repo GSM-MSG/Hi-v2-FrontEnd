@@ -32,9 +32,19 @@ export const ReservationPlace = atom<{ floor: number; period: number }>({
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
 
+export const MemberValue = atom<string>({
+  key: 'MemberValue',
+  default: '',
+})
+
 export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
   default: [],
+})
+
+export const maxCapacity = atom<number>({
+  key: 'MaxCapacity',
+  default: 0,
 })
 
 export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
