@@ -49,9 +49,7 @@ export default function AuthButton({ isLogin, accessToken, refreshToken, removeT
 
   const onClick = () => {
     if (accessToken) logout()
-    else openModal(<Portal onClose={() => {}}>
-       <ReservationModalContainer>
-<MemberSelect maxCapacity={7} /></ReservationModalContainer></Portal>)
+    else openModal(<LoginModal />)
   }
 
   useEffect(() => {
