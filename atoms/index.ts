@@ -42,8 +42,8 @@ export const ShowMembers = atom<UserItemType[]>({
   default: [],
 })
 
-export const maxCapacity = atom<number>({
-  key: 'MaxCapacity',
+export const GlobalMaxCapacity = atom<number>({
+  key: 'GlobalMaxCapacity',
   default: 0,
 })
 

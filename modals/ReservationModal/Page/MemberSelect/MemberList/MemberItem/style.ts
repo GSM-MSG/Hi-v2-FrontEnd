@@ -16,7 +16,7 @@ export const MemberBox = styled.div`
   }
 `
 
-export const MemeberContentsBox = styled.div`
+export const MemberContentsBox = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;

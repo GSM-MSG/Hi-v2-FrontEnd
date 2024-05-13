@@ -1,10 +1,10 @@
-import { ModalPage, ShowMembers } from '@/atoms';
-import { Button } from '@/components';
-import { toast } from 'react-toastify';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ModalPage, ShowMembers } from '@/atoms'
+import { Button } from '@/components'
+import { toast } from 'react-toastify'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-export function NextButton() {
-     const setModalPage = useSetRecoilState(ModalPage)
+export default function NextButton() {
+  const setModalPage = useSetRecoilState(ModalPage)
   const showMembers = useRecoilValue(ShowMembers)
 
   const onNext = () => {
@@ -14,17 +14,17 @@ export function NextButton() {
   }
   return (
     <Button
-          width='240px'
-          height='52px'
-          background='#0066ff'
-          color='#ffffff'
-          fontSize='16px'
-          fontWeight='500'
-          border='none'
-          borderRadius='8px'
-          onClick={onNext}
-        >
-          다음으로
-        </Button>
+      width='240px'
+      height='52px'
+      background='#0066ff'
+      color='#ffffff'
+      fontSize='16px'
+      fontWeight='500'
+      border='none'
+      borderRadius='8px'
+      onClick={onNext}
+    >
+      다음으로
+    </Button>
   )
 }

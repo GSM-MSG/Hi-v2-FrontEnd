@@ -1,10 +1,10 @@
-import { SearchIcon, XMark } from '@/assets';
-import { GlobalMaxCapacity, MemberValue, ShowMembers } from '@/atoms';
-import { Input } from '@/components';
-import { RefetchProps, UserItemType } from '@/types';
-import { ChangeEvent, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import * as S from './style';
+import { SearchIcon, XMark } from '@/assets'
+import { GlobalMaxCapacity, MemberValue, ShowMembers } from '@/atoms'
+import { Input } from '@/components'
+import { RefetchProps, UserItemType } from '@/types'
+import { ChangeEvent, useEffect } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import * as S from './style'
 
 const MemberInput = ({ refetch }: RefetchProps<UserItemType[]>) => {
   const [memberValue, setMemberValue] = useRecoilState(MemberValue)
@@ -28,29 +28,29 @@ const MemberInput = ({ refetch }: RefetchProps<UserItemType[]>) => {
   }, [memberValue, refetch])
 
   return (
-      <S.InputBlock>
-        <div className='searchIcon'>
-          <SearchIcon />
+    <S.InputBlock>
+      <div className='searchIcon'>
+        <SearchIcon />
+      </div>
+      <Input
+        disabled={showMembers.length === globalMaxCapacity - 1 ? true : false}
+        placeholder='팀원을 검색하세요.'
+        width='100%'
+        height='28px'
+        border='none'
+        autoComplete='new-password'
+        value={memberValue}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setMemberValue(e.target.value)
+        }
+      />
+      {memberValue.length > 0 && (
+        <div className='cancelIcon' onClick={() => setMemberValue('')}>
+          <XMark />
         </div>
-        <Input
-          disabled={showMembers.length === globalMaxCapacity - 1 ? true : false}
-          placeholder='팀원을 검색하세요.'
-          width='100%'
-          height='28px'
-          border='none'
-          autoComplete='new-password'
-          value={memberValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setMemberValue(e.target.value)
-          }
-        />
-        {memberValue.length > 0 && (
-          <div className='cancelIcon' onClick={() => setMemberValue('')}>
-            <XMark />
-          </div>
-        )}
-      </S.InputBlock>
-  );
-};
+      )}
+    </S.InputBlock>
+  )
+}
 
-export default MemberInput;
+export default MemberInput
