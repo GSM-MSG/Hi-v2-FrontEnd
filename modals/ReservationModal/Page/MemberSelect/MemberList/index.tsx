@@ -1,6 +1,4 @@
-import { GlobalMaxCapacity } from '@/atoms'
 import { UserItemType } from '@/types'
-import { useRecoilValue } from 'recoil'
 import MemberItem from './MemberItem'
 import NotMemberText from './NotMemberText'
 import * as S from './style'

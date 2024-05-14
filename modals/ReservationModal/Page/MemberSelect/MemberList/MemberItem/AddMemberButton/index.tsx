@@ -1,14 +1,15 @@
 import {
-  GlobalMaxCapacity,
   MemberValue,
   ShowMembers,
   TeamMembers,
 } from '@/atoms'
 import { Button } from '@/components'
+import { MaxCapacityContext } from '@/contexts'
 import { useGetRole } from '@/hooks'
 import { UserItemType } from '@/types'
+import { useContext } from 'react'
 import { toast } from 'react-toastify'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 interface Props {
   member: UserItemType
@@ -16,7 +17,7 @@ interface Props {
 
 export default function AddMemberButton({ member }: Props) {
   const { userId } = useGetRole()
-  const globalMaxCapacity = useRecoilValue(GlobalMaxCapacity)
+  const maxCapacityContext = useContext(MaxCapacityContext)
   const [teamMembers, setTeamMembers] = useRecoilState(TeamMembers)
   const [showMembers, setShowMembers] = useRecoilState(ShowMembers)
   const setMemberValue = useSetRecoilState(MemberValue)
@@ -26,7 +27,7 @@ export default function AddMemberButton({ member }: Props) {
       return toast.warning('이미 포함된 멤버입니다')
     } else if (member.userId === userId) {
       return toast.warning('본인을 제외한 멤버를 선택해주세요')
-    } else if (showMembers.length === globalMaxCapacity - 1) {
+    } else if (showMembers.length === maxCapacityContext - 1) {
       return toast.warning('테이블 최대 인원입니다')
     }
 

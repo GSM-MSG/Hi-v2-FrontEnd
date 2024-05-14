@@ -1,15 +1,16 @@
 import { SearchIcon, XMark } from '@/assets'
-import { GlobalMaxCapacity, MemberValue, ShowMembers } from '@/atoms'
+import { MemberValue, ShowMembers } from '@/atoms'
 import { Input } from '@/components'
+import { MaxCapacityContext } from '@/contexts'
 import { RefetchProps, UserItemType } from '@/types'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent, useContext, useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import * as S from './style'
 
 const MemberInput = ({ refetch }: RefetchProps<UserItemType[]>) => {
   const [memberValue, setMemberValue] = useRecoilState(MemberValue)
-  const globalMaxCapacity = useRecoilValue(GlobalMaxCapacity)
   const showMembers = useRecoilValue(ShowMembers)
+  const maxCapacityContext = useContext(MaxCapacityContext)
 
   useEffect(() => {
     // 타이머를 저장할 변수
@@ -33,7 +34,7 @@ const MemberInput = ({ refetch }: RefetchProps<UserItemType[]>) => {
         <SearchIcon />
       </div>
       <Input
-        disabled={showMembers.length === globalMaxCapacity - 1 ? true : false}
+        disabled={showMembers.length === maxCapacityContext - 1 ? true : false}
         placeholder='팀원을 검색하세요.'
         width='100%'
         height='28px'

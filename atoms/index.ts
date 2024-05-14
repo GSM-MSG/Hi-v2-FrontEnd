@@ -42,11 +42,6 @@ export const ShowMembers = atom<UserItemType[]>({
   default: [],
 })
 
-export const GlobalMaxCapacity = atom<number>({
-  key: 'GlobalMaxCapacity',
-  default: 0,
-})
-
 export const TeamMembers = atom<string[]>({ key: 'TeamMembers', default: [] })
 
 export const ReasonText = atom<string>({ key: 'ReasonText', default: '' })
