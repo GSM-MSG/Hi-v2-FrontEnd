@@ -50,7 +50,7 @@ API.interceptors.response.use(
           : undefined
         return API(error.config)
       } catch (err) {
-        console.log(error)
+        tokenManager.removeTokens()
         toast.error('알 수 없는 에러가 발생했습니다.')
         Router.push('/')
       }
