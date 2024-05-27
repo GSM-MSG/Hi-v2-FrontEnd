@@ -10,10 +10,23 @@ export interface HeaderMenuListProps {
   push: (url: UrlObject | string) => Promise<boolean>
 }
 
-function HeaderMenuList({ isManager, pathname, accessToken, push }: HeaderMenuListProps) {
+function HeaderMenuList({
+  isManager,
+  pathname,
+  accessToken,
+  push,
+}: HeaderMenuListProps) {
   return (
     <S.MenuListContainer isManager={isManager}>
-      {headerMenuList[isManager ? 1 : 0].map((menu) => <MenuLinkItem key={menu.id} menu={menu} pathname={pathname} accessToken={accessToken} push={push} />)}
+      {headerMenuList[isManager ? 1 : 0].map((menu) => (
+        <MenuLinkItem
+          key={menu.id}
+          menu={menu}
+          pathname={pathname}
+          accessToken={accessToken}
+          push={push}
+        />
+      ))}
     </S.MenuListContainer>
   )
 }

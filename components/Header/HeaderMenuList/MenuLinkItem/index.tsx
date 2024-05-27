@@ -10,14 +10,19 @@ interface MenuLinkItemProps {
   }
 }
 
-export default function MenuLinkItem({ menu, pathname, accessToken, push }: MenuLinkItemProps & Omit<HeaderMenuListProps, 'isManager'>) {
+export default function MenuLinkItem({
+  menu,
+  pathname,
+  accessToken,
+  push,
+}: MenuLinkItemProps & Omit<HeaderMenuListProps, 'isManager'>) {
   return (
     <S.MenuLink
       isSame={pathname === menu.link}
       onClick={() =>
-      accessToken
-        ? push(`${menu.link}`)
-        : toast.info('로그인 후에 이용해주세요')
+        accessToken
+          ? push(`${menu.link}`)
+          : toast.info('로그인 후에 이용해주세요')
       }
     >
       {menu.text}

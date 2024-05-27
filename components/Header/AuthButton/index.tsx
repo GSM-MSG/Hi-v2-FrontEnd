@@ -1,5 +1,4 @@
 import { authQueryKeys, authUrl, del } from "@/apis"
-import TokenManager from "@/apis/TokenManager"
 import { useModal } from "@/hooks"
 import { LoginModal } from "@/modals"
 import { useMutation } from "@tanstack/react-query"
@@ -7,17 +6,6 @@ import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import * as S from './style'
-import styled from "@emotion/styled"
-
-export const ReservationModalContainer = styled.div`
-  position: relative;
-  width: 416px;
-  height: 484px;
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 28px;
-  margin-bottom: 3rem;
-`
 
 interface AuthButtonProps {
   isLogin: boolean
