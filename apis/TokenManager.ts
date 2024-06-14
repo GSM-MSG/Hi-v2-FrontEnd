@@ -46,7 +46,7 @@ class TokenManager {
     this._accessExpiredAt = tokens.accessExpiredAt
     this._refreshExpiredAt = tokens.refreshExpiredAt
 
-    setStorage(accessTokenStorage, tokens.accessToken)
+    setStorage(accessTokenStorage,  tokens.accessToken)
     setStorage(refreshTokenStorage, tokens.refreshToken)
     setStorage(accessExpiredAtStorage, tokens.accessExpiredAt)
     setStorage(refreshExpiredAtStorage, tokens.refreshExpiredAt)
@@ -75,7 +75,8 @@ class TokenManager {
           baseURL: BASE_URL,
           withCredentials: true,
           headers: {
-            RefreshToken: this.refreshToken && `Bearer ${encodeURI(refreshToken || '')}`,
+            RefreshToken:
+              this.refreshToken && `Bearer ${encodeURI(refreshToken || '')}`,
           },
         }
       )

@@ -11,9 +11,13 @@ import { useRecoilState } from 'recoil'
 import * as S from './style'
 
 export default function PlaceSelectModal() {
-  const [isMonday] = useState<boolean>(new Date().getDay() === 1)
   const [reservationPlace, setReservationPlace] =
     useRecoilState(ReservationPlace)
+  const [selectPlace, setSelectPlace] = useState<{ floor: number, period: number }>({
+    floor: reservationPlace.floor,
+    period: reservationPlace.period,
+  })
+  const [isMonday] = useState<boolean>(new Date().getDay() === 1)
   const { closeModal } = useModal()
   const [showPlace] = useState<{ floors: number[]; periods: number[] }>({
     floors: [2, 3, 4],
@@ -25,21 +29,21 @@ export default function PlaceSelectModal() {
     queryFn: () =>
       get(
         homebaseUrl.hombase({
-          period: reservationPlace.period,
-          floor: reservationPlace.floor,
+          period: selectPlace.period,
+          floor: selectPlace.floor,
         })
       ),
   })
 
   const onFloorClick = (floor: number) =>
-    setReservationPlace((prev) => {
+    setSelectPlace((prev) => {
       return {
         ...prev,
         floor,
       }
     })
   const onPeriodClick = (period: number) =>
-    setReservationPlace((prev) => {
+    setSelectPlace((prev) => {
       return {
         ...prev,
         period,
@@ -47,6 +51,13 @@ export default function PlaceSelectModal() {
     })
 
   const onClick = () => {
+    setReservationPlace((prev) => {
+      return {
+        ...prev,
+        floor: selectPlace.floor,
+        period: selectPlace.period
+      }
+    })
     refetch()
     closeModal()
   }
@@ -66,7 +77,7 @@ export default function PlaceSelectModal() {
             {floors.map((floor, idx) => (
               <S.FloorButton
                 key={idx}
-                clicked={reservationPlace.floor}
+                clicked={selectPlace.floor}
                 current_value={floor}
                 onClick={() => onFloorClick(floor)}
               >
@@ -81,7 +92,7 @@ export default function PlaceSelectModal() {
             {periods.map((period, idx) => (
               <S.PeriodButton
                 key={idx}
-                clicked={reservationPlace.period}
+                clicked={selectPlace.period}
                 current_value={period}
                 onClick={() => onPeriodClick(period)}
                 isMonday={isMonday}

@@ -10,7 +10,7 @@ import {
 import { theme } from '@/styles'
 import { MyPageType, ReservationDataType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useSetRecoilState } from 'recoil'
@@ -26,11 +26,11 @@ export default function ReservationTableItem({
   const setReasonText = useSetRecoilState(ReasonText)
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false)
   const { openModal } = useModal()
-  const { data } = useQuery<AxiosResponse<MyPageType>>({
+  const { data } = useQuery<MyPageType, AxiosError>({
     queryKey: userQueryKeys.my(),
     queryFn: () => get(userUrl.my()),
   })
-  const { useStatus } = data?.data || {}
+  const { useStatus } = data || {}
   const { isTeacher, userId } = useGetRole()
 
   const onModify = () => {

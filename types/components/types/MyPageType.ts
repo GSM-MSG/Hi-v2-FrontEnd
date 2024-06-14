@@ -1,4 +1,4 @@
-import { HomeBaseTypes } from '../modals'
+import { HomeBaseTypes } from '@/types'
 import { UserItemType } from './UserItemType'
 
 export interface ReservationItemType {

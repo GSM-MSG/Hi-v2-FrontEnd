@@ -32,6 +32,11 @@ export const ReservationPlace = atom<{ floor: number; period: number }>({
 
 export const ModalPage = atom<number>({ key: 'ModalPage', default: 1 })
 
+export const MemberValue = atom<string>({
+  key: 'MemberValue',
+  default: '',
+})
+
 export const ShowMembers = atom<UserItemType[]>({
   key: 'ShowMembers',
   default: [],
@@ -47,9 +52,7 @@ export const SelectedUser = atom<UserItemType>({
     userId: '',
     email: '',
     name: '',
-    grade: 1,
-    classNum: 1,
-    number: 1,
+    schoolNumber: '',
     profileImageUrl: '',
     role: 'ROLE_STUDENT',
     useStatus: 'AVAILABLE',
