@@ -37,13 +37,7 @@ export default function StudentStateModal() {
     <Portal onClose={closeModal}>
       <S.ModalContainer>
         <p>
-          {selectedUser.grade}
-          {selectedUser.classNum}
-          {selectedUser.number
-            ? selectedUser.number.toString().length === 2
-              ? selectedUser.number
-              : '0' + selectedUser.number
-            : ''}{' '}
+          {selectedUser.schoolNumber}{' '}
           {selectedUser.name} 님을{' '}
           {selectedUser.useStatus === 'AVAILABLE' ? '예약불가' : '예약가능'}
           <br />

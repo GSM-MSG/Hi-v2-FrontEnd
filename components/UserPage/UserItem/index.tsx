@@ -28,9 +28,7 @@ export default function UserItem({
   userId,
   email,
   name,
-  grade,
-  classNum,
-  number,
+  schoolNumber,
   profileImageUrl,
   role,
   useStatus,
@@ -78,13 +76,7 @@ export default function UserItem({
         </S.UserProfileContainer>
         <S.UserInfo>
           <S.UserName>
-            {grade}
-            {classNum}
-            {number
-              ? number.toString().length === 2
-                ? number
-                : '0' + number
-              : ''}{' '}
+            {schoolNumber}{' '}
             {name}
           </S.UserName>
           <S.UserEmail>{email}</S.UserEmail>
@@ -106,9 +98,7 @@ export default function UserItem({
                 userId,
                 email,
                 name,
-                grade,
-                classNum,
-                number,
+                schoolNumber,
                 profileImageUrl,
                 useStatus,
                 role,
@@ -132,9 +122,7 @@ export default function UserItem({
               userId,
               email,
               name,
-              grade,
-              classNum,
-              number,
+              schoolNumber,
               profileImageUrl,
               useStatus,
               role,

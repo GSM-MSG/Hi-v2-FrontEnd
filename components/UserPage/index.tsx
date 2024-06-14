@@ -57,9 +57,7 @@ export default function UserPage() {
               userId,
               email,
               name,
-              grade,
-              classNum,
-              number,
+              schoolNumber,
               profileImageUrl,
               role,
               useStatus,
@@ -71,9 +69,7 @@ export default function UserPage() {
               userId={userId}
               email={email}
               name={name}
-              grade={grade}
-              classNum={classNum}
-              number={number}
+              schoolNumber={schoolNumber}
               profileImageUrl={profileImageUrl}
               role={role}
               useStatus={useStatus}

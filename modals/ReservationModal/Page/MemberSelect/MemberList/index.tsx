@@ -8,17 +8,6 @@ interface Props {
   memberList: UserItemType[] | undefined
 }
 
-const sortedMemberList = (a: UserItemType, b: UserItemType): number => {
-  const aStudentNum = parseInt(
-    `${a.grade}${a.classNum}${a.number && a.number.toString().padStart(2, '0')}`
-  )
-  const bStudentNum = parseInt(
-    `${b.grade}${b.classNum}${b.number && b.number.toString().padStart(2, '0')}`
-  )
-
-  return aStudentNum - bStudentNum
-}
-
 export default function MemberList({ isLoading, memberList }: Props) {
   return (
     <>
@@ -26,7 +15,7 @@ export default function MemberList({ isLoading, memberList }: Props) {
       {memberList?.length && (
         <S.MemberListContainer>
           {memberList
-            ?.sort((a, b) => sortedMemberList(a, b))
+            ?.sort((a, b) => Number(a.schoolNumber) - Number(b.schoolNumber))
             .map((member) => (
               <MemberItem key={member.userId} member={member} />
             ))}

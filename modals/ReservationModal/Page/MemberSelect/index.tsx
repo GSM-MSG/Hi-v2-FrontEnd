@@ -5,11 +5,11 @@ import { UserItemType } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { useRecoilValue } from 'recoil'
-import { ButtonContainer } from '../Completed/style'
 import MemberInput from './MemberInput'
 import MemberList from './MemberList'
 import ModalTitle from './ModalTitle'
 import ShowMemberList from './ShowMemberList'
+import ButtonContainer from './ButtonContainer'
 import * as S from './style'
 
 export default function MemberSelect({ maxCapacity }: { maxCapacity: number }) {

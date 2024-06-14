@@ -12,7 +12,7 @@ export default function MemberItem({ member }: Props) {
   return (
     <S.MemberBox key={member.userId}>
       <S.MemberContentsBox>
-        {member.profileImageUrl.length && (
+        {member.profileImageUrl && (
           <Image
             src={member.profileImageUrl}
             alt='profileImage'
@@ -22,11 +22,7 @@ export default function MemberItem({ member }: Props) {
         )}
         {!member.profileImageUrl.length && <UserProfile />}
         <S.InfoBox>
-          {parseInt(
-            `${member.grade}${member.classNum}${
-              member.number && member.number.toString().padStart(2, '0')
-            }`
-          )}{' '}
+          {member.schoolNumber}{' '}
           {member.name}
         </S.InfoBox>
       </S.MemberContentsBox>
