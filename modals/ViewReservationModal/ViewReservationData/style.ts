@@ -20,7 +20,7 @@ export const ViewReservationDataColumn = styled.div<{ column: number }>`
 
   span {
     color: ${({ theme }) => theme.color.Grayscale.gray05};
-    width: 66px;
+    width: 75px;
   }
 
   p {

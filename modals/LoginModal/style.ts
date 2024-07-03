@@ -48,6 +48,7 @@ export const LoginTitle = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 500;
   gap: 32px;
 `
