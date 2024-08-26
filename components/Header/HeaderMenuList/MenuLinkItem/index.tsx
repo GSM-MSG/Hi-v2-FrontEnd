@@ -18,7 +18,11 @@ export default function MenuLinkItem({
 }: MenuLinkItemProps & Omit<HeaderMenuListProps, 'isManager'>) {
   return (
     <S.MenuLink
-      isSame={pathname === menu.link}
+      isSame={
+        menu.link === '/'
+          ? pathname === menu.link
+          : pathname.includes(menu.link)
+      }
       onClick={() =>
         accessToken
           ? push(`${menu.link}`)
